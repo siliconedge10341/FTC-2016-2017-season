@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\div\\Documents\\GitHub\\ftc_app\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\preferences.xml",
+        "source": "C:\\Users\\div\\Documents\\GitHub\\ftc_app\\FtcRobotController\\src\\main\\res\\xml\\preferences.xml"
+    },
+    {
+        "merged": "C:\\Users\\div\\Documents\\GitHub\\ftc_app\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\device_filter.xml",
+        "source": "C:\\Users\\div\\Documents\\GitHub\\ftc_app\\FtcRobotController\\src\\main\\res\\xml\\device_filter.xml"
+    }
+]
