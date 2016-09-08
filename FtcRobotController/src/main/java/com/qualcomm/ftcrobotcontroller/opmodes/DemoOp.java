@@ -12,11 +12,7 @@ public class DemoOp extends OpMode{
 
 
     //to avoid the overuse of magic numbers
-    static final double tapeSpeed = 0.5; //speed of tape reel extension/retraction
-    static final double brushSpeed = 0.5; // speed of collector brush
-    static final double slideSpeed = 0.5; // speed of slide extension
-    static final double conveyorSpeed = 0.85; // speed of debris conveyor
-    static final double tapedelta = .01; // resolution of tape servo arm
+
     //drive motors
     DcMotor motorLeft1;
     DcMotor motorRight1;
@@ -47,20 +43,11 @@ public class DemoOp extends OpMode{
         //lmotor_1 ----> LeftMotor
         //rmotor_1 ----> RightMotor
 
-        motorTape = hardwareMap.dcMotor.get("motor_c");
-        motorBrush = hardwareMap.dcMotor.get("motor_brush");
-
-        //  motorSlide = hardwareMap.dcMotor.get("motor_slide");
-        motorConveyor = hardwareMap.dcMotor.get("motor_conveyor");
-
-        tapearm = hardwareMap.servo.get("s_tapepos");
-
         motorLeft1.setDirection(DcMotor.Direction.FORWARD);
         motorRight1.setDirection(DcMotor.Direction.FORWARD);
 
         //Turn the collector
-        motorTape.setDirection(DcMotor.Direction.FORWARD);
-        motorBrush.setDirection(DcMotor.Direction.FORWARD);
+
 
         //TODO design a power-on self test
         //Power ON Self Test
@@ -96,68 +83,6 @@ public class DemoOp extends OpMode{
         motorLeft1.setPower(left);
         motorRight1.setPower(right);
 
-        /*
-            OTHER MOTOR STUFF
-         */
-
-        /*Using the button a on controller 2, when pressed, Tape motor turns,
-         on release, motor doesn't turn
-         */
-
-        /*
-            GAMEPAD BUTTON EVENTS
-         */
-        //Extend tape with right trigger, retract with left
-        if(gamepad1.right_trigger == 1.0) {
-            motorTape.setPower(tapeSpeed);
-        }
-        else if(gamepad1.left_trigger == 1.0) {
-            motorTape.setPower(-tapeSpeed);
-        }
-        else{
-            motorTape.setPower(0);
-            // motorBrush.setPower(0);
-        }
-
-        //turn sweeper when a is pressed reverse when b is presed.
-        if(gamepad2.a){
-            motorBrush.setPower(brushSpeed);
-        }else if(gamepad2.b){
-            motorBrush.setPower(-brushSpeed);
-        }
-        else{
-            motorBrush.setPower(0);
-        }
-
-        //conveyor motion
-        if (gamepad2.right_trigger == 1) {
-            motorConveyor.setPower(conveyorSpeed);
-        }else if(gamepad2.left_trigger == 1){
-            motorConveyor.setPower(-conveyorSpeed); //Reverse, incase of jam
-        }
-        else{
-            motorConveyor.setPower(0);
-        }
-        //slide motion
-      /*  if (gamepad2.dpad_up) {
-            //extend
-            motorSlide.setDirection(DcMotor.Direction.FORWARD); //may need to be reversed
-            motorSlide.setPower(slideSpeed);
-        } else if (gamepad2.dpad_down) {
-            //retract
-            //FIXME Hardware is Not Yet Implemented
-        }*/
-
-        //SERVO CODE: left bumper lowers, right bumper raises
-        //TODO Automate climbing maneuver by auto-retracting the tape as the bot climbs
-        if(gamepad1.left_bumper){
-            servopos1 -= tapedelta;
-        }
-        if (gamepad1.right_bumper){
-            servopos1 += tapedelta;
-        }
-        servopos1 = Range.clip(servopos1,0.0,0.9);
-        tapearm.setPosition(servopos1);
     }
 
 
