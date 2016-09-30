@@ -63,7 +63,7 @@ public class DemoOp extends OpMode{
         // throttle: left_stick_y ranges from -1 to 1, where -1 is full up, and
         // 1 is full down
         // direction: left_stick_x ranges from -1 to 1, where -1 is full left
-        //If you can read this, you get a free dooby. Doobies are good, doobies are good, doobies are good, doobies are good
+
         //FIXME kind of a kludge, recheck hardware to see if motors were mixed up
         //FIXME b/c x and y axes are flippped
         float throttle = -gamepad1.left_stick_x;
