@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\div\\Documents\\GitHub\\ftc_app\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "outputFile": "C:\\Users\\bandi\\Documents\\pre_season-robot\\pre_season-robot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "C:\\Users\\div\\Documents\\GitHub\\ftc_app\\FtcRobotController\\src\\main\\res\\values-v14\\styles.xml",
+                    "file": "C:\\Users\\bandi\\Documents\\pre_season-robot\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values-v14\\styles.xml",
                     "position": {
                         "startLine": 40,
                         "startColumn": 4,
