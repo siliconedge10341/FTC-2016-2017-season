@@ -10,41 +10,51 @@ import com.qualcomm.robotcore.util.Range;
  */
 public class Mecanum  extends OpMode{
 
+    float FRpower;
+    float FLpower;
+    float BRpower;
+    float BLpower;
 
-    //to avoid the overuse of magic numbers
 
-    //drive motors
-    DcMotor motorLeft1;
-    DcMotor motorRight1;
-
-    //function motors
-    DcMotor motorTape;
-    DcMotor motorBrush;
-
-    // DcMotor motorSlide;
-    DcMotor motorConveyor;
-
-    //servomotors
-    Servo tapearm;
-
-    double servopos1;
     public Mecanum() {
+
 
     }
 
+    public void runmotor(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
+        motorFL = hardwareMap.dcMotor.get("bmotor_l");
+        motorFR = hardwareMap.dcMotor.get("bmotor_r");
+        motorBL = hardwareMap.dcMotor.get("fmotor_l");
+        motorBR = hardwareMap.dcMotor.get("fmotor_r");
+
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower((FLpower));
+        motorBL.setPower(BLpower);
+    }
+
+    public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x){
+        float ch1= rjoystick_x;
+        float ch3 = ljoystick_y;
+        float ch4 = ljoystick_x;
+
+        FRpower = ch3 + ch1 + ch4;
+        BLpower = ch3 + ch1 - ch4;
+        FRpower = ch3 - ch1 - ch4;
+        BRpower = ch3 - ch1 + ch4;
+
+
+
+    }
     //initialization routine
-    @Override
+
+
     public void init() {
 
-        servopos1 = 0.2;
 
-        motorLeft1 = hardwareMap.dcMotor.get("lmotor_1");
-        motorRight1 = hardwareMap.dcMotor.get("rmotor_1");
+
         //lmotor_1 ----> LeftMotor
         //rmotor_1 ----> RightMotor
-
-        motorLeft1.setDirection(DcMotor.Direction.FORWARD);
-        motorRight1.setDirection(DcMotor.Direction.FORWARD);
 
         //Turn the collector
 
@@ -57,31 +67,7 @@ public class Mecanum  extends OpMode{
     //main function body
     @Override
     public void loop() {
-        /*
-            DRIVE MOTOR CODE
-         */
-        // throttle: left_stick_y ranges from -1 to 1, where -1 is full up, and
-        // 1 is full down
-        // direction: left_stick_x ranges from -1 to 1, where -1 is full left
 
-        //FIXME kind of a kludge, recheck hardware to see if motors were mixed up
-        //FIXME b/c x and y axes are flippped
-        float throttle = -gamepad1.left_stick_x;
-        float direction = gamepad1.left_stick_y;
-        //Silicon Edge: We Specialize in Kludges
-        float right = throttle - direction;
-        float left = throttle + direction;
-        // clip the right/left values so that the values never exceed +/- 1
-        right = Range.clip(right, -1, 1);
-        left = Range.clip(left, -1, 1);
-        // scale the joystick value to make it easier to control
-        // the robot more precisely at slower speedy
-        right = (float)scaleInput(right);
-        left =  (float)scaleInput(left);
-        //Sets theo
-        // write the values to the motors
-        motorLeft1.setPower(left);
-        motorRight1.setPower(right);
 
     }
 
