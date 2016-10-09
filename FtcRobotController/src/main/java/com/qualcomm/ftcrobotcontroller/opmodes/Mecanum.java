@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 /**
  * Created by Dival Banerjee on 9/7/2016.
  */
-public class DemoOp extends Mecanum{
+public class Mecanum  extends OpMode{
 
 
     //to avoid the overuse of magic numbers
@@ -28,7 +28,7 @@ public class DemoOp extends Mecanum{
     Servo tapearm;
 
     double servopos1;
-    public DemoOp() {
+    public Mecanum() {
 
     }
 
