@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 /**
  * Created by Dival Banerjee on 9/7/2016.
  */
-public class Mecanum  extends OpMode{
+public class Mecanum{
 
     float FRpower;
     float FLpower;
@@ -20,12 +20,11 @@ public class Mecanum  extends OpMode{
 
 
     }
+    public Mecanum(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
+
+    }
 
     public void runmotor(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
-        motorFL = hardwareMap.dcMotor.get("bmotor_l");
-        motorFR = hardwareMap.dcMotor.get("bmotor_r");
-        motorBL = hardwareMap.dcMotor.get("fmotor_l");
-        motorBR = hardwareMap.dcMotor.get("fmotor_r");
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -38,50 +37,19 @@ public class Mecanum  extends OpMode{
         float ch3 = ljoystick_y;
         float ch4 = ljoystick_x;
 
-        FRpower = ch3 + ch1 + ch4;
+        FLpower = ch3 + ch1 + ch4;
         BLpower = ch3 + ch1 - ch4;
         FRpower = ch3 - ch1 - ch4;
         BRpower = ch3 - ch1 + ch4;
 
-
+        FLpower = Range.clip(FLpower,-1,1);
+        BLpower = Range.clip(BLpower,-1,1);
+        FRpower = Range.clip(FRpower,-1,1);
+        BRpower = Range.clip(BRpower,-1,1);
 
     }
     //initialization routine
 
-
-    public void init() {
-
-
-
-        //lmotor_1 ----> LeftMotor
-        //rmotor_1 ----> RightMotor
-
-        //Turn the collector
-
-
-        //TODO design a power-on self test
-        //Power ON Self Test
-
-    }
-
-    //main function body
-    @Override
-    public void loop() {
-
-
-    }
-
-
-    @Override
-    public void stop() {
-
-    }
-
-    /*
-     * This method scales the joystick input so for low joystick values, the
-     * scaled value is less than linear.  This is to make it easier to drive
-     * the robot more precisely at slower speeds.
-     */
     double scaleInput(double dVal)  {
         double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
                 0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
