@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 /**
  * Created by Dival Banerjee on 9/7/2016.
  */
-public class DemoOp extends OpMode{
+public class DemoOp extends Mecanum{
 
 
     //to avoid the overuse of magic numbers
@@ -29,14 +29,13 @@ public class DemoOp extends OpMode{
 
     double servopos1;
     public DemoOp() {
-
     }
 
     //initialization routine
     @Override
     public void init() {
 
-        servopos1 = 0.2;
+
 
         motorLeft1 = hardwareMap.dcMotor.get("lmotor_1");
         motorRight1 = hardwareMap.dcMotor.get("rmotor_1");
