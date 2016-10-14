@@ -1,10 +1,10 @@
 [
     {
-        "merged": "C:\\Users\\bandi\\Documents\\pre_season-robot\\pre_season-robot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\device_filter.xml",
-        "source": "C:\\Users\\bandi\\Documents\\pre_season-robot\\pre_season-robot\\FtcRobotController\\src\\main\\res\\xml\\device_filter.xml"
+        "merged": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\preferences.xml",
+        "source": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\xml\\preferences.xml"
     },
     {
-        "merged": "C:\\Users\\bandi\\Documents\\pre_season-robot\\pre_season-robot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\preferences.xml",
-        "source": "C:\\Users\\bandi\\Documents\\pre_season-robot\\pre_season-robot\\FtcRobotController\\src\\main\\res\\xml\\preferences.xml"
+        "merged": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\device_filter.xml",
+        "source": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\xml\\device_filter.xml"
     }
 ]
