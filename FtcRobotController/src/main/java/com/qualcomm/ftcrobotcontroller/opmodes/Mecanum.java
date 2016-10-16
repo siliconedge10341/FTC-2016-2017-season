@@ -10,10 +10,10 @@ import com.qualcomm.robotcore.util.Range;
  */
 public class Mecanum{
 
-    private float FRpower;
-    private float FLpower;
-    private float BRpower;
-    private float BLpower;
+    private double FRpower;
+    private double FLpower;
+    private double BRpower;
+    private double BLpower;
 //Private variables
 
     public Mecanum() {
@@ -22,14 +22,14 @@ public class Mecanum{
         BRpower = 0;
         BLpower = 0;
     }
-    public Mecanum(float motorFR, float motorFL, float motorBR, float motorBL){
+    public Mecanum(double motorFR, double motorFL, double motorBR, double motorBL){
         FRpower = motorFR;
         FLpower = motorFL;
         BRpower = motorBR;
         BLpower = motorBL;
     }
 
-    public void runmotor(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
+    public void run_motor(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -38,7 +38,7 @@ public class Mecanum{
     }
 
     public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x){
-        float ch1= rjoystick_x;
+        float ch1 = rjoystick_x;
         float ch3 = ljoystick_y;
         float ch4 = ljoystick_x;
 
@@ -52,6 +52,46 @@ public class Mecanum{
         BLpower = Range.clip(BLpower,-1,1);
         FRpower = Range.clip(FRpower,-1,1);
         BRpower = Range.clip(BRpower,-1,1);
+
+    }
+
+    public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        FLpower = .5;
+        BLpower = -.5;
+        FRpower = -.5;
+        BRpower = .5;
+        // The positive and negative inputs only mean direction, not speed.
+
+        FLpower = Range.clip(FLpower,-1,1);
+        BLpower = Range.clip(BLpower,-1,1);
+        FRpower = Range.clip(FRpower,-1,1);
+        BRpower = Range.clip(BRpower,-1,1);
+
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower((FLpower));
+        motorBL.setPower(BLpower);
+        // This sets the motors that go into DemoAutonomous.
+
+    }
+
+    public void run_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        FLpower = -.5;
+        BLpower = .5;
+        FRpower = .5;
+        BRpower = -.5;
+        // The positive and negative inputs only mean direction, not speed.
+
+        FLpower = Range.clip(FLpower,-1,1);
+        BLpower = Range.clip(BLpower,-1,1);
+        FRpower = Range.clip(FRpower,-1,1);
+        BRpower = Range.clip(BRpower,-1,1);
+
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower((FLpower));
+        motorBL.setPower(BLpower);
+        // This sets the motors that go into DemoAutonomous.
 
     }
     //initialization routine
