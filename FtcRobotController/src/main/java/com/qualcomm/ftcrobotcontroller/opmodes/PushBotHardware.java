@@ -600,7 +600,7 @@ public class PushBotHardware extends OpMode
     // has_left_drive_encoder_reached
     //
     /**
-     * Indicate whether the left drive motor's encoder has reached a value.
+     * Incate whether the left drive motor's encoder has reached a value.
      */
     boolean has_left_drive_encoder_reached (double p_count)
 

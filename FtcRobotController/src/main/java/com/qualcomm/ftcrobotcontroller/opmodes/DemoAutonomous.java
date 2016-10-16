@@ -25,7 +25,6 @@ public class DemoAutonomous extends PushBotTelemetry
      * The system calls this member when the class is instantiated.
      */
     public DemoAutonomous()
-
     {
         //
         // Initialize base classes.
@@ -89,8 +88,7 @@ public class DemoAutonomous extends PushBotTelemetry
         case 0:
             //
             // Reset the encoders to ensure they are at a known good value.
-            //
-            reset_drive_encoders ();
+            // reset_drive_encoders ();
 
             //
             // Transition to the next state when this method is called again.

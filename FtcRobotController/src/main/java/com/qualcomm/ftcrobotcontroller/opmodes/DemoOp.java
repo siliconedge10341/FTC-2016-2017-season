@@ -8,7 +8,25 @@ import com.qualcomm.robotcore.util.Range;
 /**
  * Created by Dival Banerjee on 9/7/2016.
  */
-public class DemoOp extends Mecanum{
+
+// NOTES //
+    // SENSORS //
+        // Distance Sensor
+        // Three Dimensional Video Sensor
+        // Color Sensor
+        // Push Button Sensor
+    // MOTORS //
+        // Front Right
+        // Front Left
+        // Back Right
+        // Back Left
+        // Launch Motor
+        // Scoop Motor
+        // Left Hand Motor
+        // Right Hand Motor
+    //
+
+public class DemoOp extends OpMode{
 
 
     //to avoid the overuse of magic numbers
