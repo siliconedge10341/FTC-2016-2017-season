@@ -43,8 +43,7 @@ public class MecanumOP extends OpMode{
     //main function body
     @Override
     public void loop() {
-
-        yo.set_Power(gamepad2.right_stick_x,gamepad1.left_stick_y,gamepad1.left_stick_x);
+        yo.set_Power(gamepad2.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
         yo.runmotor( motorFR, motorFL, motorBR, motorBL);
 
     }
@@ -52,6 +51,9 @@ public class MecanumOP extends OpMode{
 
     @Override
     public void stop() {
+        yo.set_Power(0, 0, 0);
+        // set to zero so the power doesn't influnce any motion or rotation in the robot
+        yo.runmotor( motorFR, motorFL, motorBR, motorBL);
 
     }
 

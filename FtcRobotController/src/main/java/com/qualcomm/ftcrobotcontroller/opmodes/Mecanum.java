@@ -17,11 +17,16 @@ public class Mecanum{
 //Private variables
 
     public Mecanum() {
-
-
+        FRpower = 0;
+        FLpower = 0;
+        BRpower = 0;
+        BLpower = 0;
     }
-    public Mecanum(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
-
+    public Mecanum(float motorFR, float motorFL, float motorBR, float motorBL){
+        FRpower = motorFR;
+        FLpower = motorFL;
+        BRpower = motorBR;
+        BLpower = motorBL;
     }
 
     public void runmotor(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
