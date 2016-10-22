@@ -1,5 +1,7 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+import com.qualcomm.ftcrobotcontroller.opmodes.Mecanum;
+
 //------------------------------------------------------------------------------
 //
 // PushBotAuto
