@@ -11,6 +11,8 @@ import com.qualcomm.ftcrobotcontroller.opmodes.Distance;
  */
 public class Mecanum{
 
+    private final double pi = 3.1415926;
+    private final double wheel_diameter = 4 * (pi);
     private Distance dis_sensor = new Distance();
     private double FRpower = 0;
     private double FLpower = 0;
@@ -137,12 +139,134 @@ public class Mecanum{
 
     }
 
+    public void run_diagonal_right_up(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        FLpower = .5;
+        BLpower = 0;
+        FRpower = 0;
+        BRpower = .5;
+        // The positive and negative inputs only mean direction, not speed.
+
+        FLpower = Range.clip(FLpower,-1,1);
+        BLpower = Range.clip(BLpower,-1,1);
+        FRpower = Range.clip(FRpower,-1,1);
+        BRpower = Range.clip(BRpower,-1,1);
+
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower((FLpower));
+        motorBL.setPower(BLpower);
+        // This sets the motors that go into DemoAutonomous.
+
+    }
+
+    public void run_diagonal_left_up(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        FLpower = 0;
+        BLpower = .5;
+        FRpower = .5;
+        BRpower = 0;
+        // The positive and negative inputs only mean direction, not speed.
+
+        FLpower = Range.clip(FLpower,-1,1);
+        BLpower = Range.clip(BLpower,-1,1);
+        FRpower = Range.clip(FRpower,-1,1);
+        BRpower = Range.clip(BRpower,-1,1);
+
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower((FLpower));
+        motorBL.setPower(BLpower);
+        // This sets the motors that go into DemoAutonomous.
+
+    }
+
+    public void run_diagonal_left_down(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        FLpower = -.5;
+        BLpower = 0;
+        FRpower = 0;
+        BRpower = -.5;
+        // The positive and negative inputs only mean direction, not speed.
+
+        FLpower = Range.clip(FLpower,-1,1);
+        BLpower = Range.clip(BLpower,-1,1);
+        FRpower = Range.clip(FRpower,-1,1);
+        BRpower = Range.clip(BRpower,-1,1);
+
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower((FLpower));
+        motorBL.setPower(BLpower);
+        // This sets the motors that go into DemoAutonomous.
+
+    }
+
+    public void run_diagonal_right_down(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        FLpower = 0;
+        BLpower = -.5;
+        FRpower = -.5;
+        BRpower = 0;
+        // The positive and negative inputs only mean direction, not speed.
+
+        FLpower = Range.clip(FLpower,-1,1);
+        BLpower = Range.clip(BLpower,-1,1);
+        FRpower = Range.clip(FRpower,-1,1);
+        BRpower = Range.clip(BRpower,-1,1);
+
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower((FLpower));
+        motorBL.setPower(BLpower);
+        // This sets the motors that go into DemoAutonomous.
+
+    }
+
+    public void turn_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        FLpower = .5;
+        BLpower = .5;
+        FRpower = -.5;
+        BRpower = -.5;
+        // The positive and negative inputs only mean direction, not speed.
+
+        FLpower = Range.clip(FLpower,-1,1);
+        BLpower = Range.clip(BLpower,-1,1);
+        FRpower = Range.clip(FRpower,-1,1);
+        BRpower = Range.clip(BRpower,-1,1);
+
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower((FLpower));
+        motorBL.setPower(BLpower);
+        // This sets the motors that go into DemoAutonomous.
+
+    }
+
+    public void turn_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        FLpower = -.5;
+        BLpower = -.5;
+        FRpower = .5;
+        BRpower = .5;
+        // The positive and negative inputs only mean direction, not speed.
+
+        FLpower = Range.clip(FLpower,-1,1);
+        BLpower = Range.clip(BLpower,-1,1);
+        FRpower = Range.clip(FRpower,-1,1);
+        BRpower = Range.clip(BRpower,-1,1);
+
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower((FLpower));
+        motorBL.setPower(BLpower);
+        // This sets the motors that go into DemoAutonomous.
+
+    }
+
     public double get_wheel_rotations() {
         double distance = 0;
+        double wheel_rotation = 0;
 
         distance = dis_sensor.getDistance();
+        wheel_rotation = distance/wheel_diameter;
 
-        return distance;
+        return wheel_rotation;
     }
     //initialization routine
 
