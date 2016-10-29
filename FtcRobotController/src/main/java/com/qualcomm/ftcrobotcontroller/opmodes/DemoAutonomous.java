@@ -1,11 +1,13 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-import com.qualcomm.ftcrobotcontroller.opmodes.Mecanum;
-
 //------------------------------------------------------------------------------
 //
 // PushBotAuto
 //
+
+import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 /**
  * Provide a basic autonomous operational mode that uses the left and right
  * drive motors and associated encoders implemented using a state machine for
@@ -17,44 +19,26 @@ import com.qualcomm.ftcrobotcontroller.opmodes.Mecanum;
 public class DemoAutonomous extends PushBotTelemetry
 
 {
-    //--------------------------------------------------------------------------
-    //
-    // PushBotAuto
-    //
-    /**
-     * Construct the class.
-     *
-     * The system calls this member when the class is instantiated.
-     */
-    public DemoAutonomous()
-    {
-        //
-        // Initialize base classes.
-        //
-        // All via self-construction.
+    Mecanum Drive_Train;
+    DcMotor fr;
+    DcMotor fl;
+    DcMotor bl;
+    DcMotor br;
 
-        //
-        // Initialize class members.
-        //
-        // All via self-construction.
+    public DemoAutonomous(){
 
-    } // PushBotAuto
+    }
 
-    //--------------------------------------------------------------------------
-    //
-    // start
-    //
-    /**
-     * Perform any actions that are necessary when the OpMode is enabled.
-     *
-     * The system calls this member once when the OpMode is enabled.
-     */
+  @Override public void init(){
+      fr = hardwareMap.dcMotor.get("fr_motor");
+      fl = hardwareMap.dcMotor.get("fl_motor");
+      br = hardwareMap.dcMotor.get("br_motor");
+      bl = hardwareMap.dcMotor.get("bl_motor");
+  }
+
     @Override public void start ()
 
     {
-        //
-        // Call the PushBotHardware (super/base class) start method.
-        //
         super.start ();
 
         //
@@ -65,16 +49,7 @@ public class DemoAutonomous extends PushBotTelemetry
     } // start
 
     //--------------------------------------------------------------------------
-    //
-    // loop
-    //
-    /**
-     * Implement a state machine that controls the robot during auto-operation.
-     * The state machine uses a class member and encoder input to transition
-     * between states.
-     *
-     * The system calls this member repeatedly while the OpMode is running.
-     */
+
     @Override public void loop ()
 
     {
@@ -102,24 +77,10 @@ public class DemoAutonomous extends PushBotTelemetry
         // Drive forward until the encoders exceed the specified values.
         //
         case 1:
-            //
-            // Tell the system that motor encoders will be used.  This call MUST
-            // be in this state and NOT the previous or the encoders will not
-            // work.  It doesn't need to be in subsequent states.
-            //
             run_using_encoders ();
 
-            //
-            // Start the drive wheel motors at full power.
-            //
-            set_drive_power (1.0f, 1.0f);
+            Drive_Train.run_forward(fr,fl,br,bl);
 
-            //
-            // Have the motor shafts turned the required amount?
-            //
-            // If they haven't, then the op-mode remains in this state (i.e this
-            // block will be executed the next time this method is called).
-            //
             if (have_drive_encoders_reached (2880, 2880))
             {
                 //
@@ -130,7 +91,7 @@ public class DemoAutonomous extends PushBotTelemetry
                 //
                 // Stop the motors.
                 //
-                set_drive_power (0.0f, 0.0f);
+                Drive_Train.brake(fr,fl,br,bl);
 
                 //
                 // Transition to the next state when this method is called

@@ -18,6 +18,7 @@ public class Mecanum{
     private double FLpower = 0;
     private double BRpower = 0;
     private double BLpower = 0;
+    private double BasePower = .5;
 //Private variables
 
 
@@ -61,16 +62,12 @@ public class Mecanum{
     }
 
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = .5;
-        BLpower = -.5;
-        FRpower = -.5;
-        BRpower = .5;
+        FLpower = BasePower;
+        BLpower = -BasePower;
+        FRpower = -BasePower;
+        BRpower = BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -81,16 +78,11 @@ public class Mecanum{
     }
 
     public void run_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = -.5;
-        BLpower = .5;
-        FRpower = .5;
-        BRpower = -.5;
+        FLpower = -BasePower;
+        BLpower = BasePower;
+        FRpower = BasePower;
+        BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
-
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -101,16 +93,11 @@ public class Mecanum{
     }
 
     public void run_forward(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = .5;
-        BLpower = .5;
-        FRpower = .5;
-        BRpower = .5;
+        FLpower = BasePower;
+        BLpower = BasePower;
+        FRpower = BasePower;
+        BRpower = BasePower;
         // The positive and negative inputs only mean direction, not speed.
-
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -121,16 +108,11 @@ public class Mecanum{
     }
 
     public void run_backward(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = -.5;
-        BLpower = -.5;
-        FRpower = -.5;
-        BRpower = -.5;
+        FLpower = -BasePower;
+        BLpower = -BasePower;
+        FRpower = -BasePower;
+        BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
-
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -141,16 +123,12 @@ public class Mecanum{
     }
 
     public void run_diagonal_right_up(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = .5;
+        FLpower = BasePower;
         BLpower = 0;
         FRpower = 0;
-        BRpower = .5;
+        BRpower = BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -162,15 +140,11 @@ public class Mecanum{
 
     public void run_diagonal_left_up(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = 0;
-        BLpower = .5;
-        FRpower = .5;
+        BLpower = BasePower;
+        FRpower = BasePower;
         BRpower = 0;
         // The positive and negative inputs only mean direction, not speed.
 
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -181,16 +155,11 @@ public class Mecanum{
     }
 
     public void run_diagonal_left_down(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = -.5;
+        FLpower = -BasePower;
         BLpower = 0;
         FRpower = 0;
-        BRpower = -.5;
+        BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
-
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -202,15 +171,11 @@ public class Mecanum{
 
     public void run_diagonal_right_down(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = 0;
-        BLpower = -.5;
-        FRpower = -.5;
+        BLpower = -BasePower;
+        FRpower = -BasePower;
         BRpower = 0;
         // The positive and negative inputs only mean direction, not speed.
 
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -221,16 +186,11 @@ public class Mecanum{
     }
 
     public void turn_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = .5;
-        BLpower = .5;
-        FRpower = -.5;
-        BRpower = -.5;
+        FLpower = BasePower;
+        BLpower = BasePower;
+        FRpower = -BasePower;
+        BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
-
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -241,16 +201,12 @@ public class Mecanum{
     }
 
     public void turn_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = -.5;
-        BLpower = -.5;
-        FRpower = .5;
-        BRpower = .5;
+        FLpower = -BasePower;
+        BLpower = -BasePower;
+        FRpower = BasePower;
+        BRpower = BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -260,6 +216,20 @@ public class Mecanum{
 
     }
 
+    public void brake(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        FLpower = 0;
+        BLpower = 0;
+        FRpower = 0;
+        BRpower = 0;
+        // The positive and negative inputs only mean direction, not spee
+
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower((FLpower));
+        motorBL.setPower(BLpower);
+        // This sets the motors that go into DemoAutonomous.
+
+    }
     public double get_wheel_rotations() {
         double distance = 0;
         double wheel_rotation = 0;
