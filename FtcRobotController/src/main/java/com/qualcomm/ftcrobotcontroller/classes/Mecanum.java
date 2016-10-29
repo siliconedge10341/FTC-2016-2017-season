@@ -1,10 +1,10 @@
-package com.qualcomm.ftcrobotcontroller.opmodes;
+package com.qualcomm.ftcrobotcontroller.classes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.ftcrobotcontroller.opmodes.Distance;
+import com.qualcomm.ftcrobotcontroller.classes.Distance;
 
 /**
  * Created by the lord and savior Arko Chaterjee on 9/7/2016.
@@ -19,6 +19,7 @@ public class Mecanum{
     private double BRpower = 0;
     private double BLpower = 0;
 //Private variables
+
 
     public Mecanum() {
         FRpower = 0;

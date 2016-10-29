@@ -1,20 +1,20 @@
-package com.qualcomm.ftcrobotcontroller.opmodes;
+package com.qualcomm.ftcrobotcontroller.classes;
+
 import com.qualcomm.ftcrobotcontroller.opmodes.PushBotHardwareSensors;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 
 /**
  * Created by evank on 10/14/2016.
  */
-public class Distance extends PushBotHardwareSensors {
+public class Distance {
 
     OpticalDistanceSensor v_sensor_distance;
 
-    public Distance() {
-        //
-        // Initialize Distance variables
-        //
-        v_sensor_distance = hardwareMap.opticalDistanceSensor.get("v_sensor_obs");
-    }
+    public Distance(){
+
+    };
+
 
     public double getDistance() {
         return v_sensor_distance.getLightDetected();
@@ -27,7 +27,6 @@ public class Distance extends PushBotHardwareSensors {
         // pressing the buttons and getting points.
         //
     }
-
-
-
 }
+
+
