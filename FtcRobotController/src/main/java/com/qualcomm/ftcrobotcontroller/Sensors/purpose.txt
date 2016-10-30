@@ -1,0 +1,2 @@
+This package should contain classes pertaining to the usage of all sensors and beacon mechanisms
+This includes usage of encoders

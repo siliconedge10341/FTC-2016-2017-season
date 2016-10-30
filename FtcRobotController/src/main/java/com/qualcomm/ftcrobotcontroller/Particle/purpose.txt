@@ -1,0 +1,2 @@
+This package should contain any classes pertaining to intake, collection, and launch of particles.
+This includes any classes pertaining to projectile motion
