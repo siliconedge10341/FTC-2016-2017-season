@@ -142,15 +142,9 @@ public class DemoAutonomous extends PushBotTelemetry
                     v_state++;
                 }
                 break;
-            //
-            // Perform no action - stay in this case until the OpMode is stopped.
-            // This method will still be called regardless of the state machine.
-            //
+
             default:
-                //
-                // The autonomous actions have been accomplished (i.e. the state has
-                // transitioned into its final state.
-                //
+
                 break;
         }
         update_telemetry (); // Update common telemetry
