@@ -86,9 +86,7 @@ public class DemoAutonomous extends PushBotTelemetry
                     //
                     reset_drive_encoders();
 
-                    //
-                    // Stop the motors.
-                    //
+
                     Drive_Train.brake(fr, fl, br, bl);
 
 
@@ -110,7 +108,7 @@ public class DemoAutonomous extends PushBotTelemetry
                 Drive_Train.run_left(fr, fl, br, bl);
                 if (have_drive_encoders_reached(2880, 2880)) {
                     reset_drive_encoders();
-                    set_drive_power(0.0f, 0.0f);
+                    Drive_Train.brake(fr, fl, br, bl);
                     v_state++;
                 }
                 break;
