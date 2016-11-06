@@ -169,5 +169,55 @@ public class ProjectileMotion
 		System.out.println(test1.GetAngleMax());
 		System.out.println(test1.GetAngleMin());
 		System.out.println(test1.GetAngleFreedom());
+
+		ProjectileMotion TestProjectileMotion = new ProjectileMotion();
+		Scanner scanner = new Scanner(System.in);
+		double OptimumVelocity = 0.0;
+		double LargestAngleFreedom = 0.0;
+		double TempDoubleVar = 0.0;
+		double Distance = 0.0;
+		System.out.print("Enter distance: ");
+		Distance = scanner.nextDouble();
+		while(Distance > 10.0)
+		{
+			OptimumVelocity = 0.0;
+			LargestAngleFreedom = 0.0;
+			TempDoubleVar = 0.0;
+			TestProjectileMotion.InputDistance(Distance);
+			for(double Velocity = 400.0; Velocity < 1000.0; Velocity += 10.0)
+			{
+				TestProjectileMotion.InputVelocity(Velocity);
+				TestProjectileMotion.UpdateTrajectoryCalculations();
+				TempDoubleVar = TestProjectileMotion.GetAngleFreedom();
+				if(TempDoubleVar > LargestAngleFreedom)
+				{
+					OptimumVelocity = Velocity;
+					LargestAngleFreedom = TestProjectileMotion.GetAngleFreedom();
+				}
+			}
+			OptimumVelocity += 10.0;
+			TestProjectileMotion.InputVelocity(OptimumVelocity);
+			TestProjectileMotion.UpdateTrajectoryCalculations();
+			LargestAngleFreedom = TestProjectileMotion.GetAngleFreedom();
+			for(double Velocity = OptimumVelocity; Velocity > 400.0; Velocity -= 0.05)
+			{
+				TestProjectileMotion.InputVelocity(Velocity);
+				TestProjectileMotion.UpdateTrajectoryCalculations();
+				TempDoubleVar = TestProjectileMotion.GetAngleFreedom();
+				if(TempDoubleVar > LargestAngleFreedom)
+				{
+					OptimumVelocity = Velocity;
+					LargestAngleFreedom = TestProjectileMotion.GetAngleFreedom();
+				}
+			}
+			System.out.println("The optimum velocity is: " + OptimumVelocity);
+			TestProjectileMotion.InputVelocity(OptimumVelocity);
+			TestProjectileMotion.UpdateTrajectoryCalculations();
+			System.out.println("The maximum angle is: " + TestProjectileMotion.GetAngleMax());
+			System.out.println("The minimum angle is: " + TestProjectileMotion.GetAngleMin());
+			System.out.println("The angle freedom is: " + TestProjectileMotion.GetAngleFreedom());
+			System.out.print("Enter distance: ");
+			Distance = scanner.nextDouble();
+		}
 	}*/
 }
