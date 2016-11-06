@@ -21,10 +21,10 @@ public class MecaumDriver extends OpMode{
 	@Override
 	public void init() {
 
-		motorFL = hardwareMap.dcMotor.get("bmotor_l");
-		motorFR = hardwareMap.dcMotor.get("bmotor_r");
-		motorBL = hardwareMap.dcMotor.get("fmotor_l");
-		motorBR = hardwareMap.dcMotor.get("fmotor_r");
+		motorFL = hardwareMap.dcMotor.get("fl_motor");
+		motorFR = hardwareMap.dcMotor.get("fr_motor");
+		motorBL = hardwareMap.dcMotor.get("bl_motor");
+		motorBR = hardwareMap.dcMotor.get("br_motor");
 
 
 	}

@@ -14,6 +14,7 @@ public class Mecanum{
     private final double pi = 3.1415926;
     private final double wheel_diameter = 4 * (pi);
     private Distance dis_sensor = new Distance();
+
     private double FRpower = 0;
     private double FLpower = 0;
     private double BRpower = 0;
