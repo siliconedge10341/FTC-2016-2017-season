@@ -1,10 +1,6 @@
 [
     {
-        "merged": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\button_shape.xml",
-        "source": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\drawable-hdpi\\button_shape.xml"
-    },
-    {
-        "merged": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
-        "source": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+        "merged": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\button_shape.xml",
+        "source": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\drawable-hdpi\\button_shape.xml"
     }
 ]

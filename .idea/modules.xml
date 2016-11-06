@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FTC-2016-2017-season.iml" filepath="$PROJECT_DIR$/FTC-2016-2017-season.iml" />
       <module fileurl="file://$PROJECT_DIR$/FtcRobotController/FtcRobotController.iml" filepath="$PROJECT_DIR$/FtcRobotController/FtcRobotController.iml" />
-      <module fileurl="file://$PROJECT_DIR$/pre_season-robot.iml" filepath="$PROJECT_DIR$/pre_season-robot.iml" />
     </modules>
   </component>
 </project>

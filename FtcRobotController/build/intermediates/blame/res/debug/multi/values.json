@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "outputFile": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 507
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -33,7 +33,7 @@
                     "endOffset": 672
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
@@ -54,7 +54,7 @@
                     "endOffset": 798
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
@@ -75,7 +75,7 @@
                     "endOffset": 978
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 28,
                         "startColumn": 4,
@@ -96,7 +96,7 @@
                     "endOffset": 1213
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 34,
                         "startColumn": 4,
@@ -117,7 +117,7 @@
                     "endOffset": 1463
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 42,
                         "startColumn": 4,
@@ -138,7 +138,7 @@
                     "endOffset": 1974
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 49,
                         "startColumn": 4,
@@ -158,7 +158,7 @@
                     "endOffset": 2014
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 43,
                         "startColumn": 2,
@@ -177,7 +177,7 @@
                     "endOffset": 2065
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 67,
                         "startColumn": 4,
@@ -196,7 +196,7 @@
                     "endOffset": 2110
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 40,
                         "startColumn": 2,
@@ -215,7 +215,7 @@
                     "endOffset": 2160
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 41,
                         "startColumn": 2,
@@ -234,7 +234,7 @@
                     "endOffset": 2214
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 37,
                         "startColumn": 2,
@@ -253,7 +253,7 @@
                     "endOffset": 2264
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 68,
                         "startColumn": 4,
@@ -272,7 +272,7 @@
                     "endOffset": 2319
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 36,
                         "startColumn": 2,
@@ -291,7 +291,7 @@
                     "endOffset": 2375
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 38,
                         "startColumn": 2,
@@ -310,7 +310,7 @@
                     "endOffset": 2429
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 44,
                         "startColumn": 2,
@@ -329,7 +329,7 @@
                     "endOffset": 2479
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 39,
                         "startColumn": 2,
@@ -348,7 +348,7 @@
                     "endOffset": 2519
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 42,
                         "startColumn": 2,
@@ -367,7 +367,7 @@
                     "endOffset": 2577
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\dimens.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\dimens.xml",
                     "position": {
                         "startLine": 36,
                         "startColumn": 2,
@@ -386,7 +386,7 @@
                     "endOffset": 2632
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\dimens.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\dimens.xml",
                     "position": {
                         "startLine": 37,
                         "startColumn": 2,
@@ -405,7 +405,7 @@
                     "endOffset": 2681
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 75,
                         "startColumn": 4,
@@ -424,7 +424,7 @@
                     "endOffset": 2739
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 76,
                         "startColumn": 4,
@@ -443,7 +443,7 @@
                     "endOffset": 2799
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 77,
                         "startColumn": 4,
@@ -462,7 +462,7 @@
                     "endOffset": 2865
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 78,
                         "startColumn": 4,
@@ -481,7 +481,7 @@
                     "endOffset": 2915
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 46,
                         "startColumn": 2,
@@ -500,7 +500,7 @@
                     "endOffset": 3002
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 79,
                         "startColumn": 4,
@@ -519,7 +519,7 @@
                     "endOffset": 3061
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 80,
                         "startColumn": 4,
@@ -538,7 +538,7 @@
                     "endOffset": 3143
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 81,
                         "startColumn": 4,
@@ -557,7 +557,7 @@
                     "endOffset": 3206
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 82,
                         "startColumn": 4,
@@ -576,7 +576,7 @@
                     "endOffset": 3259
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 83,
                         "startColumn": 4,
@@ -595,7 +595,7 @@
                     "endOffset": 3337
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 84,
                         "startColumn": 4,
@@ -614,7 +614,7 @@
                     "endOffset": 3386
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 85,
                         "startColumn": 4,
@@ -633,7 +633,7 @@
                     "endOffset": 3459
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 86,
                         "startColumn": 4,
@@ -652,7 +652,7 @@
                     "endOffset": 3520
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 87,
                         "startColumn": 4,
@@ -671,7 +671,7 @@
                     "endOffset": 3585
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 88,
                         "startColumn": 4,
@@ -690,7 +690,7 @@
                     "endOffset": 3634
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 45,
                         "startColumn": 2,
@@ -709,7 +709,7 @@
                     "endOffset": 3687
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 50,
                         "startColumn": 2,
@@ -728,7 +728,7 @@
                     "endOffset": 3742
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 58,
                         "startColumn": 2,
@@ -747,7 +747,7 @@
                     "endOffset": 3822
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 90,
                         "startColumn": 4,
@@ -766,7 +766,7 @@
                     "endOffset": 3902
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 91,
                         "startColumn": 4,
@@ -785,7 +785,7 @@
                     "endOffset": 3982
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 92,
                         "startColumn": 4,
@@ -804,7 +804,7 @@
                     "endOffset": 4040
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 37,
                         "startColumn": 2,
@@ -823,7 +823,7 @@
                     "endOffset": 4086
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 94,
                         "startColumn": 4,
@@ -842,7 +842,7 @@
                     "endOffset": 4142
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 95,
                         "startColumn": 4,
@@ -861,7 +861,7 @@
                     "endOffset": 4243
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 96,
                         "startColumn": 4,
@@ -880,7 +880,7 @@
                     "endOffset": 4309
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 97,
                         "startColumn": 4,
@@ -899,7 +899,7 @@
                     "endOffset": 4371
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 60,
                         "startColumn": 2,
@@ -918,7 +918,7 @@
                     "endOffset": 4413
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 98,
                         "startColumn": 4,
@@ -937,7 +937,7 @@
                     "endOffset": 4481
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 99,
                         "startColumn": 4,
@@ -956,7 +956,7 @@
                     "endOffset": 4561
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 100,
                         "startColumn": 4,
@@ -975,7 +975,7 @@
                     "endOffset": 4642
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 101,
                         "startColumn": 4,
@@ -994,7 +994,7 @@
                     "endOffset": 4725
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 102,
                         "startColumn": 4,
@@ -1013,7 +1013,7 @@
                     "endOffset": 4797
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 103,
                         "startColumn": 4,
@@ -1032,7 +1032,7 @@
                     "endOffset": 4860
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 41,
                         "startColumn": 2,
@@ -1051,7 +1051,7 @@
                     "endOffset": 4924
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 105,
                         "startColumn": 4,
@@ -1070,7 +1070,7 @@
                     "endOffset": 4981
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 106,
                         "startColumn": 4,
@@ -1089,7 +1089,7 @@
                     "endOffset": 5060
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -1108,7 +1108,7 @@
                     "endOffset": 5117
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\RobotCore-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\RobotCore-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
@@ -1127,7 +1127,7 @@
                     "endOffset": 5160
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 107,
                         "startColumn": 4,
@@ -1146,7 +1146,7 @@
                     "endOffset": 5212
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 108,
                         "startColumn": 4,
@@ -1165,7 +1165,7 @@
                     "endOffset": 5265
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 109,
                         "startColumn": 4,
@@ -1184,7 +1184,7 @@
                     "endOffset": 5310
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 110,
                         "startColumn": 4,
@@ -1203,7 +1203,7 @@
                     "endOffset": 5399
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 111,
                         "startColumn": 4,
@@ -1222,7 +1222,7 @@
                     "endOffset": 5490
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 112,
                         "startColumn": 4,
@@ -1241,7 +1241,7 @@
                     "endOffset": 5550
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 113,
                         "startColumn": 4,
@@ -1260,7 +1260,7 @@
                     "endOffset": 5677
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 114,
                         "startColumn": 4,
@@ -1279,7 +1279,7 @@
                     "endOffset": 5756
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 115,
                         "startColumn": 4,
@@ -1298,7 +1298,7 @@
                     "endOffset": 5827
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 116,
                         "startColumn": 4,
@@ -1317,7 +1317,7 @@
                     "endOffset": 5924
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 117,
                         "startColumn": 4,
@@ -1336,7 +1336,7 @@
                     "endOffset": 6007
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 118,
                         "startColumn": 4,
@@ -1355,7 +1355,7 @@
                     "endOffset": 6088
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 119,
                         "startColumn": 4,
@@ -1374,7 +1374,7 @@
                     "endOffset": 6170
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 120,
                         "startColumn": 4,
@@ -1393,7 +1393,7 @@
                     "endOffset": 6241
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 121,
                         "startColumn": 4,
@@ -1412,7 +1412,7 @@
                     "endOffset": 6322
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 122,
                         "startColumn": 4,
@@ -1431,7 +1431,7 @@
                     "endOffset": 6377
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 123,
                         "startColumn": 4,
@@ -1450,7 +1450,7 @@
                     "endOffset": 6436
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 124,
                         "startColumn": 4,
@@ -1469,7 +1469,7 @@
                     "endOffset": 6494
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 125,
                         "startColumn": 4,
@@ -1488,7 +1488,7 @@
                     "endOffset": 6548
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 126,
                         "startColumn": 4,
@@ -1507,7 +1507,7 @@
                     "endOffset": 6598
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 127,
                         "startColumn": 4,
@@ -1526,7 +1526,7 @@
                     "endOffset": 6664
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 128,
                         "startColumn": 4,
@@ -1545,7 +1545,7 @@
                     "endOffset": 6719
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 129,
                         "startColumn": 4,
@@ -1564,7 +1564,7 @@
                     "endOffset": 6786
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 130,
                         "startColumn": 4,
@@ -1583,7 +1583,7 @@
                     "endOffset": 6843
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 131,
                         "startColumn": 4,
@@ -1602,7 +1602,7 @@
                     "endOffset": 6895
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 132,
                         "startColumn": 4,
@@ -1621,7 +1621,7 @@
                     "endOffset": 6941
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 133,
                         "startColumn": 4,
@@ -1640,7 +1640,7 @@
                     "endOffset": 7011
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 134,
                         "startColumn": 4,
@@ -1659,7 +1659,7 @@
                     "endOffset": 7105
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 135,
                         "startColumn": 4,
@@ -1678,7 +1678,7 @@
                     "endOffset": 7172
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 136,
                         "startColumn": 4,
@@ -1697,7 +1697,7 @@
                     "endOffset": 7241
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 137,
                         "startColumn": 4,
@@ -1716,7 +1716,7 @@
                     "endOffset": 7346
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 138,
                         "startColumn": 4,
@@ -1735,7 +1735,7 @@
                     "endOffset": 7400
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 139,
                         "startColumn": 4,
@@ -1754,7 +1754,7 @@
                     "endOffset": 7459
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 140,
                         "startColumn": 4,
@@ -1773,7 +1773,7 @@
                     "endOffset": 7502
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 141,
                         "startColumn": 4,
@@ -1792,7 +1792,7 @@
                     "endOffset": 7545
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 142,
                         "startColumn": 4,
@@ -1811,7 +1811,7 @@
                     "endOffset": 7588
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 143,
                         "startColumn": 4,
@@ -1830,7 +1830,7 @@
                     "endOffset": 7631
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 144,
                         "startColumn": 4,
@@ -1849,7 +1849,7 @@
                     "endOffset": 7674
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 145,
                         "startColumn": 4,
@@ -1868,7 +1868,7 @@
                     "endOffset": 7717
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 146,
                         "startColumn": 4,
@@ -1887,7 +1887,7 @@
                     "endOffset": 7760
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 147,
                         "startColumn": 4,
@@ -1906,7 +1906,7 @@
                     "endOffset": 7803
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 148,
                         "startColumn": 4,
@@ -1925,7 +1925,7 @@
                     "endOffset": 7857
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 149,
                         "startColumn": 4,
@@ -1944,7 +1944,7 @@
                     "endOffset": 7956
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -1963,7 +1963,7 @@
                     "endOffset": 8048
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -1982,7 +1982,7 @@
                     "endOffset": 8149
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -2001,7 +2001,7 @@
                     "endOffset": 8247
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -2020,7 +2020,7 @@
                     "endOffset": 8314
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 150,
                         "startColumn": 4,
@@ -2039,7 +2039,7 @@
                     "endOffset": 8415
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 151,
                         "startColumn": 4,
@@ -2058,7 +2058,7 @@
                     "endOffset": 8471
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 152,
                         "startColumn": 4,
@@ -2077,7 +2077,7 @@
                     "endOffset": 8528
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 153,
                         "startColumn": 4,
@@ -2096,7 +2096,7 @@
                     "endOffset": 8570
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 154,
                         "startColumn": 4,
@@ -2115,7 +2115,7 @@
                     "endOffset": 8612
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 155,
                         "startColumn": 4,
@@ -2134,7 +2134,7 @@
                     "endOffset": 8668
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 156,
                         "startColumn": 4,
@@ -2153,7 +2153,7 @@
                     "endOffset": 8730
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 157,
                         "startColumn": 4,
@@ -2172,7 +2172,7 @@
                     "endOffset": 8792
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 158,
                         "startColumn": 4,
@@ -2191,7 +2191,7 @@
                     "endOffset": 8869
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -2210,7 +2210,7 @@
                     "endOffset": 8941
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -2229,7 +2229,7 @@
                     "endOffset": 8975
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 38,
                         "startColumn": 2,
@@ -2248,7 +2248,7 @@
                     "endOffset": 9013
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 159,
                         "startColumn": 4,
@@ -2267,7 +2267,7 @@
                     "endOffset": 9086
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 64,
                         "startColumn": 2,
@@ -2286,7 +2286,7 @@
                     "endOffset": 9170
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 40,
                         "startColumn": 2,
@@ -2305,7 +2305,7 @@
                     "endOffset": 9258
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 49,
                         "startColumn": 2,
@@ -2324,7 +2324,7 @@
                     "endOffset": 9338
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 66,
                         "startColumn": 2,
@@ -2343,7 +2343,7 @@
                     "endOffset": 9410
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 65,
                         "startColumn": 2,
@@ -2362,7 +2362,7 @@
                     "endOffset": 9480
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 63,
                         "startColumn": 2,
@@ -2381,7 +2381,7 @@
                     "endOffset": 9565
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 166,
                         "startColumn": 4,
@@ -2400,7 +2400,7 @@
                     "endOffset": 9663
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 167,
                         "startColumn": 4,
@@ -2419,7 +2419,7 @@
                     "endOffset": 9729
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 44,
                         "startColumn": 2,
@@ -2438,7 +2438,7 @@
                     "endOffset": 9802
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 168,
                         "startColumn": 4,
@@ -2457,7 +2457,7 @@
                     "endOffset": 9842
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 169,
                         "startColumn": 4,
@@ -2476,7 +2476,7 @@
                     "endOffset": 9882
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 170,
                         "startColumn": 4,
@@ -2495,7 +2495,7 @@
                     "endOffset": 9922
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 171,
                         "startColumn": 4,
@@ -2514,7 +2514,7 @@
                     "endOffset": 9962
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 172,
                         "startColumn": 4,
@@ -2533,7 +2533,7 @@
                     "endOffset": 10002
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 173,
                         "startColumn": 4,
@@ -2552,7 +2552,7 @@
                     "endOffset": 10042
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 174,
                         "startColumn": 4,
@@ -2571,7 +2571,7 @@
                     "endOffset": 10082
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 175,
                         "startColumn": 4,
@@ -2590,7 +2590,7 @@
                     "endOffset": 10127
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 176,
                         "startColumn": 4,
@@ -2609,7 +2609,7 @@
                     "endOffset": 10193
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 177,
                         "startColumn": 4,
@@ -2628,7 +2628,7 @@
                     "endOffset": 10231
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 178,
                         "startColumn": 4,
@@ -2647,7 +2647,7 @@
                     "endOffset": 10322
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 179,
                         "startColumn": 4,
@@ -2666,7 +2666,7 @@
                     "endOffset": 10389
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 180,
                         "startColumn": 4,
@@ -2685,7 +2685,7 @@
                     "endOffset": 10492
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 181,
                         "startColumn": 4,
@@ -2704,7 +2704,7 @@
                     "endOffset": 10549
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 182,
                         "startColumn": 4,
@@ -2723,7 +2723,7 @@
                     "endOffset": 10604
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 47,
                         "startColumn": 2,
@@ -2742,7 +2742,7 @@
                     "endOffset": 10660
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 48,
                         "startColumn": 2,
@@ -2761,7 +2761,7 @@
                     "endOffset": 10715
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 184,
                         "startColumn": 4,
@@ -2780,7 +2780,7 @@
                     "endOffset": 10792
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 51,
                         "startColumn": 2,
@@ -2799,7 +2799,7 @@
                     "endOffset": 10876
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 54,
                         "startColumn": 2,
@@ -2818,7 +2818,7 @@
                     "endOffset": 10948
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 187,
                         "startColumn": 4,
@@ -2837,7 +2837,7 @@
                     "endOffset": 11011
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 59,
                         "startColumn": 2,
@@ -2856,7 +2856,7 @@
                     "endOffset": 11099
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 42,
                         "startColumn": 2,
@@ -2875,7 +2875,7 @@
                     "endOffset": 11156
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 189,
                         "startColumn": 4,
@@ -2894,7 +2894,7 @@
                     "endOffset": 11214
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 57,
                         "startColumn": 2,
@@ -2913,7 +2913,7 @@
                     "endOffset": 11313
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
@@ -2932,7 +2932,7 @@
                     "endOffset": 11379
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\Hardware-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
@@ -2952,7 +2952,7 @@
                     "endOffset": 11583
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 190,
                         "startColumn": 4,
@@ -2972,7 +2972,7 @@
                     "endOffset": 11708
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 194,
                         "startColumn": 4,
@@ -2991,7 +2991,7 @@
                     "endOffset": 11809
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 195,
                         "startColumn": 4,
@@ -3010,7 +3010,7 @@
                     "endOffset": 11919
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\values\\values.xml",
                     "position": {
                         "startLine": 196,
                         "startColumn": 4,
@@ -3030,7 +3030,7 @@
                     "endOffset": 12210
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\styles.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 39,
                         "startColumn": 4,
@@ -3051,7 +3051,7 @@
                     "endOffset": 12611
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\styles.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 48,
                         "startColumn": 2,
@@ -3072,7 +3072,7 @@
                     "endOffset": 12883
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\styles.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 64,
                         "startColumn": 2,
@@ -3093,7 +3093,7 @@
                     "endOffset": 13027
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\styles.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 60,
                         "startColumn": 2,
@@ -3114,7 +3114,7 @@
                     "endOffset": 13170
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values\\styles.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 56,
                         "startColumn": 2,

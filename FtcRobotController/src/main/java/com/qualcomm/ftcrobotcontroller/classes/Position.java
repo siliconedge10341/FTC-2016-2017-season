@@ -9,22 +9,27 @@ import com.qualcomm.ftcrobotcontroller.classes.Distance;
  */
 public class Position {
 
-
+    double wheelDistance = 0;
     float x;
     float y;
     float fieldmaxX;
     float fieldmaxY;
-
+    Distance robotMovement = new Distance();
 
     public Position() {
         x = 0;
         y = 0;
         fieldmaxX = 12*12;
         fieldmaxY = 12*12;
+        robotMovement = new Distance();
     }
-    void getPosition(Distance obs_sensor){
+
+    public void move() {
+        robotMovement.getDistance();
 
     }
+
+
 
 
     //initialization routine

@@ -21,7 +21,6 @@ public class Mecanum{
     private double BasePower = .5;
 //Private variables
 
-
     public Mecanum() {
         FRpower = 0;
         FLpower = 0;

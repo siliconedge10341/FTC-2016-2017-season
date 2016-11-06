@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\values-v14\\values-v14.xml",
+        "outputFile": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "E:\\SiliconEdge\\pre_season-robot\\FtcRobotController\\src\\main\\res\\values-v14\\styles.xml",
+                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values-v14\\styles.xml",
                     "position": {
                         "startLine": 40,
                         "startColumn": 4,

@@ -1,9 +1,8 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.ftcrobotcontroller.opmodes.Mecanum;
+import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
 
 import com.qualcomm.robotcore.util.Range;
 
@@ -23,20 +22,22 @@ public class MecanumOP extends OpMode{
 
     Mecanum yo;
 
-
     public MecanumOP() {
-
+        // default constructor
+        motorFL.setPower(0);
+        motorFL.setPower(0);
+        motorBR.setPower(0);
+        motorBL.setPower(0);
+        yo.set_Power(0,0,0);
     }
 
     //initialization routine
     @Override
     public void init() {
-
         motorFL = hardwareMap.dcMotor.get("bmotor_l");
         motorFR = hardwareMap.dcMotor.get("bmotor_r");
         motorBL = hardwareMap.dcMotor.get("fmotor_l");
         motorBR = hardwareMap.dcMotor.get("fmotor_r");
-
 
     }
 
@@ -47,7 +48,6 @@ public class MecanumOP extends OpMode{
         yo.run_motor( motorFR, motorFL, motorBR, motorBL);
 
     }
-
 
     @Override
     public void stop() {
