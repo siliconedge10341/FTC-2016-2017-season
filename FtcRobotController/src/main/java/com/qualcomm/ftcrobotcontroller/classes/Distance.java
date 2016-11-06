@@ -10,14 +10,61 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 public class Distance {
 
     OpticalDistanceSensor v_sensor_distance;
+    private final double wheelDiameter = 0;
+    private final double pi = 3.1415962;
+    private double wheelRotations = 0;
 
     public Distance(){
+        v_sensor_distance = new OpticalDistanceSensor() {
+            @Override
+            public double getLightDetected() {
+                return 0;
+            }
 
+            @Override
+            public int getLightDetectedRaw() {
+                return 0;
+            }
+
+            @Override
+            public void enableLed(boolean b) {
+
+            }
+
+            @Override
+            public String status() {
+                return null;
+            }
+
+            @Override
+            public String getDeviceName() {
+                return null;
+            }
+
+            @Override
+            public String getConnectionInfo() {
+                return null;
+            }
+
+            @Override
+            public int getVersion() {
+                return 0;
+            }
+
+            @Override
+            public void close() {
+
+            }
+        };
     };
 
 
-    public double getDistance() {
-        return v_sensor_distance.getLightDetected();
+    public double getWheelDistance() {
+
+        double distance = v_sensor_distance.getLightDetected();
+        wheelRotations = (wheelDiameter * pi) * distance;
+
+        return wheelRotations;
         //
         // this returns the distance of the light traveling from an object and coming back
         //
