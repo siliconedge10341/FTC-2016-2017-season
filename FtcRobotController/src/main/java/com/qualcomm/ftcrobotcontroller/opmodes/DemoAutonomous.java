@@ -19,7 +19,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class DemoAutonomous extends PushBotTelemetry
 
 {
-    Mecanum Drive_Train;
+    Mecanum Drive_Train = new Mecanum();
     DcMotor fr;
     DcMotor fl;
     DcMotor bl;

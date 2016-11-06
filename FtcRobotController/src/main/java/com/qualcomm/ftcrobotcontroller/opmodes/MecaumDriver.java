@@ -14,7 +14,7 @@ public class MecaumDriver extends OpMode{
 	DcMotor motorBR;
 	DcMotor motorBL;
 
-	Mecanum yo;
+	Mecanum yo = new Mecanum();
 	public MecaumDriver(){
 
 	}
