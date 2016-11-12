@@ -32,7 +32,7 @@ public class MecaumDriver extends OpMode{
 	//main function body
 	@Override
 	public void loop() {
-		yo.set_Power(gamepad2.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
+		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
 		yo.run_motor( motorFR, motorFL, motorBR, motorBL);
 
 	}

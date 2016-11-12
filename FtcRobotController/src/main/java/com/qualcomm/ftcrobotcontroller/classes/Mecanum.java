@@ -86,7 +86,7 @@ public class Mecanum{
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
-        motorFL.setPower((FLpower));
+        motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
 
@@ -101,7 +101,7 @@ public class Mecanum{
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
-        motorFL.setPower((FLpower));
+        motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
 
@@ -116,7 +116,7 @@ public class Mecanum{
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
-        motorFL.setPower((FLpower));
+        motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
 
@@ -234,7 +234,7 @@ public class Mecanum{
         double distance = 0;
         double wheel_rotation = 0;
 
-        distance = dis_sensor.getDistance();
+        distance = dis_sensor.getWheelDistance();
         wheel_rotation = distance/wheel_diameter;
 
         return wheel_rotation;
