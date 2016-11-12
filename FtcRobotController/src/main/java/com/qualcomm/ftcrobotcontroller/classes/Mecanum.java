@@ -20,6 +20,7 @@ public class Mecanum{
     private double BRpower = 0;
     private double BLpower = 0;
     private double BasePower = .5;
+    private double MaxPower = 1;
 //Private variables
 
     public Mecanum() {
@@ -216,7 +217,7 @@ public class Mecanum{
         BLpower = 0;
         FRpower = 0;
         BRpower = 0;
-        // The positive and negative inputs only mean direction, not spee
+        // The positive and negative inputs only mean direction, not speed.
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
