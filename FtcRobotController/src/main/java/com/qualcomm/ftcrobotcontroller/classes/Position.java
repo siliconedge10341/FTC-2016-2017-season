@@ -25,7 +25,7 @@ public class Position {
     }
 
     public void move() {
-        robotMovement.getDistance();
+
 
     }
 

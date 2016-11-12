@@ -49,16 +49,11 @@ public class Mecanum{
         float ch4 = ljoystick_x;
 
         //Get joystick inputs
-        FLpower = ch3 + ch1 + ch4;
-        BLpower = ch3 + ch1 - ch4;
+        FLpower = -(ch3 + ch1 + ch4);
+        BLpower = -(ch3 + ch1 - ch4);
         FRpower = ch3 - ch1 - ch4;
         BRpower = ch3 - ch1 + ch4;
-
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
-
+        
     }
 
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
