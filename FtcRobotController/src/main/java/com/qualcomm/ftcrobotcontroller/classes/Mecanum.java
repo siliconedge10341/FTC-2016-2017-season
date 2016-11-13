@@ -44,7 +44,7 @@ public class Mecanum{
         motorBL.setPower(BLpower);
     }
 
-    public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x){
+    public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x, int upbutton){
         float ch1 = rjoystick_x;
         float ch3 = ljoystick_y;
         float ch4 = ljoystick_x;
@@ -54,6 +54,12 @@ public class Mecanum{
         BLpower = -(ch3 + ch1 - ch4);
         FRpower = ch3 - ch1 - ch4;
         BRpower = ch3 - ch1 + ch4;
+        if (upbutton == 1){
+            FLpower = FLpower/2;
+            FRpower = FRpower/2;
+            BLpower = BLpower/2;
+            BRpower = BRpower/2;
+        }
         
     }
 

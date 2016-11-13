@@ -15,7 +15,7 @@ public class Distance {
     private double wheelRotations = 0;
 
     public Distance(){
-        v_sensor_distance = new OpticalDistanceSensor() {
+        OpticalDistanceSensor v_sensor_distance = new OpticalDistanceSensor() {
             @Override
             public double getLightDetected() {
                 return 0;
