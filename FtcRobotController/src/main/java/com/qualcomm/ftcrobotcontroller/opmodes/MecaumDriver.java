@@ -34,9 +34,11 @@ public class MecaumDriver extends OpMode{
 	@Override
 	public void loop() {
 		if (gamepad1.dpad_up){
-			percision_flag = 1;
+			percision_flag ++;
 		}
-
+		if (percision_flag >= 2){
+			percision_flag = 0;
+		}
 		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x, percision_flag);
 		yo.run_motor( motorFR, motorFL, motorBR, motorBL);
 
