@@ -58,6 +58,7 @@ public class encodertest extends PushBotTelemetry
     {
         run_using_encoders();
         Drive_Train.run_forward(fr, fl, br, bl);
+
         if (have_drive_encoders_reached(circumfrance*12,circumfrance*12)){
             reset_drive_encoders();
             Drive_Train.brake(fr,fl,br,bl);
