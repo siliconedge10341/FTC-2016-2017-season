@@ -63,6 +63,7 @@ public class FtcOpModeRegister implements OpModeRegister {
     manager.register("MecaumDriver", MecaumDriver.class);
     manager.register("DemoAutonomous", DemoAutonomous.class);
     manager.register("encodertest", encodertest.class);
+    manager.register("VisionSample",VisionSample.class);
    // manager.register("K9Line", K9Line.class);
     //manager.register ("PushBotAuto", PushBotAuto.class);
    // manager.register ("PushBotManual", PushBotManual.class);
