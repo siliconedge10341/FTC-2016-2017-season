@@ -1,10 +1,11 @@
 package com.qualcomm.ftcrobotcontroller.classes;
-
 public class ProjectileMotion
 {
     //const declarations
     private final double InToCm = 2.54;
     private final double DegToRad = 3.1415926 / 180.0;
+    private final double ShooterAngle = 78 * DegToRad;
+    private final double ShooterDeviation = 3 * DegToRad;
 
     //input variables
     private double VelocityInitial; // cm/s^2
@@ -13,8 +14,8 @@ public class ProjectileMotion
     //measurements of fields, subject to change
     private final double BallRadius = 1.875 * InToCm;  // cm
     private final double BallStartingHeight = 6.0 * InToCm;  // cm
-    private final double VortexRadius = 10.375 * InToCm;  // cm
-    private final double VortexPoleHeight = 48.0 * InToCm;  // cm
+    private final double VortexRadius = 10.35 * InToCm;  // cm
+    private final double VortexPoleHeight = 46.7 * InToCm;  // cm
 
     //intermediate variables
     private double HorizontalVelocityInitial;  // cm/s^2
@@ -22,6 +23,9 @@ public class ProjectileMotion
 
     //output variables
     private double AngleMin, AngleMax; // radians
+
+    //secondary output variables
+    private double VelocityMin, VelocityMax; // cm/s^2
 
     //constructors
     public ProjectileMotion()
@@ -39,12 +43,12 @@ public class ProjectileMotion
     //input subroutines
     public void InputDistance(double Distance)
     {
-        DistanceToVortex = Distance; //cm
+        DistanceToVortex = Distance; // cm
     }
 
     public void InputVelocity(double Velocity)
     {
-        VelocityInitial = Velocity;
+        VelocityInitial = Velocity; // cm/s^2
     }
 
     //return functions
@@ -69,10 +73,10 @@ public class ProjectileMotion
     //private functions
 
     //setting variables for TestProjectile Calculations
-    private void SolveParametricInitialVelocities(double Angle)
+    private void SolveParametricInitialVelocities(double Angle, double Velocity)
     {
-        HorizontalVelocityInitial = Math.cos(Angle) * VelocityInitial;
-        VerticalVelocityInitial = Math.sin(Angle) * VelocityInitial;
+        HorizontalVelocityInitial = Math.cos(Angle) * Velocity;
+        VerticalVelocityInitial = Math.sin(Angle) * Velocity;
     }
 
     //Y value at a specified time
@@ -85,11 +89,11 @@ public class ProjectileMotion
     private double LinearBisectionAngleMin(double Angle1, double Angle2)
     {
         double AngleAvg = (Angle1 + Angle2)/2.0;
-        if(Angle2 - Angle1 <= 0.0005 && Angle2 - Angle1 >= -0.0005)
+        if(Angle2 - Angle1 <= 0.0005 && Angle2 - Angle1 >= -0.00005)
         { //if within acceptable margin of error, stop recursion
             return AngleAvg;
         }
-        SolveParametricInitialVelocities(AngleAvg);
+        SolveParametricInitialVelocities(AngleAvg, VelocityInitial);
         if(AllTestBallProjectile(AngleAvg))
         {
             return LinearBisectionAngleMin(Angle1, AngleAvg);
@@ -97,6 +101,25 @@ public class ProjectileMotion
         else
         {
             return LinearBisectionAngleMin(AngleAvg, Angle2);
+        }
+    }
+
+    //using linear bisection method to find VelocityMax, decreasing run time for VelocityMax to logarithmic; basically binary search
+    private double LinearBisectionVelocityMax(double Velocity1, double Velocity2)
+    {
+        double VelocityAvg = (Velocity1 + Velocity2)/2.0;
+        if(Velocity2 - Velocity1 <= 0.5 && Velocity2 - Velocity1 >= -0.5)
+        { //if within acceptable margin of error, stop recursion
+            return VelocityAvg;
+        }
+        SolveParametricInitialVelocities(ShooterAngle, VelocityAvg);
+        if(AllTestBallProjectile(ShooterAngle))
+        {
+            return LinearBisectionVelocityMax(VelocityAvg, Velocity2);
+        }
+        else
+        {
+            return LinearBisectionVelocityMax(Velocity1, VelocityAvg);
         }
     }
 
@@ -132,13 +155,13 @@ public class ProjectileMotion
     }
 
     //main angle calculations
-    private void UpdateTrajectoryCalculations()
+    public void UpdateTrajectoryCalculations()
     {
         double theta;
         // trying to find AngleMax, since it is usually close to about 70 degrees
         for(theta = Math.PI/2; theta > 0.0; theta -= 0.01)
         { // projectile might actually not pass this if test but is still viable,
-            SolveParametricInitialVelocities(theta);        // but would only have a < .6 degrees range
+            SolveParametricInitialVelocities(theta, VelocityInitial);        // but would only have a < .6 degrees range
             if(AllTestBallProjectile(theta))
             {
                 break;
@@ -147,9 +170,9 @@ public class ProjectileMotion
         //testing if Projectile actually meets requirements
         if(theta >= 0.1)
         {
-            for(theta=theta; theta <= Math.PI/2; theta += 0.0005)
+            for(theta=theta; theta <= Math.PI/2; theta += 0.00005)
             { //making theta more accurate
-                SolveParametricInitialVelocities(theta);
+                SolveParametricInitialVelocities(theta, VelocityInitial);
                 if(!AllTestBallProjectile(theta))
                 {
                     break;
@@ -158,18 +181,59 @@ public class ProjectileMotion
             AngleMax = theta;
             AngleMin = LinearBisectionAngleMin(0.0, AngleMax - 0.005); //using Linear Bisection Method to find AngleMin
         }
+        else //unable to shoot under conditions
+        {
+            AngleMax = 0;
+            AngleMin = 0;
+        }
     }
 
-	/*
-	//main function for testing
-	public static void main(String[] args)
-	{
-		ProjectileMotion test1 = new ProjectileMotion(206.35,700.0);
+    //velocity calculations
+    public void UpdatePowerRequirement()
+    {
+        //replace the constant angle with the angle from the other subroutine if necessary
+        double Velocity;
+        for(Velocity = 400; Velocity < 701; Velocity += 10)
+        {
+            SolveParametricInitialVelocities(ShooterAngle, Velocity);
+            if(AllTestBallProjectile(ShooterAngle))
+            {
+                break;
+            }
+        }
+        if(Velocity < 700)
+        {
+            VelocityMin = Velocity;
+            for(Velocity = VelocityMin; Velocity > 400; Velocity += 0.5)
+            {
+                SolveParametricInitialVelocities(ShooterAngle, Velocity);
+                if(!AllTestBallProjectile(ShooterAngle))
+                {
+                    break;
+                }
+            }
+            VelocityMin = Velocity;
+            VelocityMax = LinearBisectionVelocityMax(VelocityMin + 10, 800);
+        }
+        else // unable to shoot under conditions
+        {
+            VelocityMax = 0;
+            VelocityMax = 0;
+        }
+    }
+
+    //main function for testing
+    public static void main(String[] args)
+    {
+        //first test main
+		/*ProjectileMotion test1 = new ProjectileMotion(206.35,700.0);
 		test1.UpdateTrajectoryCalculations();
 		System.out.println(test1.GetAngleMax());
 		System.out.println(test1.GetAngleMin());
-		System.out.println(test1.GetAngleFreedom());
+		System.out.println(test1.GetAngleFreedom());*/
 
+        //second test main
+		/*
 		ProjectileMotion TestProjectileMotion = new ProjectileMotion();
 		Scanner scanner = new Scanner(System.in);
 		double OptimumVelocity = 0.0;
@@ -219,5 +283,8 @@ public class ProjectileMotion
 			System.out.print("Enter distance: ");
 			Distance = scanner.nextDouble();
 		}
-	}*/
+		*/
+
+        //third test main
+    }
 }
