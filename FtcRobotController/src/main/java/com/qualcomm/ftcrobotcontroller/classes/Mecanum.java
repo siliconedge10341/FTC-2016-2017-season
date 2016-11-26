@@ -20,6 +20,7 @@ public class Mecanum{
     private double BRpower = 0;
     private double BLpower = 0;
     private double BasePower = .5;
+    private double MaxPower = 1;
 //Private variables
 
     public Mecanum() {
@@ -43,22 +44,23 @@ public class Mecanum{
         motorBL.setPower(BLpower);
     }
 
-    public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x){
+    public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x, int upbutton){
         float ch1 = rjoystick_x;
         float ch3 = ljoystick_y;
         float ch4 = ljoystick_x;
 
         //Get joystick inputs
-        FLpower = ch3 + ch1 + ch4;
-        BLpower = ch3 + ch1 - ch4;
+        FLpower = -(ch3 + ch1 + ch4);
+        BLpower = -(ch3 + ch1 - ch4);
         FRpower = ch3 - ch1 - ch4;
         BRpower = ch3 - ch1 + ch4;
-
-        FLpower = Range.clip(FLpower,-1,1);
-        BLpower = Range.clip(BLpower,-1,1);
-        FRpower = Range.clip(FRpower,-1,1);
-        BRpower = Range.clip(BRpower,-1,1);
-
+        if (upbutton == 1){
+            FLpower = FLpower/2;
+            FRpower = FRpower/2;
+            BLpower = BLpower/2;
+            BRpower = BRpower/2;
+        }
+        
     }
 
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
@@ -221,7 +223,7 @@ public class Mecanum{
         BLpower = 0;
         FRpower = 0;
         BRpower = 0;
-        // The positive and negative inputs only mean direction, not spee
+        // The positive and negative inputs only mean direction, not speed.
 
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);

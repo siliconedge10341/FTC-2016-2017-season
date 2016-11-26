@@ -12,6 +12,7 @@ public class MecaumDriver extends OpMode{
 	DcMotor motorFL;
 	DcMotor motorBR;
 	DcMotor motorBL;
+	int percision_flag=0;
 
 	Mecanum yo = new Mecanum();
 	public MecaumDriver(){
@@ -32,15 +33,21 @@ public class MecaumDriver extends OpMode{
 	//main function body
 	@Override
 	public void loop() {
-		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
+		if (gamepad1.dpad_up){
+			percision_flag ++;
+		}
+		if (percision_flag >= 2){
+			percision_flag = 0;
+		}
+		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x, percision_flag);
 		yo.run_motor( motorFR, motorFL, motorBR, motorBL);
 
-	}
+		}
 
 
 	@Override
 	public void stop() {
-		yo.set_Power(0, 0, 0);
+		yo.set_Power(0, 0, 0,0);
 		// set to zero so the power doesn't influnce any motion or rotation in the robot
 		yo.run_motor( motorFR, motorFL, motorBR, motorBL);
 

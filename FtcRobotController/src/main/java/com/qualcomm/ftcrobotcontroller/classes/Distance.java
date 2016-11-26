@@ -15,7 +15,7 @@ public class Distance {
     private double wheelRotations = 0;
 
     public Distance(){
-        v_sensor_distance = new OpticalDistanceSensor() {
+        OpticalDistanceSensor v_sensor_distance = new OpticalDistanceSensor() {
             @Override
             public double getLightDetected() {
                 return 0;
@@ -33,6 +33,9 @@ public class Distance {
 
             @Override
             public String status() {
+                if (getLightDetected() > 1000 || getLightDetected() < 0) {
+                    return "Something went wrong. The distance was not read correctly.";
+                }
                 return null;
             }
 
@@ -62,7 +65,8 @@ public class Distance {
     public double getWheelDistance() {
 
         double distance = v_sensor_distance.getLightDetected();
-        wheelRotations = (wheelDiameter * pi) * distance;
+        wheelRotations = distance / (wheelDiameter * pi);
+        // one wheel rotation is the distance being equal to the circumference of the wheel.
 
         return wheelRotations;
         //
