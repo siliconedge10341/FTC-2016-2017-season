@@ -46,8 +46,8 @@ public class Mecanum{
 
     public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x, int upbutton){
         float ch1 = rjoystick_x;
-        float ch3 = ljoystick_y;
-        float ch4 = ljoystick_x;
+        float ch3 = ljoystick_x;
+        float ch4 = ljoystick_y;
 
         //Get joystick inputs
         FLpower = -(ch3 + ch1 + ch4);
