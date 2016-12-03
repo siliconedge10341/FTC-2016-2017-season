@@ -78,7 +78,7 @@ public class DemoAutonomous extends PushBotTelemetry
 
                 Drive_Train.run_forward(fr, fl, br, bl);
 
-                if (have_drive_encoders_reached(2880, 2880)) {
+                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
                     //
                     // Reset the encoders to ensure they are at a known good value.
                     //
@@ -99,13 +99,13 @@ public class DemoAutonomous extends PushBotTelemetry
                     v_state++;
                 }
                 break;
-            //
-            // Turn left until the encoders exceed the specified values.
-            //
+
             case 3:
+                Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
-                if (have_drive_encoders_reached(2880, 2880)) {
-                    reset_drive_encoders();
+                Drive_Train.setPosition(2880,fr, fl, br, bl);
+                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
                     v_state++;
                 }
@@ -122,10 +122,12 @@ public class DemoAutonomous extends PushBotTelemetry
             // Turn right until the encoders exceed the specified values.
             //
             case 5:
-                run_using_encoders();
+                Drive_Train.run_using_encoders(fr, fl, br, bl);
+
                 Drive_Train.run_forward(fr, fl, br, bl);
-                if (have_drive_encoders_reached(2880, 2880)) {
-                    reset_drive_encoders();
+                Drive_Train.setPosition(4080,fr, fl, br, bl);
+                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
                     v_state++;
                 }

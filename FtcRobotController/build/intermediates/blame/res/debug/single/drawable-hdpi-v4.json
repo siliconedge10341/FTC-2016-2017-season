@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\button_shape.xml",
+        "source": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\drawable-hdpi\\button_shape.xml"
+    },
+    {
         "merged": "C:\\Users\\div\\Documents\\GitHub\\ftc_app\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
         "source": "C:\\Users\\div\\Documents\\GitHub\\ftc_app\\FtcRobotController\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
     },
