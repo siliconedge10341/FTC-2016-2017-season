@@ -60,6 +60,8 @@ public class Mecanum{
             FRpower = FRpower/2;
             BLpower = BLpower/2;
             BRpower = BRpower/2;
+        } else {
+            // Power doesn't change
         }
         
     }

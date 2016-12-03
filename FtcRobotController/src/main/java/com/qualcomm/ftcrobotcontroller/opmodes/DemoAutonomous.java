@@ -26,7 +26,11 @@ public class DemoAutonomous extends PushBotTelemetry
     DcMotor br;
 
     public DemoAutonomous(){
-
+        fr.setPower(0.0);
+        fl.setPower(0.0);
+        bl.setPower(0.0);
+        br.setPower(0.0);
+        Drive_Train.set_Power(0, 0, 0, 0);
     }
 
   @Override public void init(){
