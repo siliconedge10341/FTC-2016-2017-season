@@ -250,7 +250,15 @@ public class Mecanum{
         motorBL.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
         // This sets the motors that go into DemoAutonomous.
     }
-
+    public void setPosition(int encoderval,DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
+        motorFR.setTargetPosition(encoderval);
+        motorFL.setTargetPosition(encoderval);
+        motorBR.setTargetPosition(encoderval);
+        motorBL.setTargetPosition(encoderval);
+    }
+    int getPosition(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
+        if ()
+    }
 
     public double get_wheel_rotations() {
         double distance = 0;
