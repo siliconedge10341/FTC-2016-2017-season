@@ -1,9 +1,11 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-//------------------------------------------------------------------------------
-//
-// PushBotAuto
-//
+import org.lasarobotics.vision.android.Cameras;
+import org.lasarobotics.vision.ftc.resq.Beacon;
+import org.lasarobotics.vision.opmode.VisionOpMode;
+import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
+import org.lasarobotics.vision.util.ScreenOrientation;
+import org.opencv.core.Size;
 
 import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -38,6 +40,9 @@ public class DemoAutonomous extends PushBotTelemetry
       fl = hardwareMap.dcMotor.get("fl_motor");
       br = hardwareMap.dcMotor.get("br_motor");
       bl = hardwareMap.dcMotor.get("bl_motor");
+      super.init();
+
+      this.setCameras
   }
 
     @Override public void start ()
