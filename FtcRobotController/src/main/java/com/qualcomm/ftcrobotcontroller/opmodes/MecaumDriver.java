@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.Range;
 
 public class MecaumDriver extends OpMode{
 
-	DcMotor motorFR;
+	DcMotor motorFrontRight;
 	DcMotor motorFL;
 	DcMotor motorBR;
 	DcMotor motorBL;
@@ -23,7 +23,7 @@ public class MecaumDriver extends OpMode{
 	public void init() {
 
 		motorFL = hardwareMap.dcMotor.get("fl_motor");
-		motorFR = hardwareMap.dcMotor.get("fr_motor");
+		motorFrontRight = hardwareMap.dcMotor.get("fr_motor");
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
 		motorBR = hardwareMap.dcMotor.get("br_motor");
 
@@ -40,7 +40,7 @@ public class MecaumDriver extends OpMode{
 			percision_flag = 0;
 		}
 		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x, percision_flag);
-		yo.run_motor( motorFR, motorFL, motorBR, motorBL);
+		yo.run_motor( motorFrontRight, motorFL, motorBR, motorBL);
 
 		}
 
@@ -49,7 +49,7 @@ public class MecaumDriver extends OpMode{
 	public void stop() {
 		yo.set_Power(0, 0, 0,0);
 		// set to zero so the power doesn't influnce any motion or rotation in the robot
-		yo.run_motor( motorFR, motorFL, motorBR, motorBL);
+		yo.run_motor( motorFrontRight, motorFL, motorBR, motorBL);
 
 	}
 

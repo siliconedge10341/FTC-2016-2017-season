@@ -7,6 +7,7 @@ package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 
 /**
  * Provide a basic autonomous operational mode that uses the left and right
@@ -37,6 +38,7 @@ public class encodertest extends PushBotTelemetry
       fl = hardwareMap.dcMotor.get("fl_motor");
       br = hardwareMap.dcMotor.get("br_motor");
       bl = hardwareMap.dcMotor.get("bl_motor");
+
   }
 
     @Override public void start ()
@@ -56,7 +58,7 @@ public class encodertest extends PushBotTelemetry
     @Override public void loop ()
 
     {
-        run_using_encoders();
+
         Drive_Train.run_forward(fr, fl, br, bl);
 
         if (have_drive_encoders_reached(circumfrance*12,circumfrance*12)){

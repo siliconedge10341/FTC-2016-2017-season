@@ -2,6 +2,7 @@ package com.qualcomm.ftcrobotcontroller.classes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.ftcrobotcontroller.classes.Distance;
@@ -232,6 +233,24 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
+    public void reset_encoders(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        // The positive and negative inputs only mean direction, not speed.
+        motorFR.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        motorBR.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        motorFL.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        motorBL.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        // This sets the motors that go into DemoAutonomous.
+    }
+
+    public void run_using_encoders(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        // The positive and negative inputs only mean direction, not speed.
+        motorFR.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+        motorBR.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+        motorFL.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+        motorBL.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+        // This sets the motors that go into DemoAutonomous.
+    }
+
     public double get_wheel_rotations() {
         double distance = 0;
         double wheel_rotation = 0;
