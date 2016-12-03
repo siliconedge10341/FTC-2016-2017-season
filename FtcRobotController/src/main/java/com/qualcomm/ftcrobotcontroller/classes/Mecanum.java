@@ -258,8 +258,12 @@ public class Mecanum{
         motorBR.setTargetPosition(encoderval);
         motorBL.setTargetPosition(encoderval);
     }
-    int getPosition(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
-        if ()
+    public int testDistance(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
+        if (motorFL.getCurrentPosition()>= motorFL.getTargetPosition()){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     public double get_wheel_rotations() {
