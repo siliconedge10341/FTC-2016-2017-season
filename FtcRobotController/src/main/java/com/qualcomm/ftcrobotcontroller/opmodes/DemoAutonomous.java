@@ -62,13 +62,7 @@ public class DemoAutonomous extends PushBotTelemetry
             // Synchronize the state machine and hardware.
             //
             case 0:
-                //
-                // Reset the encoders to ensure they are at a known good value.
-                // reset_drive_encoders ();
 
-                //
-                // Transition to the next state when this method is called again.
-                //
                 v_state++;
 
                 break;
@@ -76,7 +70,7 @@ public class DemoAutonomous extends PushBotTelemetry
             // Drive forward until the encoders exceed the specified values.
             //
             case 1:
-                run_using_encoders();
+                Drive_Train.run_using_encoders(fr, fl, br, bl);
 
                 Drive_Train.run_forward(fr, fl, br, bl);
 
@@ -84,7 +78,7 @@ public class DemoAutonomous extends PushBotTelemetry
                     //
                     // Reset the encoders to ensure they are at a known good value.
                     //
-                    reset_drive_encoders();
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
 
 
                     Drive_Train.brake(fr, fl, br, bl);
