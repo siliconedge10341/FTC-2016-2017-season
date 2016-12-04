@@ -27,6 +27,8 @@ public class DemoAutonomous extends VisionOpMode
     DcMotor bl;
     DcMotor br;
 
+
+
     public DemoAutonomous(){
 
 
@@ -37,6 +39,8 @@ public class DemoAutonomous extends VisionOpMode
       fl = hardwareMap.dcMotor.get("fl_motor");
       br = hardwareMap.dcMotor.get("br_motor");
       bl = hardwareMap.dcMotor.get("bl_motor");
+
+      //VISION:
       super.init();
       this.setCamera(Cameras.PRIMARY);
 
@@ -79,7 +83,8 @@ public class DemoAutonomous extends VisionOpMode
             case 1:
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
 
-                Drive_Train.run_forward(fr, fl, br, bl);
+                Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+                Drive_Train.setPosition(3*1440,fr, fl, br, bl);
 
                 if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
                     //
@@ -99,9 +104,11 @@ public class DemoAutonomous extends VisionOpMode
             //
 
             case 2:
+                //Turn left
+
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
-                Drive_Train.setPosition(2880,fr, fl, br, bl);
+                Drive_Train.setPosition(2*1440,fr, fl, br, bl);
                 if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -112,11 +119,14 @@ public class DemoAutonomous extends VisionOpMode
             // Wait...
             //
             case 3:
+                // run forward again
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
 
                 Drive_Train.run_forward(fr, fl, br, bl);
-                Drive_Train.setPosition(4080,fr, fl, br, bl);
+                Drive_Train.setPosition(2*1440,fr, fl, br, bl);
+
                 if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                    //if reached then stop
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
                     v_state++;
