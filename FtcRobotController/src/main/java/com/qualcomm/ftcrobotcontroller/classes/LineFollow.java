@@ -32,7 +32,7 @@ public class LineFollow {
 
     public void Follow(String side, Mecanum mec) {
         double d = v_distanceC.getLightDetected();
-        if (d == 1) {
+        if (d == .2) {
             if (side.equals("left")) {
                 while (Math.abs(mec.get_wheel_rotations()) <= 2) {
                     mec.run_left(fr, fl, br, bl);
