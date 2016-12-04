@@ -24,10 +24,13 @@ public class LineFollow {
 
     public boolean Found() {
         boolean found = false;
-        if (v_distanceC.getLightDetected() == 1) {
+        if (v_distanceC.getLightDetected() > .75&& v_distanceC.getLightDetected() < 1) {
             found = true;
         }
         return found;
+    }
+    public double getVal(){
+        return v_distanceC.getLightDetected();
     }
 
     public void Follow(String side, Mecanum mec) {

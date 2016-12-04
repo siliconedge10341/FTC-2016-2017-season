@@ -6,6 +6,7 @@ import org.lasarobotics.vision.opmode.VisionOpMode;
 import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
 import org.lasarobotics.vision.util.ScreenOrientation;
 import org.opencv.core.Size;
+import com.qualcomm.ftcrobotcontroller.classes.LineFollow;
 
 import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -26,6 +27,8 @@ public class DemoAutonomous extends VisionOpMode
     DcMotor fl;
     DcMotor bl;
     DcMotor br;
+    LineFollow ods =new LineFollow();
+    double initialC;
 
 
 
@@ -56,6 +59,8 @@ public class DemoAutonomous extends VisionOpMode
 
       cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
       cameraControl.setAutoExposureCompensation();
+
+      initialC = ods.getVal();
   }
 
     @Override public void start ()
@@ -94,7 +99,7 @@ public class DemoAutonomous extends VisionOpMode
                 Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
                 Drive_Train.setPosition(3*1440,fr, fl, br, bl);
 
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 || (initialC > ods.getVal() + .1)) {
                     //
                     // Reset the encoders to ensure they are at a known good value.
                     //
