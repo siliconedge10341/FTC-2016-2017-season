@@ -6,7 +6,6 @@ import org.lasarobotics.vision.opmode.VisionOpMode;
 import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
 import org.lasarobotics.vision.util.ScreenOrientation;
 import org.opencv.core.Size;
-import com.qualcomm.ftcrobotcontroller.classes.LineFollow;
 
 import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -27,17 +26,11 @@ public class DemoAutonomous extends VisionOpMode
     DcMotor fl;
     DcMotor bl;
     DcMotor br;
-    LineFollow funcLF = new LineFollow();
 
 
 
     public DemoAutonomous(){
-        Drive_Train = new Mecanum();
-        fr.setPower(0);
-        fl.setPower(0);
-        br.setPower(0);
-        bl.setPower(0);
-        funcLF = new LineFollow();
+
 
     }
 
@@ -116,8 +109,7 @@ public class DemoAutonomous extends VisionOpMode
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
                 Drive_Train.setPosition(2*1440,fr, fl, br, bl);
-                if (funcLF.Found() == true) {
-                    funcLF.Follow("left", Drive_Train);
+                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
                     v_state++;
