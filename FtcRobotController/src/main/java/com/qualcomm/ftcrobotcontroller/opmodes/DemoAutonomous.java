@@ -49,6 +49,13 @@ public class DemoAutonomous extends VisionOpMode
       enableExtension(VisionOpMode.Extensions.BEACON);         //Beacon detection
       enableExtension(VisionOpMode.Extensions.ROTATION);       //Automatic screen rotation correction
       enableExtension(VisionOpMode.Extensions.CAMERA_CONTROL); //Manual camera control
+      beacon.setAnalysisMethod(Beacon.AnalysisMethod.FAST);
+
+      beacon.setColorToleranceRed(0);
+      beacon.setColorToleranceBlue(0);
+
+      cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
+      cameraControl.setAutoExposureCompensation();
   }
 
     @Override public void start ()
@@ -68,6 +75,7 @@ public class DemoAutonomous extends VisionOpMode
         //
         // State: Initialize (i.e. state_0).
         //
+        super.loop();
         switch (v_state) {
             //
             // Synchronize the state machine and hardware.
@@ -80,7 +88,7 @@ public class DemoAutonomous extends VisionOpMode
             //
             // Drive forward until the encoders exceed the specified values.
             //
-            case 1:
+            case 1:     //Move and detect line
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
 
                 Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
@@ -104,12 +112,13 @@ public class DemoAutonomous extends VisionOpMode
             //
 
             case 2:
-                //Turn left
+                //Strafe left
 
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
-                Drive_Train.run_left(fr, fl, br, bl);
+                Drive_Train.run_right(fr, fl, br, bl);
                 Drive_Train.setPosition(2*1440,fr, fl, br, bl);
                 if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
                     v_state++;
