@@ -22,11 +22,16 @@ public class LineFollow {
         bl.setPower(0);
     }
 
-    public void Follow(String side, Mecanum mec, Distance v_distance) {
+    public void Follow(String side, Mecanum mec) {
         double d = v_distanceC.getLightDetected();
         if (d == 1) {
             if (side.equals("left")) {
-                while (v_distance.getWheelDistance() <= 2) {
+                while (Math.abs(mec.get_wheel_rotations()) <= 2) {
+                    mec.run_left(fr, fl, br, bl);
+                }
+            } else if (side.equals("right")) {
+                mec.turn_left(fr, fl, br, bl, 180);
+                while (Math.abs(mec.get_wheel_rotations()) <= 2) {
                     mec.run_left(fr, fl, br, bl);
                 }
             }
