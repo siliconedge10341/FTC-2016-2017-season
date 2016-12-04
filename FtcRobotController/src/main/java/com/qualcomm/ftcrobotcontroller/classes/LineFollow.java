@@ -22,6 +22,14 @@ public class LineFollow {
         bl.setPower(0);
     }
 
+    public boolean Found() {
+        boolean found = false;
+        if (v_distanceC.getLightDetected() == 1) {
+            found = true;
+        }
+        return found;
+    }
+
     public void Follow(String side, Mecanum mec) {
         double d = v_distanceC.getLightDetected();
         if (d == 1) {
@@ -34,6 +42,11 @@ public class LineFollow {
                 while (Math.abs(mec.get_wheel_rotations()) <= 2) {
                     mec.run_left(fr, fl, br, bl);
                 }
+            }
+            if (side.equals("left")) {
+                mec.turn_left(fr, fl, br, bl, 180);
+            } else if (side.equals("right")) {
+                mec.turn_right(fr, fl, br, bl, 180);
             }
         }
     }
