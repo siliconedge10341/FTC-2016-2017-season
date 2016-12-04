@@ -29,6 +29,9 @@ public class LineFollow {
         }
         return found;
     }
+    public double getVal(){
+        return v_distanceC.getLightDetected();
+    }
 
     public void Follow(String side, Mecanum mec) {
         double d = v_distanceC.getLightDetected();
