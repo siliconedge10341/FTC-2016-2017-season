@@ -18,7 +18,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * @author SSI Robotics
  * @version 2015-08-01-06-01
  */
-public class DemoAutonomous extends PushBotTelemetry
+public class DemoAutonomous extends VisionOpMode
 
 {
     Mecanum Drive_Train = new Mecanum();
@@ -27,12 +27,11 @@ public class DemoAutonomous extends PushBotTelemetry
     DcMotor bl;
     DcMotor br;
 
+
+
     public DemoAutonomous(){
-        fr.setPower(0.0);
-        fl.setPower(0.0);
-        bl.setPower(0.0);
-        br.setPower(0.0);
-        Drive_Train.set_Power(0, 0, 0, 0);
+
+
     }
 
   @Override public void init(){
@@ -40,9 +39,16 @@ public class DemoAutonomous extends PushBotTelemetry
       fl = hardwareMap.dcMotor.get("fl_motor");
       br = hardwareMap.dcMotor.get("br_motor");
       bl = hardwareMap.dcMotor.get("bl_motor");
-      super.init();
 
-      this.setCameras
+      //VISION:
+      super.init();
+      this.setCamera(Cameras.PRIMARY);
+
+      this.setFrameSize(new Size(900, 900));
+
+      enableExtension(VisionOpMode.Extensions.BEACON);         //Beacon detection
+      enableExtension(VisionOpMode.Extensions.ROTATION);       //Automatic screen rotation correction
+      enableExtension(VisionOpMode.Extensions.CAMERA_CONTROL); //Manual camera control
   }
 
     @Override public void start ()
@@ -50,11 +56,7 @@ public class DemoAutonomous extends PushBotTelemetry
     {
         super.start ();
 
-        //
-        // Reset the motor encoders on the drive wheels.
-        //
-        reset_drive_encoders ();
-
+        Drive_Train.reset_encoders(fr, fl, br, bl);
     } // start
 
     //--------------------------------------------------------------------------
@@ -81,7 +83,8 @@ public class DemoAutonomous extends PushBotTelemetry
             case 1:
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
 
-                Drive_Train.run_forward(fr, fl, br, bl);
+                Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+                Drive_Train.setPosition(3*1440,fr, fl, br, bl);
 
                 if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
                     //
@@ -99,16 +102,13 @@ public class DemoAutonomous extends PushBotTelemetry
             //
             // Wait...
             //
-            case 2:
-                if (have_drive_encoders_reset()) {
-                    v_state++;
-                }
-                break;
 
-            case 3:
+            case 2:
+                //Turn left
+
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
-                Drive_Train.setPosition(2880,fr, fl, br, bl);
+                Drive_Train.setPosition(2*1440,fr, fl, br, bl);
                 if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -118,20 +118,15 @@ public class DemoAutonomous extends PushBotTelemetry
             //
             // Wait...
             //
-            case 4:
-                if (have_drive_encoders_reset()) {
-                    v_state++;
-                }
-                break;
-            //
-            // Turn right until the encoders exceed the specified values.
-            //
-            case 5:
+            case 3:
+                // run forward again
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
 
                 Drive_Train.run_forward(fr, fl, br, bl);
-                Drive_Train.setPosition(4080,fr, fl, br, bl);
+                Drive_Train.setPosition(2*1440,fr, fl, br, bl);
+
                 if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                    //if reached then stop
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
                     v_state++;
@@ -140,17 +135,12 @@ public class DemoAutonomous extends PushBotTelemetry
             //
             // Wait...
             //
-            case 6:
-                if (have_drive_encoders_reset()) {
-                    v_state++;
-                }
-                break;
 
             default:
 
                 break;
         }
-        update_telemetry (); // Update common telemetry
+
         telemetry.addData ("18", "State: " + v_state);
 
     } // loop
