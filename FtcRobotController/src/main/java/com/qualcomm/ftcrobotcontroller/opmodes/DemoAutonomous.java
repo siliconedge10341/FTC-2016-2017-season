@@ -9,6 +9,7 @@ import org.opencv.core.Size;
 
 import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.ftcrobotcontroller.classes.LineFollow;
 
 /**
  * Provide a basic autonomous operational mode that uses the left and right
@@ -27,7 +28,7 @@ public class DemoAutonomous extends VisionOpMode
     DcMotor bl;
     DcMotor br;
 
-
+    LineFollow ods = new LineFollow();
 
     public DemoAutonomous(){
 
@@ -112,7 +113,7 @@ public class DemoAutonomous extends VisionOpMode
             //
 
             case 2:
-                //Strafe left
+                //Strafe right
 
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
