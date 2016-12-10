@@ -29,37 +29,8 @@ public class DemoAutonomous extends VisionOpMode
     DcMotor bl;
     DcMotor br;
     LineFollow ods =new LineFollow();
-    TouchSensor ts = new TouchSensor() {
-        @Override
-        public double getValue() {
-            return 0;
-        }
+    TouchSensor ts;
 
-        @Override
-        public boolean isPressed() {
-            return false;
-        }
-
-        @Override
-        public String getDeviceName() {
-            return null;
-        }
-
-        @Override
-        public String getConnectionInfo() {
-            return null;
-        }
-
-        @Override
-        public int getVersion() {
-            return 0;
-        }
-
-        @Override
-        public void close() {
-
-        }
-    };
     double initialC;
 
 
@@ -162,6 +133,18 @@ public class DemoAutonomous extends VisionOpMode
             // Wait...
             //
             case 3:
+
+                if(beacon.getAnalysis().isLeftBlue() == true){
+
+                }else{
+
+                }
+                //beacon code
+
+                v_state++;
+                break;
+
+            case 4:
                 // run forward again
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
 
@@ -178,7 +161,7 @@ public class DemoAutonomous extends VisionOpMode
             //
             // Wait...
             //
-            case 4:
+            case 5:
                 //Strafe right
 
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
@@ -194,11 +177,11 @@ public class DemoAutonomous extends VisionOpMode
             //
             // Wait...
             //
-            case 5:
+            case 6:
                 // Strafe left slightly
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
-                Drive_Train.setPosition(2*1440,fr, fl, br, bl);
+                Drive_Train.setPosition(1440,fr, fl, br, bl);
                 if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
 
                     Drive_Train.reset_encoders(fr, fl, br, bl);
@@ -209,7 +192,7 @@ public class DemoAutonomous extends VisionOpMode
             //
             // Wait...
             //
-            case 6:
+            case 7:
                 // go backward
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_backward(fr, fl, br, bl);
