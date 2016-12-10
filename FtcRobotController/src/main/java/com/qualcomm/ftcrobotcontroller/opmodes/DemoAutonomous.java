@@ -96,6 +96,7 @@ public class DemoAutonomous extends VisionOpMode
             case 1:     //Move and detect line
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
 
+                Drive_Train.setPower(.3);
                 Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
                 Drive_Train.setPosition(3*1440,fr, fl, br, bl);
 

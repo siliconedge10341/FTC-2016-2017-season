@@ -265,7 +265,7 @@ public class Mecanum{
         motorBR.setTargetPosition(encoderval);
         motorBL.setTargetPosition(encoderval);
     }
-    public void setPower(int power){
+    public void setPower(double power){
         BasePower = power;
     }
     public int testDistance(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
