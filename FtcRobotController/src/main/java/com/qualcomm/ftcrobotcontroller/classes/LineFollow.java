@@ -47,7 +47,7 @@ public class LineFollow {
                 }
             }
             if (side.equals("left")) {
-                mec.turn_left(fr, fl, br, bl, 180);
+
             } else if (side.equals("right")) {
                 mec.turn_right(fr, fl, br, bl, 180);
             }
