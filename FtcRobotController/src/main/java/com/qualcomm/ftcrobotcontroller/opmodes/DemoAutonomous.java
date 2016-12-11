@@ -133,18 +133,68 @@ public class DemoAutonomous extends VisionOpMode
             // Wait...
             //
             case 3:
-
+                //Detect beacon
                 if(beacon.getAnalysis().isLeftBlue() == true){
+                    //go forward if the left side of the beacon is blue
+                    Drive_Train.setPosition(720,fr, fl, br, bl);
+                    Drive_Train.run_using_encoders(fr, fl, br, bl);
+                    Drive_Train.run_forward(fr, fl, br, bl);
+                    if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+
+                        Drive_Train.reset_encoders(fr, fl, br, bl);
+                        Drive_Train.brake(fr, fl, br, bl);
+
+                    }
+
 
                 }else{
+                    Drive_Train.setPosition(720,fr, fl, br, bl);
+                    Drive_Train.run_using_encoders(fr, fl, br, bl);
+                    Drive_Train.run_backward(fr, fl, br, bl);
+                    if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
 
+                        Drive_Train.reset_encoders(fr, fl, br, bl);
+                        Drive_Train.brake(fr, fl, br, bl);
+
+
+                    }
                 }
+
+
                 //beacon code
 
                 v_state++;
                 break;
 
             case 4:
+                //hit the button
+                Drive_Train.setPosition(200,fr, fl, br, bl);
+                Drive_Train.run_using_encoders(fr, fl, br, bl);
+                Drive_Train.run_right(fr, fl, br, bl);
+                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                    //if reached then stop
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
+                    Drive_Train.brake(fr, fl, br, bl);
+
+                    v_state++;
+                }
+                break;
+
+            case 5:
+                //hit the button
+                Drive_Train.setPosition(200,fr, fl, br, bl);
+                Drive_Train.run_using_encoders(fr, fl, br, bl);
+                Drive_Train.run_left(fr, fl, br, bl);
+                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                    //if reached then stop
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
+                    Drive_Train.brake(fr, fl, br, bl);
+
+                    v_state++;
+                }
+                break;
+
+            case 6:
                 // run forward again
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
 
@@ -161,7 +211,7 @@ public class DemoAutonomous extends VisionOpMode
             //
             // Wait...
             //
-            case 5:
+            case 7:
                 //Strafe right
 
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
@@ -177,7 +227,7 @@ public class DemoAutonomous extends VisionOpMode
             //
             // Wait...
             //
-            case 6:
+            case 8:
                 // Strafe left slightly
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
@@ -192,7 +242,7 @@ public class DemoAutonomous extends VisionOpMode
             //
             // Wait...
             //
-            case 7:
+            case 9:
                 // go backward
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_backward(fr, fl, br, bl);
