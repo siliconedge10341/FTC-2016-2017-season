@@ -141,7 +141,7 @@ public class DemoAutonomous extends VisionOpMode
                     Drive_Train.run_using_encoders(fr, fl, br, bl);
                     Drive_Train.run_forward(fr, fl, br, bl);
                     if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
-
+                        // motor to move button here
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
 
@@ -152,7 +152,7 @@ public class DemoAutonomous extends VisionOpMode
                     Drive_Train.run_using_encoders(fr, fl, br, bl);
                     Drive_Train.run_backward(fr, fl, br, bl);
                     if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
-
+                        // motor to move button here
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
 
@@ -190,7 +190,7 @@ public class DemoAutonomous extends VisionOpMode
                     v_state++;
                 }
                 break;
-//Second part
+                //Second part
             case 6:
                 // run forward again to second line
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
