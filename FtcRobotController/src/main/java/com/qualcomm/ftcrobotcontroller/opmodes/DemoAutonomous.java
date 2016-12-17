@@ -28,7 +28,7 @@ public class DemoAutonomous extends VisionOpMode
     DcMotor fl;
     DcMotor bl;
     DcMotor br;
-    LineFollow ods =new LineFollow();
+    LineFollow ods = new LineFollow();
     TouchSensor ts;
 
     double initialC;
