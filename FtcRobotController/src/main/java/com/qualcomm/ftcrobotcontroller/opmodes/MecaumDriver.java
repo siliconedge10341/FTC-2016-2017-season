@@ -12,6 +12,8 @@ public class MecaumDriver extends OpMode{
 	DcMotor motorFL;
 	DcMotor motorBR;
 	DcMotor motorBL;
+	DcMotor motorShootL;
+	DcMotor motorShootR;
 	int percision_flag=0;
 
 	Mecanum yo = new Mecanum();
@@ -27,6 +29,8 @@ public class MecaumDriver extends OpMode{
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
 		motorBR = hardwareMap.dcMotor.get("br_motor");
 		motorCollector = hardwareMap.dcMotor.get("ball_collector");
+		motorShootL = hardwareMap.dcMotor.get("shooter_left");
+		motorShootR = hardwareMap.dcMotor.get("shooter_right");
 
 
 	}
@@ -44,6 +48,15 @@ public class MecaumDriver extends OpMode{
 		yo.run_motor(motorFrontRight, motorFL, motorBR, motorBL);
 		if (gamepad2.a) {
 			motorCollector.setPower(.5);
+		}else{
+			motorCollector.setPower(0);
+		}
+		if (gamepad1.b){
+			motorShootL.setPower(1.0);
+			motorShootR.setPower(-1.0);
+		}else{
+			motorShootL.setPower(0);
+			motorShootR.setPower(0);
 		}
 
 	}

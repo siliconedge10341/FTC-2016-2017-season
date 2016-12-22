@@ -235,7 +235,6 @@ public class DemoAutonomous extends VisionOpMode
 
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
-
                     }
                 }else{
                     Drive_Train.setPosition(720,fr, fl, br, bl);
