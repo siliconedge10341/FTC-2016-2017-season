@@ -65,7 +65,7 @@ public class Mecanum{
         } else {
             // Power doesn't change
         }
-        
+
     }
 
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
