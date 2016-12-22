@@ -70,7 +70,7 @@ public class ProjectileMotion
         return AngleMax/DegToRad; // degrees
     }
 
-    //private functions
+    //functions
 
     //setting variables for TestProjectile Calculations
     private void SolveParametricInitialVelocities(double Angle, double Velocity)
