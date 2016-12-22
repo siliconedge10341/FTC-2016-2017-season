@@ -28,7 +28,7 @@ public class MecanumOP extends OpMode{
         motorFL.setPower(0);
         motorBR.setPower(0);
         motorBL.setPower(0);
-        yo.set_Power(0,0,0);
+       // yo.set_Power(0,0,0);
     }
 
     //initialization routine
@@ -44,16 +44,16 @@ public class MecanumOP extends OpMode{
     //main function body
     @Override
     public void loop() {
-        yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
-        yo.run_motor( motorFR, motorFL, motorBR, motorBL);
+     //   yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x);
+       // yo.run_motor( motorFR, motorFL, motorBR, motorBL);
 
     }
 
     @Override
     public void stop() {
-        yo.set_Power(0, 0, 0);
+      //  yo.set_Power(0, 0, 0);
         // set to zero so the power doesn't influnce any motion or rotation in the robot
-        yo.run_motor( motorFR, motorFL, motorBR, motorBL);
+      //  yo.run_motor( motorFR, motorFL, motorBR, motorBL);
 
     }
 
@@ -62,6 +62,9 @@ public class MecanumOP extends OpMode{
      * scaled value is less than linear.  This is to make it easier to drive
      * the robot more precisely at slower speeds.
      */
+
+    /*
+
     double scaleInput(double dVal)  {
         double[] scaleArray = { 0.0, 0.05, 0.09, 0.10, 0.12, 0.15, 0.18, 0.24,
                 0.30, 0.36, 0.43, 0.50, 0.60, 0.72, 0.85, 1.00, 1.00 };
@@ -90,5 +93,5 @@ public class MecanumOP extends OpMode{
         // return scaled value.
         return dScale;
     }
-
+*/
 }

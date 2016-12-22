@@ -3,75 +3,75 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\Hardware-release\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="21.1.2"
-        sha1="1f393000b2bb4f5843806fc8a40da8d546202b56">
-        <dex dex="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-Hardware-release_54f1cf83e53212da62ab940d5dc559450bbd20ac.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\Analytics-release\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="21.1.2"
-        sha1="9dafed45e330aec14abcce05bdb7bbdb2a2d7092">
-        <dex dex="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-Analytics-release_9444bdde1a94510685fd3fcf5f6a4500485805b5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\FtcCommon-release\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="21.1.2"
-        sha1="42084fd058edb8779c6fbb573328cf8c36f6c5cd">
-        <dex dex="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-FtcCommon-release_0556906a000d31a2818ebb80e43885ee461cb8f0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\jars\classes.jar"
+        jar="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
         sha1="a025faa2044e14912bac7fa35c603ad6feed76af">
-        <dex dex="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-RobotCore-release_867528a9511bcb01aed7e390b661c38240dc6bc5.jar" />
+        <dex dex="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-RobotCore-release_c306d99acd46a679bd4a2b3aaaba62621675b058.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\ModernRobotics-release\jars\classes.jar"
+        jar="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\ModernRobotics-release\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
         sha1="01999c87afe3d10ffa06f3efa66f39e61e6aba0c">
-        <dex dex="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-ModernRobotics-release_f10d492e38e081daedef40a6550bdbaa6856f2d1.jar" />
+        <dex dex="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-ModernRobotics-release_c21df723ca245d2dbc288203564127573bc2b1b7.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\Analytics-release\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="899a69098c78651ab755672ce7f399f2adb3f0ac">
-        <dex dex="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\instant-run_ea48de9112b9075de2dac6b12f47b51fa99b0b9a.jar" />
+        sha1="9dafed45e330aec14abcce05bdb7bbdb2a2d7092">
+        <dex dex="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-Analytics-release_ed711b6277ccefcc6a413e6e92f97b8a80efd7b7.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\WirelessP2p-release\jars\classes.jar"
+        jar="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="dd56b213d3c2406096c73a97269648f2dade33b4">
+        <dex dex="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\instant-run-bootstrap_33aa388d4578df1030a9830437ddee0de23f7708.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="161f991504852fd45436ed2fa82fba0f7f0ad1cc">
+        <dex dex="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\instant-run_36a12cd473df94b0f6b0e85b3fe4fef1bc4674e9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\Hardware-release\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="1f393000b2bb4f5843806fc8a40da8d546202b56">
+        <dex dex="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-Hardware-release_00a3097cfb84e38cfcb79749de7c297b9db6e55c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\FtcCommon-release\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="42084fd058edb8779c6fbb573328cf8c36f6c5cd">
+        <dex dex="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-FtcCommon-release_f849e5d68d6a4b82880db213b894f9f37095ef93.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\WirelessP2p-release\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
         sha1="9403be210676ed196cdcc64c7391b9ae2361c174">
-        <dex dex="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-WirelessP2p-release_43f36a9dbebaa5a9d5a341decec5321208f1230c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="21.1.2"
-        sha1="0d0ba18e62eb064534371b382c46889f386a0d6a">
-        <dex dex="C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\instant-run-bootstrap_46d0d12118b11c4ced7c1afd05bc4439669833e6.jar" />
+        <dex dex="C:\Users\bandi\AndroidStudioProjects\FTC-2016-2017-season\FtcRobotController\build\intermediates\pre-dexed\debug\intermediates-exploded-aar-WirelessP2p-release_0da7ad031446e4be7d743afc89a7f8d3b88959d5.jar" />
     </item>
 
 </items>
