@@ -22,7 +22,7 @@ import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
 
 @TeleOp(name = "Range", group = "MRI")
-public class Range extends OpMode {
+public class Range {
 
     byte[] range1Cache; //The read will return an array of bytes. They are stored in this variable
 
@@ -33,24 +33,23 @@ public class Range extends OpMode {
     public I2cDevice RANGE1;
     public I2cDeviceSynch RANGE1Reader;
 
-    @Override
-    public void init() {
-        RANGE1 = hardwareMap.i2cDevice.get("range");
+    public Range() {
+
+
+    }
+    public void setRange(I2cDevice RANG1){
+        RANGE1 = RANG1;
         RANGE1Reader = new I2cDeviceSynchImpl(RANGE1, RANGE1ADDRESS, false);
         RANGE1Reader.engage();
     }
 
-    @Override
-    public void loop() {
+
+    public int getData() {
         range1Cache = RANGE1Reader.read(RANGE1_REG_START, RANGE1_READ_LENGTH);
 
-        telemetry.addData("Ultra Sonic", range1Cache[0] & 0xFF);
-        telemetry.addData("ODS", range1Cache[1] & 0xFF);
+        return
     }
 
-    @Override
-    public void stop() {
 
-    }
 
 }

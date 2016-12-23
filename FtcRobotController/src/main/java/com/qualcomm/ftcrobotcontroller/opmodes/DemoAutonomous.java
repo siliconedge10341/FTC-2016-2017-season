@@ -6,11 +6,18 @@ import org.lasarobotics.vision.opmode.VisionOpMode;
 import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
 import org.lasarobotics.vision.util.ScreenOrientation;
 import org.opencv.core.Size;
+
 import com.qualcomm.ftcrobotcontroller.classes.LineFollow;
+import com.qualcomm.ftcrobotcontroller.classes.Range;
 
 import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+
+import com.qualcomm.robotcore.hardware.I2cDevice;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
+
 
 
 
@@ -33,6 +40,10 @@ public class DemoAutonomous extends VisionOpMode
     LineFollow ods = new LineFollow();
     TouchSensor ts;
 
+    I2cDevice RANGE1;
+
+    Range RANGE = new Range();
+
     double initialC;
 
 
@@ -47,6 +58,12 @@ public class DemoAutonomous extends VisionOpMode
       fl = hardwareMap.dcMotor.get("fl_motor");
       br = hardwareMap.dcMotor.get("br_motor");
       bl = hardwareMap.dcMotor.get("bl_motor");
+
+      RANGE1 = hardwareMap.i2cDevice.get("range");
+
+      RANGE.setRange(RANGE1);
+      RANGE1Reader = new I2cDeviceSynchImpl(RANGE1, RANGE1ADDRESS, false);
+      RANGE1Reader.engage();
 
       //VISION:
       super.init();
