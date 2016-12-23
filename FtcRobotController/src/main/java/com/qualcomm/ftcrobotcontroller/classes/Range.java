@@ -1,99 +1,56 @@
+/*
+Modern Robotics Range Sensor Example
+Created 9/8/2016 by Colton Mehlhoff of Modern Robotics using FTC SDK 2.x Beta
+Reuse permitted with credit where credit is due
+
+Configuration:
+I2cDevice on an Interface Module named "range" at the default address of 0x28 (0x14 7-bit)
+
+This program can be run without a battery and Power Destitution Module.
+
+For more information, visit modernroboticsedu.com.
+Support is available by emailing support@modernroboticsinc.com.
+*/
 package com.qualcomm.ftcrobotcontroller.classes;
 
-import com.qualcomm.ftcrobotcontroller.FtcRobotControllerActivity;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.UltrasonicSensor;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.hardware.I2cAddr;
+import com.qualcomm.robotcore.hardware.I2cDevice;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
 
-/**
- * Created by User on 12/22/2016.
- */
+@TeleOp(name = "Range", group = "MRI")
+public class Range extends OpMode {
 
-public class Range {
-    // instance variables
-    // private data
-    private UltrasonicSensor rangeSensor = new UltrasonicSensor() {
-        @Override
-        public double getUltrasonicLevel() {
-            return 0;
-        }
+    byte[] range1Cache; //The read will return an array of bytes. They are stored in this variable
 
-        @Override
-        public String status() {
-            return "Connection achieved.";
-        }
+    I2cAddr RANGE1ADDRESS = new I2cAddr(0x14); //Default I2C address for MR Range (7-bit)
+    public static final int RANGE1_REG_START = 0x04; //Register to start reading
+    public static final int RANGE1_READ_LENGTH = 2; //Number of byte to read
 
-        @Override
-        public String getDeviceName() {
-            return null;
-        }
+    public I2cDevice RANGE1;
+    public I2cDeviceSynch RANGE1Reader;
 
-        @Override
-        public String getConnectionInfo() {
-            return "Connection Received.";
-        }
-
-        @Override
-        public int getVersion() {
-            return 0;
-        }
-
-        @Override
-        public void close() {
-
-        }
-    };
-    int yBut = 0;
-    // public data
-
-    // constructors
-
-    public Range() {
-        // default constructor
-        rangeSensor.equals(0);
-        yBut = 0;
-    }
-    public Range(double R, int Y) {
-        // fill constructor
-        rangeSensor.equals(R);
-        yBut = Y;
+    @Override
+    public void init() {
+        RANGE1 = hardwareMap.i2cDevice.get("range");
+        RANGE1Reader = new I2cDeviceSynchImpl(RANGE1, RANGE1ADDRESS, false);
+        RANGE1Reader.engage();
     }
 
-    // sets
-    public void setYBut(int Y) {
-        yBut = Y;
+    @Override
+    public void loop() {
+        range1Cache = RANGE1Reader.read(RANGE1_REG_START, RANGE1_READ_LENGTH);
+
+        telemetry.addData("Ultra Sonic", range1Cache[0] & 0xFF);
+        telemetry.addData("ODS", range1Cache[1] & 0xFF);
     }
 
-    // gets
-    public int getyBut() {
-        return yBut;
+    @Override
+    public void stop() {
+
     }
 
-    // methods
-    public String connection() {
-        if (rangeSensor.getUltrasonicLevel() >= 0) {
-            return rangeSensor.getConnectionInfo();
-        } else {
-            return "Connection interrupted. Try again.";
-        }
-    }
-    public double getRange() {
-        return rangeSensor.getUltrasonicLevel();
-    }
-    public String status() {
-        return rangeSensor.status();
-    }
-
-    // toString
-    public String toString() {
-        return  "Distance: " + this.getRange() + "\n" +
-                "Connect.  " + this.connection() + "\n" +
-                "status:   " + this.status();
-    }
-
-    // tester
-    private static Range r = new Range();
-    public static void main(String[] args) {
-        System.out.println(r.toString());
-        // TODO make main. test. reconfigure motor controller. fix demo. make sure to have power settings.
-    }
 }
