@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw720dp-land-v13\\values-sw720dp-land-v13.xml",
+        "outputFile": "C:\\Users\\bandi\\AndroidStudioProjects\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw720dp-land-v13\\values-sw720dp-land-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,31 +11,7 @@
                     "endOffset": 109
                 },
                 "from": {
-                    "file": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values-sw720dp-land\\dimens.xml",
-                    "position": {
-                        "startLine": 39,
-                        "startColumn": 4,
-                        "startOffset": 1888,
-                        "endColumn": 58,
-                        "endOffset": 1942
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw720dp-land-v13\\values-sw720dp-land-v13.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 58,
-                    "endOffset": 109
-                },
-                "from": {
-                    "file": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values-sw720dp-land\\dimens.xml",
+                    "file": "C:\\Users\\bandi\\AndroidStudioProjects\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\values-sw720dp-land\\dimens.xml",
                     "position": {
                         "startLine": 39,
                         "startColumn": 4,

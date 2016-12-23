@@ -1,18 +1,10 @@
 [
     {
-        "merged": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\device_filter.xml",
-        "source": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\xml\\device_filter.xml"
+        "merged": "C:\\Users\\bandi\\AndroidStudioProjects\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\preferences.xml",
+        "source": "C:\\Users\\bandi\\AndroidStudioProjects\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\xml\\preferences.xml"
     },
     {
-        "merged": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\preferences.xml",
-        "source": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\xml\\preferences.xml"
-    },
-    {
-        "merged": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\preferences.xml",
-        "source": "D:\\SiliconEdge\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\xml\\preferences.xml"
-    },
-    {
-        "merged": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\device_filter.xml",
-        "source": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\xml\\device_filter.xml"
+        "merged": "C:\\Users\\bandi\\AndroidStudioProjects\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\xml\\device_filter.xml",
+        "source": "C:\\Users\\bandi\\AndroidStudioProjects\\FTC-2016-2017-season\\FtcRobotController\\src\\main\\res\\xml\\device_filter.xml"
     }
 ]
