@@ -1,6 +1,5 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
-
 import org.lasarobotics.vision.android.Cameras;
 import org.lasarobotics.vision.ftc.resq.Beacon;
 import org.lasarobotics.vision.opmode.VisionOpMode;
@@ -12,7 +11,6 @@ import com.qualcomm.ftcrobotcontroller.classes.LineFollow;
 import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
-import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 
 import com.qualcomm.robotcore.hardware.I2cDevice;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
@@ -30,19 +28,17 @@ import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
 public class DemoAutonomous extends VisionOpMode
 
 {
-
+    Mecanum Drive_Train = new Mecanum();
     DcMotor fr;
     DcMotor fl;
     DcMotor bl;
     DcMotor br;
-
-    OpticalDistanceSensor joe;
+    LineFollow ods = new LineFollow();
     TouchSensor ts;
 
-    LineFollow ods = new LineFollow();
-    Mecanum Drive_Train = new Mecanum();
-
     double initialC;
+
+
 
     public DemoAutonomous(){
         // NOTE: This is for the RIGHT Side
@@ -54,11 +50,6 @@ public class DemoAutonomous extends VisionOpMode
       fl = hardwareMap.dcMotor.get("fl_motor");
       br = hardwareMap.dcMotor.get("br_motor");
       bl = hardwareMap.dcMotor.get("bl_motor");
-      joe = hardwareMap.opticalDistanceSensor.get("ods");
-
-      ods.setSensor(joe);
-
-      initialC = ods.getVal();
 
       //VISION:
       super.init();
@@ -77,7 +68,9 @@ public class DemoAutonomous extends VisionOpMode
       cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
       cameraControl.setAutoExposureCompensation();
 
-        //End Vision
+      initialC = ods.getVal();
+
+
 
   }
 

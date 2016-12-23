@@ -19,7 +19,7 @@ public class MecaumDriver extends OpMode{
 
 	Mecanum yo = new Mecanum();
 	public MecaumDriver(){
-
+		percision_flag = 0;
 	}
 
 	@Override

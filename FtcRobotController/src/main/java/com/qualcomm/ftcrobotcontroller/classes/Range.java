@@ -90,7 +90,10 @@ public class Range {
                 "status:   " + this.status();
     }
 
+    // tester
+    private static Range r = new Range();
     public static void main(String[] args) {
+        System.out.println(r.toString());
         // TODO make main. test. reconfigure motor controller. fix demo. make sure to have power settings.
     }
 }
