@@ -30,20 +30,19 @@ import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
 public class DemoAutonomous extends VisionOpMode
 
 {
-    Mecanum Drive_Train = new Mecanum();
+
     DcMotor fr;
     DcMotor fl;
     DcMotor bl;
     DcMotor br;
+
     OpticalDistanceSensor joe;
-
-
-    LineFollow ods = new LineFollow();
     TouchSensor ts;
 
+    LineFollow ods = new LineFollow();
+    Mecanum Drive_Train = new Mecanum();
+
     double initialC;
-
-
 
     public DemoAutonomous(){
         // NOTE: This is for the RIGHT Side
@@ -58,6 +57,9 @@ public class DemoAutonomous extends VisionOpMode
       joe = hardwareMap.opticalDistanceSensor.get("ods");
 
       ods.setSensor(joe);
+
+      initialC = ods.getVal();
+
       //VISION:
       super.init();
       this.setCamera(Cameras.PRIMARY);
@@ -75,9 +77,7 @@ public class DemoAutonomous extends VisionOpMode
       cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
       cameraControl.setAutoExposureCompensation();
 
-      initialC = ods.getVal();
-
-
+        //End Vision
 
   }
 
