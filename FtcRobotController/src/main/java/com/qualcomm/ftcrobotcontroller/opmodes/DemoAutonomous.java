@@ -1,5 +1,6 @@
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
+
 import org.lasarobotics.vision.android.Cameras;
 import org.lasarobotics.vision.ftc.resq.Beacon;
 import org.lasarobotics.vision.opmode.VisionOpMode;
@@ -11,6 +12,7 @@ import com.qualcomm.ftcrobotcontroller.classes.LineFollow;
 import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 
 import com.qualcomm.robotcore.hardware.I2cDevice;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
@@ -33,6 +35,9 @@ public class DemoAutonomous extends VisionOpMode
     DcMotor fl;
     DcMotor bl;
     DcMotor br;
+    OpticalDistanceSensor joe;
+
+
     LineFollow ods = new LineFollow();
     TouchSensor ts;
 
@@ -50,7 +55,9 @@ public class DemoAutonomous extends VisionOpMode
       fl = hardwareMap.dcMotor.get("fl_motor");
       br = hardwareMap.dcMotor.get("br_motor");
       bl = hardwareMap.dcMotor.get("bl_motor");
+      joe = hardwareMap.opticalDistanceSensor.get("ods");
 
+      ods.setSensor(joe);
       //VISION:
       super.init();
       this.setCamera(Cameras.PRIMARY);

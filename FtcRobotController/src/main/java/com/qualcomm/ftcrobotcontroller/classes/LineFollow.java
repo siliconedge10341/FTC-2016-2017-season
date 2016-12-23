@@ -22,6 +22,10 @@ public class LineFollow {
         bl.setPower(0);
     }
 
+    public void setSensor(OpticalDistanceSensor ods){
+        v_distanceC = ods;
+
+    }
     public boolean Found() {
         boolean found = false;
         if (v_distanceC.getLightDetected() == 1) {
