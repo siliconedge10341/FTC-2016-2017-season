@@ -62,13 +62,11 @@ public class DemoAutonomous extends VisionOpMode
       RANGE1 = hardwareMap.i2cDevice.get("range");
 
       RANGE.setRange(RANGE1);
-      RANGE1Reader = new I2cDeviceSynchImpl(RANGE1, RANGE1ADDRESS, false);
-      RANGE1Reader.engage();
+
 
       //VISION:
       super.init();
-      this.setCamera(Cameras.PRIMARY);
-
+      this.setCamera(Cameras.SECONDARY);
       this.setFrameSize(new Size(900, 900));
 
       enableExtension(VisionOpMode.Extensions.BEACON);         //Beacon detection
@@ -145,7 +143,7 @@ public class DemoAutonomous extends VisionOpMode
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
                 Drive_Train.setPosition(2*1440,fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 ||  ts.isPressed() == true) {
+                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 ||  RANGE.getData()<=5) {
 
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -236,7 +234,7 @@ public class DemoAutonomous extends VisionOpMode
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
                 Drive_Train.setPosition(2*1440,fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 ||  ts.isPressed() == true) {
+                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 ||  RANGE.getData()<=5) {
 
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);

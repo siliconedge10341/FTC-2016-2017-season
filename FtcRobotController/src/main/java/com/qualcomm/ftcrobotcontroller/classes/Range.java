@@ -47,7 +47,7 @@ public class Range {
     public int getData() {
         range1Cache = RANGE1Reader.read(RANGE1_REG_START, RANGE1_READ_LENGTH);
 
-        return
+        return range1Cache[0];
     }
 
 
