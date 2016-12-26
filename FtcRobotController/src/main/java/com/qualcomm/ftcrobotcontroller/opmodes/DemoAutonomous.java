@@ -46,8 +46,6 @@ public class DemoAutonomous extends VisionOpMode
 
     double initialC;
 
-
-
     public DemoAutonomous(){
         // NOTE: This is for the RIGHT Side
 
@@ -81,8 +79,6 @@ public class DemoAutonomous extends VisionOpMode
       cameraControl.setAutoExposureCompensation();
 
       initialC = ods.getVal();
-
-
 
   }
 
@@ -289,7 +285,7 @@ public class DemoAutonomous extends VisionOpMode
             //
 
             default:
-
+                System.exit(0);
                 break;
         }
 
