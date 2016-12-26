@@ -3,6 +3,7 @@ package com.qualcomm.ftcrobotcontroller.classes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.DcMotorControllerEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.ftcrobotcontroller.classes.Distance;
@@ -244,19 +245,22 @@ public class Mecanum{
     }
     public void reset_encoders(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         // The positive and negative inputs only mean direction, not speed.
-        motorFR.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        motorBR.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        motorFL.setMode(DcMotorController.RunMode.RESET_ENCODERS);
-        motorBL.setMode(DcMotorController.RunMode.RESET_ENCODERS);
+        motorFR.setMode(DcMotor.RunMode.RESET_ENCODERS);
+        motorBR.setMode(DcMotor.RunMode.RESET_ENCODERS);
+        motorFL.setMode(DcMotor.RunMode.RESET_ENCODERS);
+        motorBL.setMode(DcMotor.RunMode.RESET_ENCODERS);
         // This sets the motors that go into DemoAutonomous.
     }
 
     public void run_using_encoders(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         // The positive and negative inputs only mean direction, not speed.
-        motorFR.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        motorBR.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        motorFL.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
-        motorBL.setMode(DcMotorController.RunMode.RUN_USING_ENCODERS);
+        motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+
         // This sets the motors that go into DemoAutonomous.
     }
     public void setPosition(int encoderval,DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){

@@ -28,7 +28,7 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
-
+/*
 package com.qualcomm.ftcrobotcontroller.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -42,6 +42,7 @@ import com.qualcomm.robotcore.util.Range;
  * <p>
  * Enables control of the robot via the gamepad
  */
+/*
 public class NxtTeleOp extends OpMode {
 
   // position of the claw servo
@@ -57,6 +58,7 @@ public class NxtTeleOp extends OpMode {
   double wristDelta = 0.01;
 
   DcMotorController.DeviceMode devMode;
+
   DcMotorController wheelController;
   DcMotor motorRight;
   DcMotor motorLeft;
@@ -69,7 +71,7 @@ public class NxtTeleOp extends OpMode {
   /*
    * Code to run when the op mode is first enabled goes here
    * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#init()
-   */
+
   @Override
   public void init() {
     motorRight = hardwareMap.dcMotor.get("motor_2");
@@ -80,10 +82,11 @@ public class NxtTeleOp extends OpMode {
     wheelController = hardwareMap.dcMotorController.get("wheels");
   }
 
-  /*
+
    * Code that runs repeatedly when the op mode is first enabled goes here
    * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#init_loop()
    */
+/*
   @Override
   public void init_loop() {
 
@@ -100,23 +103,23 @@ public class NxtTeleOp extends OpMode {
     wristPosition = 0.6;
     clawPosition = 0.5;
   }
-
+*/
   /*
    * This method will be called repeatedly in a loop
    * @see com.qualcomm.robotcore.eventloop.opmode.OpMode#loop()
-   */
+
   @Override
   public void loop() {
 
     // The op mode should only use "write" methods (setPower, setMode, etc) while in
     // WRITE_ONLY mode or SWITCHING_TO_WRITE_MODE
     if (allowedToWrite()) {
-    /*
+
      * Gamepad 1
      *
      * Gamepad 1 controls the motors via the left stick, and it controls the wrist/claw via the a,b,
      * x, y buttons
-     */
+
 
       if (gamepad1.dpad_left) {
         // Nxt devices start up in "write" mode by default, so no need to switch modes here.
@@ -179,6 +182,7 @@ public class NxtTeleOp extends OpMode {
 
       // we only want to process gamepad2 if someone is using one of it's analog inputs. If you always
       // want to process gamepad2, remove this check
+        /*
       if (gamepad2.atRest() == false) {
 
         // throttle is taken directly from the right trigger, the right trigger ranges in values from
@@ -252,3 +256,4 @@ public class NxtTeleOp extends OpMode {
     return (devMode == DcMotorController.DeviceMode.WRITE_ONLY);
   }
 }
+*/
