@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
@@ -41,13 +41,14 @@ allprojects {
     }
 }
 
-dependencies {
-    compile(name: 'RobotCore-release', ext: 'aar')
-    compile(name: 'Hardware-release', ext: 'aar')
-    compile(name: 'FtcCommon-release', ext: 'aar')
-    compile(name: 'ModernRobotics-release', ext: 'aar')
-    compile(name: 'Analytics-release', ext: 'aar')
-    compile(name: 'WirelessP2p-release', ext: 'aar')
-    compile project(':ftc-visionlib')
-    compile project(':opencv-java')
-}
+ dependencies {
+     compile(name: 'Hardware-release', ext: 'aar')
+     compile(name: 'FtcCommon-release', ext: 'aar')
+     compile(name: 'ModernRobotics-release', ext: 'aar')
+     compile(name: 'Analytics-release', ext: 'aar')
+     compile(name: 'WirelessP2p-release', ext: 'aar')
+     compile(name: 'RobotCore-release', ext: 'aar')
+     compile project(':ftc-visionlib')
+     compile project(':opencv-java')
+
+ }

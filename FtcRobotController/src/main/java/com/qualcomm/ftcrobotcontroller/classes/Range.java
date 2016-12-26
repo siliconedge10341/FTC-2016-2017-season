@@ -11,11 +11,11 @@ This program can be run without a battery and Power Destitution Module.
 For more information, visit modernroboticsedu.com.
 Support is available by emailing support@modernroboticsinc.com.
 */
+
 package com.qualcomm.ftcrobotcontroller.classes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.I2cDevice;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;

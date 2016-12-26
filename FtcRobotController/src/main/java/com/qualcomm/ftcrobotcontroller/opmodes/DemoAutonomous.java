@@ -42,7 +42,7 @@ public class DemoAutonomous extends VisionOpMode
 
     I2cDevice RANGE1;
 
-    Range RANGE = new Range();
+   Range RANGE = new Range();
 
     double initialC;
 
@@ -119,14 +119,15 @@ public class DemoAutonomous extends VisionOpMode
                 Drive_Train.setPower(.3);
                 Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
                 Drive_Train.setPosition(3*1440,fr, fl, br, bl);
-
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 || (ods.getVal() > initialC + .1)) {
-                    //
-                    // Reset the encoders to ensure they are at a known good value.
-                    //
-                    Drive_Train.reset_encoders(fr, fl, br, bl);
-                    Drive_Train.brake(fr, fl, br, bl);
-                    v_state++;
+                while(fl.isBusy()) {
+                    if (Drive_Train.testDistance(fr, fl, br, bl) == 1 || (ods.getVal() > initialC + .1)) {
+                        //
+                        // Reset the encoders to ensure they are at a known good value.
+                        //
+                        Drive_Train.reset_encoders(fr, fl, br, bl);
+                        Drive_Train.brake(fr, fl, br, bl);
+                        v_state++;
+                    }
                 }
                 break;
             //
@@ -139,11 +140,13 @@ public class DemoAutonomous extends VisionOpMode
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
                 Drive_Train.setPosition(2*1440,fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 ||  RANGE.getData()<=5) {
+                while(fl.isBusy()) {
+                    if (Drive_Train.testDistance(fr, fl, br, bl) == 1 || RANGE.getData() <= 5) {
 
-                    Drive_Train.reset_encoders(fr, fl, br, bl);
-                    Drive_Train.brake(fr, fl, br, bl);
-                    v_state++;
+                        Drive_Train.reset_encoders(fr, fl, br, bl);
+                        Drive_Train.brake(fr, fl, br, bl);
+                        v_state++;
+                    }
                 }
                 break;
             //
@@ -206,6 +209,9 @@ public class DemoAutonomous extends VisionOpMode
                     v_state++;
                 }
                 break;
+
+
+
                 //Second part
             case 6:
                 // run forward again to second line
@@ -230,7 +236,8 @@ public class DemoAutonomous extends VisionOpMode
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
                 Drive_Train.setPosition(2*1440,fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 ||  RANGE.getData()<=5) {
+
+                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 || RANGE.getData() <= 5 ) {
 
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);

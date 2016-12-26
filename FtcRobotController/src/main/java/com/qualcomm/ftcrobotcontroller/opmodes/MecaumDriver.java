@@ -50,7 +50,7 @@ public class MecaumDriver extends OpMode{
 		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x, percision_flag);
 		yo.run_motor(motorFrontRight, motorFL, motorBR, motorBL);
 
-		if (gamepad2.a) {
+		if (gamepad1.a) {
 			//TODO: Re-attach to robot later
 			motorCollector.setPower(0.5);
 
