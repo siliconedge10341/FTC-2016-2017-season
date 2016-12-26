@@ -28,6 +28,10 @@
         "source": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\layout\\legacy.xml"
     },
     {
+        "merged": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\layout\\loading_indicator_overlay.xml",
+        "source": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\RobotCore-release\\res\\layout\\loading_indicator_overlay.xml"
+    },
+    {
         "merged": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\layout\\activity_ftc_configuration.xml",
         "source": "C:\\Users\\bandi\\Documents\\GitHub\\FTC-2016-2017-season\\FtcRobotController\\build\\intermediates\\exploded-aar\\FtcCommon-release\\res\\layout\\activity_ftc_configuration.xml"
     },

@@ -17,12 +17,14 @@ ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotControll
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.CAMERA
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:7:3-87
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:42:5-65
 	android:required
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:7:61-84
 	android:name
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:7:20-60
 uses-permission#android.permission.ACCESS_WIFI_STATE
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:8:3-10:31
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:9:5-11:35
 	android:required
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:10:5-28
 	android:name
@@ -30,12 +32,14 @@ ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotControll
 uses-permission#android.permission.CHANGE_WIFI_STATE
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:11:3-13:31
 MERGED from [:WirelessP2p-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\WirelessP2p-release\AndroidManifest.xml:9:5-76
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:12:5-14:35
 	android:required
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:13:5-28
 	android:name
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:12:5-56
 uses-permission#android.permission.WAKE_LOCK
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:14:3-16:33
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:39:5-41:35
 	android:required
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:16:7-30
 	android:name
@@ -43,12 +47,14 @@ ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotControll
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:17:3-19:31
 MERGED from [:Analytics-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\Analytics-release\AndroidManifest.xml:15:5-17:35
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:15:5-17:35
 	android:required
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:19:5-28
 	android:name
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:18:5-59
 uses-permission#android.permission.CHANGE_NETWORK_STATE
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:20:3-22:31
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:18:5-20:35
 	android:required
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:22:5-28
 	android:name
@@ -56,6 +62,7 @@ ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotControll
 uses-permission#android.permission.INTERNET
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:23:3-25:31
 MERGED from [:Analytics-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\Analytics-release\AndroidManifest.xml:12:5-14:35
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:21:5-23:35
 	android:required
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:25:5-28
 	android:name
@@ -64,6 +71,7 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:26:3-28:31
 MERGED from [:FtcCommon-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\FtcCommon-release\AndroidManifest.xml:11:5-13:35
 MERGED from [:Analytics-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\Analytics-release\AndroidManifest.xml:9:5-11:35
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:24:5-26:35
 	android:required
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:28:5-28
 	android:name
@@ -71,6 +79,7 @@ MERGED from [:Analytics-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:29:3-31:31
 MERGED from [:FtcCommon-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\FtcCommon-release\AndroidManifest.xml:14:5-16:35
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:27:5-29:35
 	android:required
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:31:5-28
 	android:name
@@ -78,12 +87,14 @@ MERGED from [:FtcCommon-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-
 uses-permission#android.permission.WRITE_SETTINGS
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:32:3-34:31
 MERGED from [:FtcCommon-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\FtcCommon-release\AndroidManifest.xml:17:5-19:35
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:30:5-32:35
 	android:required
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:34:5-28
 	android:name
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:33:5-53
 uses-feature#android.hardware.usb.accessory
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:36:3-65
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:44:5-67
 	android:name
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:36:17-62
 application
@@ -91,6 +102,7 @@ ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotControll
 MERGED from [:FtcCommon-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\FtcCommon-release\AndroidManifest.xml:21:5-156:19
 MERGED from [:Analytics-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\Analytics-release\AndroidManifest.xml:19:5-24:19
 MERGED from [FTC-2016-2017-season:ftc-visionlib:unspecified] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\FTC-2016-2017-season\ftc-visionlib\unspecified\AndroidManifest.xml:11:5-14:19
+MERGED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:61:5-93
 	android:label
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:41:5-37
 	android:exported
@@ -101,6 +113,8 @@ MERGED from [FTC-2016-2017-season:ftc-visionlib:unspecified] C:\Users\bandi\Docu
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:40:5-41
 	android:theme
 		ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:42:5-36
+	android:name
+		ADDED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:61:18-90
 activity#com.qualcomm.ftcrobotcontroller.FtcRobotControllerActivity
 ADDED from C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\src\main\AndroidManifest.xml:43:5-60:16
 	android:label
@@ -385,3 +399,11 @@ uses-library#android.test.runner
 ADDED from [:Analytics-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\Analytics-release\AndroidManifest.xml:23:9-60
 	android:name
 		ADDED from [:Analytics-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\Analytics-release\AndroidManifest.xml:23:23-57
+uses-feature#0x00020000
+ADDED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:45:5-54
+	android:glEsVersion
+		ADDED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:45:19-51
+uses-feature#android.hardware.camera
+ADDED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:59:5-60
+	android:name
+		ADDED from [:RobotCore-release:] C:\Users\bandi\Documents\GitHub\FTC-2016-2017-season\FtcRobotController\build\intermediates\exploded-aar\RobotCore-release\AndroidManifest.xml:59:19-57
