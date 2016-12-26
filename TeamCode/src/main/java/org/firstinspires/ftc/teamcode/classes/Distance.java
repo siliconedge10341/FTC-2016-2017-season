@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.classes;
 
-import org.firstinspires.ftc.teamcode.opmodes.PushBotHardwareSensors;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 

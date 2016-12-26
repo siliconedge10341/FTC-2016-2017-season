@@ -1,8 +1,8 @@
-package com.qualcomm.ftcrobotcontroller.opmodes;
+package org.firstinspires.ftc.teamcode.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
+import org.firstinspires.ftc.teamcode.classes.Mecanum;
 
 import com.qualcomm.robotcore.util.Range;
 
