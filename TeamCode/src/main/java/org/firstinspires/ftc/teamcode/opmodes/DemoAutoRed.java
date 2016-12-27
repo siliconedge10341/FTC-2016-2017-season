@@ -1,7 +1,7 @@
-package com.qualcomm.ftcrobotcontroller.opmodes;
+package org.firstinspires.ftc.teamcode.opmodes;
 
-import com.qualcomm.ftcrobotcontroller.classes.LineFollow;
-import com.qualcomm.ftcrobotcontroller.classes.Mecanum;
+import org.firstinspires.ftc.teamcode.classes.LineFollow;
+import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 

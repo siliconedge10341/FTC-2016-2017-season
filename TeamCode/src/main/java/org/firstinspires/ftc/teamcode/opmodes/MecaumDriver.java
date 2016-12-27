@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -19,7 +20,10 @@ public class MecaumDriver extends OpMode{
 	DcMotor motorShootL;
 	DcMotor motorShootR;
 
+	Servo ball;
+
 	int percision_flag=0;
+	double ballpos = .5;
 
 	Mecanum yo = new Mecanum();
 	public MecaumDriver(){
@@ -39,6 +43,8 @@ public class MecaumDriver extends OpMode{
 		motorShootL = hardwareMap.dcMotor.get("shooter_left");
 		motorShootR = hardwareMap.dcMotor.get("shooter_right");
 
+		ball = hardwareMap.servo.get("servo_ball");
+		ball.setPosition(ballpos);
 
 	}
 
@@ -70,6 +76,19 @@ public class MecaumDriver extends OpMode{
 			motorShootL.setPower(0);
 			motorShootR.setPower(0);
 		}
+		if (gamepad2.dpad_right){
+
+			ballpos = ballpos -.01;
+		}else if(gamepad2.dpad_left){
+			ballpos = ballpos +.01;
+		}
+		if (ballpos >= Servo.MAX_POSITION){
+			ballpos = Servo.MAX_POSITION - .05;
+		}else if(ballpos <= Servo.MIN_POSITION ){
+			ballpos = Servo.MIN_POSITION +.05;
+		}
+
+		ball.setPosition(ballpos);
 
 	}
 	@Override

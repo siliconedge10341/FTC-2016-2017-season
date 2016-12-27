@@ -15,9 +15,7 @@ import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
-import com.qualcomm.robotcore.hardware.I2cDevice;
-import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
-import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -46,12 +44,14 @@ public class DemoAutonomous extends VisionOpMode
     DcMotor motorShootL;
     DcMotor motorShootR;
 
+    ModernRoboticsI2cRangeSensor rangeSensor;
+
     Mecanum Drive_Train = new Mecanum();
     LineFollow ods = new LineFollow();
     private ElapsedTime runtime = new ElapsedTime();
 
 
-    I2cDevice RANGE1;
+
 
     Range RANGE = new Range();
 
@@ -71,10 +71,8 @@ public class DemoAutonomous extends VisionOpMode
       motorShootL = hardwareMap.dcMotor.get("shooter_left");
       motorShootR = hardwareMap.dcMotor.get("shooter_right");
 
-      RANGE1 = hardwareMap.i2cDevice.get("range");
-
-      RANGE.setRange(RANGE1);
-
+      rangeSensor = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
+      RANGE.setRange(rangeSensor);
 
       //VISION:
       super.init();
