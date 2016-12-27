@@ -103,7 +103,7 @@ public class MecaumDriver extends OpMode{
 		}
 
 		//bantu shooter
-		if (ballpos <= Servo.MIN_POSITION + .15 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
+		if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
 			motorShootL.setPower(1.0);
 			motorShootR.setPower(-1.0);
 		} else {
@@ -128,10 +128,12 @@ public class MecaumDriver extends OpMode{
         ballRelease.setPosition(ballpos);
 
         // Raises CatBall
-        if (gamepad2.x) {
-            motorLS.setPower(.5);
-        } else if (gamepad2.y) {
-            motorLS.setPower(-.5);
+        if (gamepad2.x && LSRotations <= 40) {
+            motorLS.setPower(0.5);
+            LSRotations++;
+        } else if (gamepad2.y && LSRotations >= 1) {
+            motorLS.setPower(-0.5);
+            LSRotations--;
         } else {
             motorLS.setPower(0.0);
         }
