@@ -57,9 +57,7 @@ public class DemoAutonomous extends VisionOpMode {
     private int v_state = 0;
 
     public DemoAutonomous(){
-        // NOTE: This is for the RIGHT Side
-        initialC = 0;
-        v_state = 0;
+
     }
 
   @Override public void init(){
@@ -92,12 +90,15 @@ public class DemoAutonomous extends VisionOpMode {
       cameraControl.setAutoExposureCompensation();
 
       initialC = ods.getVal();
+      v_state = 0;
+      // NOTE: This is for the RIGHT Side
+      initialC = 0;
   }
 
     @Override public void start () {
         // start
         super.start ();
-        v_state = 0;
+
         // reset encoders to begin period of autonomous
         Drive_Train.reset_encoders(fr, fl, br, bl);
     }
