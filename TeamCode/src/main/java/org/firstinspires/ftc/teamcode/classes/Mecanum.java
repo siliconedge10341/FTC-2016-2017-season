@@ -1,53 +1,53 @@
 package org.firstinspires.ftc.teamcode.classes;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorController;
-import com.qualcomm.robotcore.hardware.DcMotorControllerEx;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.teamcode.classes.Distance;
-
-
+//import com.qualcomm.robotcore.hardware.DcMotorController;
+//import com.qualcomm.robotcore.hardware.DcMotorControllerEx;
+//import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * Created by the lord and savior Arko Chaterjee on 9/7/2016.
  */
 public class Mecanum{
-
+    // instance variables
+    // private variables
+    // constants
     private final double pi = 3.1415926;
     private final double wheel_diameter = 4 * (pi);
     private Distance dis_sensor = new Distance();
 
+    // powers
     private double FRpower = 0;
     private double FLpower = 0;
     private double BRpower = 0;
     private double BLpower = 0;
     private double BasePower = .5;
-    private double MaxPower = 1;
-//Private variables
+    //private double MaxPower = 1;
 
+    // constructors
     public Mecanum() {
+        // default constructors
         FRpower = 0;
         FLpower = 0;
         BRpower = 0;
         BLpower = 0;
     }
-    public Mecanum(double motorFR, double motorFL, double motorBR, double motorBL){
+    public Mecanum(double motorFR, double motorFL, double motorBR, double motorBL) {
+        // fill constructor
+        // this sets the motors to the specific train withing demo and drive
         FRpower = motorFR;
         FLpower = motorFL;
         BRpower = motorBR;
         BLpower = motorBL;
     }
 
-    public void run_motor(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
-
+    // sets
+    public void run_motor(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
         motorFL.setPower((FLpower));
         motorBL.setPower(BLpower);
     }
-
     public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x, int upbutton){
         float ch1 = rjoystick_x;
         float ch3 = ljoystick_x;
@@ -68,7 +68,29 @@ public class Mecanum{
         }
 
     }
+    public void setPosition(int encoderval,DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
+        motorFR.setTargetPosition(encoderval);
+        motorFL.setTargetPosition(encoderval);
+        motorBR.setTargetPosition(encoderval);
+        motorBL.setTargetPosition(encoderval);
+    }
+    public void setPower(double power) {
+        BasePower = power;
+    }
 
+    // gets
+    public double get_wheel_rotations() {
+        double distance = 0;
+        double wheel_rotation = 0;
+
+        distance = dis_sensor.getWheelDistance();
+        wheel_rotation = distance/wheel_diameter;
+
+        return wheel_rotation;
+    }
+
+    // methods
+    // These are the functions for the specific direction
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = -BasePower;
         BLpower = BasePower;
@@ -84,7 +106,6 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-
     public void run_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = BasePower;
         BLpower = -BasePower;
@@ -99,7 +120,6 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-
     public void run_forward(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = BasePower;
         BLpower = BasePower;
@@ -114,7 +134,6 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-
     public void run_backward(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = -BasePower;
         BLpower = -BasePower;
@@ -129,7 +148,6 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-
     public void run_diagonal_right_up(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = BasePower;
         BLpower = 0;
@@ -145,7 +163,6 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-
     public void run_diagonal_left_up(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = 0;
         BLpower = BasePower;
@@ -161,7 +178,6 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-
     public void run_diagonal_left_down(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = -BasePower;
         BLpower = 0;
@@ -176,7 +192,6 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-
     public void run_diagonal_right_down(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = 0;
         BLpower = -BasePower;
@@ -192,7 +207,6 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-
     public void turn_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, int degrees) {
         FLpower = BasePower;
         BLpower = BasePower;
@@ -210,7 +224,6 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-
     public void turn_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, int degrees) {
         FLpower = -BasePower;
         BLpower = -BasePower;
@@ -228,7 +241,6 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-
     public void brake(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = 0;
         BLpower = 0;
@@ -243,6 +255,8 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
+
+    // resets
     public void reset_encoders(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         // The positive and negative inputs only mean direction, not speed.
         motorFR.setMode(DcMotor.RunMode.RESET_ENCODERS);
@@ -252,7 +266,6 @@ public class Mecanum{
 
         // This sets the motors that go into DemoAutonomous.
     }
-
     public void run_using_encoders(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         // The positive and negative inputs only mean direction, not speed.
         motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -260,36 +273,20 @@ public class Mecanum{
         motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-
-
         // This sets the motors that go into DemoAutonomous.
     }
-    public void setPosition(int encoderval,DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
-        motorFR.setTargetPosition(encoderval);
-        motorFL.setTargetPosition(encoderval);
-        motorBR.setTargetPosition(encoderval);
-        motorBL.setTargetPosition(encoderval);
-    }
-    public void setPower(double power) {
-        BasePower = power;
-    }
 
-    public int testDistance(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
-        if (motorFL.getCurrentPosition()>= motorFL.getTargetPosition()){
+    // testers
+    public int testDistance(DcMotor A_Motor) {
+        // This takes any motor and tests the distance that that motor has traveled
+        // We only do one because all have traveled the same amount. Knowing Turns
+        // Do not count.
+
+        if (A_Motor.getCurrentPosition()>= A_Motor.getTargetPosition()){
             return 1;
         }else{
             return 0;
         }
-    }
-
-    public double get_wheel_rotations() {
-        double distance = 0;
-        double wheel_rotation = 0;
-
-        distance = dis_sensor.getWheelDistance();
-        wheel_rotation = distance/wheel_diameter;
-
-        return wheel_rotation;
     }
     //initialization routine
 

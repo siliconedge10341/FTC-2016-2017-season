@@ -14,29 +14,32 @@ Support is available by emailing support@modernroboticsinc.com.
 
 package org.firstinspires.ftc.teamcode.classes;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 
 public class Range {
+    // instance variables
+    // private variables
+    private ModernRoboticsI2cRangeSensor range;
 
-    ModernRoboticsI2cRangeSensor range;
+    // constructors
     public Range() {
-
-
+        // default constructor
+        // initialize range
     }
+
+    // sets
     public void setRange(ModernRoboticsI2cRangeSensor RANG1){
         range = RANG1;
     }
 
-
+    // gets
     public double getData() {
         return range.getDistance(DistanceUnit.CM);
     }
 
-
-
+    // methods // None //
+    // toString // None //
 }
