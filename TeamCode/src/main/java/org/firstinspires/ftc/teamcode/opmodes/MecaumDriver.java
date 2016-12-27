@@ -114,13 +114,13 @@ public class MecaumDriver extends OpMode{
         // Moves Servo
 		if (gamepad2.dpad_right){
             if (ballpos > Servo.MIN_POSITION) {
-                ballpos = ballpos -.01;
+                ballpos = ballpos -.05;
             } else {
                 // Nothing
             }
 		}else if(gamepad2.dpad_left){
             if (ballpos < Servo.MAX_POSITION) {
-                ballpos = ballpos +.01;
+                ballpos = ballpos +.05;
             } else {
                 // Nothing
             }
