@@ -129,15 +129,9 @@ public class MecaumDriver extends OpMode{
 
         // Raises CatBall
         if (gamepad2.x) {
-            if (LSRotations <= 20) {
-                motorLS.setPower(1.0);
-                LSRotations++;
-            }
+            motorLS.setPower(.5);
         } else if (gamepad2.y) {
-            if (LSRotations >= 1) {
-                motorLS.setPower(-1.0);
-                LSRotations--;
-            }
+            motorLS.setPower(-.5);
         } else {
             motorLS.setPower(0.0);
         }
