@@ -53,7 +53,7 @@ public class Mecanum{
         float ch3 = ljoystick_x;
         float ch4 = ljoystick_y;
 
-        float X2 = 0, Y1 = 0, X1 = 0, threshold = 15;
+        double X2 = 0, Y1 = 0, X1 = 0, threshold = .15;
 
         if(Math.abs(ch3) > threshold)
             Y1 = ch3;
@@ -70,6 +70,10 @@ public class Mecanum{
         else
             X2 = 0;
 
+        if(Y1<.3 && Y1>-.3){
+            Y1 = 0;
+        }
+
             FLpower = (Y1 + X2 + X1);
             BLpower = (Y1 + X2 - X1);
             FRpower = -(Y1 - X2 - X1);
@@ -77,11 +81,11 @@ public class Mecanum{
 
 
     }
-    public void setPosition(int encoderval, DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
-        motorFR.setTargetPosition(encoderval);
-        motorFL.setTargetPosition(encoderval);
-        motorBR.setTargetPosition(encoderval);
-        motorBL.setTargetPosition(encoderval);
+    public void setPosition(int fr,int fl,int br, int bl, DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
+        motorFR.setTargetPosition(fr);
+        motorFL.setTargetPosition(fl);
+        motorBR.setTargetPosition(br);
+        motorBL.setTargetPosition(bl);
     }
     public void setPower(double power) {
         BasePower = power;
