@@ -266,10 +266,19 @@ public class Mecanum{
 
         // This sets the motors that go into DemoAutonomous.
     }
-    public void run_using_encoders(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+    public void run_to_position(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         // The positive and negative inputs only mean direction, not speed.
         motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        // This sets the motors that go into DemoAutonomous.
+    }
+    public void run_using_encoders(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        // The positive and negative inputs only mean direction, not speed.
+        motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+        motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
         motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 

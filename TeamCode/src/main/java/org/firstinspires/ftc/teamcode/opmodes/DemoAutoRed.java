@@ -103,7 +103,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.run_diagonal_right_down(fr, fl, br, bl);
                 Drive_Train.setPosition(3*1440,fr, fl, br, bl);
 
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 || (ods.getVal() > initialC + .1)) {
+                if (Drive_Train.testDistance(fl) == 1 || (ods.getVal() > initialC + .1)) {
                     //
                     // Reset the encoders to ensure they are at a known good value.
                     //
@@ -122,7 +122,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
                 Drive_Train.setPosition(2*1440,fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 ||  ts.isPressed() == true) {
+                if (Drive_Train.testDistance(fl) == 1 ||  ts.isPressed() == true) {
 
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -139,7 +139,7 @@ public class DemoAutoRed extends VisionOpMode
                     Drive_Train.setPosition(720,fr, fl, br, bl);
                     Drive_Train.run_using_encoders(fr, fl, br, bl);
                     Drive_Train.run_backward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                    if (Drive_Train.testDistance(fl) == 1) {
                         // motor to move button here
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
@@ -150,7 +150,7 @@ public class DemoAutoRed extends VisionOpMode
                     Drive_Train.setPosition(720,fr, fl, br, bl);
                     Drive_Train.run_using_encoders(fr, fl, br, bl);
                     Drive_Train.run_forward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                    if (Drive_Train.testDistance(fl) == 1) {
                         // motor to move button here
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
@@ -167,7 +167,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.setPosition(200,fr, fl, br, bl);
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                if (Drive_Train.testDistance(fl) == 1) {
                     //if reached then stop
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -181,7 +181,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.setPosition(200,fr, fl, br, bl);
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                if (Drive_Train.testDistance(fl) == 1) {
                     //if reached then stop
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -197,7 +197,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.run_backward(fr, fl, br, bl);
                 Drive_Train.setPosition(4*1440,fr, fl, br, bl);
 
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 ||  (ods.getVal() > initialC + .1)) {
+                if (Drive_Train.testDistance(fl) == 1 ||  (ods.getVal() > initialC + .1)) {
                     //if reached then stop
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -213,7 +213,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
                 Drive_Train.setPosition(2*1440,fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1 ||  ts.isPressed() == true) {
+                if (Drive_Train.testDistance(fl) == 1 ||  ts.isPressed() == true) {
 
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -230,7 +230,7 @@ public class DemoAutoRed extends VisionOpMode
                     Drive_Train.setPosition(720,fr, fl, br, bl);
                     Drive_Train.run_using_encoders(fr, fl, br, bl);
                     Drive_Train.run_backward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                    if (Drive_Train.testDistance(fl) == 1) {
 
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
@@ -239,7 +239,7 @@ public class DemoAutoRed extends VisionOpMode
                     Drive_Train.setPosition(720,fr, fl, br, bl);
                     Drive_Train.run_using_encoders(fr, fl, br, bl);
                     Drive_Train.run_forward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                    if (Drive_Train.testDistance(fl) == 1) {
 
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
@@ -255,7 +255,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.setPosition(200,fr, fl, br, bl);
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                if (Drive_Train.testDistance(fl) == 1) {
                     //if reached then stop
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -267,7 +267,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.setPosition(200,fr, fl, br, bl);
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr, fl, br, bl) == 1) {
+                if (Drive_Train.testDistance(fl) == 1) {
                     //if reached then stop
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);

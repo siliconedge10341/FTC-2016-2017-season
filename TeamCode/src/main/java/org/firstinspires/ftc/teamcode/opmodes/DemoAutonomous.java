@@ -69,6 +69,9 @@ public class DemoAutonomous extends VisionOpMode {
 
       motorShootL = hardwareMap.dcMotor.get("shooter_left");
       motorShootR = hardwareMap.dcMotor.get("shooter_right");
+      releaseServo = hardwareMap.servo.get("servo_ball");
+
+      releaseServo.setPosition(0.3);
 
       rangeSensor = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
       RANGE.setRange(rangeSensor);
@@ -92,7 +95,6 @@ public class DemoAutonomous extends VisionOpMode {
       initialC = ods.getVal();
       v_state = 0;
       // NOTE: This is for the RIGHT Side
-      initialC = 0;
   }
 
     @Override public void start () {
@@ -117,10 +119,13 @@ public class DemoAutonomous extends VisionOpMode {
             // Synchronize the state machine and hardware.
             //
             case 0:
+
                 //Shoots ball for 3 seconds
                 runtime.reset();
                 motorShootL.setPower(1.0);
                 motorShootR.setPower(-1.0);
+                releaseServo.setPosition(.9);
+
                 if (runtime.seconds() > 3) {
                     motorShootL.setPower(0);
                     motorShootR.setPower(0);
