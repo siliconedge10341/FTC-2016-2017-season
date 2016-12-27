@@ -5,6 +5,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
+@TeleOp(name="MecanumDrive", group ="Drive")
 
 public class MecaumDriver extends OpMode{
 	DcMotor motorCollector;

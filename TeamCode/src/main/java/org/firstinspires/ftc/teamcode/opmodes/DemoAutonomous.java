@@ -19,8 +19,10 @@ import com.qualcomm.robotcore.hardware.I2cDevice;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
-
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * Provide a basic autonomous operational mode that uses the left and right
@@ -30,20 +32,28 @@ import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
  * @author SSI Robotics
  * @version 2015-08-01-06-01
  */
+
+@Autonomous(name = "Blue_Auto", group = "Blue")
+
 public class DemoAutonomous extends VisionOpMode
 
 {
-    Mecanum Drive_Train = new Mecanum();
+
     DcMotor fr;
     DcMotor fl;
     DcMotor bl;
     DcMotor br;
+    DcMotor motorShootL;
+    DcMotor motorShootR;
+
+    Mecanum Drive_Train = new Mecanum();
     LineFollow ods = new LineFollow();
-    TouchSensor ts;
+    private ElapsedTime runtime = new ElapsedTime();
+
 
     I2cDevice RANGE1;
 
-   Range RANGE = new Range();
+    Range RANGE = new Range();
 
     double initialC;
 
@@ -57,6 +67,9 @@ public class DemoAutonomous extends VisionOpMode
       fl = hardwareMap.dcMotor.get("fl_motor");
       br = hardwareMap.dcMotor.get("br_motor");
       bl = hardwareMap.dcMotor.get("bl_motor");
+
+      motorShootL = hardwareMap.dcMotor.get("shooter_left");
+      motorShootR = hardwareMap.dcMotor.get("shooter_right");
 
       RANGE1 = hardwareMap.i2cDevice.get("range");
 
@@ -107,8 +120,16 @@ public class DemoAutonomous extends VisionOpMode
             // Synchronize the state machine and hardware.
             //
             case 0:
+                //Shoots ball for 3 seconds
+                runtime.reset();
+                motorShootL.setPower(1.0);
+                motorShootR.setPower(-1.0);
+                if (runtime.seconds() > 3){
+                    motorShootL.setPower(0);
+                    motorShootR.setPower(0);
+                    v_state++;
 
-                v_state++;
+                }
 
                 break;
             //

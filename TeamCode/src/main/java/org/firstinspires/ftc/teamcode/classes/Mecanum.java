@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.classes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
+import com.qualcomm.robotcore.hardware.DcMotorControllerEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.classes.Distance;
@@ -248,15 +249,16 @@ public class Mecanum{
         motorBR.setMode(DcMotor.RunMode.RESET_ENCODERS);
         motorFL.setMode(DcMotor.RunMode.RESET_ENCODERS);
         motorBL.setMode(DcMotor.RunMode.RESET_ENCODERS);
+
         // This sets the motors that go into DemoAutonomous.
     }
 
     public void run_using_encoders(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         // The positive and negative inputs only mean direction, not speed.
-        motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
 
