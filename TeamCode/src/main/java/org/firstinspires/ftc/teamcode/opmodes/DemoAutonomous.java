@@ -80,10 +80,7 @@ public class DemoAutonomous extends VisionOpMode {
         ods = hardwareMap.opticalDistanceSensor.get("ods_line");
         RANGE = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
 
-        //set classses
-
-
-
+        // Sets Position
         releaseServo.setPosition(0.3);
 
         //VISION:

@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
+
+import com.qualcomm.robotcore.hardware.DcMotorControllerEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.classes.ProjectileMotion;
@@ -21,6 +23,7 @@ public class MecaumDriver extends OpMode{
 	private DcMotor motorBL;
 	private DcMotor motorShootL;
 	private DcMotor motorShootR;
+    private DcMotor motorLS;
 
     // Servos
 	private Servo ballRelease;
@@ -30,11 +33,13 @@ public class MecaumDriver extends OpMode{
 	private int percision_flag = 0;
     // percision flag is to decrease power, if power is decreased, the robot will go slower.
 	private double ballpos = .5;
+    private double LSRotations = 0;
 	private Mecanum yo = new Mecanum();
     private ProjectileMotion ProjMot = new ProjectileMotion();
 
     public MecaumDriver() {
 		percision_flag = 0;
+        LSRotations = 0;
 	}
 
 	@Override
@@ -44,6 +49,7 @@ public class MecaumDriver extends OpMode{
 		motorFR = hardwareMap.dcMotor.get("fr_motor");
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
 		motorBR = hardwareMap.dcMotor.get("br_motor");
+        motorLS = hardwareMap.dcMotor.get("linear_slide_motor");
 
 		motorCollector = hardwareMap.dcMotor.get("ball_collector");
 
@@ -52,6 +58,8 @@ public class MecaumDriver extends OpMode{
 
 		ballRelease = hardwareMap.servo.get("servo_ball");
 		ballRelease.setPosition(ballpos);
+        leftClamp = hardwareMap.servo.get("servo_left_clamp");
+        rightClamp = hardwareMap.servo.get("servo_right_clamp");
 	}
 
 	//main function body
@@ -67,8 +75,11 @@ public class MecaumDriver extends OpMode{
         //-BUTTONS-//                   //
         // A: Turns on Collector        //
         // B: Runs Shooter              //
-        // X: None;                     //
-        // Y: None;                     //
+        // X: Raise Slide               //
+        // Y: Lower Slide               //
+        //-TRIGGERS-//                  //
+        // LEFT: None;                  //
+        // RIGHT: None;                 //
         //------------------------------//
 
         // Decreases Power
@@ -117,6 +128,19 @@ public class MecaumDriver extends OpMode{
         ballRelease.setPosition(ballpos);
 
         // Raises CatBall
+        if (gamepad2.x) {
+            if (LSRotations <= 20) {
+                motorLS.setPower(1.0);
+                LSRotations++;
+            }
+        } else if (gamepad2.y) {
+            if (LSRotations >= 1) {
+                motorLS.setPower(-1.0);
+                LSRotations--;
+            }
+        } else {
+            motorLS.setPower(0.0);
+        }
 
         // Clamps CatBall
 
