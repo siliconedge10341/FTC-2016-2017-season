@@ -136,28 +136,29 @@ public class DemoAutonomous extends VisionOpMode {
                 initialC = ods.getLightDetected();
                 //Shoots ball for 3 seconds
                 runtime.reset();
-                motorShootL.setPower(1.0);
-                motorShootR.setPower(-1.0);
                 releaseServo.setPosition(.9);
-
-                if (runtime.seconds() > 3) {
-                    motorShootL.setPower(0);
-                    motorShootR.setPower(0);
-                    v_state++;
+                while (runtime.seconds()<=3) {
+                    motorShootL.setPower(1.0);
+                    motorShootR.setPower(-1.0);
                 }
+                motorShootL.setPower(0);
+                motorShootR.setPower(0);
+                v_state++;
                 break;
             //
             // Drive forward until the encoders exceed the specified values.
             //
             case 1:
                 //Move and detect line
-                Drive_Train.run_using_encoders(fr, fl, br, bl);
 
                 Drive_Train.setPower(.3);
-                Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
                 Drive_Train.setPosition(3 * 1440, fr, fl, br, bl);
+                Drive_Train.run_to_position(fr, fl, br, bl);
+
+                Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+
                 while (fl.isBusy()) {
-                    if (Drive_Train.testDistance(fr) == 1 || (ods.getLightDetected() > initialC + .1)) {
+                    if (Drive_Train.testDistance(fl) == 1 || (ods.getLightDetected() > initialC + .1)) {
                         //
                         // Reset the encoders to ensure they are at a known good value.
                         //
@@ -173,11 +174,11 @@ public class DemoAutonomous extends VisionOpMode {
             // First Button
             case 2:
                 // Strafe right
-                Drive_Train.run_using_encoders(fr, fl, br, bl);
+                Drive_Train.run_to_position(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
                 Drive_Train.setPosition(2 * 1440, fr, fl, br, bl);
                 while (fl.isBusy()) {
-                    if (Drive_Train.testDistance(fr) == 1 || RANGE.getDistance(DistanceUnit.CM) <= 5) {
+                    if (Drive_Train.testDistance(fl) == 1 || RANGE.getDistance(DistanceUnit.CM) <= 5) {
 
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
@@ -193,9 +194,9 @@ public class DemoAutonomous extends VisionOpMode {
                 if (beacon.getAnalysis().isLeftBlue() == true) {
                     //go forward if the left side of the beacon is blue
                     Drive_Train.setPosition(720, fr, fl, br, bl);
-                    Drive_Train.run_using_encoders(fr, fl, br, bl);
+                    Drive_Train.run_to_position(fr, fl, br, bl);
                     Drive_Train.run_forward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fr) == 1) {
+                    if (Drive_Train.testDistance(fl) == 1) {
                         // motor to move button here
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
@@ -203,9 +204,9 @@ public class DemoAutonomous extends VisionOpMode {
                     }
                 } else {
                     Drive_Train.setPosition(720, fr, fl, br, bl);
-                    Drive_Train.run_using_encoders(fr, fl, br, bl);
+                    Drive_Train.run_to_position(fr, fl, br, bl);
                     Drive_Train.run_backward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fr) == 1) {
+                    if (Drive_Train.testDistance(fl) == 1) {
                         // motor to move button here
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
@@ -223,7 +224,7 @@ public class DemoAutonomous extends VisionOpMode {
                 Drive_Train.setPosition(200, fr, fl, br, bl);
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr) == 1) {
+                if (Drive_Train.testDistance(fl) == 1) {
                     //if reached then stop
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -237,7 +238,7 @@ public class DemoAutonomous extends VisionOpMode {
             case 5:
                 //go back a little bit
                 Drive_Train.setPosition(200, fr, fl, br, bl);
-                Drive_Train.run_using_encoders(fr, fl, br, bl);
+                Drive_Train.run_to_position(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
                 if (Drive_Train.testDistance(fr) == 1) {
                     //if reached then stop
@@ -257,12 +258,13 @@ public class DemoAutonomous extends VisionOpMode {
 
                 Drive_Train.run_forward(fr, fl, br, bl);
                 Drive_Train.setPosition(4 * 1440, fr, fl, br, bl);
-
-                if (Drive_Train.testDistance(fr) == 1 || (ods.getLightDetected() > initialC + .1)) {
-                    //if reached then stop
-                    Drive_Train.reset_encoders(fr, fl, br, bl);
-                    Drive_Train.brake(fr, fl, br, bl);
-                    v_state++;
+                while (fl.isBusy()) {
+                    if (Drive_Train.testDistance(fl) == 1 || (ods.getLightDetected() > initialC + .1)) {
+                        //if reached then stop
+                        Drive_Train.reset_encoders(fr, fl, br, bl);
+                        Drive_Train.brake(fr, fl, br, bl);
+                        v_state++;
+                    }
                 }
                 break;
             //
@@ -274,7 +276,7 @@ public class DemoAutonomous extends VisionOpMode {
                 Drive_Train.run_right(fr, fl, br, bl);
                 Drive_Train.setPosition(2 * 1440, fr, fl, br, bl);
 
-                if (Drive_Train.testDistance(fr) == 1 || RANGE.getDistance(DistanceUnit.CM) <= 5) {
+                if (Drive_Train.testDistance(fl) == 1 || RANGE.getDistance(DistanceUnit.CM) <= 5) {
 
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -289,18 +291,18 @@ public class DemoAutonomous extends VisionOpMode {
                 if (beacon.getAnalysis().isLeftBlue() == true) {
                     //go forward if the left side of the beacon is blue
                     Drive_Train.setPosition(720, fr, fl, br, bl);
-                    Drive_Train.run_using_encoders(fr, fl, br, bl);
+                    Drive_Train.run_to_position(fr, fl, br, bl);
                     Drive_Train.run_forward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fr) == 1) {
+                    if (Drive_Train.testDistance(fl) == 1) {
 
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
                     }
                 } else {
                     Drive_Train.setPosition(720, fr, fl, br, bl);
-                    Drive_Train.run_using_encoders(fr, fl, br, bl);
+                    Drive_Train.run_to_position(fr, fl, br, bl);
                     Drive_Train.run_backward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fr) == 1) {
+                    if (Drive_Train.testDistance(fl) == 1) {
 
                         Drive_Train.reset_encoders(fr, fl, br, bl);
                         Drive_Train.brake(fr, fl, br, bl);
@@ -318,7 +320,7 @@ public class DemoAutonomous extends VisionOpMode {
                 Drive_Train.setPosition(200, fr, fl, br, bl);
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr) == 1) {
+                if (Drive_Train.testDistance(fl) == 1) {
                     //if reached then stop
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);

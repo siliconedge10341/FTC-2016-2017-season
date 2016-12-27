@@ -53,18 +53,28 @@ public class Mecanum{
         float ch3 = ljoystick_x;
         float ch4 = ljoystick_y;
 
-        //Get joystick inputs
-        if (upbutton == 1){
-            FLpower = (-(ch3 + ch1 + ch4))/2;
-            BLpower = (-(ch3 + ch1 - ch4))/2;
-            FRpower = (ch3 - ch1 - ch4)/2;
-            BRpower = (ch3 - ch1 + ch4)/2;
-        } else {
-            FLpower = -(ch3 + ch1 + ch4);
-            BLpower = -(ch3 + ch1 - ch4);
-            FRpower = ch3 - ch1 - ch4;
-            BRpower = ch3 - ch1 + ch4;
-        }
+        float X2 = 0, Y1 = 0, X1 = 0, threshold = 15;
+
+        if(Math.abs(ch3) > threshold)
+            Y1 = ch3;
+        else
+            Y1 = 0;
+//Create "deadzone" for X1/Ch4
+        if(Math.abs(ch4) > threshold)
+            X1 = ch4;
+        else
+            X1 = 0;
+//Create "deadzone" for X2/Ch1
+        if(Math.abs(ch1) > threshold)
+            X2 = ch1;
+        else
+            X2 = 0;
+
+            FLpower = (Y1 + X2 + X1);
+            BLpower = (Y1 + X2 - X1);
+            FRpower = -(Y1 - X2 - X1);
+            BRpower = -(Y1 - X2 + X1);
+
 
     }
     public void setPosition(int encoderval, DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
@@ -278,8 +288,8 @@ public class Mecanum{
         // The positive and negative inputs only mean direction, not speed.
         motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
         motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
-        motorFL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorBL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+        motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
 
         // This sets the motors that go into DemoAutonomous.
     }
