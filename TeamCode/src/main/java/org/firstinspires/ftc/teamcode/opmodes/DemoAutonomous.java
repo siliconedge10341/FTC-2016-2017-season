@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 import org.lasarobotics.vision.android.Cameras;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import org.lasarobotics.vision.ftc.resq.Beacon;
 import org.lasarobotics.vision.opmode.VisionOpMode;
 import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
@@ -30,22 +31,24 @@ public class DemoAutonomous extends VisionOpMode {
     // instance variables
     // private variables
     // Motors
-    private DcMotor fr;
-    private DcMotor fl;
-    private DcMotor bl;
-    private DcMotor br;
-    private DcMotor motorShootL;
-    private DcMotor motorShootR;
-    private Servo releaseServo;
+    DcMotor fr;
+    DcMotor fl;
+    DcMotor bl;
+    DcMotor br;
+    DcMotor motorShootL;
+    DcMotor motorShootR;
+    Servo releaseServo;
+
 
     // Range Sensor
-    private ModernRoboticsI2cRangeSensor rangeSensor;
+    ModernRoboticsI2cRangeSensor rangeSensor;
+    OpticalDistanceSensor tods;
 
     // Sensor Classes
-    private Mecanum Drive_Train = new Mecanum();
-    private LineFollow ods = new LineFollow();
-    private ElapsedTime runtime = new ElapsedTime();
-    private Range RANGE = new Range();
+    Mecanum Drive_Train = new Mecanum();
+    LineFollow ods = new LineFollow();
+    ElapsedTime runtime = new ElapsedTime();
+    Range RANGE = new Range();
 
     // Reading for the initial color we take at the beginning of the match.
     // This helps us because when we test for the white line, we want to be
@@ -54,7 +57,7 @@ public class DemoAutonomous extends VisionOpMode {
     double initialC = 0;
 
     // states variable for the loop
-    private int v_state = 0;
+    int v_state = 0;
 
     public DemoAutonomous(){
 
@@ -62,6 +65,7 @@ public class DemoAutonomous extends VisionOpMode {
 
   @Override public void init(){
       // Sets every class at the beginning of the demoautonomous run class
+      //Hardware Maps
       fr = hardwareMap.dcMotor.get("fr_motor");
       fl = hardwareMap.dcMotor.get("fl_motor");
       br = hardwareMap.dcMotor.get("br_motor");
@@ -71,11 +75,14 @@ public class DemoAutonomous extends VisionOpMode {
       motorShootR = hardwareMap.dcMotor.get("shooter_right");
       releaseServo = hardwareMap.servo.get("servo_ball");
 
-      releaseServo.setPosition(0.3);
-
+      tods = hardwareMap.opticalDistanceSensor.get("ods_line");
       rangeSensor = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
-      RANGE.setRange(rangeSensor);
 
+      //set classses
+      RANGE.setRange(rangeSensor);
+      ods.setSensor(tods);
+
+      releaseServo.setPosition(0.3);
       //VISION:
       super.init();
       this.setCamera(Cameras.SECONDARY);
@@ -92,7 +99,7 @@ public class DemoAutonomous extends VisionOpMode {
       cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
       cameraControl.setAutoExposureCompensation();
 
-      initialC = ods.getVal();
+
       v_state = 0;
       // NOTE: This is for the RIGHT Side
   }
@@ -113,13 +120,14 @@ public class DemoAutonomous extends VisionOpMode {
         // Sets v_state
         v_state = 0;
 
+
         super.loop();
         switch (v_state) {
             //
             // Synchronize the state machine and hardware.
             //
             case 0:
-
+                initialC = ods.getVal();
                 //Shoots ball for 3 seconds
                 runtime.reset();
                 motorShootL.setPower(1.0);
