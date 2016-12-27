@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.teamcode.classes.ProjectileMotion;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
@@ -30,6 +31,7 @@ public class MecaumDriver extends OpMode{
     // percision flag is to decrease power, if power is decreased, the robot will go slower.
 	private double ballpos = .5;
 	private Mecanum yo = new Mecanum();
+    private ProjectileMotion ProjMot = new ProjectileMotion();
 
     public MecaumDriver() {
 		percision_flag = 0;
@@ -84,13 +86,13 @@ public class MecaumDriver extends OpMode{
 
         // Run Collector
 		if (gamepad1.a)  {
-			motorCollector.setPower(0.5);
+			motorCollector.setPower(0.75);
 		} else {
 			motorCollector.setPower(0);
 		}
 
 		//bantu shooter
-		if (ballpos <= Servo.MIN_POSITION + .1 || ballpos >= Servo.MAX_POSITION - .1 || gamepad2.b){
+		if (ballpos <= Servo.MIN_POSITION + .15 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
 			motorShootL.setPower(1.0);
 			motorShootR.setPower(-1.0);
 		} else {

@@ -1,4 +1,5 @@
-package com.qualcomm.ftcrobotcontroller.classes;
+package org.firstinspires.ftc.teamcode.classes;
+
 public class ProjectileMotion
 {
     //const declarations

@@ -54,21 +54,20 @@ public class Mecanum{
         float ch4 = ljoystick_y;
 
         //Get joystick inputs
-        FLpower = -(ch3 + ch1 + ch4);
-        BLpower = -(ch3 + ch1 - ch4);
-        FRpower = ch3 - ch1 - ch4;
-        BRpower = ch3 - ch1 + ch4;
         if (upbutton == 1){
-            FLpower = FLpower/2;
-            FRpower = FRpower/2;
-            BLpower = BLpower/2;
-            BRpower = BRpower/2;
+            FLpower = (-(ch3 + ch1 + ch4))/2;
+            BLpower = (-(ch3 + ch1 - ch4))/2;
+            FRpower = (ch3 - ch1 - ch4)/2;
+            BRpower = (ch3 - ch1 + ch4)/2;
         } else {
-            // Power doesn't change
+            FLpower = -(ch3 + ch1 + ch4);
+            BLpower = -(ch3 + ch1 - ch4);
+            FRpower = ch3 - ch1 - ch4;
+            BRpower = ch3 - ch1 + ch4;
         }
 
     }
-    public void setPosition(int encoderval,DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
+    public void setPosition(int encoderval, DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
         motorFR.setTargetPosition(encoderval);
         motorFL.setTargetPosition(encoderval);
         motorBR.setTargetPosition(encoderval);

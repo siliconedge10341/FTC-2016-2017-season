@@ -99,7 +99,6 @@ public class DemoAutonomous extends VisionOpMode {
       cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
       cameraControl.setAutoExposureCompensation();
 
-
       v_state = 0;
       // NOTE: This is for the RIGHT Side
   }
