@@ -21,7 +21,7 @@ public class Mecanum{
     private double FLpower = 0;
     private double BRpower = 0;
     private double BLpower = 0;
-    private double BasePower = .5;
+    private double BasePower = 1;
     //private double MaxPower = 1;
 
     // constructors

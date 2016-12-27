@@ -4,37 +4,42 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.Servo;
-
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+//import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 @TeleOp(name="MecanumDrive", group ="Drive")
-
 public class MecaumDriver extends OpMode{
-	DcMotor motorCollector;
-	DcMotor motorFrontRight;
-	DcMotor motorFL;
-	DcMotor motorBR;
-	DcMotor motorBL;
-	DcMotor motorShootL;
-	DcMotor motorShootR;
+    // instance variables
+    // private variables
+    // Motors
+	private DcMotor motorCollector;
+	private DcMotor motorFR;
+	private DcMotor motorFL;
+	private DcMotor motorBR;
+	private DcMotor motorBL;
+	private DcMotor motorShootL;
+	private DcMotor motorShootR;
 
-	Servo ball;
+    // Servos
+	private Servo ballRelease;
+    private Servo leftClamp;
+    private Servo rightClamp;
 
-	int percision_flag=0;
-	double ballpos = .5;
+	private int percision_flag = 0;
+    // percision flag is to decrease power, if power is decreased, the robot will go slower.
+	private double ballpos = .5;
+	private Mecanum yo = new Mecanum();
 
-	Mecanum yo = new Mecanum();
-	public MecaumDriver(){
+    public MecaumDriver() {
 		percision_flag = 0;
 	}
 
 	@Override
 	public void init() {
-
+        // Initialize everything
 		motorFL = hardwareMap.dcMotor.get("fl_motor");
-		motorFrontRight = hardwareMap.dcMotor.get("fr_motor");
+		motorFR = hardwareMap.dcMotor.get("fr_motor");
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
 		motorBR = hardwareMap.dcMotor.get("br_motor");
 
@@ -43,60 +48,83 @@ public class MecaumDriver extends OpMode{
 		motorShootL = hardwareMap.dcMotor.get("shooter_left");
 		motorShootR = hardwareMap.dcMotor.get("shooter_right");
 
-		ball = hardwareMap.servo.get("servo_ball");
-		ball.setPosition(ballpos);
-
+		ballRelease = hardwareMap.servo.get("servo_ball");
+		ballRelease.setPosition(ballpos);
 	}
 
 	//main function body
 	@Override
 	public void loop() {
+        //   Start-A Runs the Program   //
+        //-----GAMEPAD FUNCTION KEY-----//
+        //-GAMEPAD-//                   //
+        // UP: Increase Decrease Power  //
+        // RIGHT: Move Servo Right      //
+        // LEFT: Move Servo Left        //
+        // DOWN: None;                  //
+        //-BUTTONS-//                   //
+        // A: Turns on Collector        //
+        // B: Runs Shooter              //
+        // X: None;                     //
+        // Y: None;                     //
+        //------------------------------//
+
+        // Decreases Power
 		if (gamepad1.dpad_up) {
 			percision_flag++;
 		}
+
 		if (percision_flag >= 2) {
 			percision_flag = 0;
 		}
+
+        // runs the robot
 		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x, percision_flag);
-		yo.run_motor(motorFrontRight, motorFL, motorBR, motorBL);
+		yo.run_motor(motorFR, motorFL, motorBR, motorBL);
 
-		if (gamepad1.a) {
-			//TODO: Re-attach to robot later
+        // Run Collector
+		if (gamepad1.a)  {
 			motorCollector.setPower(0.5);
-
-		}else{
-			//TODO: Re-attach to robot later
+		} else {
 			motorCollector.setPower(0);
 		}
+
 		//bantu shooter
-		if (gamepad1.b){
+		if (ballpos <= Servo.MIN_POSITION + .1 || ballpos >= Servo.MAX_POSITION - .1 || gamepad2.b){
 			motorShootL.setPower(1.0);
 			motorShootR.setPower(-1.0);
-		}else{
+		} else {
 			motorShootL.setPower(0);
 			motorShootR.setPower(0);
 		}
+
+        // Moves Servo
 		if (gamepad2.dpad_right){
-
-			ballpos = ballpos -.01;
+            if (ballpos > Servo.MIN_POSITION) {
+                ballpos = ballpos -.01;
+            } else {
+                // Nothing
+            }
 		}else if(gamepad2.dpad_left){
-			ballpos = ballpos +.01;
+            if (ballpos < Servo.MAX_POSITION) {
+                ballpos = ballpos +.01;
+            } else {
+                // Nothing
+            }
 		}
-		if (ballpos >= Servo.MAX_POSITION){
-			ballpos = Servo.MAX_POSITION - .05;
-		}else if(ballpos <= Servo.MIN_POSITION ){
-			ballpos = Servo.MIN_POSITION +.05;
-		}
+        ballRelease.setPosition(ballpos);
 
-		ball.setPosition(ballpos);
+        // Raises CatBall
+
+        // Clamps CatBall
 
 	}
+
 	@Override
 	public void stop() {
 		yo.set_Power(0, 0, 0,0);
 		// set to zero so the power doesn't influnce any motion or rotation in the robot
-		yo.run_motor( motorFrontRight, motorFL, motorBR, motorBL);
-
+		yo.run_motor(motorFR, motorFL, motorBR, motorBL);
 	}
 
 
