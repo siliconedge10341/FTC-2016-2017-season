@@ -3,13 +3,18 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import org.firstinspires.ftc.teamcode.classes.LineFollow;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.lasarobotics.vision.android.Cameras;
 import org.lasarobotics.vision.ftc.resq.Beacon;
 import org.lasarobotics.vision.opmode.VisionOpMode;
 import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
+import org.lasarobotics.vision.util.ScreenOrientation;
 import org.opencv.core.Size;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 /**
  * Provide a basic autonomous operational mode that uses the left and right
@@ -19,6 +24,7 @@ import org.opencv.core.Size;
  * @author SSI Robotics
  * @version 2015-08-01-06-01
  */
+@Autonomous(name = "Red_Auto", group = "Blue")
 public class DemoAutoRed extends VisionOpMode
 
 {
@@ -27,10 +33,10 @@ public class DemoAutoRed extends VisionOpMode
     DcMotor fl;
     DcMotor bl;
     DcMotor br;
-    LineFollow ods = new LineFollow();
-    TouchSensor ts;
+
 
     double initialC;
+    private int v_state;
 
 
 
@@ -45,30 +51,34 @@ public class DemoAutoRed extends VisionOpMode
       br = hardwareMap.dcMotor.get("br_motor");
       bl = hardwareMap.dcMotor.get("bl_motor");
 
+
       //VISION:
       super.init();
       this.setCamera(Cameras.PRIMARY);
-
       this.setFrameSize(new Size(900, 900));
 
-      enableExtension(Extensions.BEACON);         //Beacon detection
-      enableExtension(Extensions.ROTATION);       //Automatic screen rotation correction
-      enableExtension(Extensions.CAMERA_CONTROL); //Manual camera control
+      enableExtension(VisionOpMode.Extensions.BEACON);         //Beacon detection
+      enableExtension(VisionOpMode.Extensions.ROTATION);       //Automatic screen rotation correction
+      enableExtension(VisionOpMode.Extensions.CAMERA_CONTROL); //Manual camera control
       beacon.setAnalysisMethod(Beacon.AnalysisMethod.FAST);
 
       beacon.setColorToleranceRed(0);
       beacon.setColorToleranceBlue(0);
 
+      rotation.setIsUsingSecondaryCamera(false);
+      rotation.disableAutoRotate();
+      rotation.setActivityOrientationFixed(ScreenOrientation.PORTRAIT);
+
       cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
       cameraControl.setAutoExposureCompensation();
+        v_state = 0;
 
-      initialC = ods.getVal();
+
   }
 
     @Override public void start ()
 
     {
-        super.start ();
 
         Drive_Train.reset_encoders(fr, fl, br, bl);
     } // start
@@ -83,7 +93,7 @@ public class DemoAutoRed extends VisionOpMode
         // State: Initialize (i.e. state_0).
         //
 
-        super.loop();
+
         switch (v_state) {
             //
             // Synchronize the state machine and hardware.
@@ -103,7 +113,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.run_diagonal_right_down(fr, fl, br, bl);
                 Drive_Train.setPosition(3*1440,fr, fl, br, bl);
 
-                if (Drive_Train.testDistance(fl) == 1 || (ods.getVal() > initialC + .1)) {
+                if (Drive_Train.testDistance(fl) == 1) {
                     //
                     // Reset the encoders to ensure they are at a known good value.
                     //
@@ -122,7 +132,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
                 Drive_Train.setPosition(2*1440,fr, fl, br, bl);
-                if (Drive_Train.testDistance(fl) == 1 ||  ts.isPressed() == true) {
+                if (Drive_Train.testDistance(fl) == 1) {
 
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -197,7 +207,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.run_backward(fr, fl, br, bl);
                 Drive_Train.setPosition(4*1440,fr, fl, br, bl);
 
-                if (Drive_Train.testDistance(fl) == 1 ||  (ods.getVal() > initialC + .1)) {
+                if (Drive_Train.testDistance(fl) == 1) {
                     //if reached then stop
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -213,7 +223,7 @@ public class DemoAutoRed extends VisionOpMode
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_left(fr, fl, br, bl);
                 Drive_Train.setPosition(2*1440,fr, fl, br, bl);
-                if (Drive_Train.testDistance(fl) == 1 ||  ts.isPressed() == true) {
+                if (Drive_Train.testDistance(fl) == 1) {
 
                     Drive_Train.reset_encoders(fr, fl, br, bl);
                     Drive_Train.brake(fr, fl, br, bl);
@@ -298,6 +308,5 @@ public class DemoAutoRed extends VisionOpMode
      * actions are complete, the state will change to state_2.  This implements
      * a state machine for the loop method.
      */
-    private int v_state = 0;
 
 } // PushBotAuto

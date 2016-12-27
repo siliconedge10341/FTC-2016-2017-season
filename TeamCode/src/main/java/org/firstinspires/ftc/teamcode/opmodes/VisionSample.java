@@ -6,7 +6,8 @@ import org.lasarobotics.vision.opmode.VisionOpMode;
 import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
 import org.lasarobotics.vision.util.ScreenOrientation;
 import org.opencv.core.Size;
-
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 /**
  * Basic Vision Sample
@@ -18,6 +19,7 @@ import org.opencv.core.Size;
  * The VisionOpMode is the base of all vision processing and other styles of OpMode
  * even extend the VisionOpMode class! Be sure to extend it if writing your own OpMode structure.
  */
+@TeleOp(name = "VisionTest", group = "Drive")
 public class VisionSample extends VisionOpMode {
 
   @Override
