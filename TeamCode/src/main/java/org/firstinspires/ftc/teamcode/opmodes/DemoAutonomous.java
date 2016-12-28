@@ -17,6 +17,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.vuforia.ar.pl.DrawOverlayView;
 
 /**
  * Provide a basic autonomous operational mode that uses the left and right
@@ -232,32 +233,32 @@ public class DemoAutonomous extends VisionOpMode {
             case 4:
                 //hit the button
                 //200 is 1.74 inches
-                Drive_Train.setPosition(200,-200,200,-200, fr, fl, br, bl);
-                Drive_Train.run_using_encoders(fr, fl, br, bl);
+                Drive_Train.run_to_position(fr, fl, br, bl);
+                Drive_Train.setPowerd(.3);
                 Drive_Train.run_right(fr, fl, br, bl);
-                if (Drive_Train.testDistance(fl) == 1) {
-                    //if reached then stop
-                    Drive_Train.reset_encoders(fr, fl, br, bl);
-                    Drive_Train.brake(fr, fl, br, bl);
+                Drive_Train.setPosition(200,-200,200,-200, fr, fl, br, bl);
 
-                    v_state++;
-                }
+                Drive_Train.reset_encoders(fr, fl, br, bl);
+                Drive_Train.brake(fr, fl, br, bl);
+
+                v_state++;
+
                 break;
             //
             // Wait...
             //
             case 5:
                 //go back a little bit
-                Drive_Train.setPosition(-200,200,-200,200, fr, fl, br, bl);
-                Drive_Train.run_to_position(fr, fl, br, bl);
-                Drive_Train.run_left(fr, fl, br, bl);
-                if (Drive_Train.testDistance(fr) == 1) {
-                    //if reached then stop
-                    Drive_Train.reset_encoders(fr, fl, br, bl);
-                    Drive_Train.brake(fr, fl, br, bl);
 
-                    v_state++;
-                }
+                Drive_Train.run_to_position(fr, fl, br, bl);
+                Drive_Train.setPowerd(.5);
+                Drive_Train.run_left(fr, fl, br, bl);
+                Drive_Train.setPosition(-200,200,-200,200, fr, fl, br, bl);
+
+                Drive_Train.reset_encoders(fr, fl, br, bl);
+                Drive_Train.brake(fr, fl, br, bl);
+
+                v_state++;
                 break;
             //
             // Wait...
@@ -267,16 +268,17 @@ public class DemoAutonomous extends VisionOpMode {
                 // run forward again to second line
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
 
+                Drive_Train.setPowerd(.5);
                 Drive_Train.run_forward(fr, fl, br, bl);
-                Drive_Train.setPosition(4 * ticks,4*ticks,4*ticks,4*ticks, fr, fl, br, bl);
-                while (fl.isBusy()) {
-                    if (Drive_Train.testDistance(fl) == 1 || (ods.getLightDetected() > initialC + .1)) {
-                        //if reached then stop
-                        Drive_Train.reset_encoders(fr, fl, br, bl);
-                        Drive_Train.brake(fr, fl, br, bl);
-                        v_state++;
-                    }
+
+                while (ods.getLightDetected()> initialC +.1) {
+
+                    telemetry.addData("Light", ods.getLightDetected());
                 }
+                Drive_Train.reset_encoders(fr, fl, br, bl);
+                Drive_Train.brake(fr, fl, br, bl);
+
+                v_state++;
                 break;
             //
             // Wait...
@@ -284,15 +286,19 @@ public class DemoAutonomous extends VisionOpMode {
             case 7:
                 // Strafe right
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
+                Drive_Train.setPowerd(.4);
                 Drive_Train.run_right(fr, fl, br, bl);
-                Drive_Train.setPosition(-2*ticks,2 * ticks,-2*ticks,2*ticks, fr, fl, br, bl);
 
-                if (Drive_Train.testDistance(fl) == 1 || RANGE.getDistance(DistanceUnit.CM) <= 5) {
+                //Drive_Train.setPosition(-2*ticks,2 * ticks,-2*ticks,2*ticks, fr, fl, br, bl);
 
-                    Drive_Train.reset_encoders(fr, fl, br, bl);
-                    Drive_Train.brake(fr, fl, br, bl);
-                    v_state++;
+                while(RANGE.getDistance(DistanceUnit.CM) >= 5) {
+                    telemetry.addData("Distance ", RANGE.getDistance(DistanceUnit.CM)  );
                 }
+
+                Drive_Train.reset_encoders(fr, fl, br, bl);
+                Drive_Train.brake(fr, fl, br, bl);
+
+                v_state++;
                 break;
             //
             // Wait...
