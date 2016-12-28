@@ -395,6 +395,7 @@ public class DemoAutonomous extends VisionOpMode {
             //
             stop();
         }
+        telemetry.addData("v_state", v_state);
     }
 
     @Override
