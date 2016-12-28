@@ -38,6 +38,7 @@ public class DemoAutonomous extends VisionOpMode {
     DcMotor br;
     DcMotor motorShootL;
     DcMotor motorShootR;
+
     Servo releaseServo;
 
 
@@ -59,6 +60,8 @@ public class DemoAutonomous extends VisionOpMode {
 
     // states variable for the loop
     int v_state = 0;
+    int ticks = 1440;
+    double WheelC = 3.14*4;
 
     public DemoAutonomous() {
 
@@ -125,7 +128,6 @@ public class DemoAutonomous extends VisionOpMode {
         //
         // Sets v_state
 
-
         super.loop();
         switch (v_state) {
             //
@@ -155,16 +157,17 @@ public class DemoAutonomous extends VisionOpMode {
             //
             case 1:
                 //Move and detect line
-
-                Drive_Train.setPower(.3);
-                Drive_Train.setPosition(3 * 1440,0,0,3 * 1440, fr, fl, br, bl);
                 Drive_Train.run_to_position(fr, fl, br, bl);
 
-                Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+                Drive_Train.setPosition(3* ticks,0,0,3 * ticks, fr, fl, br, bl);
+                //Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+                Drive_Train.setPowerd(.3);
 
                 while (fl.isBusy() || ods.getLightDetected()< initialC +.1) {
                     telemetry.addData("Light ",ods.getLightDetected());
+                    break;
                 }
+                Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.reset_encoders(fr, fl, br, bl);
                 Drive_Train.brake(fr, fl, br, bl);
                 v_state++;
@@ -175,7 +178,7 @@ public class DemoAutonomous extends VisionOpMode {
             // First Button
             case 2:
                 // Strafe right
-                Drive_Train.setPower(.3);
+                Drive_Train.setPowerd(.3);
 
 
                 while (RANGE.getDistance(DistanceUnit.CM) > 5) {
@@ -193,8 +196,9 @@ public class DemoAutonomous extends VisionOpMode {
                 // Detect beacon
                 if (beacon.getAnalysis().isLeftBlue() == true) {
                     //go forward if the left side of the beacon is blue
-                    Drive_Train.setPosition(720,720,720,720, fr, fl, br, bl);
                     Drive_Train.run_to_position(fr, fl, br, bl);
+                    Drive_Train.setPosition(430,430,430,430, fr, fl, br, bl);
+
                     Drive_Train.run_forward(fr, fl, br, bl);
                     if (Drive_Train.testDistance(fl) == 1) {
                         // motor to move button here
@@ -203,9 +207,10 @@ public class DemoAutonomous extends VisionOpMode {
 
                     }
                 } else {
-                    Drive_Train.setPosition(-720,-720,-720,-720, fr, fl, br, bl);
                     Drive_Train.run_to_position(fr, fl, br, bl);
+                    Drive_Train.setPosition(-430,-430,-430,-430, fr, fl, br, bl);
                     Drive_Train.run_backward(fr, fl, br, bl);
+
                     if (Drive_Train.testDistance(fl) == 1) {
                         // motor to move button here
                         Drive_Train.reset_encoders(fr, fl, br, bl);
@@ -257,7 +262,7 @@ public class DemoAutonomous extends VisionOpMode {
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
 
                 Drive_Train.run_forward(fr, fl, br, bl);
-                Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
+                Drive_Train.setPosition(4 * ticks,4*ticks,4*ticks,4*ticks, fr, fl, br, bl);
                 while (fl.isBusy()) {
                     if (Drive_Train.testDistance(fl) == 1 || (ods.getLightDetected() > initialC + .1)) {
                         //if reached then stop
@@ -274,7 +279,7 @@ public class DemoAutonomous extends VisionOpMode {
                 // Strafe right
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
-                Drive_Train.setPosition(-2*1440,2 * 1440,-2*1440,2*1440, fr, fl, br, bl);
+                Drive_Train.setPosition(-2*ticks,2 * ticks,-2*ticks,2*ticks, fr, fl, br, bl);
 
                 if (Drive_Train.testDistance(fl) == 1 || RANGE.getDistance(DistanceUnit.CM) <= 5) {
 

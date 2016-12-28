@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.classes;
 
+import android.preference.Preference;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 //import com.qualcomm.robotcore.hardware.DcMotorController;
 //import com.qualcomm.robotcore.hardware.DcMotorControllerEx;
@@ -21,7 +23,7 @@ public class Mecanum{
     private double FLpower = 0;
     private double BRpower = 0;
     private double BLpower = 0;
-    private double BasePower = 1;
+    private double BasePower ;
     //private double MaxPower = 1;
 
     // constructors
@@ -31,6 +33,7 @@ public class Mecanum{
         FLpower = 0;
         BRpower = 0;
         BLpower = 0;
+        BasePower = 0;
     }
     public Mecanum(double motorFR, double motorFL, double motorBR, double motorBL) {
         // fill constructor
@@ -39,6 +42,7 @@ public class Mecanum{
         FLpower = motorFL;
         BRpower = motorBR;
         BLpower = motorBL;
+        BasePower = .5;
     }
 
     // sets
@@ -87,8 +91,10 @@ public class Mecanum{
         motorBR.setTargetPosition(br);
         motorBL.setTargetPosition(bl);
     }
-    public void setPower(double power) {
+    public void setPowerd(double power) {
+
         BasePower = power;
+
     }
 
     // gets
