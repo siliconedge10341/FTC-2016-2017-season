@@ -125,277 +125,243 @@ public class DemoAutonomous extends VisionOpMode {
 
     @Override
     public void loop() {
+        //----------------------------------------------------------------------
         //
-        // Proceed with the loop
+        // State: Initialize (i.e. state_0).
         //
-        super.loop();
-        if (v_state == 0) {
-            //
-            // SHOOTING STATE:
-            // v_state == 0 is all about a few seconds where the robot moves the launching servo
-            // to release to balls. Then, after 6 seconds. the robot will move into the next state.
-            //
-            initialC = ods.getLightDetected();
-            telemetry.addData("Light WaveLength", initialC);
-            //Shoots ball for 6 seconds
+        // Sets v_state
 
-            releaseServo.setPosition(.9);
-            motorShootL.setPower(1.0);
-            motorShootR.setPower(-1.0);
-            runtime.reset();
-            while (runtime.seconds() < 6) {
-                telemetry.addData("Seconds", runtime.seconds());
-            }
-            motorShootL.setPower(0);
-            motorShootR.setPower(0);
-            v_state++;
+        super.loop();
+        switch (v_state) {
+            //
+            // Synchronize the state machine and hardware.
+            //
+            case 0:
+
+                initialC = ods.getLightDetected();
+                //Shoots ball for 3 seconds
+
+
+                releaseServo.setPosition(.9);
+
+                motorShootL.setPower(1.0);
+                motorShootR.setPower(-1.0);
+                runtime.reset();
+                while (runtime.seconds() < 3) {
+                    telemetry.addData("seconds", runtime.seconds());
+                }
+                motorShootL.setPower(0);
+                motorShootR.setPower(0);
+                v_state++;
+
+                break;
+            //
+            // Drive forward until the encoders exceed the specified values.
+            //
+            case 1:
+                //Move and detect line
+                //Drive_Train.run_to_position(fr, fl, br, bl);
+                Drive_Train.run_using_encoders(fr, fl, br, bl);
+                // Drive_Train.setPosition(3* ticks,0,0,3 * ticks, fr, fl, br, bl);
+
+                Drive_Train.setPowerD(1.0);
+                Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+
+                while (fl.isBusy() || ods.getLightDetected()< initialC +.15) {
+                    telemetry.addData("Light ",ods.getLightDetected());
+                }
+
+                Drive_Train.reset_encoders(fr, fl, br, bl);
+                Drive_Train.brake(fr, fl, br, bl);
+                v_state++;
+                break;
             //
             // Wait...
             //
-        } else if (v_state == 1) {
-            //
-            // TURNING STATE
-            // v_state == 1 is all about turning 90 degrees to the left to make sure that the
-            // touching servo, the range sensor, and the beacon are all facing the wall.
-            //
-            Drive_Train.setPowerD(1.0);
-            Drive_Train.setPosition((5/3) * 1440,-(5/3) * 1440,(5/3) * 1440,-(5/3) * 1440, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.turn_left(fr, fl, br, bl, 180);
-            while (Drive_Train.testDistance(fr) == 1) {
-                telemetry.addData("Position", fr.getCurrentPosition());
-            }
-            Drive_Train.brake(fr, fl, br, bl);
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            v_state++;
+            // First Button
+            case 2:
+                // Strafe right
+                Drive_Train.setPowerD(1.0);
+                Drive_Train.run_right(fr, fl, br, bl);
+
+                while (RANGE.getDistance(DistanceUnit.CM) > 5) {
+
+                    telemetry.addData("Distance",RANGE.getDistance(DistanceUnit.CM ));
+                }
+                Drive_Train.brake(fr,fl,br,bl);
+
+                v_state++;
+                break;
             //
             // Wait...
             //
-        } else if (v_state == 2) {
-            //
-            // DIAGONAL RIGHT UP
-            // v_state == 2 is all about moving the robot to it's specific position at the white
-            // line up by the coloured box. From there we go into the next state. Repositioning.
-            //
-            Drive_Train.setPowerD(1.0);
-            Drive_Train.setPosition(6 * 1440,0,0,6 * 1440, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
-            while (Drive_Train.testDistance(fr) == 1 || ods.getLightDetected() >= initialC + .1 || ods.getLightDetected() <= initialC - .1) {
-                telemetry.addData("Colour WaveLength", ods.getLightDetected());
-            }
-            Drive_Train.brake(fr, fl, br, bl);
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            v_state++;
+            case 3:
+                // Detect beacon
+                runtime.reset();
+                while(runtime.seconds()<2){
+                    telemetry.addLine("Scanning");
+                }
+                if (beacon.getAnalysis().isLeftBlue() == true) {
+                    //go forward if the left side of the beacon is blue
+                    Drive_Train.run_to_position(fr, fl, br, bl);
+                    Drive_Train.setPowerD(1.0);
+                    Drive_Train.run_forward(fr,fl,br,bl);
+                    Drive_Train.setPosition(430,430,430,430, fr, fl, br, bl);
+
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
+                    Drive_Train.brake(fr, fl, br, bl);
+
+                    v_state++;
+
+                } else {
+                    //go to other side
+                    Drive_Train.run_to_position(fr, fl, br, bl);
+                    Drive_Train.setPowerD(1.0);
+                    Drive_Train.run_backward(fr, fl, br, bl);
+                    Drive_Train.setPosition(-430,-430,-430,-430, fr, fl, br, bl);
+
+
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
+                    Drive_Train.brake(fr, fl, br, bl);
+
+                    v_state++;
+                }
+                // beacon code
+
+                break;
             //
             // Wait...
             //
-        } else if (v_state == 3) {
-            //
-            // SET UP POSITION
-            // v_state == 3 is depending on the colour, we will move the robot with left or right,
-            // depending on which side of the coloured box is -BLUE-.
-            //
-            // if right -BLUE- then we move BACKWARD.
-            // if left -BLUE- then we move FORWARD.
-            //
-            // After repositioning, we will proceed with the next state, pushing.
-            //
-            if (beacon.getAnalysis().isLeftBlue() == true) {
-                // go forward if the left side of the beacon is blue.
-                Drive_Train.setPosition((1/4) * 1440,(1/4) * 1440,(1/4) * 1440,(1/4) * 1440, fr, fl, br, bl);
+            case 4:
+                //hit the button
+                //200 is 1.74 inches
                 Drive_Train.run_to_position(fr, fl, br, bl);
+                Drive_Train.setPowerD(1.0);
+                Drive_Train.run_right(fr, fl, br, bl);
+                Drive_Train.setPosition(200,-200,200,-200, fr, fl, br, bl);
+
+                Drive_Train.reset_encoders(fr, fl, br, bl);
+                Drive_Train.brake(fr, fl, br, bl);
+
+                v_state++;
+
+                break;
+            //
+            // Wait...
+            //
+            case 5:
+                //go back a little bit
+
+                Drive_Train.run_to_position(fr, fl, br, bl);
+                Drive_Train.setPowerD(1.0);
+                Drive_Train.run_left(fr, fl, br, bl);
+                Drive_Train.setPosition(-200,200,-200,200, fr, fl, br, bl);
+
+                Drive_Train.reset_encoders(fr, fl, br, bl);
+                Drive_Train.brake(fr, fl, br, bl);
+
+                v_state++;
+                break;
+            //
+            // Wait...
+            //
+            // Second Button
+            case 6:
+                // run forward again to second line
+                Drive_Train.run_using_encoders(fr, fl, br, bl);
+
+                Drive_Train.setPowerD(1.0);
                 Drive_Train.run_forward(fr, fl, br, bl);
-                while (Drive_Train.testDistance(fr) == 1) {
-                    // motor to move button here
-                    telemetry.addData("Position", fr.getCurrentPosition());
+
+                while (ods.getLightDetected()> initialC +.1) {
+
+                    telemetry.addData("Light", ods.getLightDetected());
                 }
                 Drive_Train.reset_encoders(fr, fl, br, bl);
                 Drive_Train.brake(fr, fl, br, bl);
+
                 v_state++;
-                //
-                // Wait...
-                //
-            } else if (beacon.getAnalysis().isRightBlue() == true) {
-                // go backward if the righgt side of the beacon is blue.
-                Drive_Train.setPosition(-(1/4) * 1440,-(1/4) * 1440,-(1/4) * 1440,-(1/4) * 1440, fr, fl, br, bl);
+                break;
+            //
+            // Wait...
+            //
+            case 7:
+                // Strafe right
+                Drive_Train.run_using_encoders(fr, fl, br, bl);
+                Drive_Train.setPowerD(1.0);
+                Drive_Train.run_right(fr, fl, br, bl);
+
+                //Drive_Train.setPosition(-2*ticks,2 * ticks,-2*ticks,2*ticks, fr, fl, br, bl);
+
+                while(RANGE.getDistance(DistanceUnit.CM) >= 5) {
+                    telemetry.addData("Distance ", RANGE.getDistance(DistanceUnit.CM)  );
+                }
+
+                Drive_Train.reset_encoders(fr, fl, br, bl);
+                Drive_Train.brake(fr, fl, br, bl);
+
+                v_state++;
+                break;
+            //
+            // Wait...
+            //
+            case 8:
+
+                runtime.reset();
+                while(runtime.seconds()<2){
+                    telemetry.addLine("Scanning");
+                }
+                if (beacon.getAnalysis().isLeftBlue() == true) {
+                    //go forward if the left side of the beacon is blue
+                    Drive_Train.run_to_position(fr, fl, br, bl);
+                    Drive_Train.setPowerD(1.0);
+                    Drive_Train.run_forward(fr,fl,br,bl);
+                    Drive_Train.setPosition(430,430,430,430, fr, fl, br, bl);
+
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
+                    Drive_Train.brake(fr, fl, br, bl);
+
+                    v_state++;
+
+                } else {
+                    //go to other side
+                    Drive_Train.run_to_position(fr, fl, br, bl);
+                    Drive_Train.setPowerD(1.0);
+                    Drive_Train.run_backward(fr, fl, br, bl);
+                    Drive_Train.setPosition(-430,-430,-430,-430, fr, fl, br, bl);
+
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
+                    Drive_Train.brake(fr, fl, br, bl);
+
+                    v_state++;
+                }
+                // beacon code
+
+                break;
+            //
+            // Wait...
+            //
+            case 9:
+                //hit the button
                 Drive_Train.run_to_position(fr, fl, br, bl);
-                Drive_Train.run_backward(fr, fl, br, bl);
-                while (Drive_Train.testDistance(fr) == 1) {
-                    // motor to move button here
-                    telemetry.addData("Position", fr.getCurrentPosition());
-                }
+                Drive_Train.run_right(fr, fl, br, bl);
+                Drive_Train.setPosition(-200,200,200,-200, fr, fl, br, bl);
+
                 Drive_Train.reset_encoders(fr, fl, br, bl);
                 Drive_Train.brake(fr, fl, br, bl);
+
                 v_state++;
-                //
-                // Wait...
-                //
-            }
-        } else if (v_state == 4) {
-            //
-            // STRAFE RIGHT
-            // v_state == 4 is when the robot goes in for the points and presses the -FIRST BEACON-
-            // After pressing the button, it will go into the next state, going back to original position.
-            //
-            initialD = RANGE.getDistance(DistanceUnit.METER);
-            Drive_Train.setPosition(2 * 1440,-2 * 1440,2 * 1440,-2 * 1440, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_right(fr, fl, br, bl);
-            if (RANGE.getDistance(DistanceUnit.METER) <= initialD - .45) {
-                // motor to move button here
-                telemetry.addData("Distance", RANGE.getDistance(DistanceUnit.METER));
-            }
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            Drive_Train.brake(fr, fl, br, bl);
-            v_state++;
+
+                break;
             //
             // Wait...
             //
-        } else if (v_state == 5) {
-            //
-            // STRAFE LEFT
-            // v_state 5 is about returning to where you were before pressing the button.
-            // After this, the next state will be moving to the next beacon.
-            //
-            Drive_Train.setPosition(-2 * 1440,2 * 1440,-2 * 1440,2 * 1440, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_left(fr, fl, br, bl);
-            while (RANGE.getDistance(DistanceUnit.METER) >= initialD) {
-                telemetry.addData("Distance", RANGE.getDistance(DistanceUnit.METER));
-                // motor to move button here
-            }
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            Drive_Train.brake(fr, fl, br, bl);
-            v_state++;
-            //
-            // Wait...
-            //
-        } else if (v_state == 6) {
-            //
-            // RUN FORWARD
-            // v_state 6 is all about going to the next colour pad and pressing the second
-            // button. We will use the color sensor to read the second line. Then we will
-            // repeat the same steps to press the button again.
-            //
-            initialD = 0;
-            Drive_Train.setPosition(10 * 1440,10 * 1440,10 * 1440,10 * 1440, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_forward(fr, fl, br, bl);
-            while (Drive_Train.testDistance(fr) == 1 || ods.getLightDetected() >= initialC + .1 || ods.getLightDetected() <= initialC - .1) {
-                // motor to move button here
-                telemetry.addData("Colour WaveLength", ods.getLightDetected());
-            }
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            Drive_Train.brake(fr, fl, br, bl);
-            v_state++;
-            //
-            // Wait...
-            //
-        } else if (v_state == 7) {
-            //
-            // SET UP POSITION
-            // v_state == 7 is depending on the colour, we will move the robot with left or right,
-            // depending on which side of the coloured box is -BLUE-.
-            //
-            // if right -BLUE- then we move BACKWARD.
-            // if left -BLUE- then we move FORWARD.
-            //
-            // After repositioning, we will proceed with the next state, pushing.
-            //
-            if (beacon.getAnalysis().isLeftBlue() == true) {
-                // go forward if the left side of the beacon is blue.
-                Drive_Train.setPosition((1/4) * 1440,(1/4) * 1440,(1/4) * 1440,(1/4) * 1440, fr, fl, br, bl);
-                Drive_Train.run_to_position(fr, fl, br, bl);
-                Drive_Train.run_forward(fr, fl, br, bl);
-                while (Drive_Train.testDistance(fr) == 1) {
-                    // motor to move button here
-                    telemetry.addData("Position", fr.getCurrentPosition());
-                }
-                Drive_Train.reset_encoders(fr, fl, br, bl);
-                Drive_Train.brake(fr, fl, br, bl);
-                v_state++;
-                //
-                // Wait...
-                //
-            } else if (beacon.getAnalysis().isRightBlue() == true) {
-                // go backward if the righgt side of the beacon is blue.
-                Drive_Train.setPosition(-(1/4) * 1440,-(1/4) * 1440,-(1/4) * 1440,-(1/4) * 1440, fr, fl, br, bl);
-                Drive_Train.run_to_position(fr, fl, br, bl);
-                Drive_Train.run_backward(fr, fl, br, bl);
-                while (Drive_Train.testDistance(fr) == 1) {
-                    // motor to move button here
-                    telemetry.addData("Position", fr.getCurrentPosition());
-                }
-                Drive_Train.reset_encoders(fr, fl, br, bl);
-                Drive_Train.brake(fr, fl, br, bl);
-                v_state++;
-                //
-                // Wait...
-                //
-            }
-        } else if (v_state == 8) {
-            //
-            // STRAFE RIGHT
-            // v_state == 4 is when the robot goes in for the points and presses the -FIRST BEACON-
-            // After pressing the button, it will go into the next state, going back to original position.
-            //
-            initialD = RANGE.getDistance(DistanceUnit.METER);
-            Drive_Train.setPosition(2 * 1440,-2 * 1440,2 * 1440,-2 * 1440, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_right(fr, fl, br, bl);
-            if (RANGE.getDistance(DistanceUnit.METER) <= initialD - .45) {
-                // motor to move button here
-                telemetry.addData("Distance", RANGE.getDistance(DistanceUnit.METER));
-            }
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            Drive_Train.brake(fr, fl, br, bl);
-            v_state++;
-            //
-            // Wait...
-            //
-        } else if (v_state == 9) {
-            //
-            // STRAFE LEFT
-            // v_state 9 is about returning to where you were before pressing the button.
-            // After this, the next state will be moving to the next beacon.
-            //
-            Drive_Train.setPosition(-2 * 1440,2 * 1440,-2 * 1440,2 * 1440, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_left(fr, fl, br, bl);
-            while (RANGE.getDistance(DistanceUnit.METER) >= initialD) {
-                telemetry.addData("Distance", RANGE.getDistance(DistanceUnit.METER));
-                // motor to move button here
-            }
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            Drive_Train.brake(fr, fl, br, bl);
-            v_state++;
-            //
-            // Wait...
-            //
-        } else if (v_state == 10) {
-            //
-            // DIAGONAL DOWN LEFT
-            // v_state 10 is about hitting the cat ball and staying on the middle platform
-            // to gain the final points for the autonomous period. After this and the position
-            // it stays at. The v_state will increase into nothing. Therefore, it will stop and
-            // end. This is for 90 points in the Velocity vortex.
-            //
-            Drive_Train.setPosition(-6 * 1440,0,0,-6 * 1440, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_diagonal_left_down(fr, fl, br, bl);
-            //
-            // Wait...
-            //
-            // Program Ends
-            //
-        } else {
-            //
-            // Program ends
-            //
-            stop();
+            default:
+                stop();
+                break;
         }
-        telemetry.addData("v_state", v_state);
+        telemetry.addData("18", "State: " + v_state);
+        // Now the loop repeats if not default.
     }
 
     @Override
