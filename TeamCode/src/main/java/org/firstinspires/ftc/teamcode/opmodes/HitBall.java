@@ -132,7 +132,7 @@ public class HitBall extends VisionOpMode {
             case 1:
                 //Move and detect line
                 Drive_Train.run_to_position(fr, fl, br, bl);
-                Drive_Train.setPowerd(.3);
+                Drive_Train.setPowerD(.3);
                 Drive_Train.run_forward(fr,fl,br,bl);
                 Drive_Train.setPosition(5600,5600,5600,5600, fr, fl, br, bl);
 

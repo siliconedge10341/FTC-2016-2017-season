@@ -27,7 +27,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * @version 2015-08-01-06-01
  */
 
-@Autonomous(name = "RedAuto", group = "Blue")
+@Autonomous(name = "Red_Auto", group = "Blue")
 public class DemoAutoRed extends VisionOpMode {
     // instance variables
     // private variables
@@ -140,7 +140,7 @@ public class DemoAutoRed extends VisionOpMode {
 
 
                 releaseServo.setPosition(.05);
-                Drive_Train.setPowerd(0.4);
+                Drive_Train.setPowerD(0.4);
                 Drive_Train.setPosition(720,720,720,720,fr, fl, br, bl);
                 Drive_Train.run_to_position(fr, fl, br, bl);
 
@@ -162,7 +162,7 @@ public class DemoAutoRed extends VisionOpMode {
             case 1:
                 //Move and detect line
 
-                Drive_Train.setPowerd(.3);
+                Drive_Train.setPowerD(1.0);
 
 
                 Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
@@ -182,7 +182,7 @@ public class DemoAutoRed extends VisionOpMode {
             // First Button
             case 2:
                 // Strafe right
-                Drive_Train.setPowerd(.3);
+                Drive_Train.setPowerD(1.0);
 
 
                 while (RANGE.getDistance(DistanceUnit.CM) > 5) {
