@@ -332,7 +332,7 @@ public class DemoAutonomous extends VisionOpMode {
             // Wait...
             //
             default:
-                System.exit(0);
+                stop();
                 break;
         }
         telemetry.addData("18", "State: " + v_state);

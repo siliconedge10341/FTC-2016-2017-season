@@ -1,12 +1,16 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 
 import com.qualcomm.robotcore.hardware.DcMotorControllerEx;
+import org.firstinspires.ftc.teamcode.classes.Range;
+
+import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Range;
+//import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.classes.ProjectileMotion;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -35,7 +39,8 @@ public class MecaumDriver extends OpMode{
 	private double ballpos = .5;
     private double LSRotations = 0;
 	private Mecanum yo = new Mecanum();
-    private ProjectileMotion ProjMot = new ProjectileMotion();
+    private double power = 0;
+    private Range dist = new Range();
 
     public MecaumDriver() {
 		percision_flag = 0;
@@ -45,6 +50,7 @@ public class MecaumDriver extends OpMode{
 	@Override
 	public void init() {
         // Initialize everything
+        dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
 		motorFL = hardwareMap.dcMotor.get("fl_motor");
 		motorFR = hardwareMap.dcMotor.get("fr_motor");
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
@@ -104,8 +110,17 @@ public class MecaumDriver extends OpMode{
 
 		//bantu shooter
 		if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
-			motorShootL.setPower(1.0);
-			motorShootR.setPower(-1.0);
+            if (dist.getData() < .5 /*Meters*/) {
+                power = 1.0;
+            } else if (dist.getData() >= .5 /*Meters*/ && dist.getData() < 1 /*Meters*/) {
+                power = 1.25;
+            } else if (dist.getData() >= 1 /*Meters*/) {
+                power = 1.5;
+            } else {
+                power = 0.75;
+            }
+			motorShootL.setPower(power);
+			motorShootR.setPower(-power);
 		} else {
 			motorShootL.setPower(0);
 			motorShootR.setPower(0);

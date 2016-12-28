@@ -41,7 +41,7 @@ public class ProjectileMotion
         VelocityInitial = Velocity; // cm/s^2
     }
 
-    //input subroutines
+    // input subroutines
     public void InputDistance(double Distance)
     {
         DistanceToVortex = Distance; // cm
@@ -52,7 +52,7 @@ public class ProjectileMotion
         VelocityInitial = Velocity; // cm/s^2
     }
 
-    //return functions
+    // return functions
     public double GetAngleFreedom()
     {
         //return AngleMax - AngleMin; // radians
