@@ -33,38 +33,38 @@ public class DemoAutonomous extends VisionOpMode {
     // instance variables
     // private variables
     // Motors
-    DcMotor fr;
-    DcMotor fl;
-    DcMotor bl;
-    DcMotor br;
-    DcMotor motorShootL;
-    DcMotor motorShootR;
+    private DcMotor fr;
+    private DcMotor fl;
+    private DcMotor bl;
+    private DcMotor br;
+    private DcMotor motorShootL;
+    private DcMotor motorShootR;
 
-    Servo releaseServo;
+    private Servo releaseServo;
 
     // Range Sensor
-    ModernRoboticsI2cRangeSensor RANGE;
+    private ModernRoboticsI2cRangeSensor RANGE;
 
     // Light Sensor
-    OpticalDistanceSensor ods;
+    private OpticalDistanceSensor ods;
 
     // Sensor Classes
-    Mecanum Drive_Train = new Mecanum();
+    private Mecanum Drive_Train = new Mecanum();
     //LineFollow ods = new LineFollow();
-    ElapsedTime runtime = new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
 
 
     // Reading for the initial color we take at the beginning of the match.
     // This helps us because when we test for the white line, we want to be
     // able to tell the difference from the color of the ground. Thus
     // knowing where the sensor is.
-    double initialC = 0;
-    double initialD = 0;
+    private double initialC = 0;
+    private double initialD = 0;
 
     // states variable for the loop
-    int v_state = 0;
-    int ticks = 1440;
-    double WheelC = 3.14*4;
+    private int v_state = 0;
+    private int ticks = 1440;
+    private double WheelC = 3.14*4;
 
     public DemoAutonomous() {
 
