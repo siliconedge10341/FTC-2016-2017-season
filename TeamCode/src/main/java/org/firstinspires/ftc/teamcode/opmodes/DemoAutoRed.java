@@ -115,6 +115,7 @@ public class DemoAutoRed extends VisionOpMode {
 
         // reset encoders to begin period of autonomous
         Drive_Train.reset_encoders(fr, fl, br, bl);
+        runtime.reset();
     }
 
     @Override
@@ -138,19 +139,21 @@ public class DemoAutoRed extends VisionOpMode {
                 //Shoots ball for 3 seconds
 
 
-                releaseServo.setPosition(.9);
+                releaseServo.setPosition(.05);
+                Drive_Train.setPowerd(0.4);
+                Drive_Train.setPosition(720,720,720,720,fr, fl, br, bl);
+                Drive_Train.run_to_position(fr, fl, br, bl);
 
-                motorShootL.setPower(1.0);
-                motorShootR.setPower(-1.0);
-
-                runtime.reset();
                 while (runtime.seconds() < 3) {
-                    telemetry.addData("seconds", runtime.seconds());
+                    motorShootL.setPower(1.0);
+                    motorShootR.setPower(-1.0);
+                }
+                if (runtime.seconds()>=3){
+                    motorShootL.setPower(0);
+                    motorShootR.setPower(0);
+                    v_state++;
                 }
 
-                motorShootL.setPower(0);
-                motorShootR.setPower(0);
-                v_state++;
 
                 break;
             //
@@ -159,14 +162,15 @@ public class DemoAutoRed extends VisionOpMode {
             case 1:
                 //Move and detect line
 
-                Drive_Train.setPower(.3);
-                Drive_Train.setPosition(3 * 1440,0,0,3 * 1440, fr, fl, br, bl);
-                Drive_Train.run_to_position(fr, fl, br, bl);
+                Drive_Train.setPowerd(.3);
+
 
                 Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+                telemetry.addLine("test");
 
                 while (fl.isBusy() || ods.getLightDetected()< initialC +.1) {
                     telemetry.addData("Light ",ods.getLightDetected());
+                    Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
                 }
                 Drive_Train.reset_encoders(fr, fl, br, bl);
                 Drive_Train.brake(fr, fl, br, bl);
@@ -178,7 +182,7 @@ public class DemoAutoRed extends VisionOpMode {
             // First Button
             case 2:
                 // Strafe right
-                Drive_Train.setPower(.3);
+                Drive_Train.setPowerd(.3);
 
 
                 while (RANGE.getDistance(DistanceUnit.CM) > 5) {

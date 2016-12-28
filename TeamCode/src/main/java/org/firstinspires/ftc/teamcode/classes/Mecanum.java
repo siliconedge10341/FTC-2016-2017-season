@@ -113,8 +113,8 @@ public class Mecanum{
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = -BasePower;
         BLpower = BasePower;
-        FRpower = BasePower;
-        BRpower = -BasePower;
+        FRpower = -(BasePower);
+        BRpower = -(-BasePower);
         // The positive and negative inputs only mean direction, not speed.
 
 
@@ -132,8 +132,8 @@ public class Mecanum{
         BRpower = BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
-        motorFR.setPower(FRpower);
-        motorBR.setPower(BRpower);
+        motorFR.setPower(-FRpower);
+        motorBR.setPower(-BRpower);
         motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
@@ -146,8 +146,8 @@ public class Mecanum{
         BRpower = BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
-        motorFR.setPower(FRpower);
-        motorBR.setPower(BRpower);
+        motorFR.setPower(-FRpower);
+        motorBR.setPower(-BRpower);
         motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
@@ -160,8 +160,8 @@ public class Mecanum{
         BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
-        motorFR.setPower(FRpower);
-        motorBR.setPower(BRpower);
+        motorFR.setPower(-FRpower);
+        motorBR.setPower(-BRpower);
         motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
@@ -175,8 +175,8 @@ public class Mecanum{
         // The positive and negative inputs only mean direction, not speed.
 
 
-        motorFR.setPower(FRpower);
-        motorBR.setPower(BRpower);
+        motorFR.setPower(-FRpower);
+        motorBR.setPower(-BRpower);
         motorFL.setPower((FLpower));
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
@@ -190,8 +190,8 @@ public class Mecanum{
         // The positive and negative inputs only mean direction, not speed.
 
 
-        motorFR.setPower(FRpower);
-        motorBR.setPower(BRpower);
+        motorFR.setPower(-FRpower);
+        motorBR.setPower(-BRpower);
         motorFL.setPower((FLpower));
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
@@ -204,8 +204,8 @@ public class Mecanum{
         BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
-        motorFR.setPower(FRpower);
-        motorBR.setPower(BRpower);
+        motorFR.setPower(-FRpower);
+        motorBR.setPower(-BRpower);
         motorFL.setPower((FLpower));
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
@@ -219,8 +219,8 @@ public class Mecanum{
         // The positive and negative inputs only mean direction, not speed.
 
 
-        motorFR.setPower(FRpower);
-        motorBR.setPower(BRpower);
+        motorFR.setPower(-FRpower);
+        motorBR.setPower(-BRpower);
         motorFL.setPower((FLpower));
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
@@ -235,8 +235,8 @@ public class Mecanum{
         int Wheel_Rotate = degrees / 90;
 
         while (this.get_wheel_rotations() <= Wheel_Rotate) {
-            motorFR.setPower(FRpower);
-            motorBR.setPower(BRpower);
+            motorFR.setPower(-FRpower);
+            motorBR.setPower(-BRpower);
             motorFL.setPower((FLpower));
             motorBL.setPower(BLpower);
         }
@@ -252,8 +252,8 @@ public class Mecanum{
         int Wheel_Rotate = degrees / 90;
 
         while (this.get_wheel_rotations() <= Wheel_Rotate) {
-            motorFR.setPower(FRpower);
-            motorBR.setPower(BRpower);
+            motorFR.setPower(-FRpower);
+            motorBR.setPower(-BRpower);
             motorFL.setPower((FLpower));
             motorBL.setPower(BLpower);
         }
@@ -267,8 +267,8 @@ public class Mecanum{
         BRpower = 0;
         // The positive and negative inputs only mean direction, not speed.
 
-        motorFR.setPower(FRpower);
-        motorBR.setPower(BRpower);
+        motorFR.setPower(-FRpower);
+        motorBR.setPower(-BRpower);
         motorFL.setPower((FLpower));
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
