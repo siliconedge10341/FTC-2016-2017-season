@@ -91,7 +91,7 @@ public class Mecanum{
         motorBR.setTargetPosition(br);
         motorBL.setTargetPosition(bl);
     }
-    public void setPowerd(double power) {
+    public void setPowerD(double power) {
 
         BasePower = power;
 
@@ -310,7 +310,7 @@ public class Mecanum{
         // We only do one because all have traveled the same amount. Knowing Turns
         // Do not count.
 
-        if (A_Motor.getCurrentPosition()>= A_Motor.getTargetPosition()){
+        if (A_Motor.getCurrentPosition() >= A_Motor.getTargetPosition()){
             return 1;
         }else{
             return 0;
