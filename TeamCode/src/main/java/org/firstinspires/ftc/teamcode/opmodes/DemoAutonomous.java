@@ -41,6 +41,7 @@ public class DemoAutonomous extends VisionOpMode {
     DcMotor motorShootR;
 
     Servo releaseServo;
+    Servo beaconServo;
 
 
     // Range Sensor
@@ -79,13 +80,16 @@ public class DemoAutonomous extends VisionOpMode {
 
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
+
         releaseServo = hardwareMap.servo.get("servo_ball");
+        beaconServo = hardwareMap.servo.get("servo_beacon");
 
         ods = hardwareMap.opticalDistanceSensor.get("ods_line");
         RANGE = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
 
         // Sets Position
         releaseServo.setPosition(0.3);
+        beaconServo.setPosition(.6);
 
         //VISION:
         super.init();
