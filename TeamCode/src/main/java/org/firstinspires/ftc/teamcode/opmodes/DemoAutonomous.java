@@ -124,7 +124,6 @@ public class DemoAutonomous extends VisionOpMode {
         // State: Initialize (i.e. state_0).
         //
         // Sets v_state
-        v_state = 0;
 
 
         super.loop();
@@ -177,9 +176,10 @@ public class DemoAutonomous extends VisionOpMode {
             case 2:
                 // Strafe right
                 Drive_Train.setPower(.3);
-                Drive_Train.run_right(fr, fl, br, bl);
+
 
                 while (RANGE.getDistance(DistanceUnit.CM) > 5) {
+                    Drive_Train.run_right(fr, fl, br, bl);
                     telemetry.addData("Distance",RANGE.getDistance(DistanceUnit.CM ));
                 }
                 Drive_Train.brake(fr,fl,br,bl);
