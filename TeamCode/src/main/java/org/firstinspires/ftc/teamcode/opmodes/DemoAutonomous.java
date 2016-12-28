@@ -304,46 +304,52 @@ public class DemoAutonomous extends VisionOpMode {
             // Wait...
             //
             case 8:
-                //Detect beacon
+
+                runtime.reset();
+                while(runtime.seconds()<2){
+                    telemetry.addLine("Scanning");
+                }
                 if (beacon.getAnalysis().isLeftBlue() == true) {
                     //go forward if the left side of the beacon is blue
-                    Drive_Train.setPosition(720,720,720,720, fr, fl, br, bl);
                     Drive_Train.run_to_position(fr, fl, br, bl);
-                    Drive_Train.run_forward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fl) == 1) {
+                    Drive_Train.setPowerd(.3);
+                    Drive_Train.run_forward(fr,fl,br,bl);
+                    Drive_Train.setPosition(430,430,430,430, fr, fl, br, bl);
 
-                        Drive_Train.reset_encoders(fr, fl, br, bl);
-                        Drive_Train.brake(fr, fl, br, bl);
-                    }
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
+                    Drive_Train.brake(fr, fl, br, bl);
+
+                    v_state++;
+
                 } else {
-                    Drive_Train.setPosition(-720,-720,-720,-720, fr, fl, br, bl);
+                    //go to other side
                     Drive_Train.run_to_position(fr, fl, br, bl);
+                    Drive_Train.setPowerd(.3);
                     Drive_Train.run_backward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fl) == 1) {
+                    Drive_Train.setPosition(-430,-430,-430,-430, fr, fl, br, bl);
 
-                        Drive_Train.reset_encoders(fr, fl, br, bl);
-                        Drive_Train.brake(fr, fl, br, bl);
-                    }
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
+                    Drive_Train.brake(fr, fl, br, bl);
+
+                    v_state++;
                 }
-                //beacon code
+                // beacon code
 
-                v_state++;
                 break;
             //
             // Wait...
             //
             case 9:
                 //hit the button
-                Drive_Train.setPosition(-200,200,200,-200, fr, fl, br, bl);
-                Drive_Train.run_using_encoders(fr, fl, br, bl);
+                Drive_Train.run_to_position(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
-                if (Drive_Train.testDistance(fl) == 1) {
-                    //if reached then stop
-                    Drive_Train.reset_encoders(fr, fl, br, bl);
-                    Drive_Train.brake(fr, fl, br, bl);
+                Drive_Train.setPosition(-200,200,200,-200, fr, fl, br, bl);
 
-                    v_state++;
-                }
+                Drive_Train.reset_encoders(fr, fl, br, bl);
+                Drive_Train.brake(fr, fl, br, bl);
+
+                v_state++;
+
                 break;
             //
             // Wait...
