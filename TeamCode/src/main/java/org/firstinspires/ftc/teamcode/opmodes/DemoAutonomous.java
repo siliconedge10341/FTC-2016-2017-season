@@ -157,17 +157,17 @@ public class DemoAutonomous extends VisionOpMode {
             //
             case 1:
                 //Move and detect line
-                Drive_Train.run_to_position(fr, fl, br, bl);
-
-                Drive_Train.setPosition(3* ticks,0,0,3 * ticks, fr, fl, br, bl);
-                //Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
-                Drive_Train.setPowerd(.3);
-
-                while (fl.isBusy() || ods.getLightDetected()< initialC +.1) {
-                    telemetry.addData("Light ",ods.getLightDetected());
-                    break;
-                }
+                //Drive_Train.run_to_position(fr, fl, br, bl);
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
+               // Drive_Train.setPosition(3* ticks,0,0,3 * ticks, fr, fl, br, bl);
+
+                Drive_Train.setPowerd(.3);
+                Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+
+                while (fl.isBusy() || ods.getLightDetected()< initialC +.15) {
+                    telemetry.addData("Light ",ods.getLightDetected());
+                }
+
                 Drive_Train.reset_encoders(fr, fl, br, bl);
                 Drive_Train.brake(fr, fl, br, bl);
                 v_state++;
@@ -179,10 +179,10 @@ public class DemoAutonomous extends VisionOpMode {
             case 2:
                 // Strafe right
                 Drive_Train.setPowerd(.3);
-
+                Drive_Train.run_right(fr, fl, br, bl);
 
                 while (RANGE.getDistance(DistanceUnit.CM) > 5) {
-                    Drive_Train.run_right(fr, fl, br, bl);
+
                     telemetry.addData("Distance",RANGE.getDistance(DistanceUnit.CM ));
                 }
                 Drive_Train.brake(fr,fl,br,bl);
@@ -194,38 +194,44 @@ public class DemoAutonomous extends VisionOpMode {
             //
             case 3:
                 // Detect beacon
+                runtime.reset();
+                while(runtime.seconds()<2){
+                    telemetry.addLine("Scanning");
+                }
                 if (beacon.getAnalysis().isLeftBlue() == true) {
                     //go forward if the left side of the beacon is blue
                     Drive_Train.run_to_position(fr, fl, br, bl);
+                    Drive_Train.setPowerd(.3);
+                    Drive_Train.run_forward(fr,fl,br,bl);
                     Drive_Train.setPosition(430,430,430,430, fr, fl, br, bl);
 
-                    Drive_Train.run_forward(fr, fl, br, bl);
-                    if (Drive_Train.testDistance(fl) == 1) {
-                        // motor to move button here
-                        Drive_Train.reset_encoders(fr, fl, br, bl);
-                        Drive_Train.brake(fr, fl, br, bl);
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
+                    Drive_Train.brake(fr, fl, br, bl);
 
-                    }
+                    v_state++;
+
                 } else {
+                    //go to other side
                     Drive_Train.run_to_position(fr, fl, br, bl);
-                    Drive_Train.setPosition(-430,-430,-430,-430, fr, fl, br, bl);
+                    Drive_Train.setPowerd(.3);
                     Drive_Train.run_backward(fr, fl, br, bl);
+                    Drive_Train.setPosition(-430,-430,-430,-430, fr, fl, br, bl);
 
-                    if (Drive_Train.testDistance(fl) == 1) {
-                        // motor to move button here
-                        Drive_Train.reset_encoders(fr, fl, br, bl);
-                        Drive_Train.brake(fr, fl, br, bl);
 
-                    }
+                    Drive_Train.reset_encoders(fr, fl, br, bl);
+                    Drive_Train.brake(fr, fl, br, bl);
+
+                    v_state++;
                 }
                 // beacon code
-                v_state++;
+
                 break;
             //
             // Wait...
             //
             case 4:
                 //hit the button
+                //200 is 1.74 inches
                 Drive_Train.setPosition(200,-200,200,-200, fr, fl, br, bl);
                 Drive_Train.run_using_encoders(fr, fl, br, bl);
                 Drive_Train.run_right(fr, fl, br, bl);
