@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.classes.LineFollow;
 import org.firstinspires.ftc.teamcode.classes.Range;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
+import org.lasarobotics.vision.opmode.VisionOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.Servo;
