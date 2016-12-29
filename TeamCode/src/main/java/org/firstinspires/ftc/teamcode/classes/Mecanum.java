@@ -67,15 +67,24 @@ public class Mecanum{
         }
         else if(FL && FR)
         {
-
+            FLpower = ch1;
+            BLpower = ch1;
+            FRpower = ch1;
+            BRpower = ch1;
         }
         else if(FL || FR)
         {
-
+            FLpower = ch1;
+            BLpower = ch1;
+            FRpower = ch1;
+            BRpower = ch1;
         }
         else
         {
-
+            FLpower = ch1;
+            BLpower = ch1;
+            FRpower = ch1;
+            BRpower = ch1;
         }/*
         double X2 = 0, Y1 = 0, X1 = 0, threshold = .15;
 
