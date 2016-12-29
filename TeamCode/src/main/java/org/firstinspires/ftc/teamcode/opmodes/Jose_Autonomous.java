@@ -19,16 +19,16 @@ import org.opencv.core.Size;
  * Created by Jose Martinez on 12/28/2016.
  */
 
-@Autonomous(name = "Jose's_Autonomous", group = "Blue")
+@Autonomous(name = "Shut_Up_Anirudh", group = "Blue")
 public class Jose_Autonomous extends VisionOpMode {
 
     // instance variables
     // private variables
     // Motors
-    private DcMotor fr;
-    private DcMotor fl;
-    private DcMotor bl;
-    private DcMotor br;
+    private DcMotor motorFR;
+    private DcMotor motorFL;
+    private DcMotor motorBL;
+    private DcMotor motorBR;
     private DcMotor motorShootL;
     private DcMotor motorShootR;
 
@@ -64,10 +64,10 @@ public class Jose_Autonomous extends VisionOpMode {
     public void init() {
         // Sets every class at the beginning of the demoautonomous run class
         //Hardware Maps
-        fr = hardwareMap.dcMotor.get("fr_motor");
-        fl = hardwareMap.dcMotor.get("fl_motor");
-        br = hardwareMap.dcMotor.get("br_motor");
-        bl = hardwareMap.dcMotor.get("bl_motor");
+        motorFR = hardwareMap.dcMotor.get("fr_motor");
+        motorFL = hardwareMap.dcMotor.get("fl_motor");
+        motorBR = hardwareMap.dcMotor.get("br_motor");
+        motorBL = hardwareMap.dcMotor.get("bl_motor");
 
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
@@ -109,13 +109,26 @@ public class Jose_Autonomous extends VisionOpMode {
         super.start();
 
         // reset encoders to begin period of autonomous
-        Drive_Train.reset_encoders(fr, fl, br, bl);
+        //Drive_Train.reset_encoders(motorFR, motorFL, motorBR, motorBL);
     }
 
 
     public void loop(){
         super.loop();
-        //Your different cases for autonomous go here
+        switch (v_state) {
+            case 0:
+                Drive_Train.setPowerD(1.0);
+                Drive_Train.run_left(motorFR,motorFL,motorBR,motorBL);
+
+                runtime.reset();
+                while (runtime.seconds() < 10) {
+                    telemetry.addData("seconds", runtime.seconds());
+                    telemetry.update();
+                }
+                Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
+
+                break;
+        }
     }
     @Override
     public void stop() {
