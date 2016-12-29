@@ -24,8 +24,7 @@ import com.vuforia.ar.pl.DrawOverlayView;
  * drive motors and associated encoders implemented using a state machine for
  * the Push Bot.
  *
- * @author SSI Robotics
- * @version 2015-08-01-06-01
+ * @author Silicon Edge Robotics
  */
 
 @Autonomous(name = "Blue_Auto", group = "Blue")
@@ -161,17 +160,19 @@ public class DemoAutonomous extends VisionOpMode {
             case 1:
                 //Move and detect line
                 //Drive_Train.run_to_position(fr, fl, br, bl);
-                Drive_Train.run_using_encoders(fr, fl, br, bl);
                 // Drive_Train.setPosition(3* ticks,0,0,3 * ticks, fr, fl, br, bl);
-
                 Drive_Train.setPowerD(1.0);
-                Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
-
-                while (fl.isBusy() || ods.getLightDetected()< initialC +.15) {
-                    telemetry.addData("Light ",ods.getLightDetected());
+                Drive_Train.run_left(fr, fl, br, bl);
+                runtime.reset();
+                while (runtime.seconds() < 2) {
+                    telemetry.addData("seconds", runtime.seconds());
                 }
+                Drive_Train.setPowerD(0);
 
-                Drive_Train.reset_encoders(fr, fl, br, bl);
+                //while (fl.isBusy() || ods.getLightDetected()< initialC +.15) {
+                  //  telemetry.addData("Light ",ods.getLightDetected());
+                //}
+
                 Drive_Train.brake(fr, fl, br, bl);
                 v_state++;
                 break;
@@ -185,7 +186,6 @@ public class DemoAutonomous extends VisionOpMode {
                 Drive_Train.run_right(fr, fl, br, bl);
 
                 while (RANGE.getDistance(DistanceUnit.CM) > 5) {
-
                     telemetry.addData("Distance",RANGE.getDistance(DistanceUnit.CM ));
                 }
                 Drive_Train.brake(fr,fl,br,bl);

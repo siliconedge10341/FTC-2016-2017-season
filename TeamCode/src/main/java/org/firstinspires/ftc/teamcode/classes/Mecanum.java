@@ -169,8 +169,8 @@ public class Mecanum{
     }
     public void run_diagonal_right_up(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = BasePower;
-        BLpower = 0;
-        FRpower = 0;
+        BLpower = -0.5*BasePower;
+        FRpower = -0.5*BasePower;
         BRpower = BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
