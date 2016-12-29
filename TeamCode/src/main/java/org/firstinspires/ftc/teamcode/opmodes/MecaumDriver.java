@@ -50,7 +50,7 @@ public class MecaumDriver extends OpMode{
 	@Override
 	public void init() {
         // Initialize everything
-        dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
+        //dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));  - This line is broken, not sure why - Dival
 		motorFL = hardwareMap.dcMotor.get("fl_motor");
 		motorFR = hardwareMap.dcMotor.get("fr_motor");
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
@@ -71,22 +71,22 @@ public class MecaumDriver extends OpMode{
 	//main function body
 	@Override
 	public void loop() {
-        //   Start-A Runs the Program   //
-        //-----GAMEPAD FUNCTION KEY-----//
-        //-GAMEPAD-//                   //
-        // UP: Increase Decrease Power  //
-        // RIGHT: Move Servo Right      //
-        // LEFT: Move Servo Left        //
-        // DOWN: None;                  //
-        //-BUTTONS-//                   //
-        // A: Turns on Collector        //
-        // B: Runs Shooter              //
-        // X: Raise Slide               //
-        // Y: Lower Slide               //
-        //-TRIGGERS-//                  //
-        // LEFT: None;                  //
-        // RIGHT: None;                 //
-        //------------------------------//
+        /*   Start-A Runs the Program
+        *-----GAMEPAD FUNCTION KEY-----
+        *-GAMEPAD-
+        *UP: Increase Decrease Power
+        *RIGHT: Move Servo Right
+        *LEFT: Move Servo Left
+        * DOWN: None;
+        *-BUTTONS-//
+        * A: Turns on Collector
+        * B: Runs Shooter
+        * X: Raise Slide
+        * Y: Lower Slide
+        *-TRIGGERS-//
+        * LEFT: None;
+        * RIGHT: None;
+        */
 
         // Decreases Power
 		if (gamepad1.dpad_up) {
