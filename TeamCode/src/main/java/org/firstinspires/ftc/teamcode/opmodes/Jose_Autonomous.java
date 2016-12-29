@@ -35,8 +35,9 @@ public class Jose_Autonomous extends VisionOpMode {
     private Servo releaseServo;
 
     // Range Sensor
-    private ModernRoboticsI2cRangeSensor RANGE;
-
+    //private ModernRoboticsI2cRangeSensor RANGE;
+    private ModernRoboticsI2cRangeSensor rangeSide; //Added by Dival
+    private ModernRoboticsI2cRangeSensor rangeFront;
     // Light Sensor
     private OpticalDistanceSensor ods;
 
@@ -74,7 +75,10 @@ public class Jose_Autonomous extends VisionOpMode {
         releaseServo = hardwareMap.servo.get("servo_ball");
 
         ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-        RANGE = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
+        this.rangeSide = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
+        this.rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "senor_range_front");
+
+
 
         // Sets Position
         releaseServo.setPosition(0.3);
