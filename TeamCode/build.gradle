@@ -12,11 +12,10 @@
 // Custom definitions may go here
 
 // Include common definitions from above.
+apply plugin: 'com.android.application'
+
 apply from: '../build.common.gradle'
-dependencies {
-    compile project(':ftc-visionlib')
-    compile project(':opencv-java')
-}
+
 android {
     compileSdkVersion 19
     buildToolsVersion '23.0.3'
@@ -24,4 +23,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+}
+dependencies {
+    compile project(':ftc-visionlib')
+    compile project(':opencv-java')
 }

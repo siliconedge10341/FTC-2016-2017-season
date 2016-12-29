@@ -1,18 +1,12 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.lasarobotics.vision.android.Cameras;
-import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
-import org.lasarobotics.vision.ftc.resq.Beacon;
-import org.lasarobotics.vision.opmode.VisionOpMode;
-import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
-import org.lasarobotics.vision.util.ScreenOrientation;
-import org.opencv.core.Size;
+
 import org.firstinspires.ftc.teamcode.classes.LineFollow;
 import org.firstinspires.ftc.teamcode.classes.Range;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.Servo;
