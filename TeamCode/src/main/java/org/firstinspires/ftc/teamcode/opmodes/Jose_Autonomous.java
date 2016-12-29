@@ -76,7 +76,7 @@ public class Jose_Autonomous extends VisionOpMode {
 
         ods = hardwareMap.opticalDistanceSensor.get("ods_line");
         this.rangeSide = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
-        this.rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "senor_range_front");
+        this.rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
 
 
 
@@ -121,7 +121,9 @@ public class Jose_Autonomous extends VisionOpMode {
         super.loop();
         switch (v_state) {
             case 0:
-                Drive_Train.setPowerD(0.5);
+
+
+                Drive_Train.setPowerD(1);
                 Drive_Train.run_forward(motorFR,motorFL,motorBR,motorBL);
 
                 runtime.reset();
@@ -131,7 +133,7 @@ public class Jose_Autonomous extends VisionOpMode {
                 }
                 Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
 
-                Drive_Train.setPowerD(0.5);
+                Drive_Train.setPowerD(1);
                 Drive_Train.run_left(motorFR,motorFL,motorBR,motorBL);
 
                 runtime.reset();
@@ -141,7 +143,7 @@ public class Jose_Autonomous extends VisionOpMode {
                 }
                 Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
 
-                Drive_Train.setPowerD(0.5);
+                Drive_Train.setPowerD(1);
                 Drive_Train.run_backward(motorFR,motorFL,motorBR,motorBL);
 
                 runtime.reset();
@@ -151,7 +153,7 @@ public class Jose_Autonomous extends VisionOpMode {
                 }
                 Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
 
-                Drive_Train.setPowerD(0.5);
+                Drive_Train.setPowerD(1);
                 Drive_Train.run_right(motorFR,motorFL,motorBR,motorBL);
 
                 runtime.reset();
