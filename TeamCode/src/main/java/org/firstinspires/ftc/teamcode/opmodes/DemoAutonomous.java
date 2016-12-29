@@ -124,16 +124,23 @@ public class DemoAutonomous extends VisionOpMode {
 
     @Override
     public void loop() {
-
-        // State: Initialize (i.e. state_0)
+        //----------------------------------------------------------------------
+        //
+        // State: Initialize (i.e. state_0).
+        //
         // Sets v_state
 
         super.loop();
         switch (v_state) {
-            // Synchronize the state machine and hardware
+            //
+            // Synchronize the state machine and hardware.
+            //
             case 0:
+
                 initialC = ods.getLightDetected();
                 //Shoots ball for 3 seconds
+
+
                 releaseServo.setPosition(.9);
 
                 motorShootL.setPower(1.0);
@@ -142,6 +149,7 @@ public class DemoAutonomous extends VisionOpMode {
                 while (runtime.seconds() < 3) {
                     telemetry.addData("seconds", runtime.seconds());
                 }
+                releaseServo.setPosition(0);
                 motorShootL.setPower(0);
                 motorShootR.setPower(0);
                 v_state++;
@@ -151,22 +159,19 @@ public class DemoAutonomous extends VisionOpMode {
             // Drive forward until the encoders exceed the specified values.
             //
             case 1:
-                //FIXME:Stuck in loop error
                 //Move and detect line
                 //Drive_Train.run_to_position(fr, fl, br, bl);
+                //Drive_Train.run_using_encoders(fr, fl, br, bl);
                 // Drive_Train.setPosition(3* ticks,0,0,3 * ticks, fr, fl, br, bl);
+
                 Drive_Train.setPowerD(1.0);
-                Drive_Train.run_left(fr, fl, br, bl);
-                runtime.reset();
-                while (runtime.seconds() < 2) {
-                    telemetry.addData("seconds", runtime.seconds());
+                Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+
+                while (fl.isBusy() || ods.getLightDetected()< initialC +.15) {
+                    telemetry.addData("Light ",ods.getLightDetected());
                 }
-                Drive_Train.setPowerD(0);
 
-                //while (fl.isBusy() || ods.getLightDetected()< initialC +.15) {
-                  //  telemetry.addData("Light ",ods.getLightDetected());
-                //}
-
+                Drive_Train.reset_encoders(fr, fl, br, bl);
                 Drive_Train.brake(fr, fl, br, bl);
                 v_state++;
                 break;
@@ -180,6 +185,7 @@ public class DemoAutonomous extends VisionOpMode {
                 Drive_Train.run_right(fr, fl, br, bl);
 
                 while (RANGE.getDistance(DistanceUnit.CM) > 5) {
+
                     telemetry.addData("Distance",RANGE.getDistance(DistanceUnit.CM ));
                 }
                 Drive_Train.brake(fr,fl,br,bl);
@@ -256,9 +262,9 @@ public class DemoAutonomous extends VisionOpMode {
 
                 v_state++;
                 break;
-
+            //
             // Wait...
-
+            //
             // Second Button
             case 6:
                 // run forward again to second line
