@@ -122,30 +122,27 @@ public class Jose_Autonomous extends VisionOpMode {
         switch (v_state) {
             case 0:
 
-                Drive_Train.setPowerD(0.7);
-                Drive_Train.run_left(motorFR,motorFL,motorBR,motorBL);
-                motorFL.setPower(0.7);
-                motorFR.setPower(0.9);
-                motorBL.setPower(-0.7);
-                motorBR.setPower(-0.9);
-                runtime.reset();
-                while (runtime.seconds() < 10) {
-                    telemetry.addData("seconds", runtime.seconds());
-                    telemetry.update();
-                }
-                /*
-                Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
-
-                Drive_Train.setPowerD(0.7);
-                Drive_Train.run_right(motorFR,motorFL,motorBR,motorBL);
+                Drive_Train.setPowerD(1.0);
+                Drive_Train.run_left(motorFR, motorFL, motorBR, motorBL);
 
                 runtime.reset();
-                while (runtime.seconds() < 10) {
+                while (runtime.seconds() < 0.75) {
                     telemetry.addData("seconds", runtime.seconds());
                     telemetry.update();
                 }
                 Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
-                */
+
+
+                Drive_Train.setPowerD(0.7);
+                Drive_Train.run_backward(motorFR,motorFL,motorBR,motorBL);
+                runtime.reset();
+                while (runtime.seconds() < 0.8) {
+                    telemetry.addData("seconds", runtime.seconds());
+                    telemetry.update();
+                }
+
+                Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
+                v_state++;
                 break;
         }
     }

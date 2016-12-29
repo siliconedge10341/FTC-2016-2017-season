@@ -56,7 +56,27 @@ public class Mecanum{
         float ch1 = rjoystick_x;
         float ch3 = ljoystick_x;
         float ch4 = ljoystick_y;
+        boolean FL = ch4 > ch3;
+        boolean FR = ch4 > -ch3;
+        if(ch1 < -0.4 || ch1 > 0.4)
+        {
+            FLpower = ch1;
+            BLpower = ch1;
+            FRpower = ch1;
+            BRpower = ch1;
+        }
+        else if(FL && FR)
+        {
 
+        }
+        else if(FL || FR)
+        {
+
+        }
+        else
+        {
+
+        }/*
         double X2 = 0, Y1 = 0, X1 = 0, threshold = .15;
 
         if(Math.abs(ch3) > threshold)
@@ -80,10 +100,10 @@ public class Mecanum{
 
             FLpower = (Y1 + X2 + X1);
             BLpower = (Y1 + X2 - X1);
-            FRpower = -(Y1 - X2 - X1);
-            BRpower = -(Y1 - X2 + X1);
+            FRpower = (Y1 - X2 - X1);
+            BRpower = (Y1 - X2 + X1);
 
-
+            */
     }
     public void setPosition(int fr,int fl,int br, int bl, DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
         motorFR.setTargetPosition(fr);
@@ -111,9 +131,9 @@ public class Mecanum{
     // methods
     // These are the functions for the specific direction
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = BasePower;
-        BLpower = -BasePower;
-        FRpower = BasePower;
+        FLpower = 0.7*BasePower;
+        BLpower = -0.95*BasePower;
+        FRpower = 0.75*BasePower;
         BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
@@ -267,9 +287,9 @@ public class Mecanum{
         BRpower = 0;
         // The positive and negative inputs only mean direction, not speed.
 
-        motorFR.setPower(-FRpower);
-        motorBR.setPower(-BRpower);
-        motorFL.setPower((FLpower));
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
 
