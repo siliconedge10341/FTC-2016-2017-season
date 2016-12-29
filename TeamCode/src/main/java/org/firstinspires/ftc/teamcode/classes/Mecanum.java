@@ -49,7 +49,7 @@ public class Mecanum{
     public void run_motor(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
-        motorFL.setPower((FLpower));
+        motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
     }
     public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x, int upbutton){
@@ -67,25 +67,45 @@ public class Mecanum{
         }
         else if(FL && FR)
         {
-            FLpower = ch1;
-            BLpower = ch1;
-            FRpower = ch1;
-            BRpower = ch1;
+            FLpower = -ch4;
+            BLpower = -ch4;
+            FRpower = ch4;
+            BRpower = ch4;
         }
         else if(FL || FR)
         {
-            FLpower = ch1;
-            BLpower = ch1;
-            FRpower = ch1;
-            BRpower = ch1;
+            if(FL)
+            {
+                FLpower = -0.7*ch3;
+                BLpower = 0.95*ch3;
+                FRpower = -0.78*ch3;
+                BRpower = ch3;
+            }
+            else
+            {
+                FLpower = -0.78*ch3;
+                BLpower = ch3;
+                FRpower = -0.7*ch3;
+                BRpower = 0.95*ch3;
+            }
         }
         else
         {
-            FLpower = ch1;
-            BLpower = ch1;
-            FRpower = ch1;
-            BRpower = ch1;
-        }/*
+            FLpower = -ch4;
+            BLpower = -ch4;
+            FRpower = ch4;
+            BRpower = ch4;
+        }
+
+        if(Math.abs(FLpower) + Math.abs(BLpower) + Math.abs(FRpower) + Math.abs(BRpower) < 1)
+        {
+            FLpower = 0;
+            BLpower = 0;
+            FRpower = 0;
+            BRpower = 0;
+        }
+        /*
+
         double X2 = 0, Y1 = 0, X1 = 0, threshold = .15;
 
         if(Math.abs(ch3) > threshold)
@@ -142,7 +162,7 @@ public class Mecanum{
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = 0.7*BasePower;
         BLpower = -0.95*BasePower;
-        FRpower = 0.75*BasePower;
+        FRpower = 0.73*BasePower;
         BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
@@ -155,10 +175,10 @@ public class Mecanum{
 
     }
     public void run_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = -BasePower;
+        FLpower = -0.73*BasePower;
         BLpower = BasePower;
-        FRpower = -BasePower;
-        BRpower = BasePower;
+        FRpower = -0.7*BasePower;
+        BRpower = 0.95*BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
         motorFR.setPower(FRpower);
