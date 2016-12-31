@@ -137,7 +137,7 @@ public class Jose_Autonomous extends VisionOpMode {
                 motorBR.setPower(1.0);
                 motorBL.setPower(1.0);
                 runtime.reset();
-u                while (runtime.seconds() < 0.86) {
+                while (runtime.seconds() < 0.86) {
                     telemetry.addData("seconds", runtime.seconds());
                     telemetry.update();
                 }
