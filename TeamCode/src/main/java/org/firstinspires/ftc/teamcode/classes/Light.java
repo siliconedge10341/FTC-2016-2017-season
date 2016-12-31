@@ -16,6 +16,10 @@ public class Light {
         // Initialize everything.
     }
 
+    public void setV_sensor(OpticalDistanceSensor Sens1) {
+        v_sensor = Sens1;
+    }
+
     public double getLightDetected() {
         return v_sensor.getLightDetected();
     }

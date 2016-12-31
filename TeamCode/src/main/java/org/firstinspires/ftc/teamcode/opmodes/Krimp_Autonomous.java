@@ -50,7 +50,17 @@ public class Krimp_Autonomous extends VisionOpMode {
         private Light color_sensor = new Light();
         private ElapsedTime runtime = new ElapsedTime();
 
-    //
+    // Variables
+        // Reading for the initial color we take at the beginning of the match.
+        // This helps us because when we test for the white line, we want to be
+        // able to tell the difference from the color of the ground. Thus
+        // knowing where the sensor is.
+        private double initialC = 0;
+        private double initialD = 0;
+
+        // states variable for the loop
+        private static final int ticks = 1440;
+        private static final double WheelC = 3.14*4;
 
     // public data
 
@@ -65,6 +75,11 @@ public class Krimp_Autonomous extends VisionOpMode {
         //
         // Initializes every motor, servo, variable, and position.
         //
+        // Motors
+
+        // Servos
+
+        // Classes
 
 
     }
