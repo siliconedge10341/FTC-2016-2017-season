@@ -38,10 +38,10 @@ public class Dival_Autonomous extends VisionOpMode{
     private DcMotor mtrShooterRight;
     private DcMotor mtrShooterLeft;
 
-    //Servos:
+    //Servos
     private Servo svoBallRelaease;
 
-    //Sensors:
+    //Sensors
     private ModernRoboticsI2cRangeSensor rangeSide;
     private ModernRoboticsI2cRangeSensor rangeFront;
     private OpticalDistanceSensor ods;
@@ -60,11 +60,11 @@ public class Dival_Autonomous extends VisionOpMode{
     //Used to keep track of the different stages completed during autonomous
     private int v_state;
 
-    private  static final int ENCODER_TICKS = 1440;
+    private static final int ENCODER_TICKS = 1440;
     private static final double Wheel_Circumfrence = 3.14*4;
 
     public Dival_Autonomous(){
-        //Default constructor
+        // Default constructor
     }
 
     @Override
@@ -128,22 +128,28 @@ public class Dival_Autonomous extends VisionOpMode{
 
             case 1:
                 //Configure robot for autonomous
+                break;
             case 2:
                 //shoot balls
+                break;
             case 3:
                 //Move forward
+                break;
             case 4:
                 //Move toward beacon
+                break;
             case 5:
                 //Beacon 1
+                break;
             case 6:
                 //Move to beacon 2
+                break;
             case 7:
                 //Beacon 2
+                break;
             case 8:
                 //Knock cap ball off
-
-
+                break;
             default:
                 stop();
                 break;
