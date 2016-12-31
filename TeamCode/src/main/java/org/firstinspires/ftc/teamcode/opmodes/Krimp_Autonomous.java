@@ -8,8 +8,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import org.firstinspires.ftc.teamcode.classes.Light;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
+import org.firstinspires.ftc.teamcode.classes.Range;
 import org.lasarobotics.vision.android.Cameras;
 import org.lasarobotics.vision.ftc.resq.Beacon;
 import org.lasarobotics.vision.opmode.VisionOpMode;
@@ -31,6 +32,25 @@ public class Krimp_Autonomous extends VisionOpMode {
     // instance variables
     // private data
     private int v_state = 0; // Used for the loop as a counter per states.
+
+    // Motors
+        private DcMotor mtrFR;
+        private DcMotor mtrFL;
+        private DcMotor mtrBR;
+        private DcMotor mtrBL;
+        private DcMotor mtrShootR;
+        private DcMotor MtrShootL;
+
+    // Servos
+        private Servo srvRelease;
+
+    // Classes
+        private Mecanum drive_train = new Mecanum();
+        private Range range_sensor = new Range();
+        private Light color_sensor = new Light();
+        private ElapsedTime runtime = new ElapsedTime();
+
+    //
 
     // public data
 
