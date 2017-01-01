@@ -168,6 +168,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                 //
                 drive_train.setPowerD(1.0);
                 drive_train.turn_left(mtrFR, mtrFL, mtrBR, mtrBL);
+                runtime.reset();
                 while (runtime.seconds() < 1) {
                     telemetry.addData("Seconds", runtime.seconds());
                 }
@@ -185,6 +186,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                 //
                 drive_train.setPowerD(0.6);
                 drive_train.run_diagonal_right_up(mtrFR, mtrFL, mtrBR, mtrBL);
+                runtime.reset();
                 while (runtime.seconds() < 5 || color_sensor.getLightDetected() > initialC + 0.1) {
                     telemetry.addData("Colour WaveLength", color_sensor.getLightDetected());
                 }
@@ -209,6 +211,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                     // go forward if the left side of the beacon is blue.
                     drive_train.setPowerD(0.3);
                     drive_train.run_forward(mtrFR, mtrFL, mtrBR, mtrBL);
+                    runtime.reset();
                     while (runtime.seconds() < 1) {
                         // motor to move button here
                         telemetry.addData("Seconds", runtime.seconds());
@@ -220,6 +223,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                     // go backward if the righgt side of the beacon is blue.
                     drive_train.setPowerD(0.3);
                     drive_train.run_backward(mtrFR, mtrFL, mtrBR, mtrBL);
+                    runtime.reset();
                     while (runtime.seconds() < 1) {
                         // motor to move button here
                         telemetry.addData("Seconds", runtime.seconds());
@@ -233,7 +237,21 @@ public class Krimp_Autonomous extends VisionOpMode {
             // Wait...
             //
             case 4:
-
+                //
+                // STRAFE RIGHT
+                // v_state == 4 is when the robot goes in for the points and presses the -FIRST BEACON-
+                // After pressing the button, it will go into the next state, going back to original position.
+                //
+                initialD = range_sensor_beacon.getData();
+                drive_train.setPowerD(.3);
+                drive_train.run_right(mtrFR, mtrFL, mtrBR, mtrBL);
+                runtime.reset();
+                if (range_sensor_beacon.getData() <= initialD - .40 || runtime.seconds() < 4) {
+                    // motor to move button here
+                    telemetry.addData("Distance", range_sensor_beacon.getData());
+                }
+                drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
+                drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
                 break;
             //
             // Wait...
