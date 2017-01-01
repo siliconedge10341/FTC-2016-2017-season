@@ -212,7 +212,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                 //
                 if (beacon.getAnalysis().isLeftBlue() == true) {
                     // go forward if the left side of the beacon is blue.
-                    drive_train.setPowerD(0.3);
+                    drive_train.setPowerD(0.2);
                     drive_train.run_forward(mtrFR, mtrFL, mtrBR, mtrBL);
                     runtime.reset();
                     while (runtime.seconds() < 1) {
@@ -224,8 +224,8 @@ public class Krimp_Autonomous extends VisionOpMode {
                     v_state++;
 
                 } else if (beacon.getAnalysis().isRightBlue() == true) {
-                    // go backward if the righgt side of the beacon is blue.
-                    drive_train.setPowerD(0.3);
+                    // go backward if the right side of the beacon is blue.
+                    drive_train.setPowerD(0.2);
                     drive_train.run_backward(mtrFR, mtrFL, mtrBR, mtrBL);
                     runtime.reset();
                     while (runtime.seconds() < 1) {
@@ -248,11 +248,12 @@ public class Krimp_Autonomous extends VisionOpMode {
                 // After pressing the button, it will go into the next state, going back to original position.
                 //
                 initialD = range_sensor_beacon.getData();
-                drive_train.setPowerD(.3);
+                drive_train.setPowerD(0.3);
                 drive_train.run_right(mtrFR, mtrFL, mtrBR, mtrBL);
                 runtime.reset();
                 if (range_sensor_beacon.getData() <= initialD - .40 || runtime.seconds() < 4) {
                     // motor to move button here
+                    telemetry.addData("Seconds", runtime.seconds());
                     telemetry.addData("Distance", range_sensor_beacon.getData());
                 }
                 drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
@@ -263,13 +264,34 @@ public class Krimp_Autonomous extends VisionOpMode {
             // Wait...
             //
             case 5:
-
+                // explanation
+                drive_train.setPowerD(0.3);
+                drive_train.run_left(mtrFR, mtrFL, mtrBR, mtrBL);
+                runtime.reset();
+                while (range_sensor_beacon.getData() + .05 >= initialD || runtime.seconds() < 4) {
+                    // motor to move away from here
+                    telemetry.addData("Seconds", runtime.seconds());
+                    telemetry.addData("Distance", range_sensor_beacon.getData());
+                }
+                drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
+                drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+                v_state++;
                 break;
             //
             // Wait...
             //
             case 6:
-
+                // explanation
+                drive_train.setPowerD(0.6);
+                drive_train.run_forward(mtrFR, mtrFL, mtrBR, mtrBL);
+                runtime.reset();
+                while (runtime.seconds() < 4 || color_sensor.getLightDetected() > initialC + 0.1) {
+                    telemetry.addData("Colour", color_sensor.getLightDetected());
+                    telemetry.addData("Seconds", runtime.seconds());
+                }
+                drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
+                drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+                v_state++;
                 break;
             //
             // Wait...
