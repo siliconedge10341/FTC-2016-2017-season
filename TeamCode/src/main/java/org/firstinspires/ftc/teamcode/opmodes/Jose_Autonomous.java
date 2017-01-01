@@ -33,6 +33,7 @@ public class Jose_Autonomous extends VisionOpMode {
     private DcMotor motorShootR;
     private DcMotor motorCollector;
 
+    private Servo beaconServo;
     private Servo releaseServo;
 
     // Range Sensor
@@ -75,6 +76,7 @@ public class Jose_Autonomous extends VisionOpMode {
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
         releaseServo = hardwareMap.servo.get("servo_ball");
+        beaconServo = hardwareMap.servo.get("servo_beacon");
 
         ods = hardwareMap.opticalDistanceSensor.get("ods_line");
         this.rangeSide = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
@@ -87,7 +89,7 @@ public class Jose_Autonomous extends VisionOpMode {
 
         //VISION:
         super.init();
-        releaseServo.setPosition(0.7);
+        beaconServo.setPosition(0.5);
         this.setCamera(Cameras.PRIMARY);
         this.setFrameSize(new Size(900, 900));
 
@@ -151,7 +153,7 @@ public class Jose_Autonomous extends VisionOpMode {
                 while (runtime.seconds()<2.0){
                     telemetry.addData("seconds",runtime.seconds());
                     telemetry.update();
-            }
+                }
                 motorShootL.setPower(0);
                 motorShootR.setPower(0);
 
@@ -160,33 +162,11 @@ public class Jose_Autonomous extends VisionOpMode {
                 Drive_Train.run_left(motorFR, motorFL, motorBR, motorBL);
 
                 runtime.reset();
-                while (runtime.seconds() < 1.0) {
+                while (runtime.seconds() < 1.5) {
                     telemetry.addData("seconds", runtime.seconds());
                     telemetry.update();
                 }
-                Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
 
-
-                releaseServo.setPosition(.9);
-
-                motorShootL.setPower(1.0);
-                motorShootR.setPower(-1.0);
-                runtime.reset();
-                while (runtime.seconds() < 3) {
-                    telemetry.addData("seconds", runtime.seconds());
-                }
-                releaseServo.setPosition(0);
-                motorShootL.setPower(0);
-                motorShootR.setPower(0);
-
-                Drive_Train.setPowerD(1.0);
-                Drive_Train.run_left(motorFR, motorFL, motorBR, motorBL);
-
-                runtime.reset();
-                while (runtime.seconds() < 0.5) {
-                    telemetry.addData("seconds", runtime.seconds());
-                    telemetry.update();
-                }
                 Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
 
                 runtime.reset();

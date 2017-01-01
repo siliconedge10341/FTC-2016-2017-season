@@ -31,8 +31,8 @@ public class MecanumDriver extends OpMode{
 
     // Servos
 	private Servo ballRelease;
-    private Servo leftClamp;
-    private Servo rightClamp;
+    //private Servo leftClamp;
+    //private Servo rightClamp;
 
 	private int percision_flag = 0;
     // percision flag is to decrease power, if power is decreased, the robot will go slower.
@@ -64,8 +64,10 @@ public class MecanumDriver extends OpMode{
 
 		ballRelease = hardwareMap.servo.get("servo_ball");
 		ballRelease.setPosition(ballpos);
-        leftClamp = hardwareMap.servo.get("servo_left_clamp");
-        rightClamp = hardwareMap.servo.get("servo_right_clamp");
+		LSRotations = 0;
+		percision_flag = 0;
+        //leftClamp = hardwareMap.servo.get("servo_left_clamp");
+        //rightClamp = hardwareMap.servo.get("servo_right_clamp");
 	}
 
 	//main function body
@@ -143,11 +145,11 @@ public class MecanumDriver extends OpMode{
         ballRelease.setPosition(ballpos);
 
         // Raises CatBall
-        if (gamepad2.x && LSRotations <= 40) {
-            motorLS.setPower(0.5);
+        if (gamepad2.x && LSRotations <= 16000) {
+            motorLS.setPower(0.3);
             LSRotations++;
-        } else if (gamepad2.y && LSRotations >= 1) {
-            motorLS.setPower(-0.5);
+        } else if (gamepad2.y && LSRotations >= 10) {
+            motorLS.setPower(-0.3);
             LSRotations--;
         } else {
             motorLS.setPower(0.0);
