@@ -16,7 +16,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 @TeleOp(name="MecanumDrive", group ="Drive")
-public class MecaumDriver extends OpMode{
+public class MecanumDriver extends OpMode{
     // instance variables
     // private variables
     // Motors
@@ -42,7 +42,7 @@ public class MecaumDriver extends OpMode{
     private double power = 0;
     private Range dist = new Range();
 
-    public MecaumDriver() {
+    public MecanumDriver() {
 		percision_flag = 0;
         LSRotations = 0;
 	}

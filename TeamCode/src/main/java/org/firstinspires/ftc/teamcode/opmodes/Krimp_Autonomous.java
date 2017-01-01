@@ -135,7 +135,72 @@ public class Krimp_Autonomous extends VisionOpMode {
         super.loop();
 
         switch (v_state) {
+            case 0:
 
+                break;
+            //
+            // Wait...
+            //
+            case 1:
+
+                break;
+            //
+            // Wait...
+            //
+            case 2:
+
+                break;
+            //
+            // Wait...
+            //
+            case 3:
+
+                break;
+            //
+            // Wait...
+            //
+            case 4:
+
+                break;
+            //
+            // Wait...
+            //
+            case 5:
+
+                break;
+            //
+            // Wait...
+            //
+            case 6:
+
+                break;
+            //
+            // Wait...
+            //
+            case 7:
+
+                break;
+            //
+            // Wait...
+            //
+            case 8:
+
+                break;
+            //
+            // Wait...
+            //
+            case 9:
+
+                break;
+            //
+            // Wait...
+            //
+            case 10:
+
+                break;
+            //
+            // Wait...
+            //
             default:
                 //
                 // Stops the program.
