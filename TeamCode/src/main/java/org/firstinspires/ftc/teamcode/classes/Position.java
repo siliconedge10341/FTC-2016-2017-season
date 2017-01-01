@@ -30,8 +30,6 @@ public class Position {
     }
 
 
-
-
     //initialization routine
 
 

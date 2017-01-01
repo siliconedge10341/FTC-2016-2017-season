@@ -60,7 +60,7 @@ public class FtcOpModeRegister implements OpModeRegister {
 
 
     //manager.register("MatrixK9TeleOp", MatrixK9TeleOp.class);tn
-    manager.register("MecaumDriver", MecaumDriver.class);
+    manager.register("MecaumDriver", MecanumDriver.class);
     manager.register("DemoAutonomous", DemoAutonomous.class);
 
     manager.register("VisionSample",VisionSample.class);
