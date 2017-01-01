@@ -128,8 +128,9 @@ public class Jose_Autonomous extends VisionOpMode {
                 motorShootL.setPower(1.0);
                 motorShootR.setPower(-1.0);
                 runtime.reset();
-                while (runtime.seconds() < 2) {
+                while (runtime.seconds() < 2.0) {
                     telemetry.addData("seconds", runtime.seconds());
+                    telemetry.update();
                 }
                 releaseServo.setPosition(0);
                 motorShootL.setPower(0);
@@ -137,8 +138,9 @@ public class Jose_Autonomous extends VisionOpMode {
 
                 motorCollector.setPower(0.75);
                 runtime.reset();
-                while (runtime.seconds() < 3){
+                while (runtime.seconds() < 3.0){
                     telemetry.addData("seconds",runtime.seconds());
+                    telemetry.update();
                 }
                 motorCollector.setPower(0);
 
@@ -146,8 +148,9 @@ public class Jose_Autonomous extends VisionOpMode {
                 motorShootL.setPower(1.0);
                 motorShootR.setPower(-1.0);
                 runtime.reset();
-                while (runtime.seconds()<2){
+                while (runtime.seconds()<2.0){
                     telemetry.addData("seconds",runtime.seconds());
+                    telemetry.update();
             }
                 motorShootL.setPower(0);
                 motorShootR.setPower(0);

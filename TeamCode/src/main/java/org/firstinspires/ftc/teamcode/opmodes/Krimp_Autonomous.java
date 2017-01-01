@@ -51,7 +51,7 @@ public class Krimp_Autonomous extends VisionOpMode {
         private ElapsedTime runtime = new ElapsedTime();
 
     // Variables
-        // Reading for the initial color we take at the beginning of the match.
+        // Reading for the initial color we zz take at the beginning of the match.
         // This helps us because when we test for the white line, we want to be
         // able to tell the difference from the color of the ground. Thus
         // knowing where the sensor is.
@@ -156,6 +156,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                 }
                 mtrShootL.setPower(0);
                 mtrShootR.setPower(0);
+                v_state++;
                 break;
             //
             // Wait...
@@ -174,6 +175,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                 }
                 drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
                 drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+                v_state++;
                 break;
             //
             // Wait...
@@ -192,6 +194,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                 }
                 drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
                 drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+                v_state++;
                 break;
             //
             // Wait...
@@ -218,6 +221,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                     }
                     drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
                     drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+                    v_state++;
 
                 } else if (beacon.getAnalysis().isRightBlue() == true) {
                     // go backward if the righgt side of the beacon is blue.
@@ -230,6 +234,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                     }
                     drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
                     drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+                    v_state++;
 
                 }
                 break;
@@ -252,6 +257,7 @@ public class Krimp_Autonomous extends VisionOpMode {
                 }
                 drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
                 drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+                v_state++;
                 break;
             //
             // Wait...
@@ -302,7 +308,6 @@ public class Krimp_Autonomous extends VisionOpMode {
         //
         // Increase v_state
         //
-        v_state++;
 
         telemetry.addData("State", v_state);
     }
