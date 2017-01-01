@@ -125,6 +125,8 @@ public class Krimp_Autonomous extends VisionOpMode {
         //
         super.start();
 
+        // Resets encoders to begin -LOOP-.
+        drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
     }
 
     // Loop
@@ -136,25 +138,96 @@ public class Krimp_Autonomous extends VisionOpMode {
 
         switch (v_state) {
             case 0:
+                //
+                // SHOOTING STATE:
+                // v_state == 0 is all about a few seconds where the robot moves the launching servo
+                // to release to balls. Then, after 6 seconds. the robot will move into the next state.
+                //
+                initialC = color_sensor.getLightDetected();
+                telemetry.addData("Light WaveLength", initialC);
+                //Shoots ball for 6 seconds
 
+                srvRelease.setPosition(srvRelease.MAX_POSITION);
+                mtrShootL.setPower(1.0);
+                mtrShootR.setPower(-1.0);
+                runtime.reset();
+                while (runtime.seconds() < 3) {
+                    telemetry.addData("Seconds", runtime.seconds());
+                }
+                mtrShootL.setPower(0);
+                mtrShootR.setPower(0);
                 break;
             //
             // Wait...
             //
             case 1:
-
+                //
+                // TURNING STATE
+                // v_state == 1 is all about turning 90 degrees to the left to make sure that the
+                // touching servo, the range sensor, and the beacon are all facing the wall.
+                //
+                drive_train.setPowerD(1.0);
+                drive_train.turn_left(mtrFR, mtrFL, mtrBR, mtrBL);
+                while (runtime.seconds() < 1) {
+                    telemetry.addData("Seconds", runtime.seconds());
+                }
+                drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
+                drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
                 break;
             //
             // Wait...
             //
             case 2:
-
+                //
+                // DIAGONAL RIGHT UP
+                // v_state == 2 is all about moving the robot to it's specific position at the white
+                // line up by the coloured box. From there we go into the next state. Repositioning.
+                //
+                drive_train.setPowerD(0.6);
+                drive_train.run_diagonal_right_up(mtrFR, mtrFL, mtrBR, mtrBL);
+                while (runtime.seconds() < 5 || color_sensor.getLightDetected() > initialC + 0.1) {
+                    telemetry.addData("Colour WaveLength", color_sensor.getLightDetected());
+                }
+                drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
+                drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
                 break;
             //
             // Wait...
             //
             case 3:
+                //
+                // SET UP POSITION
+                // v_state == 3 is depending on the colour, we will move the robot with left or right,
+                // depending on which side of the coloured box is -BLUE-.
+                //
+                // if right -BLUE- then we move BACKWARD.
+                // if left -BLUE- then we move FORWARD.
+                //
+                // After repositioning, we will proceed with the next state, pushing.
+                //
+                if (beacon.getAnalysis().isLeftBlue() == true) {
+                    // go forward if the left side of the beacon is blue.
+                    drive_train.setPowerD(0.3);
+                    drive_train.run_forward(mtrFR, mtrFL, mtrBR, mtrBL);
+                    while (runtime.seconds() < 1) {
+                        // motor to move button here
+                        telemetry.addData("Seconds", runtime.seconds());
+                    }
+                    drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
+                    drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
 
+                } else if (beacon.getAnalysis().isRightBlue() == true) {
+                    // go backward if the righgt side of the beacon is blue.
+                    drive_train.setPowerD(0.3);
+                    drive_train.run_backward(mtrFR, mtrFL, mtrBR, mtrBL);
+                    while (runtime.seconds() < 1) {
+                        // motor to move button here
+                        telemetry.addData("Seconds", runtime.seconds());
+                    }
+                    drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
+                    drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+
+                }
                 break;
             //
             // Wait...
@@ -208,6 +281,12 @@ public class Krimp_Autonomous extends VisionOpMode {
                 stop();
                 break;
         }
+        //
+        // Increase v_state
+        //
+        v_state++;
+
+        telemetry.addData("State", v_state);
     }
 
     // Stop
