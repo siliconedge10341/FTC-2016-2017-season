@@ -275,37 +275,21 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-    public void turn_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, int degrees) {
+    public void turn_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = BasePower;
         BLpower = BasePower;
         FRpower = -BasePower;
         BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
-        int Wheel_Rotate = degrees / 90;
-
-        while (this.get_wheel_rotations() <= Wheel_Rotate) {
-            motorFR.setPower(-FRpower);
-            motorBR.setPower(-BRpower);
-            motorFL.setPower((FLpower));
-            motorBL.setPower(BLpower);
-        }
         // This sets the motors that go into DemoAutonomous.
 
     }
-    public void turn_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, int degrees) {
+    public void turn_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = -BasePower;
         BLpower = -BasePower;
         FRpower = BasePower;
         BRpower = BasePower;
         // The positive and negative inputs only mean direction, not speed.
-        int Wheel_Rotate = degrees / 90;
-
-        while (this.get_wheel_rotations() <= Wheel_Rotate) {
-            motorFR.setPower(-FRpower);
-            motorBR.setPower(-BRpower);
-            motorFL.setPower((FLpower));
-            motorBL.setPower(BLpower);
-        }
         // This sets the motors that go into DemoAutonomous.
 
     }

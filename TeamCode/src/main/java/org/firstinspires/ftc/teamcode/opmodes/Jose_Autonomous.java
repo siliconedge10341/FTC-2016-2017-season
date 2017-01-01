@@ -31,6 +31,7 @@ public class Jose_Autonomous extends VisionOpMode {
     private DcMotor motorBR;
     private DcMotor motorShootL;
     private DcMotor motorShootR;
+    private DcMotor motorCollector;
 
     private Servo releaseServo;
 
@@ -69,6 +70,7 @@ public class Jose_Autonomous extends VisionOpMode {
         motorFL = hardwareMap.dcMotor.get("fl_motor");
         motorBR = hardwareMap.dcMotor.get("br_motor");
         motorBL = hardwareMap.dcMotor.get("bl_motor");
+        motorCollector = hardwareMap.dcMotor.get("ball_collector");
 
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
@@ -85,6 +87,7 @@ public class Jose_Autonomous extends VisionOpMode {
 
         //VISION:
         super.init();
+        releaseServo.setPosition(0.7);
         this.setCamera(Cameras.PRIMARY);
         this.setFrameSize(new Size(900, 900));
 
@@ -121,6 +124,34 @@ public class Jose_Autonomous extends VisionOpMode {
         super.loop();
         switch (v_state) {
             case 0:
+                releaseServo.setPosition(0.9);
+                motorShootL.setPower(1.0);
+                motorShootR.setPower(-1.0);
+                runtime.reset();
+                while (runtime.seconds() < 2) {
+                    telemetry.addData("seconds", runtime.seconds());
+                }
+                releaseServo.setPosition(0);
+                motorShootL.setPower(0);
+                motorShootR.setPower(0);
+
+                motorCollector.setPower(0.75);
+                runtime.reset();
+                while (runtime.seconds() < 3){
+                    telemetry.addData("seconds",runtime.seconds());
+                }
+                motorCollector.setPower(0);
+
+                releaseServo.setPosition(0.9);
+                motorShootL.setPower(1.0);
+                motorShootR.setPower(-1.0);
+                runtime.reset();
+                while (runtime.seconds()<2){
+                    telemetry.addData("seconds",runtime.seconds());
+            }
+                motorShootL.setPower(0);
+                motorShootR.setPower(0);
+
 
                 Drive_Train.setPowerD(1.0);
                 Drive_Train.run_left(motorFR, motorFL, motorBR, motorBL);
