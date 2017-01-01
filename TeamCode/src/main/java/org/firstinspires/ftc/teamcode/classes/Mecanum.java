@@ -16,7 +16,6 @@ public class Mecanum{
     // constants
     private final double pi = 3.1415926;
     private final double wheel_diameter = 4 * (pi);
-    private Distance dis_sensor = new Distance();
 
     // powers
     private double FRpower = 0;
@@ -146,17 +145,6 @@ public class Mecanum{
 
     }
 
-    // gets
-    public double get_wheel_rotations() {
-        double distance = 0;
-        double wheel_rotation = 0;
-
-        distance = dis_sensor.getWheelDistance();
-        wheel_rotation = distance/wheel_diameter;
-
-        return wheel_rotation;
-    }
-
     // methods
     // These are the functions for the specific direction
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
@@ -275,37 +263,20 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-    public void turn_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, int degrees) {
+    public void turn_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = BasePower;
         BLpower = BasePower;
         FRpower = -BasePower;
         BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
-        int Wheel_Rotate = degrees / 90;
-
-        while (this.get_wheel_rotations() <= Wheel_Rotate) {
-            motorFR.setPower(-FRpower);
-            motorBR.setPower(-BRpower);
-            motorFL.setPower((FLpower));
-            motorBL.setPower(BLpower);
-        }
-        // This sets the motors that go into DemoAutonomous.
 
     }
-    public void turn_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, int degrees) {
+    public void turn_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = -BasePower;
         BLpower = -BasePower;
         FRpower = BasePower;
         BRpower = BasePower;
         // The positive and negative inputs only mean direction, not speed.
-        int Wheel_Rotate = degrees / 90;
-
-        while (this.get_wheel_rotations() <= Wheel_Rotate) {
-            motorFR.setPower(-FRpower);
-            motorBR.setPower(-BRpower);
-            motorFL.setPower((FLpower));
-            motorBL.setPower(BLpower);
-        }
         // This sets the motors that go into DemoAutonomous.
 
     }
