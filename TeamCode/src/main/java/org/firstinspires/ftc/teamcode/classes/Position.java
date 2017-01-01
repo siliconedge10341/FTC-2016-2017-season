@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.classes;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.teamcode.classes.Distance;
+import org.firstinspires.ftc.teamcode.classes.Light;
 
 /**
  * Created by the lord and savior Arko Chaterjee on 9/7/2016.
@@ -14,22 +14,20 @@ public class Position {
     float y;
     float fieldmaxX;
     float fieldmaxY;
-    Distance robotMovement = new Distance();
+    Light robotMovement = new Light();
 
     public Position() {
         x = 0;
         y = 0;
         fieldmaxX = 12*12;
         fieldmaxY = 12*12;
-        robotMovement = new Distance();
+        robotMovement = new Light();
     }
 
     public void move() {
 
 
     }
-
-
 
 
     //initialization routine

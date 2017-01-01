@@ -94,15 +94,25 @@ public class AutonomousBallKnock extends LinearOpMode {
         bl = hardwareMap.dcMotor.get("bl_motor");
 
         ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-        initialC = ods.getLightDetected();
+
 
         Drive_Train.run_using_encoders(fr, fl, br, bl);
 
-        waitForStart();
+        // Wait for the game to start (driver presses PLAY)
+        // Abort this loop is started or stopped.
 
-        Drive_Train.setPowerD(.5);
+        while (!(isStarted() || isStopRequested())) {
+
+            // Display the light level while we are waiting to start
+            telemetry.addData("Light Level", ods.getLightDetected());
+            telemetry.update();
+            idle();
+        }
+        initialC = ods.getLightDetected();
+
+        Drive_Train.setPowerD(.15);
         Drive_Train.run_forward(fr, fl, br, bl);
-        while (ods.getLightDetected()<initialC && opModeIsActive()){
+        while (ods.getLightDetected()<initialC +.07 && opModeIsActive()){
             telemetry.addData("Light", ods.getLightDetected());
             telemetry.update();
         }
