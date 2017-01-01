@@ -119,7 +119,6 @@ public class DemoAutonomous extends VisionOpMode {
         super.start();
 
         // reset encoders to begin period of autonomous
-        Drive_Train.reset_encoders(fr, fl, br, bl);
     }
 
     @Override
