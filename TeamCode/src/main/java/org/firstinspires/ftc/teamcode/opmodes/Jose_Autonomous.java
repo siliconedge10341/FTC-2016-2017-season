@@ -126,11 +126,41 @@ public class Jose_Autonomous extends VisionOpMode {
                 Drive_Train.run_left(motorFR, motorFL, motorBR, motorBL);
 
                 runtime.reset();
-                while (runtime.seconds() < 1.5) {
+                while (runtime.seconds() < 1.0) {
                     telemetry.addData("seconds", runtime.seconds());
                     telemetry.update();
                 }
                 Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
+
+
+                releaseServo.setPosition(.9);
+
+                motorShootL.setPower(1.0);
+                motorShootR.setPower(-1.0);
+                runtime.reset();
+                while (runtime.seconds() < 3) {
+                    telemetry.addData("seconds", runtime.seconds());
+                }
+                releaseServo.setPosition(0);
+                motorShootL.setPower(0);
+                motorShootR.setPower(0);
+
+                Drive_Train.setPowerD(1.0);
+                Drive_Train.run_left(motorFR, motorFL, motorBR, motorBL);
+
+                runtime.reset();
+                while (runtime.seconds() < 0.5) {
+                    telemetry.addData("seconds", runtime.seconds());
+                    telemetry.update();
+                }
+                Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
+
+                runtime.reset();
+                while (runtime.seconds() < 0.5) {
+                    telemetry.addData("seconds", runtime.seconds());
+                    telemetry.update();
+                }
+
 
                 motorFR.setPower(1.0);
                 motorFL.setPower(1.0);
@@ -143,6 +173,13 @@ public class Jose_Autonomous extends VisionOpMode {
                 }
 
                 Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
+
+
+                runtime.reset();
+                while (runtime.seconds() < 0.5) {
+                    telemetry.addData("seconds", runtime.seconds());
+                    telemetry.update();
+                }
 
 
                 Drive_Train.setPowerD(1);

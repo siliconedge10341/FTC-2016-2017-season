@@ -16,7 +16,7 @@ public class Mecanum{
     // constants
     private final double pi = 3.1415926;
     private final double wheel_diameter = 4 * (pi);
-    private Distance dis_sensor = new Distance();
+    private Light dis_sensor = new Light();
 
     // powers
     private double FRpower = 0;
@@ -151,7 +151,7 @@ public class Mecanum{
         double distance = 0;
         double wheel_rotation = 0;
 
-        distance = dis_sensor.getWheelDistance();
+        //distance = dis_sensor.getWheelDistance();
         wheel_rotation = distance/wheel_diameter;
 
         return wheel_rotation;
