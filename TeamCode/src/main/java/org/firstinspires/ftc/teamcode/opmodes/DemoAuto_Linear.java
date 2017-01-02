@@ -111,6 +111,78 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
 
         initialC = ods.getLightDetected();
+
+/*
+        int v_state;
+        boolean startatcenter = true;
+        boolean firetwice = true;
+        boolean knockcapball = true;
+        boolean pressbeacons = true;
+        boolean endincorner = true;
+        boolean endincenter = false;
+
+        double posx, posy; // from corner to robot corner;
+        if(startatcenter)
+        {
+            posx = 54.89; //in
+            posy = 0.0;
+            v_state = 1;
+        }
+        else
+        {
+            posx = 90.0; //in
+            posy = 0.0;
+            v_state = 0;
+        }
+
+        switch(v_state)
+        {
+            case 0: //  case if we don't start at the center; wait for alliance partner to move
+                //wait until optical distance sensor registers > 5 feet
+
+                encoderDrive(1492, "forward",1.0);
+
+                posx = 54.89;
+                posy = 0.0;
+                v_state++;
+            case 1: //  case of firing once
+                motorShootL.setPower(1.0);
+                motorShootR.setPower(-1.0);
+                releaseServo.setPosition(0.9);
+                runtime.reset();
+                while (runtime.seconds() < 2.0) {
+                    telemetry.addData("seconds", runtime.seconds());
+                    telemetry.update();
+                }
+                v_state++;
+            case 2: //  case of running collector and firing again
+
+            case 3: //  case of strafing to the center
+
+            case 4: //  case of knocking the cap ball over and returning
+
+            case 5: //  case of rotating and strafing to beacons
+
+            case 6: //  case of moving forward until white line is detected
+
+            case 7: //  case of determining beacon color
+
+            case 8: //  case of opposite color is on the left, move backward
+
+            case 9: //  case of pressing beacon button
+
+            case 10://  case of moving to next white line
+
+            case 11://  case of determining beacon color
+
+            case 12://  case of opposite color is on the left, move backward
+
+            case 13://  case of pressing beacon button
+
+            case 14://  case of moving to corner vortex
+
+            case 15://  case of moving to center vortex
+        }*/
         //Shoots ball for 3 seconds
         releaseServo.setPosition(.05);
 
