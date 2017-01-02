@@ -145,10 +145,10 @@ public class MecanumDriver extends OpMode{
         ballRelease.setPosition(ballpos);
 
         // Raises CatBall
-        if (gamepad2.x && LSRotations <= 16000) {
+        if (gamepad2.x && LSRotations <= 4000) {
             motorLS.setPower(0.3);
             LSRotations++;
-        } else if (gamepad2.y && LSRotations >= 10) {
+        } else if (gamepad2.y && LSRotations >= 0) {
             motorLS.setPower(-0.3);
             LSRotations--;
         } else {

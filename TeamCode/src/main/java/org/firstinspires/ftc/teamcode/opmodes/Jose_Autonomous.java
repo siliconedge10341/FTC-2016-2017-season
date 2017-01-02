@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import org.lasarobotics.vision.android.Cameras;
 import org.lasarobotics.vision.ftc.resq.Beacon;
@@ -25,6 +26,7 @@ public class Jose_Autonomous extends VisionOpMode {
     // instance variables
     // private variables
     // Motors
+
     private DcMotor motorFR;
     private DcMotor motorFL;
     private DcMotor motorBL;
@@ -126,14 +128,16 @@ public class Jose_Autonomous extends VisionOpMode {
         super.loop();
         switch (v_state) {
             case 0:
-                releaseServo.setPosition(0.9);
                 motorShootL.setPower(1.0);
                 motorShootR.setPower(-1.0);
+                releaseServo.setPosition(0.9);
                 runtime.reset();
                 while (runtime.seconds() < 2.0) {
                     telemetry.addData("seconds", runtime.seconds());
                     telemetry.update();
                 }
+                v_state++;
+            case 1:
                 releaseServo.setPosition(0);
                 motorShootL.setPower(0);
                 motorShootR.setPower(0);
@@ -147,6 +151,8 @@ public class Jose_Autonomous extends VisionOpMode {
                 motorCollector.setPower(0);
 
                 releaseServo.setPosition(0.9);
+                v_state++;
+            case 2:
                 motorShootL.setPower(1.0);
                 motorShootR.setPower(-1.0);
                 runtime.reset();
@@ -156,11 +162,10 @@ public class Jose_Autonomous extends VisionOpMode {
                 }
                 motorShootL.setPower(0);
                 motorShootR.setPower(0);
-
-
+                v_state++;
+            case 3:
                 Drive_Train.setPowerD(1.0);
                 Drive_Train.run_left(motorFR, motorFL, motorBR, motorBL);
-
                 runtime.reset();
                 while (runtime.seconds() < 1.5) {
                     telemetry.addData("seconds", runtime.seconds());
@@ -168,14 +173,15 @@ public class Jose_Autonomous extends VisionOpMode {
                 }
 
                 Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
-
+                v_state++;
+            case 4:
                 runtime.reset();
                 while (runtime.seconds() < 0.5) {
                     telemetry.addData("seconds", runtime.seconds());
                     telemetry.update();
                 }
-
-
+                v_state++;
+            case 5:
                 motorFR.setPower(1.0);
                 motorFL.setPower(1.0);
                 motorBR.setPower(1.0);
@@ -187,15 +193,15 @@ public class Jose_Autonomous extends VisionOpMode {
                 }
 
                 Drive_Train.brake(motorFR,motorFL,motorBR,motorBL);
-
-
+                v_state++;
+            case 6:
                 runtime.reset();
                 while (runtime.seconds() < 0.5) {
                     telemetry.addData("seconds", runtime.seconds());
                     telemetry.update();
                 }
-
-
+                v_state++;
+            case 7:
                 Drive_Train.setPowerD(1);
                 Drive_Train.run_right(motorFR,motorFL,motorBR,motorBL);
                 runtime.reset();
