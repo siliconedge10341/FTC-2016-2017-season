@@ -150,80 +150,41 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         // Detect beacon
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //go forward if the left side of the beacon is blue
-            Drive_Train.run_using_encoders(fr, fl, br, bl);
-            Drive_Train.setPowerD(.5);
-            Drive_Train.setPosition(720,720,720,720, fr, fl, br, bl);
 
-           // Drive_Train.run_forward(fr, fl, br, bl);
-            while (Drive_Train.testDistance(fl) != 1){
-                telemetry.addData("Encoder ", fl.getCurrentPosition());
-            }
-                // motor to move button here
-                Drive_Train.reset_encoders(fr, fl, br, bl);
-                Drive_Train.brake(fr, fl, br, bl);
+            encoderDrive(720,"forward",.5);
 
         } else {
-            Drive_Train.setPosition(-720,-720,-720,-720, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_backward(fr, fl, br, bl);
-            if (Drive_Train.testDistance(fl) == 1) {
-                // motor to move button here
-                Drive_Train.reset_encoders(fr, fl, br, bl);
-                Drive_Train.brake(fr, fl, br, bl);
-
-            }
+            encoderDrive(720,"backward" , .5);
         }
         // beacon code
-        v_state++;
+
 
 
         //hit the button
-        Drive_Train.setPosition(200,-200,200,-200, fr, fl, br, bl);
-        Drive_Train.run_using_encoders(fr, fl, br, bl);
-        Drive_Train.run_right(fr, fl, br, bl);
-        if (Drive_Train.testDistance(fl) == 1) {
-            //if reached then stop
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            Drive_Train.brake(fr, fl, br, bl);
 
-            v_state++;
-        }
+        encoderDrive(200,"right" , .15);
 
         //go back a little bit
-        Drive_Train.setPosition(-200,200,-200,200, fr, fl, br, bl);
-        Drive_Train.run_to_position(fr, fl, br, bl);
-        Drive_Train.run_left(fr, fl, br, bl);
-        if (Drive_Train.testDistance(fr) == 1) {
-            //if reached then stop
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            Drive_Train.brake(fr, fl, br, bl);
+        encoderDrive(200, "left" , .15);
 
-            v_state++;
-        }
-
-
-        // run forward again to second line
-        Drive_Train.run_using_encoders(fr, fl, br, bl);
 
         Drive_Train.run_forward(fr, fl, br, bl);
-        Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
-        while (fl.isBusy()) {
-            if (Drive_Train.testDistance(fl) == 1 || (ods.getLightDetected() > initialC + .1)) {
-                //if reached then stop
-                Drive_Train.reset_encoders(fr, fl, br, bl);
-                Drive_Train.brake(fr, fl, br, bl);
-                v_state++;
-            }
+        //Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
+        while (opModeIsActive() && ods.getLightDetected() > initialC + .1) {
+              telemetry.addData("Light" , ods.getLightDetected());
+            telemetry.update();
         }
-
+        Drive_Train.reset_encoders(fr, fl, br, bl);
+        Drive_Train.brake(fr, fl, br, bl);
         // Wait...
         //
+        //Stop at wall
 
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         Drive_Train.run_right(fr, fl, br, bl);
 
-        while ( RANGE.getDistance(DistanceUnit.CM) > 5) {
-            telemetry.addData("Distance ", RANGE.getDistance(DistanceUnit.CM));
+        while ( opModeIsActive() && RANGE.getDistance(DistanceUnit.CM) > 5) {
+           telemetry.addData("Distance ", RANGE.getDistance(DistanceUnit.CM));
            telemetry.update();
         }
         Drive_Train.reset_encoders(fr, fl, br, bl);
