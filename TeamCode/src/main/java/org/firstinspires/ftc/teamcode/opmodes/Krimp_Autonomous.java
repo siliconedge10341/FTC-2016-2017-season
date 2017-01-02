@@ -92,8 +92,8 @@ public class Krimp_Autonomous extends VisionOpMode {
 
         // Classes
         color_sensor.setV_sensor(hardwareMap.opticalDistanceSensor.get("ods_line"));
-        range_sensor_beacon.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_beacon"));
-        range_sensor_proj.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_proj"));
+        range_sensor_beacon.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side"));
+        range_sensor_proj.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front"));
 
         // Positions
         srvRelease.setPosition(0.3);

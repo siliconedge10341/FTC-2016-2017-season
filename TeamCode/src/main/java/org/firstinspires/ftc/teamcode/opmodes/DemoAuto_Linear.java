@@ -108,6 +108,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         initialC = ods.getLightDetected();
         //Shoots ball for 3 seconds
         releaseServo.setPosition(.05);
+
         Drive_Train.setPowerD(0.4);
         Drive_Train.setPosition(720,720,720,720,fr, fl, br, bl);
         Drive_Train.run_to_position(fr, fl, br, bl);
@@ -116,50 +117,53 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
             motorShootL.setPower(1.0);
             motorShootR.setPower(-1.0);
         }
-        if (runtime.seconds()>=3){
-            motorShootL.setPower(0);
-            motorShootR.setPower(0);
-            v_state++;
-        }
+
+        motorShootL.setPower(0);
+        motorShootR.setPower(0);
+
         /////////////////////////////////////////////////////////
+        //Turn:
+
         //Move and detect line
 
-
+        Drive_Train.run_using_encoders(fr,fl,br,bl);
         Drive_Train.setPowerD(.15);
 
         Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
-        telemetry.addLine("test");
 
-        while (fl.isBusy() || ods.getLightDetected()< initialC +.1) {
+        while (opModeIsActive() && ods.getLightDetected()< initialC +.1) {
             telemetry.addData("Light ",ods.getLightDetected());
-            Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+
         }
-        Drive_Train.reset_encoders(fr, fl, br, bl);
+        //Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
-        v_state++;
+
 
         // Strafe right
-        Drive_Train.setPowerD(1.0);
+        Drive_Train.setPowerD(.5);
+        Drive_Train.run_right(fr, fl, br, bl);
         while (RANGE.getDistance(DistanceUnit.CM) > 5) {
-            Drive_Train.run_right(fr, fl, br, bl);
+
             telemetry.addData("Distance",RANGE.getDistance(DistanceUnit.CM ));
         }
         Drive_Train.brake(fr,fl,br,bl);
-
-        v_state++;
+        Drive_Train.reset_encoders(fr,fl,br,bl);
 
         // Detect beacon
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //go forward if the left side of the beacon is blue
+            Drive_Train.run_using_encoders(fr, fl, br, bl);
+            Drive_Train.setPowerD(.5);
             Drive_Train.setPosition(720,720,720,720, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_forward(fr, fl, br, bl);
-            if (Drive_Train.testDistance(fl) == 1) {
+
+           // Drive_Train.run_forward(fr, fl, br, bl);
+            while (Drive_Train.testDistance(fl) != 1){
+                telemetry.addData("Encoder ", fl.getCurrentPosition());
+            }
                 // motor to move button here
                 Drive_Train.reset_encoders(fr, fl, br, bl);
                 Drive_Train.brake(fr, fl, br, bl);
 
-            }
         } else {
             Drive_Train.setPosition(-720,-720,-720,-720, fr, fl, br, bl);
             Drive_Train.run_to_position(fr, fl, br, bl);
