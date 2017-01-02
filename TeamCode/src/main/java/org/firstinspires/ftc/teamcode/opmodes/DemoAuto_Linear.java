@@ -29,7 +29,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * @version 2015-08-01-06-01
  */
 
-@Autonomous(name = "Red_Auto", group = "Blue")
+@Autonomous(name = "Joe_Auto_Linear", group = "Blue")
 public class DemoAuto_Linear extends LinearVisionOpMode {
     // instance variables
     // private variables
@@ -40,7 +40,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
     DcMotor br;
     DcMotor motorShootL;
     DcMotor motorShootR;
+
     Servo releaseServo;
+    Servo beaconServo;
 
 
     // Range Sensor
@@ -73,7 +75,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
+
         releaseServo = hardwareMap.servo.get("servo_ball");
+        beaconServo = hardwareMap.servo.get("servo_beacon");
 
         ods = hardwareMap.opticalDistanceSensor.get("ods_line");
         RANGE = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
@@ -103,6 +107,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         cameraControl.setAutoExposureCompensation();
 
         waitForStart();
+        //Start OpMode
 
 
         initialC = ods.getLightDetected();
@@ -119,6 +124,17 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         /////////////////////////////////////////////////////////
         //Turn:
+        fr.setPower(1.0);
+        fl.setPower(1.0);
+        br.setPower(1.0);
+        bl.setPower(1.0);
+        runtime.reset();
+        while (runtime.seconds() < 0.86) {
+            telemetry.addData("seconds", runtime.seconds());
+            telemetry.update();
+        }
+
+        Drive_Train.brake(fr,fl,br,bl);
         //Hit the ball:
         encoderDrive(520 , "backward" , .5);
 
@@ -131,13 +147,13 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         while (opModeIsActive() && ods.getLightDetected()< initialC +.1) {
             telemetry.addData("Light ",ods.getLightDetected());
-
+            telemetry.update();
         }
         //Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
 
 
-        // Strafe right
+        // Strafe right to the wal
         Drive_Train.setPowerD(.5);
         Drive_Train.run_right(fr, fl, br, bl);
         while (RANGE.getDistance(DistanceUnit.CM) > 5) {
@@ -167,6 +183,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //go back a little bit
         encoderDrive(200, "left" , .15);
 
+        //Run to line
 
         Drive_Train.run_forward(fr, fl, br, bl);
         //Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
