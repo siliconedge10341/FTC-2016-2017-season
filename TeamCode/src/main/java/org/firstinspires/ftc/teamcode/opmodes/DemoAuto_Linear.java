@@ -116,7 +116,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         initialC = ods.getLightDetected();
 
-/*
+
         int v_state;
         boolean startatcenter = true;
         boolean firetwice = true;
@@ -142,7 +142,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         switch(v_state)
         {
             case 0: //  case if we don't start at the center; wait for alliance partner to move
-                //wait until optical distance sensor registers > 5 feet
+                //wait until range sensor registers > 5 feet
+                while(RANGE.getDistance(DistanceUnit.CM) < 152){}
 
                 encoderDrive(1492, "forward",1.0);
 
@@ -150,20 +151,48 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 posy = 0.0;
                 v_state++;
             case 1: //  case of firing once
+                //Shoots ball for 2 seconds
+                releaseServo.setPosition(.05);
                 motorShootL.setPower(1.0);
                 motorShootR.setPower(-1.0);
-                releaseServo.setPosition(0.9);
-                runtime.reset();
-                while (runtime.seconds() < 2.0) {
+                while (runtime.seconds() < 2) {
                     telemetry.addData("seconds", runtime.seconds());
                     telemetry.update();
                 }
+                motorShootL.setPower(0);
+                motorShootR.setPower(0);
                 v_state++;
             case 2: //  case of running collector and firing again
+                releaseServo.setPosition(.3);
+                motorCollector.setPower(0.9);
+                runtime.reset();
+                while (runtime.seconds() < 4.0){
+                    telemetry.addData("seconds",runtime.seconds());
+                    telemetry.update();
+                    if(runtime.seconds() > 2.0)
+                    {
+                        releaseServo.setPosition(.05);
+                        motorShootL.setPower(1.0);
+                        motorShootR.setPower(-1.0);
+                    }
+                }
+                motorCollector.setPower(0);
+                releaseServo.setPosition(.3);
+                motorShootL.setPower(0.0);
+                motorShootR.setPower(0.0);
 
-            case 3: //  case of strafing to the center
-
-            case 4: //  case of knocking the cap ball over and returning
+                if(knockcapball)
+                {
+                    v_state+=2;
+                }
+                else
+                {
+                    v_state++;
+                }
+            case 3: //  case of strafing to the center (21 in)
+                //encoderDrive();
+            case 4: //  case of knocking the cap ball over and returning (27 in and back)
+                encoderDrive(1895 , "left" , .5);
 
             case 5: //  case of rotating and strafing to beacons
 
@@ -186,19 +215,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
             case 14://  case of moving to corner vortex
 
             case 15://  case of moving to center vortex
-        }*/
-        //Shoots ball for 3 seconds
-        releaseServo.setPosition(.05);
-
-        while (runtime.seconds() < 3) {
-            motorShootL.setPower(1.0);
-            motorShootR.setPower(-1.0);
-            motorCollector.setPower(1.0);
         }
-
-        motorCollector.setPower(0);
-        motorShootL.setPower(0);
-        motorShootR.setPower(0);
 
         /////////////////////////////////////////////////////////
         //Turn:
@@ -310,7 +327,14 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
     }
 
-
+    public void PauseAuto(double time)
+    {
+        runtime.reset();
+        while(runtime.seconds() < time)
+        {
+            //do nothing
+        }
+    }
     public void encoderDrive(int encoderval, String direction, double power){
         Drive_Train.run_using_encoders(fr, fl, br, bl);
 
