@@ -219,17 +219,23 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 PauseAuto(0.3);
                 //strafe 30 in right
 
-
+                encoderDrive(1, "right", 0.9);
+                posx = 24.89;
+                posy = 27;
 
                 PauseAuto(0.3);
-                //forward 12 in
+                //backward 12 in
 
-
+                encoderDrive(1, "backward", 0.9);
+                posx = 24.89;
+                posy = 39;
 
                 PauseAuto(0.3);
                 //strafe 12.89 in right
 
-
+                encoderDrive(1, "right", 0.9);
+                posx = 12;
+                posy = 27;
 
                 PauseAuto(0.3);
             case 6: //  case of moving forward until white line is detected
