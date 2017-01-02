@@ -189,13 +189,49 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 {
                     v_state++;
                 }
-            case 3: //  case of strafing to the center (21 in)
-                //encoderDrive();
-            case 4: //  case of knocking the cap ball over and returning (27 in and back)
-                encoderDrive(1895 , "left" , .5);
-
+            case 3: //  case of strafing to the center (27 in)
+                encoderDrive(1, "left", 0.9);
+                posx = 54.89;
+                posy = 27;
+                v_state=5;
+            case 4: //  case of knocking the cap ball over and returning (35 in and back 8 in)
+                encoderDrive(1 , "left" , 0.9);
+                posx = 54.89;
+                posy = 35.0;
+                PauseAuto(0.3);
+                encoderDrive(1, "right", 0.9);
+                posx = 54.89;
+                posy = 27;
+                v_state=5;
             case 5: //  case of rotating and strafing to beacons
+                PauseAuto(0.3);
+                //rotation
+                fr.setPower(1.0);
+                fl.setPower(1.0);
+                br.setPower(1.0);
+                bl.setPower(1.0);
+                runtime.reset();
+                while (runtime.seconds() < 0.86) {
+                    telemetry.addData("seconds", runtime.seconds());
+                    telemetry.update();
+                }
+                Drive_Train.brake(fr,fl,br,bl);
+                PauseAuto(0.3);
+                //strafe 30 in right
 
+
+
+                PauseAuto(0.3);
+                //forward 12 in
+
+
+
+                PauseAuto(0.3);
+                //strafe 12.89 in right
+
+
+
+                PauseAuto(0.3);
             case 6: //  case of moving forward until white line is detected
 
             case 7: //  case of determining beacon color
@@ -224,15 +260,6 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         encoderDrive(1895 , "left" , .5);
 
         //Turn:
-        fr.setPower(1.0);
-        fl.setPower(1.0);
-        br.setPower(1.0);
-        bl.setPower(1.0);
-        runtime.reset();
-        while (runtime.seconds() < 0.86) {
-            telemetry.addData("seconds", runtime.seconds());
-            telemetry.update();
-        }
         //Move to wall
         Drive_Train.setPowerD(.5);
         Drive_Train.run_right(fr, fl, br, bl);
