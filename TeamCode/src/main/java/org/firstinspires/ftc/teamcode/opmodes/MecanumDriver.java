@@ -105,7 +105,7 @@ public class MecanumDriver extends OpMode{
 
         // Run Collector
 		if (gamepad1.a)  {
-			motorCollector.setPower(0.75);
+			motorCollector.setPower(1.0);
 		} else {
 			motorCollector.setPower(0);
 		}

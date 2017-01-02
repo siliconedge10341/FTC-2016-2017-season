@@ -84,6 +84,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         // Sets Position
         releaseServo.setPosition(0.3);
+        beaconServo.setPosition(.5);
 
         waitForVisionStart();
 
@@ -196,6 +197,13 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         /////////////////////////////////////////////////////////
         //Turn:
+
+
+        Drive_Train.brake(fr,fl,br,bl);
+        //Hit the ball:
+        encoderDrive(520 , "left" , .5);
+
+        //Turn:
         fr.setPower(1.0);
         fl.setPower(1.0);
         br.setPower(1.0);
@@ -205,17 +213,22 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
             telemetry.addData("seconds", runtime.seconds());
             telemetry.update();
         }
+        //Move to wall
+        Drive_Train.setPowerD(.5);
+        Drive_Train.run_right(fr, fl, br, bl);
+        while (opModeIsActive() && RANGE.getDistance(DistanceUnit.CM) > 19) {
 
+            telemetry.addData("Distance ",RANGE.getDistance(DistanceUnit.CM ));
+        }
         Drive_Train.brake(fr,fl,br,bl);
-        //Hit the ball:
-        encoderDrive(520 , "backward" , .5);
+        Drive_Train.reset_encoders(fr,fl,br,bl);
 
         //Move and detect line
 
         Drive_Train.run_using_encoders(fr,fl,br,bl);
         Drive_Train.setPowerD(.15);
 
-        Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+        Drive_Train.run_right(fr, fl, br, bl);
 
         while (opModeIsActive() && ods.getLightDetected()< initialC +.1) {
             telemetry.addData("Light ",ods.getLightDetected());
@@ -224,25 +237,17 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
 
-
-        // Strafe right to the wal
-        Drive_Train.setPowerD(.5);
-        Drive_Train.run_right(fr, fl, br, bl);
-        while (RANGE.getDistance(DistanceUnit.CM) > 5) {
-
-            telemetry.addData("Distance",RANGE.getDistance(DistanceUnit.CM ));
-        }
-        Drive_Train.brake(fr,fl,br,bl);
-        Drive_Train.reset_encoders(fr,fl,br,bl);
-
+            beaconServo.setPosition(1.0);
         // Detect beacon
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //go forward if the left side of the beacon is blue
 
-            encoderDrive(720,"forward",.5);
+            //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
+            encoderDrive(250,"backward" , .5);
 
         } else {
-            encoderDrive(720,"backward" , .5);
+            //beacon is 1/2 a foot
+
         }
         // beacon code
 
@@ -272,7 +277,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         Drive_Train.run_right(fr, fl, br, bl);
 
-        while ( opModeIsActive() && RANGE.getDistance(DistanceUnit.CM) > 5) {
+        while ( opModeIsActive() && RANGE.getDistance(DistanceUnit.CM) > 19) {
            telemetry.addData("Distance ", RANGE.getDistance(DistanceUnit.CM));
            telemetry.update();
         }
@@ -284,9 +289,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //Detect beacon
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //go forward if the left side of the beacon is blue
-            encoderDrive(720,"forward" , .15);
+            encoderDrive(250,"backward" , .5);
         } else {
-            encoderDrive(720,"backward" , .15);
+           // encoderDrive(720,"backward" , .15);
         }
         //beacon code
 
