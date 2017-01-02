@@ -41,6 +41,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
     DcMotor motorShootL;
     DcMotor motorShootR;
 
+    DcMotor motorCollector;
+
     Servo releaseServo;
     Servo beaconServo;
 
@@ -75,6 +77,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
+        motorCollector = hardwareMap.dcMotor.get("ball_collector");
 
         releaseServo = hardwareMap.servo.get("servo_ball");
         beaconServo = hardwareMap.servo.get("servo_beacon");
@@ -190,18 +193,18 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         while (runtime.seconds() < 3) {
             motorShootL.setPower(1.0);
             motorShootR.setPower(-1.0);
+            motorCollector.setPower(1.0);
         }
 
+        motorCollector.setPower(0);
         motorShootL.setPower(0);
         motorShootR.setPower(0);
 
         /////////////////////////////////////////////////////////
         //Turn:
 
-
-        Drive_Train.brake(fr,fl,br,bl);
         //Hit the ball:
-        encoderDrive(520 , "left" , .5);
+        encoderDrive(1895 , "left" , .5);
 
         //Turn:
         fr.setPower(1.0);
@@ -223,12 +226,14 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         Drive_Train.brake(fr,fl,br,bl);
         Drive_Train.reset_encoders(fr,fl,br,bl);
 
+        beaconServo.setPosition(1.0);
+
         //Move and detect line
 
         Drive_Train.run_using_encoders(fr,fl,br,bl);
         Drive_Train.setPowerD(.15);
 
-        Drive_Train.run_right(fr, fl, br, bl);
+        Drive_Train.run_backward(fr, fl, br, bl);
 
         while (opModeIsActive() && ods.getLightDetected()< initialC +.1) {
             telemetry.addData("Light ",ods.getLightDetected());
@@ -243,7 +248,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
             //go forward if the left side of the beacon is blue
 
             //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
-            encoderDrive(250,"backward" , .5);
+            encoderDrive(250,"forward" , .5);
 
         } else {
             //beacon is 1/2 a foot
@@ -255,10 +260,10 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         //hit the button
 
-        encoderDrive(200,"right" , .15);
+        encoderDrive(40,"right" , .15);
 
         //go back a little bit
-        encoderDrive(200, "left" , .15);
+        encoderDrive(100, "left" , .15);
 
         //Run to line
 

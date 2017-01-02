@@ -43,8 +43,6 @@ public class MecanumDriver extends OpMode{
     private Range dist = new Range();
 
     public MecanumDriver() {
-		percision_flag = 0;
-        LSRotations = 0;
 	}
 
 	@Override
@@ -55,6 +53,7 @@ public class MecanumDriver extends OpMode{
 		motorFR = hardwareMap.dcMotor.get("fr_motor");
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
 		motorBR = hardwareMap.dcMotor.get("br_motor");
+
         motorLS = hardwareMap.dcMotor.get("linear_slide_motor");
 
 		motorCollector = hardwareMap.dcMotor.get("ball_collector");
@@ -111,12 +110,12 @@ public class MecanumDriver extends OpMode{
 		}
 
 		//bantu shooter
-		if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
-            if (dist.getData() < .5 /*Meters*/) {
+		/*if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
+            if (dist.getData() < .5 /*Meters) {
                 power = 1.0;
-            } else if (dist.getData() >= .5 /*Meters*/ && dist.getData() < 1 /*Meters*/) {
+            } else if (dist.getData() >= .5 /*Meters && dist.getData() < 1 /*Meters) {
                 power = 1.25;
-            } else if (dist.getData() >= 1 /*Meters*/) {
+            } else if (dist.getData() >= 1 /*Meters) {
                 power = 1.5;
             } else {
                 power = 0.75;
@@ -127,6 +126,7 @@ public class MecanumDriver extends OpMode{
 			motorShootL.setPower(0);
 			motorShootR.setPower(0);
 		}
+	*/
 
         // Moves Servo
 		if (gamepad2.dpad_right){
@@ -145,11 +145,11 @@ public class MecanumDriver extends OpMode{
         ballRelease.setPosition(ballpos);
 
         // Raises CatBall
-        if (gamepad2.x && LSRotations <= 4000) {
-            motorLS.setPower(0.3);
+        if (gamepad1.x) {
+            motorLS.setPower(-0.75);
             LSRotations++;
-        } else if (gamepad2.y && LSRotations >= 0) {
-            motorLS.setPower(-0.3);
+        } else if (gamepad1.y) {
+            motorLS.setPower(0.2);
             LSRotations--;
         } else {
             motorLS.setPower(0.0);
