@@ -160,10 +160,10 @@ public class Mecanum{
     // methods
     // These are the functions for the specific direction
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = 0.7*BasePower;
-        BLpower = -0.95*BasePower;
-        FRpower = 0.73*BasePower;
-        BRpower = -BasePower;
+        FLpower = BasePower;  //0.7
+        BLpower = -BasePower; //-0.95
+        FRpower = BasePower; //0.73
+        BRpower = -BasePower; // -1
         // The positive and negative inputs only mean direction, not speed.
 
 
@@ -232,16 +232,16 @@ public class Mecanum{
 
     }
     public void run_diagonal_left_up(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = 0;
-        BLpower = BasePower;
-        FRpower = BasePower;
-        BRpower = 0;
+        FLpower = BasePower;
+        BLpower = 0;
+        FRpower = 0;
+        BRpower = -BasePower;
         // The positive and negative inputs only mean direction, not speed.
 
 
-        motorFR.setPower(-FRpower);
-        motorBR.setPower(-BRpower);
-        motorFL.setPower((FLpower));
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
         // This sets the motors that go into DemoAutonomous.
 

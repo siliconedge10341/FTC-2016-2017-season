@@ -109,10 +109,6 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //Shoots ball for 3 seconds
         releaseServo.setPosition(.05);
 
-        Drive_Train.setPowerD(0.4);
-        Drive_Train.setPosition(720,720,720,720,fr, fl, br, bl);
-        Drive_Train.run_to_position(fr, fl, br, bl);
-
         while (runtime.seconds() < 3) {
             motorShootL.setPower(1.0);
             motorShootR.setPower(-1.0);
@@ -123,6 +119,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         /////////////////////////////////////////////////////////
         //Turn:
+        //Hit the ball:
+        encoderDrive(520 , "backward" , .5);
 
         //Move and detect line
 
@@ -223,38 +221,22 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         Drive_Train.run_right(fr, fl, br, bl);
-        Drive_Train.setPosition(-2*1440,2 * 1440,-2*1440,2*1440, fr, fl, br, bl);
 
-        if (Drive_Train.testDistance(fl) == 1 || RANGE.getDistance(DistanceUnit.CM) <= 5) {
-
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            Drive_Train.brake(fr, fl, br, bl);
-            v_state++;
+        while ( RANGE.getDistance(DistanceUnit.CM) > 5) {
+            telemetry.addData("Distance ", RANGE.getDistance(DistanceUnit.CM));
+           telemetry.update();
         }
-
+        Drive_Train.reset_encoders(fr, fl, br, bl);
+        Drive_Train.brake(fr, fl, br, bl);
         //
         // Wait...
         //
         //Detect beacon
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //go forward if the left side of the beacon is blue
-            Drive_Train.setPosition(720,720,720,720, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_forward(fr, fl, br, bl);
-            if (Drive_Train.testDistance(fl) == 1) {
-
-                Drive_Train.reset_encoders(fr, fl, br, bl);
-                Drive_Train.brake(fr, fl, br, bl);
-            }
+            encoderDrive(720,"forward" , .15);
         } else {
-            Drive_Train.setPosition(-720,-720,-720,-720, fr, fl, br, bl);
-            Drive_Train.run_to_position(fr, fl, br, bl);
-            Drive_Train.run_backward(fr, fl, br, bl);
-            if (Drive_Train.testDistance(fl) == 1) {
-
-                Drive_Train.reset_encoders(fr, fl, br, bl);
-                Drive_Train.brake(fr, fl, br, bl);
-            }
+            encoderDrive(720,"backward" , .15);
         }
         //beacon code
 
@@ -263,21 +245,36 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //
 
         //hit the button
-        Drive_Train.setPosition(-200,200,200,-200, fr, fl, br, bl);
-        Drive_Train.run_using_encoders(fr, fl, br, bl);
-        Drive_Train.run_right(fr, fl, br, bl);
-        if (Drive_Train.testDistance(fl) == 1) {
-            //if reached then stop
-            Drive_Train.reset_encoders(fr, fl, br, bl);
-            Drive_Train.brake(fr, fl, br, bl);
+        encoderDrive(200,"right",.3);
 
-            v_state++;
+
+    }
+
+
+    public void encoderDrive(int encoderval, String direction, double power){
+        Drive_Train.run_using_encoders(fr, fl, br, bl);
+
+        Drive_Train.setPosition(encoderval,encoderval,encoderval,encoderval,fr,fl,br,bl);
+
+        Drive_Train.setPowerD(power);
+        if (direction == "forward"){
+            Drive_Train.run_forward(fr,fl,br,bl);
+        }else if(direction == "backward"){
+            Drive_Train.run_backward(fr,fl,br,bl);
+        }else if (direction == "left"){
+            Drive_Train.run_left(fr,fl,br,bl);
+        }else if (direction == "right"){
+            Drive_Train.run_right(fr,fl,br,bl);
+        }else if (direction == "diagonal_left_up"){
+            Drive_Train.run_diagonal_left_up(fr,fl,br,bl);
         }
 
+        while(Drive_Train.testDistance(fl) != 1){
+            telemetry.addData("Pos " , fl.getCurrentPosition());
+            telemetry.update();
+        }
 
-
-
-
+        Drive_Train.brake(fr, fl, br, bl);
     }
 
 

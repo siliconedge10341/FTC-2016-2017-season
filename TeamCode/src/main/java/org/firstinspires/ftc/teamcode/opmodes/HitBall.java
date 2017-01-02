@@ -106,10 +106,10 @@ public class HitBall extends LinearOpMode {
 
         Drive_Train.run_using_encoders(fr, fl, br, bl);
 
-        Drive_Train.setPosition(1440,1440,1440,1440,fr,fl,br,bl);
+        Drive_Train.setPosition(510,510,510,510,fr,fl,br,bl);
 
         Drive_Train.setPowerD(.15);
-        Drive_Train.run_forward(fr,fl,br,bl);
+        Drive_Train.run_left(fr,fl,br,bl);
 
         while(Drive_Train.testDistance(fl) != 1){
             telemetry.addData("Pos " , fl.getCurrentPosition());
@@ -117,7 +117,35 @@ public class HitBall extends LinearOpMode {
         }
 
         Drive_Train.brake(fr, fl, br, bl);
+
         telemetry.addData("DONE" , "Done");
         telemetry.update();
+    }
+
+
+    public void encoderDrive(int encoderval, String direction){
+        Drive_Train.run_using_encoders(fr, fl, br, bl);
+
+        Drive_Train.setPosition(encoderval,encoderval,encoderval,encoderval,fr,fl,br,bl);
+
+        Drive_Train.setPowerD(.15);
+        if (direction == "forward"){
+            Drive_Train.run_forward(fr,fl,br,bl);
+        }else if(direction == "backward"){
+            Drive_Train.run_backward(fr,fl,br,bl);
+        }else if (direction == "left"){
+            Drive_Train.run_left(fr,fl,br,bl);
+        }else if (direction == "right"){
+            Drive_Train.run_right(fr,fl,br,bl);
+        }else if (direction == "diagonal_left_up"){
+            Drive_Train.run_diagonal_left_up(fr,fl,br,bl);
+        }
+
+        while(Drive_Train.testDistance(fl) != 1){
+            telemetry.addData("Pos " , fl.getCurrentPosition());
+            telemetry.update();
+        }
+
+        Drive_Train.brake(fr, fl, br, bl);
     }
 }
