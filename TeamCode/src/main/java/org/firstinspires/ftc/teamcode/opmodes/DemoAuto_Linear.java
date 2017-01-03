@@ -258,7 +258,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 v_state++;
             case 7: //  case of pressing beacon button
                 if (beacon.getAnalysis().isLeftRed()) {
-                    encoderDrive(1, "right", 0.5);
+                    encoderDrive(500, "right", 0.5);
                     PauseAuto(0.2);
 
                     Drive_Train.setPowerD(0.6);
@@ -276,9 +276,42 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
                     encoderDrive(250, "forward", .5);
 
+                    encoderDrive(500, "right", 0.5);
+                    PauseAuto(0.2);
+
+                    Drive_Train.setPowerD(0.6);
+                    Drive_Train.run_left(fr, fl, br, bl);
+                    while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+
+                        telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                    }
+                    Drive_Train.brake(fr, fl, br, bl);
+
                 }
                 v_state++;
             case 8://  case of moving to next white line
+                encoderDrive(520,"backward",0.9);
+
+                double distancemoved = ranges.getDistance(DistanceUnit.CM) - 30.0;
+                
+                double angleofrobot = (Math.atan(distancemoved/30.54))*180/Math.PI;
+                Drive_Train.turn_left(fr,fl,br,bl);
+
+                runtime.reset();
+                while(runtime.seconds() < angleofrobot/100)
+                {
+                    telemetry.addData("seconds", runtime.seconds());
+                    telemetry.update();
+                }
+
+                Drive_Train.brake(fr, fl, br,bl);
+                Drive_Train.setPowerD(0.6);
+                Drive_Train.run_left(fr, fl, br, bl);
+                while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+
+                    telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                }
+                Drive_Train.brake(fr, fl, br, bl);
 
             case 9://  case of pressing beacon button
 

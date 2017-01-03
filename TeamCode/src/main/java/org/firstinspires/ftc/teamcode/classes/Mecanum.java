@@ -162,7 +162,7 @@ public class Mecanum{
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = BasePower;  //0.7
         BLpower = -BasePower; //-0.95
-        FRpower = BasePower; //0.73
+        FRpower = BasePower;  //0.73
         BRpower = -BasePower; // -1
         // The positive and negative inputs only mean direction, not speed.
 
