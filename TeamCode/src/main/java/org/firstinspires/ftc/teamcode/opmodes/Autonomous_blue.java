@@ -59,6 +59,13 @@ public class Autonomous_blue extends LinearVisionOpMode {
     // states variable for the loop
     int v_state = 0;
 
+    boolean startatcenter = true;
+    boolean firetwice = true;
+    boolean knockcapball = true;
+    boolean pressbeacons = true;
+    boolean endincorner = true;
+    boolean endincenter = false;
+
 
     public void runOpMode() throws InterruptedException {
         // Sets every class at the beginning of the demoautonomous run class
@@ -113,152 +120,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         encoderDrive(510,"forward",1.0);
 
-        int v_state;
-        boolean startatcenter = true;
-        boolean firetwice = true;
-        boolean knockcapball = true;
-        boolean pressbeacons = true;
-        boolean endincorner = true;
-        boolean endincenter = false;
-
-        double posx, posy; // from corner to robot corner;
-        if(startatcenter)
-        {
-            posx = 54.89; //in
-            posy = 0.0;
-            v_state = 1;
-        }
-        else
-        {
-            posx = 90.0; //in
-            posy = 0.0;
-            v_state = 0;
-        }
-
-        switch(v_state)
-        {
-            case 0: //  case if we don't start at the center; wait for alliance partner to move
-                //wait until range sensor registers > 5 feet
-                while(rangef.getDistance(DistanceUnit.CM) < 152){}
-
-                encoderDrive(1492, "forward",1.0);
-
-                posx = 54.89;
-                posy = 0.0;
-                v_state++;
-            case 1: //  case of firing once
-                //Shoots ball for 2 seconds
-                releaseServo.setPosition(.05);
-                motorShootL.setPower(1.0);
-                motorShootR.setPower(-1.0);
-                while (runtime.seconds() < 2) {
-                    telemetry.addData("seconds", runtime.seconds());
-                    telemetry.update();
-                }
-                motorShootL.setPower(0);
-                motorShootR.setPower(0);
-                v_state++;
-            case 2: //  case of running collector and firing again
-                releaseServo.setPosition(.3);
-                motorCollector.setPower(0.9);
-                runtime.reset();
-                while (runtime.seconds() < 4.0){
-                    telemetry.addData("seconds",runtime.seconds());
-                    telemetry.update();
-                    if(runtime.seconds() > 2.0)
-                    {
-                        releaseServo.setPosition(.05);
-                        motorShootL.setPower(1.0);
-                        motorShootR.setPower(-1.0);
-                    }
-                }
-                motorCollector.setPower(0);
-                releaseServo.setPosition(.3);
-                motorShootL.setPower(0.0);
-                motorShootR.setPower(0.0);
-
-                if(knockcapball)
-                {
-                    v_state+=2;
-                }
-                else
-                {
-                    v_state++;
-                }
-            case 3: //  case of strafing to the center (27 in)
-                encoderDrive(1, "left", 0.9);
-                posx = 54.89;
-                posy = 27;
-                v_state=5;
-            case 4: //  case of knocking the cap ball over and returning (35 in and back 8 in)
-                encoderDrive(1 , "left" , 0.9);
-                posx = 54.89;
-                posy = 35.0;
-                PauseAuto(0.3);
-                encoderDrive(1, "right", 0.9);
-                posx = 54.89;
-                posy = 27;
-                v_state=5;
-            case 5: //  case of rotating and strafing to beacons
-                PauseAuto(0.3);
-                //rotation
-                fr.setPower(1.0);
-                fl.setPower(1.0);
-                br.setPower(1.0);
-                bl.setPower(1.0);
-                runtime.reset();
-                while (runtime.seconds() < 0.86) {
-                    telemetry.addData("seconds", runtime.seconds());
-                    telemetry.update();
-                }
-                Drive_Train.brake(fr,fl,br,bl);
-                PauseAuto(0.3);
-                //strafe 30 in right
-
-                encoderDrive(1, "right", 0.9);
-                posx = 24.89;
-                posy = 27;
-
-                PauseAuto(0.3);
-                //backward 12 in
-
-                encoderDrive(1, "backward", 0.9);
-                posx = 24.89;
-                posy = 39;
-
-                PauseAuto(0.3);
-                //strafe 12.89 in right
-
-                Drive_Train.setPowerD(0.6);
-                Drive_Train.run_right(fr, fl, br, bl);
-                while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
-
-                    telemetry.addData("Distance ",ranges.getDistance(DistanceUnit.CM ));
-                }
-                Drive_Train.brake(fr,fl,br,bl);
-
-                PauseAuto(0.3);
-
-            case 6: //  case of moving forward until white line is detected
-
-            case 7: //  case of determining beacon color
-
-            case 8: //  case of opposite color is on the left, move backward
-
-            case 9: //  case of pressing beacon button
-
-            case 10://  case of moving to next white line
-
-            case 11://  case of determining beacon color
-
-            case 12://  case of opposite color is on the left, move backward
-
-            case 13://  case of pressing beacon button
-
-            case 14://  case of moving to corner vortex
-
-            case 15://  case of moving to center vortex
-        }
 
         /////////////////////////////////////////////////////////
         //Shoot ball:

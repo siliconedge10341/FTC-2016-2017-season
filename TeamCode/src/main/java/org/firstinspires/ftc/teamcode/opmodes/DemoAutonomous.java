@@ -28,6 +28,7 @@ import com.vuforia.ar.pl.DrawOverlayView;
  */
 
 @Autonomous(name = "Blue_Auto", group = "Blue")
+@Disabled
 public class DemoAutonomous extends VisionOpMode {
     // instance variables
     // private variables

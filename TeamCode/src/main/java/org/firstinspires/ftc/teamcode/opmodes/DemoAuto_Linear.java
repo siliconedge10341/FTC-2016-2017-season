@@ -142,8 +142,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
             posy = 0.0;
             v_state = 0;
         }
-
-        switch(v_state) {
+    while (opModeIsActive()) {
+        switch (v_state) {
             case 0: //  case if we don't start at the center; wait for alliance partner to move
                 //wait until range sensor registers > 5 feet
                 while (rangef.getDistance(DistanceUnit.CM) < 152) {
@@ -319,6 +319,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
             case 11://  case of moving to center vortex
         }
+    }
 
         //Run to line
 
