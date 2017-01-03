@@ -369,8 +369,6 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         //
         // Wait...
-        //
-
         //hit the button
         encoderDrive(6.0,"right",.3);
 
