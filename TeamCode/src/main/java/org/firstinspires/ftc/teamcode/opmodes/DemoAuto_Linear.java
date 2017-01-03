@@ -159,7 +159,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 releaseServo.setPosition(.05);
                 motorShootL.setPower(1.0);
                 motorShootR.setPower(-1.0);
-                while (runtime.seconds() < 2) {
+                while (runtime.seconds() < 3) {
                     telemetry.addData("seconds", runtime.seconds());
                     telemetry.update();
                 }
@@ -223,7 +223,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 posx = 24.89;
                 posy = 27;
 
-                PauseAuto(0.3);
+                PauseAuto(0.5);
                 //backward 12 in
 
                 encoderDrive(12.89, "backward", 0.9);
@@ -325,6 +325,38 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 v_state++;
 
             case 9://  case of pressing beacon button
+                if (beacon.getAnalysis().isLeftRed()) {
+                    encoderDrive(12.0, "right", 0.5);
+                    PauseAuto(0.2);
+
+                    Drive_Train.setPowerD(0.6);
+                    Drive_Train.run_left(fr, fl, br, bl);
+                    while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+
+                        telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                    }
+                    Drive_Train.brake(fr, fl, br, bl);
+                } else if (beacon.getAnalysis().isRightBlue()) {
+                    //beacon was correctly pressed
+                } else {
+                    //go forward if the left side of the beacon is blue
+
+                    //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
+                    encoderDrive(6.0, "forward", .5);
+
+                    encoderDrive(12.0, "right", 0.5);
+                    PauseAuto(0.2);
+
+                    Drive_Train.setPowerD(0.6);
+                    Drive_Train.run_left(fr, fl, br, bl);
+                    while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+
+                        telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                    }
+                    Drive_Train.brake(fr, fl, br, bl);
+
+                }
+                v_state++;
 
             case 10://  case of moving to corner vortex
 
