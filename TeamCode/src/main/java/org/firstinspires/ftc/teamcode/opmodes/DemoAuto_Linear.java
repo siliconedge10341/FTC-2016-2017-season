@@ -257,7 +257,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
                 v_state++;
             case 7: //  case of pressing beacon button
-                if (beacon.getAnalysis().isLeftRed()) {
+                if (beacon.getAnalysis().isLeftBlue()) {
                     encoderDrive(12.0, "right", 0.5);
                     PauseAuto(0.2);
 
@@ -268,9 +268,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                         telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
                     }
                     Drive_Train.brake(fr, fl, br, bl);
-                } else if (beacon.getAnalysis().isRightBlue()) {
+                } else if (beacon.getAnalysis().isRightRed()) {
                     //beacon was correctly pressed
-                } else {
+                } else if (beacon.getAnalysis().isLeftRed()){
                     //go forward if the left side of the beacon is blue
 
                     //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
