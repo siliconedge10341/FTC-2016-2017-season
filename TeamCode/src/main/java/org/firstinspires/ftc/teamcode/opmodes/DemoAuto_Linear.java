@@ -29,7 +29,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * @version 2015-08-01-06-01
  */
 
-@Autonomous(name = "Joe_Auto_Linear", group = "Blue")
+@Autonomous(name = "Auto_Linear", group = "Blue")
 public class DemoAuto_Linear extends LinearVisionOpMode {
     // instance variables
     // private variables
