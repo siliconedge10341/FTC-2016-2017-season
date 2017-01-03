@@ -163,8 +163,8 @@ public class MecanumDriver extends OpMode{
 	@Override
 	public void stop() {
 		yo.setPowerD(0.0);
+		yo.brake(motorFR,motorFL, motorBR, motorBL);
 		// set to zero so the power doesn't influnce any motion or rotation in the robot
-		yo.run_motor(motorFR, motorFL, motorBR, motorBL);
 	}
 
 
