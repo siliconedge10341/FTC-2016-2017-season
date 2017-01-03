@@ -133,11 +133,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         waitForStart();
         //Start OpMode
 
-
         initialC = ods.getLightDetected();
 
         encoderDrive(12.0,"forward",1.0);
-
 
         double posx, posy; // from corner to robot corner;
         if(startatcenter)
@@ -382,7 +380,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         }
     }
         //Run to line
-/*
+        /*
         Drive_Train.run_forward(fr, fl, br, bl);
         //Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
         while (opModeIsActive() && ods.getLightDetected() > initialC + .1) {
@@ -423,10 +421,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //hit the button
         encoderDrive(200,"right",.3);
         encoderDrive(6.0,"right",.3);
-
         */
     }
-
 
     // methods
     public void PauseAuto(double time /*Seconds*/) {
@@ -445,7 +441,6 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //
         // Sets the encoders
         //
-
         encoderval = ticks_per_inch.intValue() * ((int) inches);
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         //
