@@ -99,8 +99,9 @@ public class MecanumDriver extends OpMode{
 		}
 
         // runs the robot
-		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x, percision_flag);
+		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.left_trigger, gamepad1.right_trigger);
 		yo.run_motor(motorFR, motorFL, motorBR, motorBL);
+
 
         // Run Collector
 		if (gamepad1.a)  {
@@ -145,10 +146,10 @@ public class MecanumDriver extends OpMode{
         ballRelease.setPosition(ballpos);
 
         // Raises CatBall
-        if (gamepad1.x) {
+        if (gamepad1.x || gamepad2.x) {
             motorLS.setPower(-0.75);
             LSRotations++;
-        } else if (gamepad1.y) {
+        } else if (gamepad1.y || gamepad2.y) {
             motorLS.setPower(0.2);
             LSRotations--;
         } else {
@@ -161,7 +162,7 @@ public class MecanumDriver extends OpMode{
 
 	@Override
 	public void stop() {
-		yo.set_Power(0, 0, 0,0);
+		yo.setPowerD(0.0);
 		// set to zero so the power doesn't influnce any motion or rotation in the robot
 		yo.run_motor(motorFR, motorFL, motorBR, motorBL);
 	}

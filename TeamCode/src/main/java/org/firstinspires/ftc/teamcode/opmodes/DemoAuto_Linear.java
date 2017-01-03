@@ -119,6 +119,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         initialC = ods.getLightDetected();
 
+        encoderDrive(510,"forward",1.0);
 
         int v_state;
         boolean startatcenter = true;
