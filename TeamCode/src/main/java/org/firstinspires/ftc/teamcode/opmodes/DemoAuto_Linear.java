@@ -48,7 +48,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
 
     // Range Sensor
-    ModernRoboticsI2cRangeSensor RANGE;
+    ModernRoboticsI2cRangeSensor rangef;
+    ModernRoboticsI2cRangeSensor ranges;
     OpticalDistanceSensor ods;
 
     // Sensor Classes
@@ -83,7 +84,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         beaconServo = hardwareMap.servo.get("servo_beacon");
 
         ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-        RANGE = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range");
+        rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
+        ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
+
 
         // Sets Position
         releaseServo.setPosition(0.3);
@@ -143,7 +146,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         {
             case 0: //  case if we don't start at the center; wait for alliance partner to move
                 //wait until range sensor registers > 5 feet
-                while(RANGE.getDistance(DistanceUnit.CM) < 152){}
+                while(rangef.getDistance(DistanceUnit.CM) < 152){}
 
                 encoderDrive(1492, "forward",1.0);
 
@@ -238,6 +241,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 posy = 27;
 
                 PauseAuto(0.3);
+
             case 6: //  case of moving forward until white line is detected
 
             case 7: //  case of determining beacon color
@@ -269,9 +273,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //Move to wall
         Drive_Train.setPowerD(.5);
         Drive_Train.run_right(fr, fl, br, bl);
-        while (opModeIsActive() && RANGE.getDistance(DistanceUnit.CM) > 19) {
+        while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 19) {
 
-            telemetry.addData("Distance ",RANGE.getDistance(DistanceUnit.CM ));
+            telemetry.addData("Distance ",ranges.getDistance(DistanceUnit.CM ));
         }
         Drive_Train.brake(fr,fl,br,bl);
         Drive_Train.reset_encoders(fr,fl,br,bl);
@@ -332,8 +336,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         Drive_Train.run_right(fr, fl, br, bl);
 
-        while ( opModeIsActive() && RANGE.getDistance(DistanceUnit.CM) > 19) {
-           telemetry.addData("Distance ", RANGE.getDistance(DistanceUnit.CM));
+        while ( opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 19) {
+           telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
            telemetry.update();
         }
         Drive_Train.reset_encoders(fr, fl, br, bl);
