@@ -293,7 +293,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 encoderDrive(520,"backward",0.9);
 
                 double distancemoved = ranges.getDistance(DistanceUnit.CM) - 30.0;
-                
+
                 double angleofrobot = (Math.atan(distancemoved/30.54))*180/Math.PI;
                 Drive_Train.turn_left(fr,fl,br,bl);
 
@@ -312,6 +312,17 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
                 }
                 Drive_Train.brake(fr, fl, br, bl);
+
+                Drive_Train.setPowerD(0.6);
+                Drive_Train.run_backward(fr, fl, br, bl);
+
+                while (opModeIsActive() && ods.getLightDetected() < initialC + .1) {
+                    telemetry.addData("Light ", ods.getLightDetected());
+                    telemetry.update();
+                }
+                Drive_Train.brake(fr, fl, br, bl);
+
+                v_state++;
 
             case 9://  case of pressing beacon button
 
