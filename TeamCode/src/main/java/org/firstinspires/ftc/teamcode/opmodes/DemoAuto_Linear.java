@@ -190,16 +190,16 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     v_state++;
                 }
             case 3: //  case of strafing to the center (27 in)
-                encoderDrive(1.0, "left", 0.9);
+                encoderDrive(27.0, "left", 0.9);
                 posx = 54.89;
                 posy = 27;
                 v_state = 5;
             case 4: //  case of knocking the cap ball over and returning (35 in and back 8 in)
-                encoderDrive(1.0, "left", 0.9);
+                encoderDrive(35.0, "left", 0.9);
                 posx = 54.89;
                 posy = 35.0;
                 PauseAuto(0.3);
-                encoderDrive(1.0, "right", 0.9);
+                encoderDrive(8.0, "right", 0.9);
                 posx = 54.89;
                 posy = 27;
                 v_state = 5;
@@ -219,14 +219,14 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 PauseAuto(0.3);
                 //strafe 30 in right
 
-                encoderDrive(1.0, "right", 0.9);
+                encoderDrive(12.0, "right", 0.9);
                 posx = 24.89;
                 posy = 27;
 
                 PauseAuto(0.3);
                 //backward 12 in
 
-                encoderDrive(1.0, "backward", 0.9);
+                encoderDrive(12.89, "backward", 0.9);
                 posx = 24.89;
                 posy = 39;
 
