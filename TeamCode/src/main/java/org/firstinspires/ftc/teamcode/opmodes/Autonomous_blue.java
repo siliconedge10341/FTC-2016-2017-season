@@ -146,7 +146,16 @@ public class Autonomous_blue extends LinearVisionOpMode {
         encoderDrive(1895 , "left" , .5);
 
         //Turn:
-
+        fr.setPower(1.0);
+        fl.setPower(1.0);
+        br.setPower(1.0);
+        bl.setPower(1.0);
+        runtime.reset();
+        while (runtime.seconds() < 0.86) {
+            telemetry.addData("seconds", runtime.seconds());
+            telemetry.update();
+        }
+        Drive_Train.brake(fr, fl, br, bl);
 
         //Move to wall
         Drive_Train.setPowerD(.5);
