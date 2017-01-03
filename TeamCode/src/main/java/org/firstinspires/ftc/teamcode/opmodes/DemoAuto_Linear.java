@@ -69,6 +69,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
     // able to tell the difference from the color of the ground. Thus
     // knowing where the sensor is.
     double initialC = 0;
+    static Double ticks_per_inch = 510/(3.14*4);
 
     // states variable for the loop
     int v_state = 0;
@@ -125,7 +126,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         initialC = ods.getLightDetected();
 
-        encoderDrive(510,"forward",1.0);
+        encoderDrive(12.0,"forward",1.0);
 
 
         double posx, posy; // from corner to robot corner;
@@ -148,7 +149,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 while (rangef.getDistance(DistanceUnit.CM) < 152) {
                 }
 
-                encoderDrive(1492, "forward", 1.0);
+                encoderDrive(35.0, "forward", 1.0);
 
                 posx = 54.89;
                 posy = 0.0;
@@ -189,16 +190,16 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     v_state++;
                 }
             case 3: //  case of strafing to the center (27 in)
-                encoderDrive(1, "left", 0.9);
+                encoderDrive(1.0, "left", 0.9);
                 posx = 54.89;
                 posy = 27;
                 v_state = 5;
             case 4: //  case of knocking the cap ball over and returning (35 in and back 8 in)
-                encoderDrive(1, "left", 0.9);
+                encoderDrive(1.0, "left", 0.9);
                 posx = 54.89;
                 posy = 35.0;
                 PauseAuto(0.3);
-                encoderDrive(1, "right", 0.9);
+                encoderDrive(1.0, "right", 0.9);
                 posx = 54.89;
                 posy = 27;
                 v_state = 5;
@@ -218,14 +219,14 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 PauseAuto(0.3);
                 //strafe 30 in right
 
-                encoderDrive(1, "right", 0.9);
+                encoderDrive(1.0, "right", 0.9);
                 posx = 24.89;
                 posy = 27;
 
                 PauseAuto(0.3);
                 //backward 12 in
 
-                encoderDrive(1, "backward", 0.9);
+                encoderDrive(1.0, "backward", 0.9);
                 posx = 24.89;
                 posy = 39;
 
@@ -257,7 +258,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 v_state++;
             case 7: //  case of pressing beacon button
                 if (beacon.getAnalysis().isLeftRed()) {
-                    encoderDrive(500, "right", 0.5);
+                    encoderDrive(12.0, "right", 0.5);
                     PauseAuto(0.2);
 
                     Drive_Train.setPowerD(0.6);
@@ -273,9 +274,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     //go forward if the left side of the beacon is blue
 
                     //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
-                    encoderDrive(250, "forward", .5);
+                    encoderDrive(6.0, "forward", .5);
 
-                    encoderDrive(500, "right", 0.5);
+                    encoderDrive(12.0, "right", 0.5);
                     PauseAuto(0.2);
 
                     Drive_Train.setPowerD(0.6);
@@ -289,7 +290,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 }
                 v_state++;
             case 8://  case of moving to next white line
-                encoderDrive(520,"backward",0.9);
+                encoderDrive(6.0,"backward",0.9);
 
                 double distancemoved = ranges.getDistance(DistanceUnit.CM) - 30.0;
 
@@ -360,7 +361,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //Detect beacon
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //go forward if the left side of the beacon is blue
-            encoderDrive(250,"backward" , .5);
+            encoderDrive(6.0,"backward" , .5);
         } else {
            // encoderDrive(720,"backward" , .15);
         }
@@ -371,7 +372,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //
 
         //hit the button
-        encoderDrive(200,"right",.3);
+        encoderDrive(6.0,"right",.3);
 
 
     }
@@ -384,7 +385,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
             //do nothing
         }
     }
-    public void encoderDrive(int encoderval, String direction, double power){
+    public void encoderDrive(Double inches, String direction, double power){
+        int encoderval;
+        encoderval = ticks_per_inch.intValue() * inches.intValue();
         Drive_Train.run_using_encoders(fr, fl, br, bl);
 
         Drive_Train.setPosition(encoderval,encoderval,encoderval,encoderval,fr,fl,br,bl);
