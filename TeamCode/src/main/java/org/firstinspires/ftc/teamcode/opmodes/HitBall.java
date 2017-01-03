@@ -86,7 +86,6 @@ public class HitBall extends LinearOpMode {
     private OpticalDistanceSensor ods;
     private double initialC = 0;
 
-    @Override
     public void runOpMode() {
         fr = hardwareMap.dcMotor.get("fr_motor");
         fl = hardwareMap.dcMotor.get("fl_motor");

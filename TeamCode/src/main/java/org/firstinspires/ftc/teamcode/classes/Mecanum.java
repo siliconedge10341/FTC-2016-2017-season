@@ -52,7 +52,7 @@ public class Mecanum{
         motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
     }
-    public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x, int upbutton){
+    public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x, float lefttrigger, float righttrigger){
         float ch1 = rjoystick_x;
         float ch3 = ljoystick_x;
         float ch4 = ljoystick_y;
@@ -76,17 +76,17 @@ public class Mecanum{
         {
             if(FL)
             {
-                FLpower = -0.7*ch3;
-                BLpower = 0.95*ch3;
-                FRpower = -0.78*ch3;
-                BRpower = ch3;
+                FLpower = -ch3;  //0.7
+                BLpower = ch3;  //0.95
+                FRpower = -ch3; //0.78
+                BRpower = ch3;       //1
             }
             else
             {
-                FLpower = -0.78*ch3;
-                BLpower = ch3;
-                FRpower = -0.7*ch3;
-                BRpower = 0.95*ch3;
+                FLpower = -ch3; //.78
+                BLpower = ch3;       //1
+                FRpower = -ch3;  //0.7
+                BRpower = ch3;  //0.95
             }
         }
         else
@@ -162,7 +162,7 @@ public class Mecanum{
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = BasePower;  //0.7
         BLpower = -BasePower; //-0.95
-        FRpower = BasePower; //0.73
+        FRpower = BasePower;  //0.73
         BRpower = -BasePower; // -1
         // The positive and negative inputs only mean direction, not speed.
 
@@ -278,20 +278,26 @@ public class Mecanum{
     public void turn_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = BasePower;
         BLpower = BasePower;
-        FRpower = -BasePower;
-        BRpower = -BasePower;
-        // The positive and negative inputs only mean direction, not speed.
-        // This sets the motors that go into DemoAutonomous.
-
-    }
-    public void turn_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
-        FLpower = -BasePower;
-        BLpower = -BasePower;
         FRpower = BasePower;
         BRpower = BasePower;
         // The positive and negative inputs only mean direction, not speed.
         // This sets the motors that go into DemoAutonomous.
-
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower(FLpower);
+        motorBL.setPower(BLpower);
+    }
+    public void turn_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+        FLpower = -BasePower;
+        BLpower = -BasePower;
+        FRpower = -BasePower;
+        BRpower = -BasePower;
+        // The positive and negative inputs only mean direction, not speed.
+        // This sets the motors that go into DemoAutonomous.
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower(FLpower);
+        motorBL.setPower(BLpower);
     }
     public void brake(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
         FLpower = 0;
