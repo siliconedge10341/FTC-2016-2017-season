@@ -29,71 +29,79 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * @version 2015-08-01-06-01
  */
 
-@Autonomous(name = "Joe_Auto_Linear", group = "Blue")
+@Autonomous(name = "Auto_Linear", group = "Blue")
 public class DemoAuto_Linear extends LinearVisionOpMode {
     // instance variables
     // private variables
-    // Motors
-    DcMotor fr;
-    DcMotor fl;
-    DcMotor bl;
-    DcMotor br;
-    DcMotor motorShootL;
-    DcMotor motorShootR;
+        // Motors
+        private DcMotor fr;
+        private DcMotor fl;
+        private DcMotor bl;
+        private DcMotor br;
+        private DcMotor motorShootL;
+        private DcMotor motorShootR;
+        private DcMotor motorCollector;
 
-    DcMotor motorCollector;
+        // Servos
+        private Servo releaseServo;
+        private Servo beaconServo;
 
-    Servo releaseServo;
-    Servo beaconServo;
+        // sensors
+        private ModernRoboticsI2cRangeSensor rangef;
+        private ModernRoboticsI2cRangeSensor ranges;
+        private OpticalDistanceSensor ods;
 
+        // Classes
+        private Mecanum Drive_Train = new Mecanum();
+        private ElapsedTime runtime = new ElapsedTime();
 
-    // Range Sensor
-    ModernRoboticsI2cRangeSensor rangef;
-    ModernRoboticsI2cRangeSensor ranges;
-    OpticalDistanceSensor ods;
+        // Checks
+        private boolean startatcenter = true;
+        private boolean firetwice = true;
+        private boolean knockcapball = true;
+        private boolean pressbeacons = true;
+        private boolean endincorner = true;
+        private boolean endincenter = false;
+        private static final Double ticks_per_inch = 510 / (3.1415 * 4);
 
-    // Sensor Classes
-    Mecanum Drive_Train = new Mecanum();
-    //LineFollow ods = new LineFollow();
-    ElapsedTime runtime = new ElapsedTime();
+        // Reading for the initial color we take at the beginning of the match.
+        // This helps us because when we test for the white line, we want to be
+        // able to tell the difference from the color of the ground. Thus
+        // knowing where the sensor is.
+        double initialC = 0;
 
-    boolean startatcenter = true;
-    boolean firetwice = true;
-    boolean knockcapball = true;
-    boolean pressbeacons = true;
-    boolean endincorner = true;
-    boolean endincenter = false;
+        // states variable for the loop
+        int v_state = 0;
 
-    // Reading for the initial color we take at the beginning of the match.
-    // This helps us because when we test for the white line, we want to be
-    // able to tell the difference from the color of the ground. Thus
-    // knowing where the sensor is.
-    double initialC = 0;
-    static Double ticks_per_inch = 510/(3.14*4);
+    // public data
 
-    // states variable for the loop
-    int v_state = 0;
+    // Constructors
+    public DemoAuto_Linear() {
+        // Default Constructor
 
+    }
 
+    // Run
     public void runOpMode() throws InterruptedException {
         // Sets every class at the beginning of the demoautonomous run class
-        //Hardware Maps
-        fr = hardwareMap.dcMotor.get("fr_motor");
-        fl = hardwareMap.dcMotor.get("fl_motor");
-        br = hardwareMap.dcMotor.get("br_motor");
-        bl = hardwareMap.dcMotor.get("bl_motor");
+        // hardware maps
+            // motors
+            fr = hardwareMap.dcMotor.get("fr_motor");
+            fl = hardwareMap.dcMotor.get("fl_motor");
+            br = hardwareMap.dcMotor.get("br_motor");
+            bl = hardwareMap.dcMotor.get("bl_motor");
+            motorShootL = hardwareMap.dcMotor.get("shooter_left");
+            motorShootR = hardwareMap.dcMotor.get("shooter_right");
+            motorCollector = hardwareMap.dcMotor.get("ball_collector");
 
-        motorShootL = hardwareMap.dcMotor.get("shooter_left");
-        motorShootR = hardwareMap.dcMotor.get("shooter_right");
-        motorCollector = hardwareMap.dcMotor.get("ball_collector");
+            // servos
+            releaseServo = hardwareMap.servo.get("servo_ball");
+            beaconServo = hardwareMap.servo.get("servo_beacon");
 
-        releaseServo = hardwareMap.servo.get("servo_ball");
-        beaconServo = hardwareMap.servo.get("servo_beacon");
-
-        ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-        rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
-        ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
-
+            // sensors
+            ods = hardwareMap.opticalDistanceSensor.get("ods_line");
+            rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
+            ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
 
         // Sets Position
         releaseServo.setPosition(0.3);
@@ -145,7 +153,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
     while (opModeIsActive()) {
         switch (v_state) {
             case 0: //  case if we don't start at the center; wait for alliance partner to move
-                //wait until range sensor registers > 5 feet
+                //
+                // wait until range sensor registers > 5 feet
+                //
                 while (rangef.getDistance(DistanceUnit.CM) < 152) {
                 }
 
@@ -189,11 +199,15 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 } else {
                     v_state++;
                 }
-            case 3: //  case of strafing to the center (27 in)
-                encoderDrive(27.0, "left", 0.9);
+            case 3:
+                //
+                //  case of strafing to the center (27 in)
+                //
+                encoderDrive(1, "left", 0.9);
                 posx = 54.89;
                 posy = 27;
                 v_state = 5;
+
             case 4: //  case of knocking the cap ball over and returning (35 in and back 8 in)
                 encoderDrive(35.0, "left", 0.9);
                 posx = 54.89;
@@ -203,6 +217,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 posx = 54.89;
                 posy = 27;
                 v_state = 5;
+
             case 5: //  case of rotating and strafing to beacons
                 PauseAuto(0.3);
                 //rotation
@@ -401,27 +416,42 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         //
         // Wait...
+        //
+
         //hit the button
+        encoderDrive(200,"right",.3);
         encoderDrive(6.0,"right",.3);
 
 
     }
 
-    public void PauseAuto(double time)
-    {
+    // methods
+    public void PauseAuto(double time /*Seconds*/) {
+        //
+        // for Waiting between driving periods.
+        //
         runtime.reset();
         while(runtime.seconds() < time)
         {
-            //do nothing
+            // do nothing
+            telemetry.addData("Seconds", runtime.seconds());
         }
+
     }
-    public void encoderDrive(Double inches, String direction, double power){
+    public void encoderDrive(double inches /*Inches*/, String direction /*Direction*/, double power /*Power between 0.0 and 1.0*/) {
+        //
+        // Sets the encoders
+        //
         int encoderval;
         encoderval = ticks_per_inch.intValue() * inches.intValue();
         Drive_Train.run_using_encoders(fr, fl, br, bl);
-
+        //
+        // Uses the encoders and motors to set the specific position
+        //
         Drive_Train.setPosition(encoderval,encoderval,encoderval,encoderval,fr,fl,br,bl);
-
+        //
+        // Sets the power and direction
+        //
         Drive_Train.setPowerD(power);
         if (direction == "forward"){
             Drive_Train.run_forward(fr,fl,br,bl);
@@ -434,13 +464,20 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         }else if (direction == "diagonal_left_up"){
             Drive_Train.run_diagonal_left_up(fr,fl,br,bl);
         }
-
+        //
+        // while in the -TEST DISTANCE- loop below, it will keep running until the distance
+        // from the encoders is achieved. When achieved, the program will proceed to the end
+        // of the function.
+        //
         while(Drive_Train.testDistance(fl) != 1){
             telemetry.addData("Pos " , fl.getCurrentPosition());
             telemetry.update();
         }
-
+        //
+        // Ends the Drive period.
+        //
         Drive_Train.brake(fr, fl, br, bl);
+
     }
 
 
