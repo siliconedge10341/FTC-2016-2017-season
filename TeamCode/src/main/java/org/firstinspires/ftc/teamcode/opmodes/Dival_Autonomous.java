@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.configuration.DeviceConfiguration;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import org.lasarobotics.vision.android.Cameras;
 import org.lasarobotics.vision.ftc.resq.Beacon;
@@ -62,6 +63,9 @@ public class Dival_Autonomous extends VisionOpMode{
 
     private static final int ENCODER_TICKS = 1440;
     private static final double Wheel_Circumfrence = 3.14*4;
+
+    private static final int Max_Shooter_Speed = 1784;
+    private static final int Safe_Shooter_Speed  = Max_Shooter_Speed - 100;
 
     public Dival_Autonomous(){
         // Default constructor
@@ -128,9 +132,20 @@ public class Dival_Autonomous extends VisionOpMode{
 
             case 1:
                 //Configure robot for autonomous
+                svoBallRelaease.setPosition(.5); // Move beacon pusher out of the way
+
+                telemetry.addData("Stage 1:","Confuration complete");
                 break;
             case 2:
                 //shoot balls
+                double leftMotorCalculatedPower = 0;
+                double rightMotorCalculatedPower = 0;
+
+                double leftMotorRPM =  0;
+                double rightMotorRPM = 0;
+
+
+
                 break;
             case 3:
                 //Move forward
@@ -155,12 +170,19 @@ public class Dival_Autonomous extends VisionOpMode{
                 break;
         }
 
-
-
-
     }
     @Override
     public void stop() {
         super.stop();
     }
+
+
+    public void Wait(int delayInMilliseconds){
+        long myStartTime  = System.currentTimeMillis();
+        long myCurrentTime  = System.currentTimeMillis();
+
+        do {
+        }while(myCurrentTime-myStartTime < delayInMilliseconds);
+    }
+
 }
