@@ -111,13 +111,13 @@ public class MecanumDriver extends OpMode{
 		}
 
 		//bantu shooter
-		/*if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
-            if (dist.getData() < .5 /*Meters) {
+		if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
+            if (dist.getData() < .5 /*Meters*/) {
+                power = 0.5;
+            } else if (dist.getData() >= .5 /*Meters*/ && dist.getData() < 1 /*Meters*/) {
+                power = 0.75;
+            } else if (dist.getData() >= 1 /*Meters*/) {
                 power = 1.0;
-            } else if (dist.getData() >= .5 /*Meters && dist.getData() < 1 /*Meters) {
-                power = 1.25;
-            } else if (dist.getData() >= 1 /*Meters) {
-                power = 1.5;
             } else {
                 power = 0.75;
             }
@@ -127,7 +127,7 @@ public class MecanumDriver extends OpMode{
 			motorShootL.setPower(0);
 			motorShootR.setPower(0);
 		}
-	*/
+
 
         // Moves Servo
 		if (gamepad2.dpad_right){
@@ -147,10 +147,10 @@ public class MecanumDriver extends OpMode{
 
         // Raises CatBall
         if (gamepad1.x || gamepad2.x) {
-            motorLS.setPower(-0.75);
+            motorLS.setPower(-0.3);
             LSRotations++;
         } else if (gamepad1.y || gamepad2.y) {
-            motorLS.setPower(0.2);
+            motorLS.setPower(0.3);
             LSRotations--;
         } else {
             motorLS.setPower(0.0);
@@ -163,7 +163,7 @@ public class MecanumDriver extends OpMode{
 	@Override
 	public void stop() {
 		yo.setPowerD(0.0);
-		yo.brake(motorFR,motorFL, motorBR, motorBL);
+		yo.brake(motorFR ,motorFL, motorBR, motorBL);
 		// set to zero so the power doesn't influnce any motion or rotation in the robot
 	}
 
