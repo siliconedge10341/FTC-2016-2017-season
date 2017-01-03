@@ -45,26 +45,28 @@ public class MecanumDriver extends OpMode{
 		//
         // Initialize everything
         //
-		dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
+		// Motors
 		motorFL = hardwareMap.dcMotor.get("fl_motor");
 		motorFR = hardwareMap.dcMotor.get("fr_motor");
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
 		motorBR = hardwareMap.dcMotor.get("br_motor");
-
         motorLS = hardwareMap.dcMotor.get("linear_slide_motor");
-
 		motorCollector = hardwareMap.dcMotor.get("ball_collector");
-
 		motorShootL = hardwareMap.dcMotor.get("shooter_left");
 		motorShootR = hardwareMap.dcMotor.get("shooter_right");
 
+		// Servos
 		ballRelease = hardwareMap.servo.get("servo_ball");
 		ballRelease.setPosition(ballpos);
+
+		// Classes
+		dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
+
+		// Variables
 		LSRotations = 0;
 		initialR = motorLS.getCurrentPosition();
 		percision_flag = 0;
-        //leftClamp = hardwareMap.servo.get("servo_left_clamp");
-        //rightClamp = hardwareMap.servo.get("servo_right_clamp");
+
 	}
 
 	// loop
