@@ -4,51 +4,48 @@ import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
-
-import com.qualcomm.robotcore.hardware.DcMotorControllerEx;
 import org.firstinspires.ftc.teamcode.classes.Range;
-
-import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
-//import com.qualcomm.robotcore.util.Range;
-import org.firstinspires.ftc.teamcode.classes.ProjectileMotion;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-//import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 @TeleOp(name="MecanumDrive", group ="Drive")
 public class MecanumDriver extends OpMode{
     // instance variables
     // private variables
-    // Motors
-	private DcMotor motorCollector;
-	private DcMotor motorFR;
-	private DcMotor motorFL;
-	private DcMotor motorBR;
-	private DcMotor motorBL;
-	private DcMotor motorShootL;
-	private DcMotor motorShootR;
-    private DcMotor motorLS;
+		// Motors
+		private DcMotor motorCollector;
+		private DcMotor motorFR;
+		private DcMotor motorFL;
+		private DcMotor motorBR;
+		private DcMotor motorBL;
+		private DcMotor motorShootL;
+		private DcMotor motorShootR;
+		private DcMotor motorLS;
 
-    // Servos
-	private Servo ballRelease;
-    //private Servo leftClamp;
-    //private Servo rightClamp;
+		// Servos
+		private Servo ballRelease;
 
-	private int percision_flag = 0;
-    // percision flag is to decrease power, if power is decreased, the robot will go slower.
+		private int percision_flag = 0;
+		// percision flag is to decrease power, if power is decreased, the robot will go slower.
+
 	private double ballpos = .5;
     private double LSRotations = 0;
+	private double initialR = 0;
 	private Mecanum yo = new Mecanum();
     private double power = 0;
     private Range dist = new Range();
 
     public MecanumDriver() {
+		// default constructor
+
 	}
 
 	@Override
 	public void init() {
+		//
         // Initialize everything
-        //dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));  - This line is broken, not sure why - Dival
+        //
+		dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
 		motorFL = hardwareMap.dcMotor.get("fl_motor");
 		motorFR = hardwareMap.dcMotor.get("fr_motor");
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
@@ -64,32 +61,34 @@ public class MecanumDriver extends OpMode{
 		ballRelease = hardwareMap.servo.get("servo_ball");
 		ballRelease.setPosition(ballpos);
 		LSRotations = 0;
+		initialR = motorLS.getCurrentPosition();
 		percision_flag = 0;
         //leftClamp = hardwareMap.servo.get("servo_left_clamp");
         //rightClamp = hardwareMap.servo.get("servo_right_clamp");
 	}
 
-	//main function body
+	// loop
 	@Override
 	public void loop() {
-        /*   Start-A Runs the Program
-        *-----GAMEPAD FUNCTION KEY-----
-        *-GAMEPAD-
-        *UP: Increase Decrease Power
-        *RIGHT: Move Servo Right
-        *LEFT: Move Servo Left
-        * DOWN: None;
-        *-BUTTONS-//
-        * A: Turns on Collector
-        * B: Runs Shooter
-        * X: Raise Slide
-        * Y: Lower Slide
-        *-TRIGGERS-//
-        * LEFT: None;
-        * RIGHT: None;
-        */
-
+        //   Start-A Runs the Program   //
+        //-----GAMEPAD FUNCTION KEY-----//
+        //          -GAMEPAD-           //
+        // UP: Increase Decrease Power  //
+        // RIGHT: Move Servo Right      //
+        // LEFT: Move Servo Left        //
+        // DOWN: None;                  //
+        //          -BUTTONS-           //
+        // A: Turns on Collector        //
+        // B: Runs Shooter              //
+        // X: Raise Slide               //
+        // Y: Lower Slide               //
+		//         -TRIGGERED-          //
+        // LEFT: None;                  //
+        // RIGHT: None;                 //
+        //------------------------------//
+		//
         // Decreases Power
+		//
 		if (gamepad1.dpad_up) {
 			percision_flag++;
 		}
@@ -97,30 +96,32 @@ public class MecanumDriver extends OpMode{
 		if (percision_flag >= 2) {
 			percision_flag = 0;
 		}
-
+		//
         // runs the robot
+		//
 		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.left_trigger, gamepad1.right_trigger);
 		yo.run_motor(motorFR, motorFL, motorBR, motorBL);
-
-
+		//
         // Run Collector
+		//
 		if (gamepad1.a)  {
 			motorCollector.setPower(1.0);
 		} else {
 			motorCollector.setPower(0);
 		}
-
-		//bantu shooter
+		//
+		// bantu shooter
+		//
 		if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
-            motorShootL.setPower(0);
-			motorShootR.setPower(0);
+            motorShootL.setPower(1.0);
+			motorShootR.setPower(-1.0);
 		} else {
 			motorShootL.setPower(0);
 			motorShootR.setPower(0);
 		}
-
-
+		//
         // Moves Servo
+		//
 		if (gamepad2.dpad_right){
             if (ballpos > Servo.MIN_POSITION) {
                 ballpos = ballpos -.05;
@@ -135,28 +136,28 @@ public class MecanumDriver extends OpMode{
             }
 		}
         ballRelease.setPosition(ballpos);
-
+		//
         // Raises CatBall
-        if (gamepad1.x || gamepad2.x) {
-            motorLS.setPower(-0.75);
-            LSRotations++;
-        } else if (gamepad1.y || gamepad2.y) {
-            motorLS.setPower(0.2);
-            LSRotations--;
+        //
+		if (gamepad1.x) {
+            motorLS.setPower(-0.3);
+            LSRotations = motorLS.getCurrentPosition();
+        } else if (gamepad1.y && LSRotations > initialR) {
+            motorLS.setPower(0.3);
+            LSRotations = motorLS.getCurrentPosition();
         } else {
             motorLS.setPower(0.0);
         }
 
-        // Clamps CatBall
-
 	}
 
+	// functions
 	@Override
 	public void stop() {
 		yo.setPowerD(0.0);
 		yo.brake(motorFR,motorFL, motorBR, motorBL);
 		// set to zero so the power doesn't influnce any motion or rotation in the robot
-	}
 
+	}
 
 }
