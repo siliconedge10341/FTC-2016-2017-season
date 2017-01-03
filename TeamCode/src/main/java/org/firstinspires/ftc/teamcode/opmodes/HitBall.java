@@ -1,40 +1,10 @@
-/*
-Copyright (c) 2016 Robert Atkinson
 
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without modification,
-are permitted (subject to the limitations in the disclaimer below) provided that
-the following conditions are met:
-
-Redistributions of source code must retain the above copyright notice, this list
-of conditions and the following disclaimer.
-
-Redistributions in binary form must reproduce the above copyright notice, this
-list of conditions and the following disclaimer in the documentation and/or
-other materials provided with the distribution.
-
-Neither the name of Robert Atkinson nor the names of his contributors may be used to
-endorse or promote products derived from this software without specific prior
-written permission.
-
-NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
-LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESSFOR A PARTICULAR PURPOSE
-ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
-TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
 package org.firstinspires.ftc.teamcode.opmodes;
 
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -43,6 +13,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+
+import java.net.PortUnreachableException;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -85,6 +57,8 @@ public class HitBall extends LinearOpMode {
 
     private OpticalDistanceSensor ods;
     private double initialC = 0;
+    private static final Double ticks_per_inch = 510 / (3.1415 * 4);
+    ElapsedTime runtime = new ElapsedTime();
 
     public void runOpMode() {
         fr = hardwareMap.dcMotor.get("fr_motor");
@@ -103,19 +77,9 @@ public class HitBall extends LinearOpMode {
 
         waitForStart();
 
-        Drive_Train.run_using_encoders(fr, fl, br, bl);
-
-        Drive_Train.setPosition(510,510,510,510,fr,fl,br,bl);
-
-        Drive_Train.setPowerD(.15);
-        Drive_Train.run_left(fr,fl,br,bl);
-
-        while(Drive_Train.testDistance(fl) != 1){
-            telemetry.addData("Pos " , fl.getCurrentPosition());
-            telemetry.update();
-        }
-
-        Drive_Train.brake(fr, fl, br, bl);
+       encoderDrive(12.0,"forward",.5);
+        PauseAuto(1);
+        encoderDrive(24.0 , "left" , .5);
 
         telemetry.addData("DONE" , "Done");
         telemetry.update();
@@ -124,12 +88,22 @@ public class HitBall extends LinearOpMode {
     }
 
 
-    public void encoderDrive(int encoderval, String direction){
+    public void encoderDrive(double inches, String direction , double power ) {
+        //
+        int encoderval;
+        // Sets the encoders
+        //
+
+        encoderval = ticks_per_inch.intValue() * (int) inches;
         Drive_Train.run_using_encoders(fr, fl, br, bl);
 
-        Drive_Train.setPosition(encoderval,encoderval,encoderval,encoderval,fr,fl,br,bl);
+        // Uses the encoders and motors to set the specific position
 
-        Drive_Train.setPowerD(.15);
+        Drive_Train.setPosition(encoderval,encoderval,encoderval,encoderval,fr,fl,br,bl);
+        //
+        // Sets the power and direction
+        //
+        Drive_Train.setPowerD(power);
         if (direction == "forward"){
             Drive_Train.run_forward(fr,fl,br,bl);
         }else if(direction == "backward"){
@@ -141,12 +115,30 @@ public class HitBall extends LinearOpMode {
         }else if (direction == "diagonal_left_up"){
             Drive_Train.run_diagonal_left_up(fr,fl,br,bl);
         }
-
+        //
+        // while in the -TEST DISTANCE- loop below, it will keep running until the distance
+        // from the encoders is achieved. When achieved, the program will proceed to the end
+        // of the function.
+        //
         while(Drive_Train.testDistance(fl) != 1){
             telemetry.addData("Pos " , fl.getCurrentPosition());
             telemetry.update();
         }
-
+        //
+        // Ends the Drive period.
+        //
         Drive_Train.brake(fr, fl, br, bl);
+    }
+    public void PauseAuto(double time ) {
+        //
+        // for Waiting between driving periods.
+        //
+        runtime.reset();
+        while(runtime.seconds() < time)
+        {
+            // do nothing
+            telemetry.addData("Seconds", runtime.seconds());
+        }
+
     }
 }
