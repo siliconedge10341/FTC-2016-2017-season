@@ -4,13 +4,13 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
+
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
@@ -43,7 +43,7 @@ import java.net.PortUnreachableException;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Encoder Test", group="Pushbot")
+@Autonomous(name="40_points", group="Pushbot")
 
 public class HitBall extends LinearOpMode {
 
@@ -54,6 +54,12 @@ public class HitBall extends LinearOpMode {
     private DcMotor fl;
     private DcMotor bl;
     private DcMotor br;
+
+    private DcMotor motorShootL;
+    private DcMotor motorShootR;
+    private DcMotor motorCollector;
+
+    private Servo releaseServo;
 
     private OpticalDistanceSensor ods;
     private double initialC = 0;
@@ -66,20 +72,38 @@ public class HitBall extends LinearOpMode {
         br = hardwareMap.dcMotor.get("br_motor");
         bl = hardwareMap.dcMotor.get("bl_motor");
 
+        motorShootL = hardwareMap.dcMotor.get("shooter_left");
+        motorShootR = hardwareMap.dcMotor.get("shooter_right");
+        motorCollector = hardwareMap.dcMotor.get("ball_collector");
+
+        releaseServo = hardwareMap.servo.get("servo_ball");
+
         Drive_Train.reset_encoders(fr,fl,br,bl);
 
+        releaseServo.setPosition(.5);
+
         //ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-
-
 
         // Wait for the game to start (driver presses PLAY)
         // Abort this loop is started or stopped.
 
         waitForStart();
 
-       encoderDrive(12.0,"forward",.5);
-        PauseAuto(1);
-        encoderDrive(24.0 , "left" , .5);
+        releaseServo.setPosition(.05);
+        motorShootL.setPower(1.0);
+        motorShootR.setPower(-1.0);
+        motorCollector.setPower(1.0);
+        runtime.reset();
+        while (runtime.seconds()<4){
+            telemetry.addData("Seconds" , runtime.seconds());
+            telemetry.update();
+        }
+        motorShootL.setPower(0);
+        motorShootR.setPower(0);
+        motorCollector.setPower(0);
+
+        encoderDrive(60.0,"left",.5);
+
 
         telemetry.addData("DONE" , "Done");
         telemetry.update();

@@ -152,6 +152,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
             posy = 0.0;
             v_state = 0;
         }
+
     while (opModeIsActive()) {
         switch (v_state) {
             case 0: //  case if we don't start at the center; wait for alliance partner to move
