@@ -220,7 +220,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 v_state = 5;
 
             case 5: //  case of rotating and strafing to beacons
-                PauseAuto(0.3);
+                PauseAuto(0.5);
                 //rotation
                 fr.setPower(1.0);
                 fl.setPower(1.0);
@@ -254,6 +254,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
 
                     telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                    telemetry.update();
                 }
                 Drive_Train.brake(fr, fl, br, bl);
 
@@ -273,6 +274,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
                 v_state++;
             case 7: //  case of pressing beacon button
+                telemetry.addData("Beacon" , beacon.getAnalysis().toString());
+                telemetry.update();
                 if (beacon.getAnalysis().isLeftBlue()) {
                     encoderDrive(12.0, "right", 0.5);
                     PauseAuto(0.2);
@@ -293,20 +296,22 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     encoderDrive(6.0, "forward", .5);
 
                     encoderDrive(12.0, "right", 0.5);
-                    PauseAuto(0.2);
+                    PauseAuto(0.5);
+                    encoderDrive(10.0, "left" , .5);
 
-                    Drive_Train.setPowerD(0.6);
+                   /* Drive_Train.setPowerD(0.6);
                     Drive_Train.run_left(fr, fl, br, bl);
-                    while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+                    while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) < 30) {
 
                         telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                        telemetry.update();
                     }
                     Drive_Train.brake(fr, fl, br, bl);
-
+                    */
                 }
                 v_state++;
             case 8://  case of moving to next white line
-                encoderDrive(6.0,"backward",0.9);
+                encoderDrive(6.0,"forward",0.9);
 
                 double distancemoved = ranges.getDistance(DistanceUnit.CM) - 30.0;
 
@@ -321,6 +326,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 }
 
                 Drive_Train.brake(fr, fl, br,bl);
+
                 Drive_Train.setPowerD(0.6);
                 Drive_Train.run_left(fr, fl, br, bl);
                 while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
@@ -437,10 +443,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         }
 
     }
-    public void encoderDrive(double inches /*Inches*/, String direction /*Direction*/, double power /*Power between 0.0 and 1.0*/) {
-        //
-        // Sets the encoders
-        //
+    public void encoderDrive(double inches /*Inches*/, String direction /*Direction*/, double power ) {
+        int encoderval;
+
         encoderval = ticks_per_inch.intValue() * ((int) inches);
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         //

@@ -58,6 +58,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
     // states variable for the loop
     int v_state = 0;
+    private static final Double ticks_per_inch = 510 / (3.1415 * 4);
 
     boolean startatcenter = true;
     boolean firetwice = true;
@@ -123,18 +124,14 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         /////////////////////////////////////////////////////////
         //Shoot ball:
-        releaseServo.setPosition(.1);
+        releaseServo.setPosition(.05);
         motorCollector.setPower(0.9);
+        motorShootL.setPower(1.0);
+        motorShootR.setPower(-1.0);
         runtime.reset();
         while (runtime.seconds() < 4.0){
             telemetry.addData("seconds",runtime.seconds());
             telemetry.update();
-            if(runtime.seconds() > 1.0)
-            {
-                releaseServo.setPosition(.05);
-                motorShootL.setPower(1.0);
-                motorShootR.setPower(-1.0);
-            }
         }
         motorCollector.setPower(0);
         releaseServo.setPosition(.3);
@@ -143,20 +140,21 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
 
         //Hit the ball:
-        encoderDrive(1895 , "left" , .5);
-
+        encoderDrive(24.0 , "left" , .5);
+        PauseAuto(.5);
         //Turn:
         fr.setPower(1.0);
         fl.setPower(1.0);
         br.setPower(1.0);
         bl.setPower(1.0);
+
         runtime.reset();
         while (runtime.seconds() < 0.86) {
             telemetry.addData("seconds", runtime.seconds());
             telemetry.update();
         }
         Drive_Train.brake(fr, fl, br, bl);
-
+        PauseAuto(.5);
         //Move to wall
         Drive_Train.setPowerD(.5);
         Drive_Train.run_right(fr, fl, br, bl);
@@ -183,13 +181,13 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
 
-        beaconServo.setPosition(1.0);
+        beaconServo.setPosition(0.0);
         // Detect beacon
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //go forward if the left side of the beacon is blue
 
             //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
-            encoderDrive(250,"forward" , .5);
+            encoderDrive(6.0,"forward" , .5);
 
         } else {
             //beacon is 1/2 a foot
@@ -201,7 +199,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         //hit the button
 
-        encoderDrive(40,"right" , .15);
+        encoderDrive(1.0,"right" , .15);
 
         //go back a little bit
         encoderDrive(100, "left" , .15);
@@ -259,11 +257,19 @@ public class Autonomous_blue extends LinearVisionOpMode {
             //do nothing
         }
     }
-    public void encoderDrive(int encoderval, String direction, double power){
+    public void encoderDrive(double inches /*Inches*/, String direction /*Direction*/, double power /*Power between 0.0 and 1.0*/) {
+        int encoderval;
+        // Sets the encoders
+        //
+        encoderval = ticks_per_inch.intValue() * ((int) inches);
         Drive_Train.run_using_encoders(fr, fl, br, bl);
-
+        //
+        // Uses the encoders and motors to set the specific position
+        //
         Drive_Train.setPosition(encoderval,encoderval,encoderval,encoderval,fr,fl,br,bl);
-
+        //
+        // Sets the power and direction
+        //
         Drive_Train.setPowerD(power);
         if (direction == "forward"){
             Drive_Train.run_forward(fr,fl,br,bl);
@@ -276,15 +282,21 @@ public class Autonomous_blue extends LinearVisionOpMode {
         }else if (direction == "diagonal_left_up"){
             Drive_Train.run_diagonal_left_up(fr,fl,br,bl);
         }
-
+        //
+        // while in the -TEST DISTANCE- loop below, it will keep running until the distance
+        // from the encoders is achieved. When achieved, the program will proceed to the end
+        // of the function.
+        //
         while(Drive_Train.testDistance(fl) != 1){
             telemetry.addData("Pos " , fl.getCurrentPosition());
             telemetry.update();
         }
-
+        //
+        // Ends the Drive period.
+        //
         Drive_Train.brake(fr, fl, br, bl);
-    }
 
+    }
 
 
 

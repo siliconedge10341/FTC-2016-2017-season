@@ -81,6 +81,8 @@ public class HitBall extends LinearOpMode {
         Drive_Train.reset_encoders(fr,fl,br,bl);
 
         releaseServo.setPosition(.5);
+        motorShootL.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+        motorShootR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
 
         //ods = hardwareMap.opticalDistanceSensor.get("ods_line");
 
