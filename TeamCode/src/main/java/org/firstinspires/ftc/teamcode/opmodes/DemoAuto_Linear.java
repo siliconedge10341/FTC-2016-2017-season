@@ -57,6 +57,12 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
     //LineFollow ods = new LineFollow();
     ElapsedTime runtime = new ElapsedTime();
 
+    boolean startatcenter = true;
+    boolean firetwice = true;
+    boolean knockcapball = true;
+    boolean pressbeacons = true;
+    boolean endincorner = true;
+    boolean endincenter = false;
 
     // Reading for the initial color we take at the beginning of the match.
     // This helps us because when we test for the white line, we want to be
@@ -121,13 +127,6 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
         encoderDrive(510,"forward",1.0);
 
-        int v_state;
-        boolean startatcenter = true;
-        boolean firetwice = true;
-        boolean knockcapball = true;
-        boolean pressbeacons = true;
-        boolean endincorner = true;
-        boolean endincenter = false;
 
         double posx, posy; // from corner to robot corner;
         if(startatcenter)
