@@ -69,9 +69,11 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         // able to tell the difference from the color of the ground. Thus
         // knowing where the sensor is.
         double initialC = 0;
+        int encoderval;
 
         // states variable for the loop
         int v_state = 0;
+    private double inches;
 
     // public data
 
@@ -442,8 +444,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //
         // Sets the encoders
         //
-        int encoderval;
-        encoderval = ticks_per_inch.intValue() * inches.intValue();
+
+        encoderval = ticks_per_inch.intValue() * ((int) inches);
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         //
         // Uses the encoders and motors to set the specific position
