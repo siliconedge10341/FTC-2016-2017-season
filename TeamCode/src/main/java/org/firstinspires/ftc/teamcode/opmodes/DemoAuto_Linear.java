@@ -237,9 +237,13 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 PauseAuto(0.3);
                 //strafe 12.89 in right
 
-                encoderDrive(1, "right", 0.9);
-                posx = 12;
-                posy = 27;
+                Drive_Train.setPowerD(0.6);
+                Drive_Train.run_right(fr, fl, br, bl);
+                while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+
+                    telemetry.addData("Distance ",ranges.getDistance(DistanceUnit.CM ));
+                }
+                Drive_Train.brake(fr,fl,br,bl);
 
                 PauseAuto(0.3);
 
