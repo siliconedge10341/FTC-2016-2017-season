@@ -111,23 +111,14 @@ public class MecanumDriver extends OpMode{
 		}
 
 		//bantu shooter
-		/*if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
-            if (dist.getData() < .5 /*Meters) {
-                power = 1.0;
-            } else if (dist.getData() >= .5 /*Meters && dist.getData() < 1 /*Meters) {
-                power = 1.25;
-            } else if (dist.getData() >= 1 /*Meters) {
-                power = 1.5;
-            } else {
-                power = 0.75;
-            }
-			motorShootL.setPower(power);
-			motorShootR.setPower(-power);
+		if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
+            motorShootL.setPower(0);
+			motorShootR.setPower(0);
 		} else {
 			motorShootL.setPower(0);
 			motorShootR.setPower(0);
 		}
-	*/
+
 
         // Moves Servo
 		if (gamepad2.dpad_right){
