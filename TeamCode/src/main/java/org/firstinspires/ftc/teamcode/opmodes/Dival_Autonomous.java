@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.configuration.DeviceConfiguration;
@@ -111,6 +112,8 @@ public class Dival_Autonomous extends VisionOpMode{
         cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
         cameraControl.setAutoExposureCompensation();
 
+        //setDriveMode(DcMotorController.RunMode.Run_Without_Encoder)
+
     }
 
     @Override
@@ -133,7 +136,7 @@ public class Dival_Autonomous extends VisionOpMode{
             case 1:
                 //Configure robot for autonomous
                 svoBallRelaease.setPosition(.5); // Move beacon pusher out of the way
-
+                initialColor = this.ods.getLightDetected();
                 telemetry.addData("Stage 1:","Confuration complete");
                 break;
             case 2:
@@ -145,10 +148,25 @@ public class Dival_Autonomous extends VisionOpMode{
                 double rightMotorRPM = 0;
 
 
+                while(leftMotorRPM < Safe_Shooter_Speed){
+                    leftMotorCalculatedPower = leftMotorCalculatedPower + .05;
+                    mtrShooterLeft.setPower(leftMotorCalculatedPower);
+                    telemetry.addData("Left Shooter Power:",leftMotorCalculatedPower);
+                    this.Wait(10);
+                    int initialEncoderValue = mtrShooterLeft.getCurrentPosition();
+                    this.Wait(10);
+                    int DistanceTraveled = mtrShooterLeft.getCurrentPosition() - initialEncoderValue;
+                    double RotationsPerMillisecond = ENCODER_TICKS * (DistanceTraveled/10);
+                    double RotationsPerMinute = RotationsPerMillisecond * 1000 * 60;
+                    telemetry.addData("Left Shooter RPM:", RotationsPerMinute);
+                }
+
+
 
                 break;
             case 3:
                 //Move forward
+
                 break;
             case 4:
                 //Move toward beacon
@@ -184,5 +202,7 @@ public class Dival_Autonomous extends VisionOpMode{
         do {
         }while(myCurrentTime-myStartTime < delayInMilliseconds);
     }
+
+
 
 }
