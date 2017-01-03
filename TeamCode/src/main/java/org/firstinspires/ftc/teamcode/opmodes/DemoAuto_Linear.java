@@ -443,7 +443,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         }
 
     }
-    public void encoderDrive(double inches /*Inches*/, String direction /*Direction*/, double power ) {
+    public void encoderDrive(double inches , String direction, double power ) {
         int encoderval;
 
         encoderval = ticks_per_inch.intValue() * ((int) inches);

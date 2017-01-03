@@ -56,7 +56,8 @@ public class Mecanum{
         float ch1 = rjoystick_x;
         float ch3 = ljoystick_x;
         float ch4 = ljoystick_y;
-        boolean FL = ch4 > ch3;
+
+        /*boolean FL = ch4 > ch3;
         boolean FR = ch4 > -ch3;
         if(ch1 < -0.4 || ch1 > 0.4)
         {
@@ -104,7 +105,7 @@ public class Mecanum{
             FRpower = 0;
             BRpower = 0;
         }
-        /*
+        */
 
         double X2 = 0, Y1 = 0, X1 = 0, threshold = .15;
 
@@ -129,10 +130,10 @@ public class Mecanum{
 
             FLpower = (Y1 + X2 + X1);
             BLpower = (Y1 + X2 - X1);
-            FRpower = (Y1 - X2 - X1);
-            BRpower = (Y1 - X2 + X1);
+            FRpower = -(Y1 - X2 - X1);
+            BRpower = -(Y1 - X2 + X1);
 
-            */
+
     }
     public void setPosition(int fr,int fl,int br, int bl, DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
         motorFR.setTargetPosition(fr);
@@ -174,7 +175,7 @@ public class Mecanum{
         // This sets the motors that go into DemoAutonomous.
 
     }
-    public void run_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
+    public void run_right(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR , DcMotor motorBL) {
         FLpower = -0.73*BasePower;
         BLpower = BasePower;
         FRpower = -0.7*BasePower;
