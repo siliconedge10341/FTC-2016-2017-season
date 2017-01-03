@@ -241,6 +241,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 }
                 Drive_Train.brake(fr, fl, br, bl);
 
+                posx = 12;
+                posy = 39;
                 PauseAuto(0.3);
 
             case 6: //  case of moving forward until white line is detected
@@ -255,15 +257,24 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
                 v_state++;
             case 7: //  case of pressing beacon button
-                if (beacon.getAnalysis().isRightRed()) {
+                if (beacon.getAnalysis().isLeftRed()) {
+                    encoderDrive(1, "right", 0.5);
+                    PauseAuto(0.2);
+
+                    Drive_Train.setPowerD(0.6);
+                    Drive_Train.run_left(fr, fl, br, bl);
+                    while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+
+                        telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                    }
+                    Drive_Train.brake(fr, fl, br, bl);
+                } else if (beacon.getAnalysis().isRightBlue()) {
+                    //beacon was correctly pressed
+                } else {
                     //go forward if the left side of the beacon is blue
 
                     //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
                     encoderDrive(250, "forward", .5);
-
-                } else if (beacon.getAnalysis().isLeftBlue()) {
-                    //go to case 8
-                } else {
 
                 }
                 v_state++;
@@ -275,10 +286,6 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
             case 11://  case of moving to center vortex
         }
-        encoderDrive(40,"right" , .15);
-
-        //go back a little bit
-        encoderDrive(100, "left" , .15);
 
         //Run to line
 
