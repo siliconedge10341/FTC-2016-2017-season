@@ -363,9 +363,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
             case 11://  case of moving to center vortex
         }
     }
-
         //Run to line
-
+/*
         Drive_Train.run_forward(fr, fl, br, bl);
         //Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
         while (opModeIsActive() && ods.getLightDetected() > initialC + .1) {
@@ -404,8 +403,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         //hit the button
         encoderDrive(6.0,"right",.3);
 
-
+        */
     }
+
 
     public void PauseAuto(double time)
     {
