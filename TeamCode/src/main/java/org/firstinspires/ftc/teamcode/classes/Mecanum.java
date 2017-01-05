@@ -52,7 +52,7 @@ public class Mecanum{
         motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
     }
-    public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x, float lefttrigger, float righttrigger){
+    public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x, boolean percision_flag){
         float ch1 = rjoystick_x;
         float ch3 = ljoystick_x;
         float ch4 = ljoystick_y;
@@ -127,11 +127,17 @@ public class Mecanum{
         if(Y1<.3 && Y1>-.3){
             Y1 = 0;
         }
-
+        if (percision_flag = true) {
             FLpower = (Y1 + X2 + X1);
             BLpower = (Y1 + X2 - X1);
             FRpower = -(Y1 - X2 - X1);
             BRpower = -(Y1 - X2 + X1);
+        }else{
+            FLpower = (Y1 + X2 + X1) / 2;
+            BLpower = (Y1 + X2 - X1) / 2;
+            FRpower = -(Y1 - X2 - X1) / 2;
+            BRpower = -(Y1 - X2 + X1) / 2;
+        }
 
 
     }

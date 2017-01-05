@@ -104,6 +104,7 @@ public class HitBall extends LinearOpMode {
         motorShootR.setPower(0);
         motorCollector.setPower(0);
 
+
         encoderDrive(60.0,"left",.5);
 
 

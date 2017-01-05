@@ -25,7 +25,7 @@ public class MecanumDriver extends OpMode{
 		// Servos
 		private Servo ballRelease;
 
-		private int percision_flag = 0;
+		private boolean percision_flag;
 		// percision flag is to decrease power, if power is decreased, the robot will go slower.
 
 	private double ballpos = .5;
@@ -65,7 +65,7 @@ public class MecanumDriver extends OpMode{
 		// Variables
 		LSRotations = 0;
 		initialR = motorLS.getCurrentPosition();
-		percision_flag = 0;
+		percision_flag = false;
 
 	}
 
@@ -91,17 +91,17 @@ public class MecanumDriver extends OpMode{
 		//
         // Decreases Power
 		//
-		if (gamepad1.dpad_up) {
-			percision_flag++;
+
+		if (gamepad1.right_bumper) {
+			percision_flag = true;
+		}else if (gamepad1.left_bumper){
+			percision_flag= false;
 		}
 
-		if (percision_flag >= 2) {
-			percision_flag = 0;
-		}
 		//
         // runs the robot
 		//
-		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.left_trigger, gamepad1.right_trigger);
+		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x,percision_flag);
 		yo.run_motor(motorFR, motorFL, motorBR, motorBL);
 		//
         // Run Collector
@@ -127,24 +127,20 @@ public class MecanumDriver extends OpMode{
 		if (gamepad2.dpad_right){
             if (ballpos > Servo.MIN_POSITION) {
                 ballpos = ballpos -.05;
-            } else {
-                // Nothing
             }
 		}else if(gamepad2.dpad_left){
             if (ballpos < Servo.MAX_POSITION) {
                 ballpos = ballpos +.05;
-            } else {
-                // Nothing
             }
 		}
         ballRelease.setPosition(ballpos);
 		//
         // Raises CatBall
         //
-		if (gamepad1.x) {
+		if (gamepad2.x) {
             motorLS.setPower(-0.3);
             LSRotations = motorLS.getCurrentPosition();
-        } else if (gamepad1.y && LSRotations > initialR) {
+        } else if (gamepad2.y && LSRotations > initialR) {
             motorLS.setPower(0.3);
             LSRotations = motorLS.getCurrentPosition();
         } else {
