@@ -83,32 +83,35 @@ public class HitBall extends LinearOpMode {
         releaseServo.setPosition(.5);
         motorShootL.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
         motorShootR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
-
         //ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-
         // Wait for the game to start (driver presses PLAY)
         // Abort this loop is started or stopped.
-
         waitForStart();
-
+        //
+        // starting autonomous
+        //
         releaseServo.setPosition(.05);
         motorShootL.setPower(1.0);
         motorShootR.setPower(-1.0);
         motorCollector.setPower(1.0);
         runtime.reset();
-        while (runtime.seconds()<4){
+        runtime.startTime();
+        while (runtime.seconds() < 8){
             telemetry.addData("Seconds" , runtime.seconds());
             telemetry.update();
         }
         motorShootL.setPower(0);
         motorShootR.setPower(0);
         motorCollector.setPower(0);
-
-
-        encoderDrive(60.0,"left",.5);
-
-
-        telemetry.addData("DONE" , "Done");
+        //
+        // Drives to the center of the field
+        //
+        encoderDrive(60.0, "left", .5);
+        //
+        // end of autonomous period
+        //
+        stop();
+        telemetry.addData( "DONE" , "Done");
         telemetry.update();
 
 

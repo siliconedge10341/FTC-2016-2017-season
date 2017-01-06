@@ -25,39 +25,37 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class Autonomous_blue extends LinearVisionOpMode {
     // instance variables
     // private variables
-    // Motors
-    DcMotor fr;
-    DcMotor fl;
-    DcMotor bl;
-    DcMotor br;
-    DcMotor motorShootL;
-    DcMotor motorShootR;
+        // Motors
+        private DcMotor fr;
+        private DcMotor fl;
+        private DcMotor bl;
+        private DcMotor br;
+        private DcMotor motorShootL;
+        private DcMotor motorShootR;
+        private DcMotor motorCollector;
 
-    DcMotor motorCollector;
+        // servo
+        private Servo releaseServo;
+        private Servo beaconServo;
 
-    Servo releaseServo;
-    Servo beaconServo;
+        // Range Sensor
+        private ModernRoboticsI2cRangeSensor rangef;
+        private ModernRoboticsI2cRangeSensor ranges;
+        private OpticalDistanceSensor ods;
 
-
-    // Range Sensor
-    ModernRoboticsI2cRangeSensor rangef;
-    ModernRoboticsI2cRangeSensor ranges;
-    OpticalDistanceSensor ods;
-
-    // Sensor Classes
-    Mecanum Drive_Train = new Mecanum();
-    //LineFollow ods = new LineFollow();
-    ElapsedTime runtime = new ElapsedTime();
+        // Sensor Classes
+        private Mecanum Drive_Train = new Mecanum();
+        private ElapsedTime runtime = new ElapsedTime();
 
 
     // Reading for the initial color we take at the beginning of the match.
     // This helps us because when we test for the white line, we want to be
     // able to tell the difference from the color of the ground. Thus
     // knowing where the sensor is.
-    double initialC = 0;
+    private double initialC = 0;
 
     // states variable for the loop
-    int v_state = 0;
+    private int v_state = 0;
     private static final Double ticks_per_inch = 510 / (3.1415 * 4);
 
     private static final double distancetoBase = 46.7;
