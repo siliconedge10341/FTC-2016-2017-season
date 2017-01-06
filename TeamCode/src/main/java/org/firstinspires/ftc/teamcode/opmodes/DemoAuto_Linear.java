@@ -54,6 +54,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         // Classes
         private Mecanum Drive_Train = new Mecanum();
         private ElapsedTime runtime = new ElapsedTime();
+        private ElapsedTime total_time = new ElapsedTime();
 
         // Checks
         private boolean startatcenter = true;
@@ -69,11 +70,11 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         // able to tell the difference from the color of the ground. Thus
         // knowing where the sensor is.
         double initialC = 0;
-        int encoderval;
+        private int encoderval;
 
         // states variable for the loop
-        int v_state = 0;
-    private double inches;
+        private int v_state = 0;
+        private double inches;
 
     // public data
 
@@ -131,8 +132,11 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         cameraControl.setAutoExposureCompensation();
 
         waitForStart();
-        //Start OpMode
-
+        //
+        // Start OpMode
+        //
+        total_time.reset();
+        total_time.startTime();
         initialC = ods.getLightDetected();
 
         encoderDrive(12.0,"forward",1.0);
@@ -153,20 +157,25 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
     while (opModeIsActive()) {
         switch (v_state) {
-            case 0: //  case if we don't start at the center; wait for alliance partner to move
+            case 0:
                 //
-                // wait until range sensor registers > 5 feet
+                // Case if we don't start at the center; wait for alliance partner to move
+                //
+                // Wait until range sensor registers > 5 feet
                 //
                 while (rangef.getDistance(DistanceUnit.CM) < 152) {
                 }
 
                 encoderDrive(35.0, "forward", 1.0);
-
                 posx = 54.89;
                 posy = 0.0;
+
                 v_state++;
-            case 1: //  case of firing once
-                //Shoots ball for 2 seconds
+            case 1:
+                //
+                // Case of firing once
+                // Shoots ball for 2 seconds
+                //
                 releaseServo.setPosition(.05);
                 motorShootL.setPower(1.0);
                 motorShootR.setPower(-1.0);
@@ -177,7 +186,11 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 motorShootL.setPower(0);
                 motorShootR.setPower(0);
                 v_state++;
-            case 2: //  case of running collector and firing again
+
+            case 2:
+                //
+                // Case of running collector and firing again
+                //
                 releaseServo.setPosition(.3);
                 motorCollector.setPower(0.9);
                 runtime.reset();
@@ -200,6 +213,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 } else {
                     v_state++;
                 }
+
             case 3:
                 //
                 //  case of strafing to the center (27 in)
@@ -207,21 +221,32 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 encoderDrive(1, "left", 0.9);
                 posx = 54.89;
                 posy = 27;
-                v_state = 5;
+                v_state++;
 
-            case 4: //  case of knocking the cap ball over and returning (35 in and back 8 in)
+            case 4:
+                //
+                //  case of knocking the cap ball over and returning (35 in and back 8 in)
+                //
                 encoderDrive(35.0, "left", 0.9);
                 posx = 54.89;
                 posy = 35.0;
+
                 PauseAuto(0.3);
+
                 encoderDrive(8.0, "right", 0.9);
                 posx = 54.89;
                 posy = 27;
-                v_state = 5;
 
-            case 5: //  case of rotating and strafing to beacons
+                v_state++;
+
+            case 5:
+                //
+                // Case of rotating and strafing to beacons
+                //
                 PauseAuto(0.5);
-                //rotation
+                //
+                // Rotation
+                //
                 fr.setPower(1.0);
                 fl.setPower(1.0);
                 br.setPower(1.0);
@@ -233,22 +258,25 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 }
                 Drive_Train.brake(fr, fl, br, bl);
                 PauseAuto(0.3);
+                //
                 //strafe 30 in right
-
+                //
                 encoderDrive(12.0, "right", 0.9);
                 posx = 24.89;
                 posy = 27;
 
                 PauseAuto(0.5);
+                //
                 //backward 12 in
-
+                //
                 encoderDrive(12.89, "backward", 0.9);
                 posx = 24.89;
                 posy = 39;
 
                 PauseAuto(0.3);
-                //strafe 12.89 in right
-
+                //
+                // Strafe 12.89 in right
+                //
                 Drive_Train.setPowerD(0.6);
                 Drive_Train.run_right(fr, fl, br, bl);
                 while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
@@ -257,12 +285,16 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     telemetry.update();
                 }
                 Drive_Train.brake(fr, fl, br, bl);
-
                 posx = 12;
                 posy = 39;
-                PauseAuto(0.3);
 
-            case 6: //  case of moving forward until white line is detected
+                PauseAuto(0.3);
+                v_state++;
+
+            case 6:
+                //
+                // Case of moving forward until white line is detected
+                //
                 Drive_Train.setPowerD(0.6);
                 Drive_Train.run_backward(fr, fl, br, bl);
 
@@ -271,9 +303,12 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     telemetry.update();
                 }
                 Drive_Train.brake(fr, fl, br, bl);
-
                 v_state++;
-            case 7: //  case of pressing beacon button
+
+            case 7:
+                //
+                // Case of pressing beacon button
+                //
                 telemetry.addData("Beacon" , beacon.getAnalysis().toString());
                 telemetry.update();
                 if (beacon.getAnalysis().isLeftBlue()) {
@@ -290,27 +325,23 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 } else if (beacon.getAnalysis().isRightRed()) {
                     //beacon was correctly pressed
                 } else if (beacon.getAnalysis().isLeftRed()){
-                    //go forward if the left side of the beacon is blue
-
-                    //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
+                    //
+                    // Go forward if the left side of the beacon is blue
+                    //
+                    // Beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
+                    //
                     encoderDrive(6.0, "forward", .5);
 
                     encoderDrive(12.0, "right", 0.5);
                     PauseAuto(0.5);
                     encoderDrive(10.0, "left" , .5);
 
-                   /* Drive_Train.setPowerD(0.6);
-                    Drive_Train.run_left(fr, fl, br, bl);
-                    while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) < 30) {
-
-                        telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
-                        telemetry.update();
-                    }
-                    Drive_Train.brake(fr, fl, br, bl);
-                    */
                 }
                 v_state++;
-            case 8://  case of moving to next white line
+            case 8:
+                //
+                //  case of moving to next white line
+                //
                 encoderDrive(6.0,"forward",0.9);
 
                 double distancemoved = ranges.getDistance(DistanceUnit.CM) - 30.0;
@@ -346,7 +377,10 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
                 v_state++;
 
-            case 9://  case of pressing beacon button
+            case 9:
+                //
+                //  case of pressing 2nd beacon button
+                //
                 if (beacon.getAnalysis().isLeftRed()) {
                     encoderDrive(12.0, "right", 0.5);
                     PauseAuto(0.2);
@@ -359,14 +393,19 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     }
                     Drive_Train.brake(fr, fl, br, bl);
                 } else if (beacon.getAnalysis().isRightBlue()) {
-                    //beacon was correctly pressed
+                    //
+                    // Beacon was correctly pressed
+                    //
                 } else {
-                    //go forward if the left side of the beacon is blue
-
-                    //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
-                    encoderDrive(6.0, "forward", .5);
+                    //
+                    // Go forward if the left side of the beacon is blue
+                    //
+                    // Beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
+                    //
+                    encoderDrive(6.0, "forward", 0.5);
 
                     encoderDrive(12.0, "right", 0.5);
+
                     PauseAuto(0.2);
 
                     Drive_Train.setPowerD(0.6);
@@ -378,11 +417,47 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     Drive_Train.brake(fr, fl, br, bl);
 
                 }
-                v_state++;
+                if (total_time.seconds() < 26) {
+                    v_state += 2;
+                } else if (total_time.seconds() >= 26) {
+                    v_state++;
+                }
 
-            case 10://  case of moving to corner vortex
+            case 10:
+                //
+                // Case of moving to center vortex
+                //
+                encoderDrive(9.0, "left", 0.5);
 
-            case 11://  case of moving to center vortex
+                PauseAuto(0.2);
+                //
+                // Moving a little more towards the center line so we get the points.
+                //
+                encoderDrive(48.0, "diagonal_left_down", 0.5);
+
+                PauseAuto(0.2);
+                //
+                // Completed the autonomous period
+                //
+                stop();
+
+            case 11:
+                //
+                // Case of moving to corner vortex
+                //
+                encoderDrive(4.0, "left", 0.5);
+
+                PauseAuto(0.2);
+                //
+                // Moving a little more towards the ramp edge so we get the points.
+                //
+                encoderDrive(96.0, "backward", 0.5);
+
+                PauseAuto(0.2);
+                //
+                // Completed the autonomous period
+                //
+                stop();
         }
     }
         //Run to line
@@ -466,6 +541,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
             Drive_Train.run_right(fr,fl,br,bl);
         }else if (direction == "diagonal_left_up"){
             Drive_Train.run_diagonal_left_up(fr,fl,br,bl);
+        }else if (direction == "diagonal_left_down"){
+            Drive_Train.run_diagonal_left_down(fr,fl,br,bl);
         }
         //
         // while in the -TEST DISTANCE- loop below, it will keep running until the distance
@@ -482,8 +559,5 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         Drive_Train.brake(fr, fl, br, bl);
 
     }
-
-
-
 
 }
