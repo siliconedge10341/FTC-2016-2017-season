@@ -128,15 +128,15 @@ public class Mecanum{
             Y1 = 0;
         }
         if (percision_flag = true) {
-            FLpower = (Y1 + X2 + X1);
+            FLpower = -(Y1 + X2 + X1);
             BLpower = (Y1 + X2 - X1);
             FRpower = -(Y1 - X2 - X1);
-            BRpower = -(Y1 - X2 + X1);
-        }else{
-            FLpower = (Y1 + X2 + X1) / 2;
+            BRpower = (Y1 - X2 + X1);
+        } else {
+            FLpower = -(Y1 + X2 + X1) / 2;
             BLpower = (Y1 + X2 - X1) / 2;
             FRpower = -(Y1 - X2 - X1) / 2;
-            BRpower = -(Y1 - X2 + X1) / 2;
+            BRpower = (Y1 - X2 + X1) / 2;
         }
 
 

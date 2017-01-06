@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import org.firstinspires.ftc.teamcode.classes.Range;
+
+import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -24,6 +26,7 @@ public class MecanumDriver extends OpMode{
 
 		// Servos
 		private Servo ballRelease;
+		private Servo beaconServo;
 
 		private boolean percision_flag;
 		// percision flag is to decrease power, if power is decreased, the robot will go slower.
@@ -57,7 +60,9 @@ public class MecanumDriver extends OpMode{
 
 		// Servos
 		ballRelease = hardwareMap.servo.get("servo_ball");
-		ballRelease.setPosition(ballpos);
+		ballRelease.setPosition(0.7);
+		beaconServo = hardwareMap.servo.get("servo_beacon");
+		beaconServo.setPosition(0.5);
 
 		// Classes
 		dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
@@ -73,9 +78,9 @@ public class MecanumDriver extends OpMode{
 	@Override
 	public void loop() {
         //   Start-A Runs the Program   //
-        //-----GAMEPAD FUNCTION KEY-----//
+        //----GAMEPAD 2 FUNCTION KEY----//
         //          -GAMEPAD-           //
-        // UP: Increase Decrease Power  //
+        // UP: none;					//
         // RIGHT: Move Servo Right      //
         // LEFT: Move Servo Left        //
         // DOWN: None;                  //
@@ -91,13 +96,19 @@ public class MecanumDriver extends OpMode{
 		//
         // Decreases Power
 		//
-
-		if (gamepad1.right_bumper) {
+		if (gamepad1.right_trigger > 0.8) {
 			percision_flag = true;
-		}else if (gamepad1.left_bumper){
-			percision_flag= false;
+		} else if (gamepad1.left_trigger > 0.8){
+			percision_flag = false;
 		}
-
+		//
+		// beacon servo
+		//
+		if (gamepad1.x) {
+			beaconServo.setPosition(beaconServo.MAX_POSITION);
+		} else if (gamepad1.y) {
+			beaconServo.setPosition(0.5);
+		}
 		//
         // runs the robot
 		//
@@ -106,7 +117,7 @@ public class MecanumDriver extends OpMode{
 		//
         // Run Collector
 		//
-		if (gamepad1.a)  {
+		if (gamepad2.a)  {
 			motorCollector.setPower(1.0);
 		} else {
 			motorCollector.setPower(0);
@@ -138,10 +149,10 @@ public class MecanumDriver extends OpMode{
         // Raises CatBall
         //
 		if (gamepad2.x) {
-            motorLS.setPower(-0.3);
+            motorLS.setPower(-0.5);
             LSRotations = motorLS.getCurrentPosition();
         } else if (gamepad2.y && LSRotations > initialR) {
-            motorLS.setPower(0.3);
+            motorLS.setPower(0.5);
             LSRotations = motorLS.getCurrentPosition();
         } else {
             motorLS.setPower(0.0);
