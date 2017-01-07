@@ -60,6 +60,7 @@ public class HitBall extends LinearOpMode {
     private DcMotor motorCollector;
 
     private Servo releaseServo;
+    private Servo beaconServo;
 
     private OpticalDistanceSensor ods;
     private double initialC = 0;
@@ -77,6 +78,8 @@ public class HitBall extends LinearOpMode {
         motorCollector = hardwareMap.dcMotor.get("ball_collector");
 
         releaseServo = hardwareMap.servo.get("servo_ball");
+        beaconServo = hardwareMap.servo.get("servo_beacon");
+        beaconServo.setPosition(0.5);
 
         Drive_Train.reset_encoders(fr,fl,br,bl);
 
@@ -106,11 +109,11 @@ public class HitBall extends LinearOpMode {
         //
         // Drives to the center of the field
         //
-        encoderDrive(52.0, "left", .5);
+        encoderDrive(48.0 * 2, "left", .5);
         //
         // end of autonomous period
         //
-        stop();
+        Drive_Train.brake(fr,fl,br,bl);
         telemetry.addData( "DONE" , "Done");
         telemetry.update();
 

@@ -356,7 +356,7 @@ public class Mecanum{
         // We only do one because all have traveled the same amount. Knowing Turns
         // Do not count.
 
-        if (A_Motor.getCurrentPosition() >= A_Motor.getTargetPosition()){
+        if (Math.abs(A_Motor.getCurrentPosition()) >= Math.abs(A_Motor.getTargetPosition())){
             return 1;
         }else{
             return 0;

@@ -25,8 +25,7 @@ import org.opencv.core.Size;
  * "Shut up anirudh" - Juan
  */
 
-@Autonomous(name = "Dival's_Autonomous", group = "Blue")
-
+@Autonomous(name = "Pluck it like a berry", group = "Blue")
 public class Dival_Autonomous extends VisionOpMode{
 
     //variable declarations:
@@ -60,7 +59,7 @@ public class Dival_Autonomous extends VisionOpMode{
     //This is the compared color that is used to determine whether the line is detected or not
     private double comparedColor = 0;
     //Used to keep track of the different stages completed during autonomous
-    private int v_state;
+    private int v_state = 0;
 
     private static final int ENCODER_TICKS = 1440;
     private static final double Wheel_Circumfrence = 3.14*4;
@@ -90,7 +89,7 @@ public class Dival_Autonomous extends VisionOpMode{
         //TODO:WE need to rename our current range sensor on the side in the config - ask pavan to do this
         //TODO: Also install a second range sensor for forward distance
         this.rangeSide = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
-        this.rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "senor_range_front");
+        this.rangeFront = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
 
 //VISION:
         super.init();
@@ -112,8 +111,8 @@ public class Dival_Autonomous extends VisionOpMode{
         cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
         cameraControl.setAutoExposureCompensation();
 
+        v_state = 0;
         //setDriveMode(DcMotorController.RunMode.Run_Without_Encoder)
-
     }
 
     @Override
@@ -121,37 +120,37 @@ public class Dival_Autonomous extends VisionOpMode{
         // start
         super.start();
 
-        // reset encoders to begin period of autonomous
-      //  Drive_Train.reset_encoders(fr, fl, br, bl);
     }
-
 
     public void loop(){
         super.loop();
         //Different cases for autonomous, step by step
-
-
         switch(v_state){
-
-            case 1:
+            case 0:
                 //Configure robot for autonomous
                 svoBallRelaease.setPosition(.5); // Move beacon pusher out of the way
                 initialColor = this.ods.getLightDetected();
                 telemetry.addData("Stage 1:","Confuration complete");
+                telemetry.update();
+                v_state++;
                 break;
-            case 2:
+            case 1:
                 //shoot balls
                 double leftMotorCalculatedPower = 0;
                 double rightMotorCalculatedPower = 0;
 
                 double leftMotorRPM =  0;
                 double rightMotorRPM = 0;
-
+                mtrShooterLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                mtrShooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                mtrShooterLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+                mtrShooterRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
                 while(leftMotorRPM < Safe_Shooter_Speed){
                     leftMotorCalculatedPower = leftMotorCalculatedPower + .05;
                     mtrShooterLeft.setPower(leftMotorCalculatedPower);
                     telemetry.addData("Left Shooter Power:",leftMotorCalculatedPower);
+                    telemetry.update();
                     this.Wait(10);
                     int initialEncoderValue = mtrShooterLeft.getCurrentPosition();
                     this.Wait(10);
@@ -159,35 +158,32 @@ public class Dival_Autonomous extends VisionOpMode{
                     double RotationsPerMillisecond = ENCODER_TICKS * (DistanceTraveled/10);
                     double RotationsPerMinute = RotationsPerMillisecond * 1000 * 60;
                     telemetry.addData("Left Shooter RPM:", RotationsPerMinute);
+                    telemetry.update();
                 }
-
-
-
+                v_state++;
                 break;
-            case 3:
+            case 2:
                 //Move forward
 
-                break;
-            case 4:
+            case 3:
                 //Move toward beacon
-                break;
-            case 5:
-                //Beacon 1
-                break;
-            case 6:
-                //Move to beacon 2
-                break;
-            case 7:
-                //Beacon 2
-                break;
-            case 8:
-                //Knock cap ball off
-                break;
-            default:
-                stop();
-                break;
-        }
 
+            case 4:
+                //Beacon 1
+
+            case 5:
+                //Move to beacon 2
+
+            case 6:
+                //Beacon 2
+
+            case 7:
+                //Knock cap ball off
+
+            //default:
+               // stop();
+               // break;
+        }
     }
     @Override
     public void stop() {
@@ -200,7 +196,8 @@ public class Dival_Autonomous extends VisionOpMode{
         long myCurrentTime  = System.currentTimeMillis();
 
         do {
-        }while(myCurrentTime-myStartTime < delayInMilliseconds);
+            telemetry.addData("Waiting",(myCurrentTime-myStartTime));
+        }while((myCurrentTime-myStartTime) < delayInMilliseconds);
     }
 
 

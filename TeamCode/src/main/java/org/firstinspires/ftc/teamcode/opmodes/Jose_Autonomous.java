@@ -118,7 +118,6 @@ public class Jose_Autonomous extends VisionOpMode {
     public void start() {
         // start
         super.start();
-
         // reset encoders to begin period of autonomous
         //Drive_Train.reset_encoders(motorFR, motorFL, motorBR, motorBL);
     }

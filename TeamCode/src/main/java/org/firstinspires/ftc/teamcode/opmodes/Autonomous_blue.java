@@ -121,8 +121,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //Shoot ball:
         releaseServo.setPosition(.05);
         motorCollector.setPower(0.9);
-        motorShootL.setPower(1.0);
-        motorShootR.setPower(-1.0);
+        motorShootL.setPower(.85);
+        motorShootR.setPower(-.85);
         runtime.reset();
         while (runtime.seconds() < 4.0){
             telemetry.addData("seconds",runtime.seconds());
@@ -135,7 +135,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
 
         //Hit the ball:
-        encoderDrive(distancetoBase , "left" , .5);
+        encoderDrive(2.0*2, "left" , .5);
         PauseAuto(.5);
         //Turn:
         fr.setPower(1.0);
@@ -151,6 +151,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         Drive_Train.brake(fr, fl, br, bl);
         PauseAuto(.5);
         //Move to wall
+        /*
         Drive_Train.setPowerD(.2);
         Drive_Train.run_right(fr, fl, br, bl);
         while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > distanceFromWall) {
@@ -160,8 +161,11 @@ public class Autonomous_blue extends LinearVisionOpMode {
         }
         Drive_Train.brake(fr,fl,br,bl);
         Drive_Train.reset_encoders(fr,fl,br,bl);
-
+        */
+        Drive_Train.run_using_encoders(fr,fl,br,bl);
+        Drive_Train.setPowerD(.15);
         beaconServo.setPosition(1.0);
+
 
         //Move and detect line
 
@@ -197,10 +201,10 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         //hit the button
 
-        encoderDrive(15.24,"right" , .15);
+        encoderDrive(15.24 * 2,"right" , .15);
         PauseAuto(.8);
         //go back a little bit
-        encoderDrive(10.0, "left" , .15);
+        encoderDrive(10.0 * 2, "left" , .15);
 
         //Run to line
         Drive_Train.setPowerD(.2);
@@ -232,7 +236,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //Detect beacon
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //go forward if the left side of the beacon is blue
-            encoderDrive(250,"backward" , .5);
+            encoderDrive(6.0,"backward" , .5);
         } else {
             // encoderDrive(720,"backward" , .15);
         }
@@ -244,7 +248,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
 
         //hit the button
-        encoderDrive(200,"right",.3);
+        encoderDrive(6.0 * 2,"right",.3);
         PauseAuto(.5);
 
 
