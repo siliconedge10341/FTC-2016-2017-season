@@ -164,6 +164,33 @@ public class Mecanum{
         return wheel_rotation;
     }
 
+    public void run_left_using_alignment(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, int distanceleft, int distanceright)
+    {
+        FLpower = -BasePower;
+        BLpower = BasePower; //0.95
+        FRpower = -BasePower;  //0.73
+        BRpower = BasePower; // 1
+        int distancedifference = distanceleft - distanceright;
+        if(distancedifference > 2)
+        {
+            //turn left
+            FLpower -= (double) (distancedifference/100);
+            FRpower -= (double) (distancedifference/100);
+        }
+        else if(distancedifference < -2)
+        {
+            distancedifference = -1 * distancedifference;
+            //turn right
+            BLpower += (double) (distancedifference/100);
+            BRpower += (double) (distancedifference/100);
+        }
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower(FLpower);
+        motorBL.setPower(BLpower);
+
+    }
+
     // methods
     // These are the functions for the specific direction
     public void run_left(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL) {
