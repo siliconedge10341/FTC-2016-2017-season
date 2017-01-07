@@ -36,7 +36,7 @@ public class MecanumDriver extends OpMode{
 	private double initialR = 0;
 	private Mecanum yo = new Mecanum();
     private double power = 0;
-    private Range dist = new Range();
+    //private Range dist = new Range();
 
     public MecanumDriver() {
 		// default constructor
@@ -65,7 +65,7 @@ public class MecanumDriver extends OpMode{
 		beaconServo.setPosition(0.5);
 
 		// Classes
-		dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
+		//dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
 
 		// Variables
 		LSRotations = 0;
@@ -126,8 +126,8 @@ public class MecanumDriver extends OpMode{
 		// bantu shooter
 		//
 		if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
-            motorShootL.setPower(1.0);
-			motorShootR.setPower(-1.0);
+            motorShootL.setPower(.85);
+			motorShootR.setPower(-.85);
 		} else {
 			motorShootL.setPower(0);
 			motorShootR.setPower(0);
