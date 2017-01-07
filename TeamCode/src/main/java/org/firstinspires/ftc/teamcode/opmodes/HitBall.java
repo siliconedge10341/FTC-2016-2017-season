@@ -83,7 +83,7 @@ public class HitBall extends LinearOpMode {
 
         Drive_Train.reset_encoders(fr,fl,br,bl);
 
-        releaseServo.setPosition(.25);
+        releaseServo.setPosition(0.25);
         motorShootL.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
         motorShootR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
         //ods = hardwareMap.opticalDistanceSensor.get("ods_line");
@@ -92,6 +92,12 @@ public class HitBall extends LinearOpMode {
         waitForStart();
         //
         // starting autonomous
+        //
+        encoderDrive(48.0, "left", 0.5);
+
+        PauseAuto(0.2);
+        //
+        // Shoot
         //
         releaseServo.setPosition(0.0);
         motorShootL.setPower(1.0);
@@ -115,7 +121,7 @@ public class HitBall extends LinearOpMode {
         //
         // Drives to the center of the field
         //
-        encoderDrive(48.0 * 2, "left", .5);
+        encoderDrive(48.0, "left", 0.5);
         //
         // end of autonomous period
         //
@@ -123,10 +129,9 @@ public class HitBall extends LinearOpMode {
         telemetry.addData( "DONE" , "Done");
         telemetry.update();
 
-
     }
 
-
+    // Functions
     public void encoderDrive(double inches, String direction , double power ) {
         int encoderval;
         //
@@ -167,7 +172,7 @@ public class HitBall extends LinearOpMode {
         //
         Drive_Train.brake(fr, fl, br, bl);
     }
-    public void PauseAuto(double time ) {
+    public void PauseAuto(double time) {
         //
         // for Waiting between driving periods.
         //
