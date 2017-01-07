@@ -77,17 +77,17 @@ public class Mecanum{
         {
             if(FL)
             {
-                FLpower = ch3;  //0.7
-                BLpower = -ch3;  //0.95
-                FRpower = ch3; //0.78
-                BRpower = -ch3;       //1
+                FLpower = -ch3;  //0.7
+                BLpower = ch3;  //0.95
+                FRpower = -ch3; //0.78
+                BRpower = ch3;       //1
             }
             else
             {
-                FLpower = ch3; //.78
-                BLpower = -ch3;       //1
-                FRpower = ch3;  //0.7
-                BRpower = -ch3;  //0.95
+                FLpower = -ch3; //.78
+                BLpower = ch3;       //1
+                FRpower = -ch3;  //0.7
+                BRpower = ch3;  //0.95
             }
         }
         else
