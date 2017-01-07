@@ -171,18 +171,18 @@ public class Mecanum{
         FRpower = -BasePower;  //0.73
         BRpower = BasePower; // 1
         double distancedifference = distanceleft - distanceright;
-        if(distancedifference > 2)
+        if(distancedifference > 1)
         {
             //turn left
-            FLpower -= (double) (distancedifference/100);
-            FRpower -= (double) (distancedifference/100);
+            FLpower -= (double) (distancedifference/60);
+            FRpower -= (double) (distancedifference/60);
         }
-        else if(distancedifference < -2)
+        else if(distancedifference < -1)
         {
             distancedifference = -1 * distancedifference;
             //turn right
-            BLpower += (double) (distancedifference/100);
-            BRpower += (double) (distancedifference/100);
+            BLpower += (double) (distancedifference/60);
+            BRpower += (double) (distancedifference/60);
         }
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);

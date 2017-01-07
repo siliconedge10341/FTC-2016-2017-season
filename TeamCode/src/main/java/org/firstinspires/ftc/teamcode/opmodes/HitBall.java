@@ -36,6 +36,8 @@ import java.net.PortUnreachableException;
  *   - Drive Backwards for 24 inches
  *   - Stop and close the claw.
  *
+ *
+ *
  *  The code is written using a method called: encoderDrive(speed, leftInches, rightInches, timeoutS)
  *  that performs the actual movement.
  *  This methods assumes that each movement is relative to the last stopping place.
@@ -90,11 +92,11 @@ public class HitBall extends LinearOpMode {
 
         releaseServo = hardwareMap.servo.get("servo_ball");
         beaconServo = hardwareMap.servo.get("servo_beacon");
-        beaconServo.setPosition(0.5);
+        beaconServo.setPosition(0.25);
 
         Drive_Train.reset_encoders(fr,fl,br,bl);
 
-        releaseServo.setPosition(0.25);
+        releaseServo.setPosition(-0.2);
         motorShootL.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
         motorShootR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
         //ods = hardwareMap.opticalDistanceSensor.get("ods_line");
@@ -104,35 +106,60 @@ public class HitBall extends LinearOpMode {
         //
         // starting autonomous
         //
-        encoderDrive(24.0, "leftalign", 0.5);
+        encoderDrive(30.0, "left", 0.5);
+
 
         PauseAuto(0.2);
+
         //
         // Shoot
         //
-        releaseServo.setPosition(0.0);
-        motorShootL.setPower(1.0);
+        releaseServo.setPosition(-0.2);
+        PauseAuto(.5);
+
+       motorShootL.setPower(1.0);
         motorShootR.setPower(-1.0);
         motorCollector.setPower(1.0);
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 4){
+        while (runtime.seconds() < 2){
             telemetry.addData("Seconds" , runtime.seconds());
             telemetry.update();
         }
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 4){
+        while (runtime.seconds() < 2){
+            telemetry.addData("Seconds" , runtime.seconds());
+            telemetry.update();
+        }
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 2){
+            telemetry.addData("Seconds" , runtime.seconds());
+            telemetry.update();
+        }
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 2){
             telemetry.addData("Seconds" , runtime.seconds());
             telemetry.update();
         }
         motorShootL.setPower(0);
         motorShootR.setPower(0);
         motorCollector.setPower(0);
+        */
         //
         // Drives to the center of the field
         //
-        encoderDrive(48.0, "leftalign", 0.5);
+        encoderDrive(44.0, "left", 0.5);
+        Drive_Train.turn_left(fr,fl,br,bl);
+        runtime.reset();
+        while (runtime.seconds() < 1){
+
+        }
+        Drive_Train.brake(fr,fl,br,bl);
+
+        encoderDrive(5.0 , "forward" , 0.5);
         //
         // end of autonomous period
         //
@@ -148,6 +175,7 @@ public class HitBall extends LinearOpMode {
         //
         // Sets the encoders
         //
+        Drive_Train.reset_encoders(fr,fl,br,bl);
         encoderval = ticks_per_inch.intValue() * (int) inches;
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         //
