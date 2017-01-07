@@ -30,6 +30,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name = "Pls help", group = "Blue")
+@Disabled
 public class ExperementalAuto extends LinearVisionOpMode {
     // instance variables
     // private variables

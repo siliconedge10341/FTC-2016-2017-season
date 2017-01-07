@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opmodes;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -21,6 +22,7 @@ import org.opencv.core.Size;
  */
 
 @Autonomous(name = "Shut_Up_Anirudh", group = "Blue")
+@Disabled
 public class Jose_Autonomous extends VisionOpMode {
 
     // instance variables

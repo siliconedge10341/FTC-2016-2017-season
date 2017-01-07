@@ -1,28 +1,24 @@
 package org.firstinspires.ftc.teamcode.opmodes;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
+import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import org.lasarobotics.vision.android.Cameras;
-import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import org.lasarobotics.vision.ftc.resq.Beacon;
 import org.lasarobotics.vision.opmode.LinearVisionOpMode;
 import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
 import org.lasarobotics.vision.util.ScreenOrientation;
 import org.opencv.core.Size;
 
-import org.firstinspires.ftc.teamcode.classes.LineFollow;
-import org.firstinspires.ftc.teamcode.classes.Range;
-import org.firstinspires.ftc.teamcode.classes.Mecanum;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
+@Autonomous(name = "red_Autonomous", group = "Red")
 
-@Autonomous(name = "Blue_Autonomous", group = "Blue")
-
-public class Autonomous_blue extends LinearVisionOpMode {
+public class Autonomous_red extends LinearVisionOpMode {
     // instance variables
     // private variables
         // Motors
@@ -93,9 +89,9 @@ public class Autonomous_blue extends LinearVisionOpMode {
         this.setCamera(Cameras.PRIMARY);
         this.setFrameSize(new Size(900, 900));
 
-        enableExtension(LinearVisionOpMode.Extensions.BEACON);         //Beacon detection
-        enableExtension(LinearVisionOpMode.Extensions.ROTATION);       //Automatic screen rotation correction
-        enableExtension(LinearVisionOpMode.Extensions.CAMERA_CONTROL); //Manual camera control
+        enableExtension(Extensions.BEACON);         //Beacon detection
+        enableExtension(Extensions.ROTATION);       //Automatic screen rotation correction
+        enableExtension(Extensions.CAMERA_CONTROL); //Manual camera control
         beacon.setAnalysisMethod(Beacon.AnalysisMethod.FAST);
 
         beacon.setColorToleranceRed(0);
@@ -173,7 +169,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //Drive_Train.run_using_encoders(fr,fl,br,bl);
         Drive_Train.setPowerD(.15);
 
-        Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
+        Drive_Train.run_diagonal_right_down(fr, fl, br, bl);
 
         while (opModeIsActive() && ods.getLightDetected()< initialC +.1) {
             telemetry.addData("Light ",ods.getLightDetected());
@@ -197,11 +193,11 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Detect beacon
         telemetry.addData("Beacon " , beacon.getAnalysis());
         telemetry.update();
-        if (beacon.getAnalysis().isLeftBlue() == true) {
+        if (beacon.getAnalysis().isRightRed()) {
             //go forward if the left side of the beacon is blue
 
             //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
-            encoderDrive(buttonWidth,"forward" , .3);
+            encoderDrive(buttonWidth,"backward" , .3);
 
         } else {
             //beacon is 1/2 a foot
@@ -220,7 +216,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         //Run to line
         Drive_Train.setPowerD(.2);
-        Drive_Train.run_forward(fr, fl, br, bl);
+        Drive_Train.run_backward(fr, fl, br, bl);
         //Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
         while (opModeIsActive() && ods.getLightDetected() > initialC + .1) {
             telemetry.addData("Light" , ods.getLightDetected());
@@ -248,7 +244,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //Detect beacon
         telemetry.addData("Beacon" , beacon.getAnalysis());
         telemetry.update();
-        if (beacon.getAnalysis().isLeftBlue() == true) {
+        if (beacon.getAnalysis().isRightRed() == true) {
             //go forward if the left side of the beacon is blue
             encoderDrive(6.0,"backward" , .5);
         } else {
