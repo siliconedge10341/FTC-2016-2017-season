@@ -1,7 +1,10 @@
 
 package org.firstinspires.ftc.teamcode.opmodes;
 
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
+
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -62,6 +65,10 @@ public class HitBall extends LinearOpMode {
     private Servo releaseServo;
     private Servo beaconServo;
 
+    private ModernRoboticsI2cRangeSensor rangef;
+    private ModernRoboticsI2cRangeSensor rangesl;
+    private ModernRoboticsI2cRangeSensor rangesr;
+
     private OpticalDistanceSensor ods;
     private double initialC = 0;
     private static final Double ticks_per_inch = 510 / (3.1415 * 4);
@@ -72,6 +79,10 @@ public class HitBall extends LinearOpMode {
         fl = hardwareMap.dcMotor.get("fl_motor");
         br = hardwareMap.dcMotor.get("br_motor");
         bl = hardwareMap.dcMotor.get("bl_motor");
+
+        rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
+        rangesr = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
+        rangesl = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
 
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
@@ -163,9 +174,20 @@ public class HitBall extends LinearOpMode {
         // from the encoders is achieved. When achieved, the program will proceed to the end
         // of the function.
         //
-        while(Drive_Train.testDistance(fl) != 1){
-            telemetry.addData("Pos " , fl.getCurrentPosition());
-            telemetry.update();
+        if(direction == "leftalign")
+        {
+            while(Drive_Train.testDistance(fl)!= 1)
+            {
+                Drive_Train.run_left_using_alignment(fr,fl,br,bl,rangesl.getDistance(DistanceUnit.CM),rangesr.getDistance(DistanceUnit.CM));
+                telemetry.addData("Pos ", fl.getCurrentPosition());
+                telemetry.update();
+            }
+        }
+        else {
+            while (Drive_Train.testDistance(fl) != 1) {
+                telemetry.addData("Pos ", fl.getCurrentPosition());
+                telemetry.update();
+            }
         }
         //
         // Ends the Drive period.

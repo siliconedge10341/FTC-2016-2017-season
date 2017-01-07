@@ -164,13 +164,13 @@ public class Mecanum{
         return wheel_rotation;
     }
 
-    public void run_left_using_alignment(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, int distanceleft, int distanceright)
+    public void run_left_using_alignment(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, double distanceleft, double distanceright)
     {
         FLpower = -BasePower;
         BLpower = BasePower; //0.95
         FRpower = -BasePower;  //0.73
         BRpower = BasePower; // 1
-        int distancedifference = distanceleft - distanceright;
+        double distancedifference = distanceleft - distanceright;
         if(distancedifference > 2)
         {
             //turn left

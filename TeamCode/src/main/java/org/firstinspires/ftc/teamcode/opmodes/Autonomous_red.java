@@ -48,7 +48,8 @@ public class Autonomous_red extends LinearVisionOpMode {
 
         // sensors
         private ModernRoboticsI2cRangeSensor rangef;
-        private ModernRoboticsI2cRangeSensor ranges;
+        private ModernRoboticsI2cRangeSensor rangesl;
+        private ModernRoboticsI2cRangeSensor rangesr;
         private OpticalDistanceSensor ods;
 
         // Classes
@@ -104,7 +105,8 @@ public class Autonomous_red extends LinearVisionOpMode {
             // sensors
             ods = hardwareMap.opticalDistanceSensor.get("ods_line");
             rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
-            ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
+            rangesr = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
+            rangesl = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
 
         // Sets Position
         releaseServo.setPosition(0.3);
@@ -281,9 +283,9 @@ public class Autonomous_red extends LinearVisionOpMode {
                 //
                 Drive_Train.setPowerD(0.6);
                 Drive_Train.run_right(fr, fl, br, bl);
-                while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+                while (opModeIsActive() && rangesr.getDistance(DistanceUnit.CM) > 30) {
                     // Get data
-                    telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                    telemetry.addData("Distance ", rangesr.getDistance(DistanceUnit.CM));
                     telemetry.update();
                 }
                 Drive_Train.brake(fr, fl, br, bl);
@@ -321,9 +323,9 @@ public class Autonomous_red extends LinearVisionOpMode {
 
                     Drive_Train.setPowerD(0.6);
                     Drive_Train.run_left(fr, fl, br, bl);
-                    while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+                    while (opModeIsActive() && rangesr.getDistance(DistanceUnit.CM) > 30) {
                         // Get data
-                        telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                        telemetry.addData("Distance ", rangesr.getDistance(DistanceUnit.CM));
                     }
                     Drive_Train.brake(fr, fl, br, bl);
 
@@ -354,7 +356,7 @@ public class Autonomous_red extends LinearVisionOpMode {
                 //
                 encoderDrive(6.0,"forward",0.9);
 
-                double distancemoved = ranges.getDistance(DistanceUnit.CM) - 30.0;
+                double distancemoved = rangesr.getDistance(DistanceUnit.CM) - 30.0;
 
                 double angleofrobot = (Math.atan(distancemoved/30.54))*180/Math.PI;
                 Drive_Train.turn_left(fr,fl,br,bl);
@@ -371,9 +373,9 @@ public class Autonomous_red extends LinearVisionOpMode {
 
                 Drive_Train.setPowerD(0.6);
                 Drive_Train.run_left(fr, fl, br, bl);
-                while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+                while (opModeIsActive() && rangesr.getDistance(DistanceUnit.CM) > 30) {
 
-                    telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                    telemetry.addData("Distance ", rangesr.getDistance(DistanceUnit.CM));
                 }
                 Drive_Train.brake(fr, fl, br, bl);
 
@@ -399,9 +401,9 @@ public class Autonomous_red extends LinearVisionOpMode {
 
                     Drive_Train.setPowerD(0.6);
                     Drive_Train.run_left(fr, fl, br, bl);
-                    while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+                    while (opModeIsActive() && rangesr.getDistance(DistanceUnit.CM) > 30) {
 
-                        telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                        telemetry.addData("Distance ", rangesr.getDistance(DistanceUnit.CM));
                     }
                     Drive_Train.brake(fr, fl, br, bl);
                 } else if (beacon.getAnalysis().isRightBlue()) {
@@ -424,9 +426,9 @@ public class Autonomous_red extends LinearVisionOpMode {
 
                     Drive_Train.setPowerD(0.6);
                     Drive_Train.run_left(fr, fl, br, bl);
-                    while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
+                    while (opModeIsActive() && rangesr.getDistance(DistanceUnit.CM) > 30) {
 
-                        telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+                        telemetry.addData("Distance ", rangesr.getDistance(DistanceUnit.CM));
                     }
                     //
                     // ended the case
