@@ -127,7 +127,7 @@ public class MecanumDriver extends OpMode{
 		// beacon servo
 		//
 		if (gamepad1.x) {
-			beaconServo.setPosition(beaconServo.MAX_POSITION);
+			beaconServo.setPosition(beaconServo.MIN_POSITION);
 		} else if (gamepad1.y) {
 			beaconServo.setPosition(0.5);
 		}
