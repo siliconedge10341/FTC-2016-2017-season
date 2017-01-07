@@ -138,10 +138,10 @@ public class Autonomous_blue extends LinearVisionOpMode {
         encoderDrive(2.0*2, "left" , .5);
         PauseAuto(.5);
         //Turn:
-        fr.setPower(1.0);
-        fl.setPower(1.0);
-        br.setPower(1.0);
-        bl.setPower(1.0);
+        fr.setPower(-1.0);
+        fl.setPower(-1.0);
+        br.setPower(-1.0);
+        bl.setPower(-1.0);
 
         runtime.reset();
         while (runtime.seconds() < 0.86) {
@@ -162,17 +162,18 @@ public class Autonomous_blue extends LinearVisionOpMode {
         Drive_Train.brake(fr,fl,br,bl);
         Drive_Train.reset_encoders(fr,fl,br,bl);
         */
+        /*
         Drive_Train.run_using_encoders(fr,fl,br,bl);
         Drive_Train.setPowerD(.15);
-        beaconServo.setPosition(1.0);
+        beaconServo.setPosition(1.0);*/
 
 
         //Move and detect line
 
-        Drive_Train.run_using_encoders(fr,fl,br,bl);
+        //Drive_Train.run_using_encoders(fr,fl,br,bl);
         Drive_Train.setPowerD(.15);
 
-        Drive_Train.run_backward(fr, fl, br, bl);
+        Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
 
         while (opModeIsActive() && ods.getLightDetected()< initialC +.1) {
             telemetry.addData("Light ",ods.getLightDetected());
@@ -184,7 +185,18 @@ public class Autonomous_blue extends LinearVisionOpMode {
         PauseAuto(.5);
 
         beaconServo.setPosition(0.0);
+        //Go closer to wall
+        Drive_Train.setPowerD(.2);
+        Drive_Train.run_right(fr,fl,br,bl);
+        while(ranges.getDistance(DistanceUnit.INCH) > 8){
+            telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.INCH));
+            telemetry.update();
+        }
+
+
         // Detect beacon
+        telemetry.addData("Beacon " , beacon.getAnalysis());
+        telemetry.update();
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //go forward if the left side of the beacon is blue
 
@@ -197,11 +209,11 @@ public class Autonomous_blue extends LinearVisionOpMode {
         }
         // beacon code
 
-
+        PauseAuto(1.0);
 
         //hit the button
 
-        encoderDrive(15.24 * 2,"right" , .15);
+        encoderDrive(1.5 * 2,"right" , .15);
         PauseAuto(.8);
         //go back a little bit
         encoderDrive(10.0 * 2, "left" , .15);
@@ -224,8 +236,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         Drive_Train.run_right(fr, fl, br, bl);
 
-        while ( opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 19) {
-            telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
+        while ( opModeIsActive() && ranges.getDistance(DistanceUnit.INCH) > 8) {
+            telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.INCH));
             telemetry.update();
         }
         Drive_Train.reset_encoders(fr, fl, br, bl);
@@ -234,12 +246,15 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Wait...
         //
         //Detect beacon
+        telemetry.addData("Beacon" , beacon.getAnalysis());
+        telemetry.update();
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //go forward if the left side of the beacon is blue
             encoderDrive(6.0,"backward" , .5);
         } else {
             // encoderDrive(720,"backward" , .15);
         }
+        PauseAuto(1.0);
 
         //beacon code
 
@@ -248,8 +263,9 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
 
         //hit the button
-        encoderDrive(6.0 * 2,"right",.3);
+        encoderDrive(3.0 *2,"right",.3);
         PauseAuto(.5);
+        beaconServo.setPosition(.5);
 
 
     }
