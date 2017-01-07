@@ -99,7 +99,13 @@ public class HitBall extends LinearOpMode {
         motorCollector.setPower(1.0);
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 8){
+        while (runtime.seconds() < 4){
+            telemetry.addData("Seconds" , runtime.seconds());
+            telemetry.update();
+        }
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 4){
             telemetry.addData("Seconds" , runtime.seconds());
             telemetry.update();
         }

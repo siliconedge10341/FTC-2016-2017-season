@@ -147,7 +147,7 @@ public class MecanumDriver extends OpMode{
 		//
 		// bantu shooter
 		//
-		if (ballpos >= .125 || gamepad2.b){
+		if (ballpos <= .125 || gamepad2.b){
             motorShootL.setPower(1.0);
 			motorShootR.setPower(-1.0);
 		} else {
