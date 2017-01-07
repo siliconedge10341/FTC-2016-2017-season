@@ -157,6 +157,8 @@ public class MecanumDriver extends OpMode{
         } else {
             motorLS.setPower(0.0);
         }
+		telemetry.addData("LinearSlideMotor ",LSRotations);
+		telemetry.update();
 
 	}
 
@@ -165,7 +167,7 @@ public class MecanumDriver extends OpMode{
 	public void stop() {
 		yo.setPowerD(0.0);
 		yo.brake(motorFR,motorFL, motorBR, motorBL);
-		// set to zero so the power doesn't influnce any motion or rotation in the robot
+		// set to zero so the power doesn't influence any motion or rotation in the robot
 
 	}
 
