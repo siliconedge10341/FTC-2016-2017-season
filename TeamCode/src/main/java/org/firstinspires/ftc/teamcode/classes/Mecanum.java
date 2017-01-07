@@ -57,7 +57,7 @@ public class Mecanum{
         float ch3 = ljoystick_x;
         float ch4 = ljoystick_y;
 
-        /*boolean FL = ch4 > ch3;
+        boolean FL = ch4 > ch3;
         boolean FR = ch4 > -ch3;
         if(ch1 < -0.4 || ch1 > 0.4)
         {
@@ -77,17 +77,17 @@ public class Mecanum{
         {
             if(FL)
             {
-                FLpower = -ch3;  //0.7
-                BLpower = ch3;  //0.95
-                FRpower = -ch3; //0.78
-                BRpower = ch3;       //1
+                FLpower = ch3;  //0.7
+                BLpower = -ch3;  //0.95
+                FRpower = ch3; //0.78
+                BRpower = -ch3;       //1
             }
             else
             {
-                FLpower = -ch3; //.78
-                BLpower = ch3;       //1
-                FRpower = -ch3;  //0.7
-                BRpower = ch3;  //0.95
+                FLpower = ch3; //.78
+                BLpower = -ch3;       //1
+                FRpower = ch3;  //0.7
+                BRpower = -ch3;  //0.95
             }
         }
         else
@@ -105,8 +105,8 @@ public class Mecanum{
             FRpower = 0;
             BRpower = 0;
         }
-        */
 
+/*
         double X2 = 0, Y1 = 0, X1 = 0, threshold = .15;
 
         if(Math.abs(ch3) > threshold)
@@ -138,7 +138,7 @@ public class Mecanum{
             FRpower = -(Y1 - X2 - X1) / 2;
             BRpower = (Y1 - X2 + X1) / 2;
         }
-
+*/
 
     }
     public void setPosition(int fr,int fl,int br, int bl, DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){

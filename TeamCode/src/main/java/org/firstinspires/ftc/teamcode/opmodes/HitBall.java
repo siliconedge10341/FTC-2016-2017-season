@@ -122,16 +122,15 @@ public class HitBall extends LinearOpMode {
 
 
     public void encoderDrive(double inches, String direction , double power ) {
-        //
         int encoderval;
+        //
         // Sets the encoders
         //
-
         encoderval = ticks_per_inch.intValue() * (int) inches;
         Drive_Train.run_using_encoders(fr, fl, br, bl);
-
+        //
         // Uses the encoders and motors to set the specific position
-
+        //
         Drive_Train.setPosition(encoderval,encoderval,encoderval,encoderval,fr,fl,br,bl);
         //
         // Sets the power and direction
@@ -139,13 +138,13 @@ public class HitBall extends LinearOpMode {
         Drive_Train.setPowerD(power);
         if (direction == "forward"){
             Drive_Train.run_forward(fr,fl,br,bl);
-        }else if(direction == "backward"){
+        } else if(direction == "backward"){
             Drive_Train.run_backward(fr,fl,br,bl);
-        }else if (direction == "left"){
+        } else if (direction == "left"){
             Drive_Train.run_left(fr,fl,br,bl);
-        }else if (direction == "right"){
+        } else if (direction == "right"){
             Drive_Train.run_right(fr,fl,br,bl);
-        }else if (direction == "diagonal_left_up"){
+        } else if (direction == "diagonal_left_up"){
             Drive_Train.run_diagonal_left_up(fr,fl,br,bl);
         }
         //

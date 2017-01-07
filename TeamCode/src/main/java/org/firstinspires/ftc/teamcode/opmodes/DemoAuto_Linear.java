@@ -252,12 +252,14 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 br.setPower(1.0);
                 bl.setPower(1.0);
                 runtime.reset();
+                runtime.startTime();
                 while (runtime.seconds() < 0.86) {
+                    // Get data
                     telemetry.addData("seconds", runtime.seconds());
                     telemetry.update();
                 }
                 Drive_Train.brake(fr, fl, br, bl);
-                PauseAuto(0.3);
+                PauseAuto(0.4);
                 //
                 //strafe 30 in right
                 //
@@ -265,7 +267,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 posx = 24.89;
                 posy = 27;
 
-                PauseAuto(0.5);
+                PauseAuto(0.4);
                 //
                 //backward 12 in
                 //
@@ -273,14 +275,14 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 posx = 24.89;
                 posy = 39;
 
-                PauseAuto(0.3);
+                PauseAuto(0.4);
                 //
                 // Strafe 12.89 in right
                 //
                 Drive_Train.setPowerD(0.6);
                 Drive_Train.run_right(fr, fl, br, bl);
                 while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
-
+                    // Get data
                     telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
                     telemetry.update();
                 }
@@ -297,8 +299,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 //
                 Drive_Train.setPowerD(0.6);
                 Drive_Train.run_backward(fr, fl, br, bl);
-
                 while (opModeIsActive() && ods.getLightDetected() < initialC + .1) {
+                    // Get data
                     telemetry.addData("Light ", ods.getLightDetected());
                     telemetry.update();
                 }
@@ -311,29 +313,37 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 //
                 telemetry.addData("Beacon" , beacon.getAnalysis().toString());
                 telemetry.update();
+
                 if (beacon.getAnalysis().isLeftBlue()) {
                     encoderDrive(12.0, "right", 0.5);
+
                     PauseAuto(0.2);
 
                     Drive_Train.setPowerD(0.6);
                     Drive_Train.run_left(fr, fl, br, bl);
                     while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 30) {
-
+                        // Get data
                         telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
                     }
                     Drive_Train.brake(fr, fl, br, bl);
+
                 } else if (beacon.getAnalysis().isRightRed()) {
-                    //beacon was correctly pressed
+                    //
+                    // Beacon was correctly pressed
+                    //
                 } else if (beacon.getAnalysis().isLeftRed()){
                     //
-                    // Go forward if the left side of the beacon is blue
-                    //
+                    // Go forward if the left side of the beacon is blue.
                     // Beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
                     //
                     encoderDrive(6.0, "forward", .5);
 
+                    PauseAuto(0.2);
+
                     encoderDrive(12.0, "right", 0.5);
-                    PauseAuto(0.5);
+
+                    PauseAuto(0.2);
+
                     encoderDrive(10.0, "left" , .5);
 
                 }
@@ -350,6 +360,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 Drive_Train.turn_left(fr,fl,br,bl);
 
                 runtime.reset();
+                runtime.startTime();
                 while(runtime.seconds() < angleofrobot/100)
                 {
                     telemetry.addData("seconds", runtime.seconds());
@@ -383,6 +394,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 //
                 if (beacon.getAnalysis().isLeftRed()) {
                     encoderDrive(12.0, "right", 0.5);
+
                     PauseAuto(0.2);
 
                     Drive_Train.setPowerD(0.6);
@@ -404,6 +416,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                     //
                     encoderDrive(6.0, "forward", 0.5);
 
+                    PauseAuto(0.2);
+
                     encoderDrive(12.0, "right", 0.5);
 
                     PauseAuto(0.2);
@@ -414,6 +428,9 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
 
                         telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
                     }
+                    //
+                    // ended the case
+                    //
                     Drive_Train.brake(fr, fl, br, bl);
 
                 }
@@ -439,7 +456,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 //
                 // Completed the autonomous period
                 //
-                stop();
+                Drive_Train.brake(fr, fl, br, bl);
 
             case 11:
                 //
@@ -457,7 +474,7 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 //
                 // Completed the autonomous period
                 //
-                stop();
+                Drive_Train.brake(fr, fl, br, bl);
         }
     }
         //Run to line
@@ -533,15 +550,15 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         Drive_Train.setPowerD(power);
         if (direction == "forward"){
             Drive_Train.run_forward(fr,fl,br,bl);
-        }else if(direction == "backward"){
+        } else if(direction == "backward"){
             Drive_Train.run_backward(fr,fl,br,bl);
-        }else if (direction == "left"){
+        } else if (direction == "left"){
             Drive_Train.run_left(fr,fl,br,bl);
-        }else if (direction == "right"){
+        } else if (direction == "right"){
             Drive_Train.run_right(fr,fl,br,bl);
-        }else if (direction == "diagonal_left_up"){
+        } else if (direction == "diagonal_left_up"){
             Drive_Train.run_diagonal_left_up(fr,fl,br,bl);
-        }else if (direction == "diagonal_left_down"){
+        } else if (direction == "diagonal_left_down"){
             Drive_Train.run_diagonal_left_down(fr,fl,br,bl);
         }
         //
@@ -557,7 +574,6 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
         // Ends the Drive period.
         //
         Drive_Train.brake(fr, fl, br, bl);
-
     }
 
 }
