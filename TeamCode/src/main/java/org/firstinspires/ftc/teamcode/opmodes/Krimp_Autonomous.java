@@ -7,11 +7,14 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.classes.Light;
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import org.firstinspires.ftc.teamcode.classes.Range;
 import org.lasarobotics.vision.android.Cameras;
 import org.lasarobotics.vision.ftc.resq.Beacon;
+import org.lasarobotics.vision.opmode.LinearVisionOpMode;
 import org.lasarobotics.vision.opmode.VisionOpMode;
 import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
 import org.lasarobotics.vision.util.ScreenOrientation;
@@ -37,9 +40,11 @@ public class Krimp_Autonomous extends VisionOpMode {
         private DcMotor mtrBL;
         private DcMotor mtrShootR;
         private DcMotor mtrShootL;
+        private DcMotor mtrCollect;
 
     // Servos
         private Servo srvRelease;
+        private Servo srvBeacon;
 
     // Classes
         private Mecanum drive_train = new Mecanum();
@@ -47,6 +52,7 @@ public class Krimp_Autonomous extends VisionOpMode {
         private Range range_sensor_proj = new Range();
         private Light color_sensor = new Light();
         private ElapsedTime runtime = new ElapsedTime();
+        private ElapsedTime total_time = new ElapsedTime();
 
     // Variables
         // Reading for the initial color we zz take at the beginning of the match.
@@ -57,8 +63,7 @@ public class Krimp_Autonomous extends VisionOpMode {
         private double initialD = 0;
 
         // states variable for the loop
-        private static final int ticks = 1440;
-        private static final double WheelC = 3.14*4;
+        private static final Double ticks_per_inch = 510 / (3.1415 * 4);
 
     // public data
 
@@ -83,9 +88,14 @@ public class Krimp_Autonomous extends VisionOpMode {
         mtrBL = hardwareMap.dcMotor.get("bl_motor");
         mtrShootR = hardwareMap.dcMotor.get("shooter_right");
         mtrShootL = hardwareMap.dcMotor.get("shooter_left");
+        mtrCollect = hardwareMap.dcMotor.get("ball_collector");
+
+        mtrShootL.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+        mtrShootR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
 
         // Servos
         srvRelease = hardwareMap.servo.get("servo_ball");
+        srvRelease = hardwareMap.servo.get("servo_beacon");
 
         // Classes
         color_sensor.setV_sensor(hardwareMap.opticalDistanceSensor.get("ods_line"));
@@ -93,15 +103,16 @@ public class Krimp_Autonomous extends VisionOpMode {
         range_sensor_proj.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front"));
 
         // Positions
-        srvRelease.setPosition(0.3);
+        srvRelease.setPosition(0.25);
+        srvBeacon.setPosition(0.5);
 
         super.init();
         this.setCamera(Cameras.PRIMARY);
         this.setFrameSize(new Size(900, 900));
 
-        enableExtension(VisionOpMode.Extensions.BEACON);         // Beacon detection.
-        enableExtension(VisionOpMode.Extensions.ROTATION);       // Automatic screen rotation correction.
-        enableExtension(VisionOpMode.Extensions.CAMERA_CONTROL); // Manual camera control.
+        enableExtension(LinearVisionOpMode.Extensions.BEACON);         // Beacon detection
+        enableExtension(LinearVisionOpMode.Extensions.ROTATION);       // Automatic screen rotation correction
+        enableExtension(LinearVisionOpMode.Extensions.CAMERA_CONTROL); // Manual camera control
         beacon.setAnalysisMethod(Beacon.AnalysisMethod.FAST);
 
         beacon.setColorToleranceRed(0);
@@ -139,19 +150,31 @@ public class Krimp_Autonomous extends VisionOpMode {
         // v_state == 0 is all about a few seconds where the robot moves the launching servo
         // to release to balls. Then, after 6 seconds. the robot will move into the next state.
         //
+        total_time.reset();
+        total_time.startTime();
+        //
+        // Time starts
+        //
         initialC = color_sensor.getLightDetected();
         telemetry.addData("Light WaveLength", initialC);
-        //Shoots ball for 3 seconds
-
+        //
+        // Shoots ball for 3 seconds
+        // One ball by the releases servo and there is one ball in the collector so there
+        // is a delay between the shots. This allows for smoother transitions.
+        //
         srvRelease.setPosition(srvRelease.MAX_POSITION);
         mtrShootL.setPower(1.0);
         mtrShootR.setPower(-1.0);
+        mtrCollect.setPower(1.0);
         runtime.reset();
-        while (runtime.seconds() < 3) {
+        runtime.startTime();
+        while (runtime.seconds() < 4) {
             telemetry.addData("Seconds", runtime.seconds());
         }
         mtrShootL.setPower(0);
         mtrShootR.setPower(0);
+        mtrCollect.setPower(0);
+        srvRelease.setPosition(0.25);
 
         //
         // Wait...
@@ -160,14 +183,24 @@ public class Krimp_Autonomous extends VisionOpMode {
         // v_state == 1 is all about turning 90 degrees to the left to make sure that the
         // touching servo, the range sensor, and the beacon are all facing the wall.
         //
-        drive_train.setPowerD(1.0);
-        drive_train.turn_left(mtrFR, mtrFL, mtrBR, mtrBL);
+        PauseAuto(0.2);
+        //
+        // Rotation
+        //
+        mtrFR.setPower(1.0);
+        mtrFL.setPower(1.0);
+        mtrBR.setPower(1.0);
+        mtrBL.setPower(1.0);
         runtime.reset();
-        while (runtime.seconds() < 1) {
-            telemetry.addData("Seconds", runtime.seconds());
+        runtime.startTime();
+        while (runtime.seconds() < 0.86) {
+            // Get data
+            telemetry.addData("seconds", runtime.seconds());
+            telemetry.update();
         }
         drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-        drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+
+        PauseAuto(0.4);
 
         //
         // Wait...
@@ -179,11 +212,13 @@ public class Krimp_Autonomous extends VisionOpMode {
         drive_train.setPowerD(0.6);
         drive_train.run_diagonal_right_up(mtrFR, mtrFL, mtrBR, mtrBL);
         runtime.reset();
-        while (runtime.seconds() < 5 || color_sensor.getLightDetected() > initialC + 0.1) {
+        runtime.startTime();
+        while (runtime.seconds() < 8 || color_sensor.getLightDetected() < initialC + .1) {
             telemetry.addData("Colour WaveLength", color_sensor.getLightDetected());
         }
         drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-        drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+
+        PauseAuto(0.4);
 
         //
         // Wait...
@@ -197,68 +232,59 @@ public class Krimp_Autonomous extends VisionOpMode {
         //
         // After repositioning, we will proceed with the next state, pushing.
         //
-        if (beacon.getAnalysis().isLeftBlue() == true) {
-            // go forward if the left side of the beacon is blue.
-            drive_train.setPowerD(0.2);
-            drive_train.run_forward(mtrFR, mtrFL, mtrBR, mtrBL);
-            runtime.reset();
-            while (runtime.seconds() < 1) {
-                // motor to move button here
-                telemetry.addData("Seconds", runtime.seconds());
+        telemetry.addData("Beacon" , beacon.getAnalysis().toString());
+        telemetry.update();
+
+        if (beacon.getAnalysis().isLeftRed()) {
+            encoderDrive(12.0, "right", 0.6);
+
+            PauseAuto(0.2);
+
+            drive_train.setPowerD(0.6);
+            drive_train.run_left(mtrFR, mtrFL, mtrBR, mtrBL);
+            while (range_sensor_beacon.getData() > 30) {
+                // Get data
+                telemetry.addData("Distance ", range_sensor_beacon.getData());
             }
-            drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-            drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+            drive_train.brake(mtrBL, mtrBL, mtrBL, mtrBL);
 
-        } else if (beacon.getAnalysis().isRightBlue() == true) {
-            // go backward if the right side of the beacon is blue.
-            drive_train.setPowerD(0.2);
-            drive_train.run_backward(mtrFR, mtrFL, mtrBR, mtrBL);
-            runtime.reset();
-            while (runtime.seconds() < 1) {
-                // motor to move button here
-                telemetry.addData("Seconds", runtime.seconds());
-            }
-            drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-            drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+        } else if (beacon.getAnalysis().isRightBlue()) {
+            //
+            // Beacon was correctly pressed
+            //
+        } else if (beacon.getAnalysis().isLeftBlue()){
+            //
+            // Go forward if the left side of the beacon is blue.
+            // Beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
+            //
+            // Wait...
+            //
+
+            encoderDrive(6.0, "forward", 0.6);
+
+            PauseAuto(0.2);
+            //
+            // STRAFE RIGHT
+            // v_state == 4 is when the robot goes in for the points and presses the -FIRST BEACON-
+            // After pressing the button, it will go into the next state, going back to original position.
+            //
+
+            encoderDrive(12.0, "right", 0.6);
+
+            PauseAuto(0.2);
+            //
+            // Wait...
+            //
+            // STRAFE LEFT
+            // v_state 5 is about returning to where you were before pressing the button.
+            // After this, the next state will be moving to the next beacon.
+            //
+
+            encoderDrive(10.0, "left" , 0.6);
 
         }
 
-        //
-        // Wait...
-        //
-        // STRAFE RIGHT
-        // v_state == 4 is when the robot goes in for the points and presses the -FIRST BEACON-
-        // After pressing the button, it will go into the next state, going back to original position.
-        //
-        initialD = range_sensor_beacon.getData();
-        drive_train.setPowerD(0.3);
-        drive_train.run_right(mtrFR, mtrFL, mtrBR, mtrBL);
-        runtime.reset();
-        if (range_sensor_beacon.getData() <= initialD - .40 || runtime.seconds() < 4) {
-            // motor to move button here
-            telemetry.addData("Seconds", runtime.seconds());
-            telemetry.addData("Distance", range_sensor_beacon.getData());
-        }
-        drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-        drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
-
-        //
-        // Wait...
-        //
-        // STRAFE LEFT
-        // v_state 5 is about returning to where you were before pressing the button.
-        // After this, the next state will be moving to the next beacon.
-        //
-        drive_train.setPowerD(0.3);
-        drive_train.run_left(mtrFR, mtrFL, mtrBR, mtrBL);
-        runtime.reset();
-        while (range_sensor_beacon.getData() + .05 >= initialD || runtime.seconds() < 4) {
-            // motor to move away from here
-            telemetry.addData("Seconds", runtime.seconds());
-            telemetry.addData("Distance", range_sensor_beacon.getData());
-        }
-        drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-        drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+        PauseAuto(0.4);
 
         //
         // Wait...
@@ -271,12 +297,14 @@ public class Krimp_Autonomous extends VisionOpMode {
         drive_train.setPowerD(0.6);
         drive_train.run_forward(mtrFR, mtrFL, mtrBR, mtrBL);
         runtime.reset();
-        while (runtime.seconds() < 4 || color_sensor.getLightDetected() > initialC + 0.1) {
+        runtime.startTime();
+        while (runtime.seconds() < 6 || color_sensor.getLightDetected() < initialC + .1) {
             telemetry.addData("Colour", color_sensor.getLightDetected());
             telemetry.addData("Seconds", runtime.seconds());
         }
         drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-        drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+
+        PauseAuto(0.4);
 
         //
         // Wait...
@@ -290,85 +318,109 @@ public class Krimp_Autonomous extends VisionOpMode {
         //
         // After repositioning, we will proceed with the next state, pushing.
         //
-        if (beacon.getAnalysis().isLeftBlue() == true) {
-            // go forward if the left side of the beacon is blue.
-            drive_train.setPowerD(0.2);
-            drive_train.run_forward(mtrFR, mtrFL, mtrBR, mtrBL);
-            while (runtime.seconds() < 1) {
-                // motor to move button here
-                telemetry.addData("Seconds", runtime.seconds());
+        telemetry.addData("Beacon" , beacon.getAnalysis().toString());
+        telemetry.update();
+
+        if (beacon.getAnalysis().isLeftRed()) {
+            encoderDrive(12.0, "right", 0.6);
+
+            PauseAuto(0.2);
+
+            drive_train.setPowerD(0.6);
+            drive_train.run_left(mtrFR, mtrFL, mtrBR, mtrBL);
+            while (range_sensor_beacon.getData() > 30) {
+                // Get data
+                telemetry.addData("Distance ", range_sensor_beacon.getData());
             }
-            drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
-            drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
+            drive_train.brake(mtrBL, mtrBL, mtrBL, mtrBL);
 
-        } else if (beacon.getAnalysis().isRightBlue() == true) {
-            // go backward if the right side of the beacon is blue.
-            drive_train.setPowerD(0.2);
-            drive_train.run_backward(mtrFR, mtrFL, mtrBR, mtrBL);
-            while (runtime.seconds() < 1) {
-                // motor to move button here
-                telemetry.addData("Seconds", runtime.seconds());
-            }
-            drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
-            drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
+        } else if (beacon.getAnalysis().isRightBlue()) {
+            //
+            // Beacon was correctly pressed
+            //
+        } else if (beacon.getAnalysis().isLeftBlue()){
+            //
+            // Go forward if the left side of the beacon is blue.
+            // Beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
+            //
+            // Wait...
+            //
+
+            encoderDrive(6.0, "forward", 0.6);
+
+            PauseAuto(0.2);
+            //
+            // STRAFE RIGHT
+            // v_state == 8 is when the robot goes in for the points and presses the -FIRST BEACON-
+            // After pressing the button, it will go into the next state, going back to original position.
+            //
+
+            encoderDrive(12.0, "right", 0.6);
+
+            PauseAuto(0.2);
+            //
+            // Wait...
+            //
+            // STRAFE LEFT
+            // v_state 9 is about returning to where you were before pressing the button.
+            // After this, the next state will be moving to the next beacon.
+            //
+
+            encoderDrive(10.0, "left" , 0.6);
 
         }
+
+        PauseAuto(0.4);
 
         //
         // Wait...
         //
-        // STRAFE RIGHT
-        // v_state == 8 is when the robot goes in for the points and presses the -FIRST BEACON-
-        // After pressing the button, it will go into the next state, going back to original position.
-        //
-        initialD = range_sensor_beacon.getData();
-        drive_train.setPowerD(0.3);
-        drive_train.run_right(mtrFR, mtrFL, mtrBR, mtrBL);
-        runtime.reset();
-        if (range_sensor_beacon.getData() <= initialD - .40 || runtime.seconds() < 4) {
-            // motor to move button here
-            telemetry.addData("Seconds", runtime.seconds());
-            telemetry.addData("Distance", range_sensor_beacon.getData());
-        }
-        drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-        drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+        if (total_time.seconds() < 26) {
+            //
+            // Wait...
+            //
+            // DOWN
+            // v_state 10 is all about moving to the corner vortex to get on the
+            // ramp and get extra points for the team. We have to do this if time
+            // is less than 26 seconds however, all in order to get extra points.
+            //
+            encoderDrive(4.0, "left", 0.5);
 
-        //
-        // Wait...
-        //
-        // STRAFE LEFT
-        // v_state 9 is about returning to where you were before pressing the button.
-        // After this, the next state will be moving to the next beacon.
-        //
-        drive_train.setPowerD(0.3);
-        drive_train.run_left(mtrFR, mtrFL, mtrBR, mtrBL);
-        runtime.reset();
-        while (range_sensor_beacon.getData() + .05 >= initialD || runtime.seconds() < 4) {
-            // motor to move away from here
-            telemetry.addData("Seconds", runtime.seconds());
-            telemetry.addData("Distance", range_sensor_beacon.getData());
-        }
-        drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-        drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+            PauseAuto(0.2);
+            //
+            // Moving a little more towards the ramp edge so we get the points.
+            //
+            encoderDrive(96.0, "backward", 0.5);
 
-        //
-        // Wait...
-        //
-        // DIAGONAL DOWN LEFT
-        // v_state 10 is about hitting the cat ball and staying on the middle platform
-        // to gain the final points for the autonomous period. After this and the position
-        // it stays at. The v_state will increase into nothing. Therefore, it will stop and
-        // end. This is for 90 points in the Velocity vortex.
-        //
-        drive_train.setPowerD(0.6);
-        drive_train.run_diagonal_left_down(mtrFR, mtrFL, mtrBR, mtrBL);
-        runtime.reset();
-        while (runtime.seconds() < 5) {
-            // motor to move away from here
-            telemetry.addData("Seconds", runtime.seconds());
+            PauseAuto(0.2);
+            //
+            // Completed the autonomous period
+            //
+
+        } else if (total_time.seconds() >= 26) {
+            //
+            // Wait...
+            //
+            // DIAGONAL DOWN LEFT
+            // v_state 10 is about hitting the cat ball and staying on the middle platform
+            // to gain the final points for the autonomous period. After this and the position
+            // it stays at. The v_state will increase into nothing. Therefore, it will stop and
+            // end. This is for 90 points in the Velocity vortex.
+            //
+            encoderDrive(9.0, "left", 0.5);
+
+            PauseAuto(0.2);
+            //
+            // Moving a little more towards the center line so we get the points.
+            //
+            encoderDrive(48.0, "diagonal_left_down", 0.5);
+
+            PauseAuto(0.2);
+            //
+            // Completed the autonomous period
+            //
         }
-        drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-        drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+
         //
         // Program Ends...
         //
@@ -380,12 +432,65 @@ public class Krimp_Autonomous extends VisionOpMode {
 
     }
 
-    // Stop
+    // methods
+    public void PauseAuto(double time /*Seconds*/) {
+        //
+        // for Waiting between driving periods.
+        //
+        runtime.reset();
+        while(runtime.seconds() < time)
+        {
+            // do nothing
+            telemetry.addData("Seconds", runtime.seconds());
+        }
+
+    }
+    public void encoderDrive(double inches /*Seconds*/, String direction /*movement type*/, double power /*Power from 1.0 to -1.0*/) {
+        int encoderval;
+
+        encoderval = ticks_per_inch.intValue() * ((int) inches);
+        drive_train.run_using_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
+        //
+        // Uses the encoders and motors to set the specific position
+        //
+        drive_train.setPosition(encoderval, encoderval, encoderval, encoderval, mtrFR, mtrFL, mtrBR, mtrBL);
+        //
+        // Sets the power and direction
+        //
+        drive_train.setPowerD(power);
+        if (direction == "forward"){
+            drive_train.run_forward(mtrFR, mtrFL, mtrBR, mtrBL);
+        } else if(direction == "backward"){
+            drive_train.run_backward(mtrFR, mtrFL, mtrBR, mtrBL);
+        } else if (direction == "left"){
+            drive_train.run_left(mtrFR, mtrFL, mtrBR, mtrBL);
+        } else if (direction == "right"){
+            drive_train.run_right(mtrFR, mtrFL, mtrBR, mtrBL);
+        } else if (direction == "diagonal_left_up"){
+            drive_train.run_diagonal_left_up(mtrFR, mtrFL, mtrBR, mtrBL);
+        } else if (direction == "diagonal_left_down"){
+            drive_train.run_diagonal_left_down(mtrFR, mtrFL, mtrBR, mtrBL);
+        }
+        //
+        // while in the -TEST DISTANCE- loop below, it will keep running until the distance
+        // from the encoders is achieved. When achieved, the program will proceed to the end
+        // of the function.
+        //
+        while(drive_train.testDistance(mtrFR) != 1){
+            telemetry.addData("Pos " , mtrFR.getCurrentPosition());
+            telemetry.update();
+        }
+        //
+        // Ends the Drive period.
+        //
+        drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
+    }
     public void stop() {
         //
         // Stops -LOOP- and ends Program.
         //
-        super.stop();
+       drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
 
     }
+
 }

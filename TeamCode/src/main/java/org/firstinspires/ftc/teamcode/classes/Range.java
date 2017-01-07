@@ -37,7 +37,7 @@ public class Range {
 
     // gets
     public double getData() {
-        return range.getDistance(DistanceUnit.METER);
+        return range.getDistance(DistanceUnit.CM);
     }
 
     // methods // None //
