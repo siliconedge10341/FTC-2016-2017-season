@@ -31,7 +31,7 @@ public class MecanumDriver extends OpMode{
 		private boolean percision_flag;
 		// percision flag is to decrease power, if power is decreased, the robot will go slower.
 
-	private double ballpos = .5;
+	private double ballpos = .25;
     private double LSRotations = 0;
 	private double initialR = 0;
 	private Mecanum yo = new Mecanum();
@@ -60,7 +60,7 @@ public class MecanumDriver extends OpMode{
 
 		// Servos
 		ballRelease = hardwareMap.servo.get("servo_ball");
-		ballRelease.setPosition(0.7);
+		ballRelease.setPosition(0.25);
 		beaconServo = hardwareMap.servo.get("servo_beacon");
 		beaconServo.setPosition(0.5);
 
@@ -147,7 +147,7 @@ public class MecanumDriver extends OpMode{
 		//
 		// bantu shooter
 		//
-		if (ballpos <= Servo.MIN_POSITION + .25 || ballpos >= Servo.MAX_POSITION - .25 || gamepad2.b){
+		if (ballpos >= .125 || gamepad2.b){
             motorShootL.setPower(1.0);
 			motorShootR.setPower(-1.0);
 		} else {
@@ -158,12 +158,12 @@ public class MecanumDriver extends OpMode{
         // Moves Servo
 		//
 		if (gamepad2.dpad_right){
-            if (ballpos > Servo.MIN_POSITION) {
-                ballpos = ballpos -.05;
+            if (ballpos > .125) {
+                ballpos = 0.0;
             }
 		}else if(gamepad2.dpad_left){
-            if (ballpos < Servo.MAX_POSITION) {
-                ballpos = ballpos +.05;
+            if (ballpos < .125) {
+                ballpos = .25;
             }
 		}
         ballRelease.setPosition(ballpos);
