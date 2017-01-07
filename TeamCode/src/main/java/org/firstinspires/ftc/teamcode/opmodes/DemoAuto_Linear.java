@@ -475,51 +475,8 @@ public class DemoAuto_Linear extends LinearVisionOpMode {
                 // Completed the autonomous period
                 //
                 Drive_Train.brake(fr, fl, br, bl);
+            }
         }
-    }
-        //Run to line
-        /*
-        Drive_Train.run_forward(fr, fl, br, bl);
-        //Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
-        while (opModeIsActive() && ods.getLightDetected() > initialC + .1) {
-              telemetry.addData("Light" , ods.getLightDetected());
-            telemetry.update();
-        }
-        Drive_Train.reset_encoders(fr, fl, br, bl);
-        Drive_Train.brake(fr, fl, br, bl);
-        // Wait...
-        //
-        //Stop at wall
-
-        Drive_Train.run_using_encoders(fr, fl, br, bl);
-        Drive_Train.run_right(fr, fl, br, bl);
-
-        while ( opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > 19) {
-           telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.CM));
-           telemetry.update();
-        }
-        Drive_Train.reset_encoders(fr, fl, br, bl);
-        Drive_Train.brake(fr, fl, br, bl);
-        //
-        // Wait...
-        //
-        //Detect beacon
-        if (beacon.getAnalysis().isLeftBlue() == true) {
-            //go forward if the left side of the beacon is blue
-            encoderDrive(6.0,"backward" , .5);
-        } else {
-           // encoderDrive(720,"backward" , .15);
-        }
-        //beacon code
-
-        //
-        // Wait...
-        //
-
-        //hit the button
-        encoderDrive(200,"right",.3);
-        encoderDrive(6.0,"right",.3);
-        */
     }
 
     // methods
