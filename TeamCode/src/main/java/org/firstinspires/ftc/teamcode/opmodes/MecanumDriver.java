@@ -159,7 +159,7 @@ public class MecanumDriver extends OpMode{
 		//
 		if (gamepad2.dpad_right){
             if (ballpos > .125) {
-                ballpos = 0.0;
+                ballpos = -0.2;
             }
 		}else if(gamepad2.dpad_left){
             if (ballpos < .125) {

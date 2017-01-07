@@ -76,7 +76,7 @@ public class Autonomous_red_nocase extends LinearVisionOpMode {
 
         ods = hardwareMap.opticalDistanceSensor.get("ods_line");
         rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
-        ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
+        ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
 
 
         // Sets Position
