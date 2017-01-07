@@ -1,3 +1,4 @@
+package org.firstinspires.ftc.teamcode.opmodes;
 /*
  * Copyright (c) 2014, 2015 Qualcomm Technologies Inc
  *
@@ -36,5 +37,3 @@
  * <p>
 
  */
-
-package com.qualcomm.ftcrobotcontroller.opmodes;

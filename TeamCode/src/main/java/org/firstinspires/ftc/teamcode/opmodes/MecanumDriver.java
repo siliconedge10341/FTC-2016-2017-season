@@ -77,7 +77,8 @@ public class MecanumDriver extends OpMode{
 	// loop
 	@Override
 	public void loop() {
-        //   Start-A Runs the Program   //
+		//-------------KEY--------------//
+        //   Start-B Runs the Program   //
         //----GAMEPAD 2 FUNCTION KEY----//
         //          -GAMEPAD-           //
         // UP: none;					//
@@ -93,8 +94,29 @@ public class MecanumDriver extends OpMode{
         // LEFT: None;                  //
         // RIGHT: None;                 //
         //------------------------------//
+		//   Start-A Runs the Program   //
+		//----GAMEPAD 1 FUNCTION KEY----//
+		//         -GAMEPAD L-          //
+		// UP: Forward					//
+		// RIGHT: Strafe Right		    //
+		// LEFT: Strafe Left	        //
+		// DOWN: Backward				//
+		//         -GAMEPAD R-          //
+		// UP: none;					//
+		// RIGHT: Turn right			//
+		// LEFT: Turn left				//
+		// DOWN: none;					//
+		//          -BUTTONS-           //
+		// A: none;        				//
+		// B: none;             		//
+		// X: none;      		        //
+		// Y: none;		                //
+		//         -TRIGGERED-          //
+		// LEFT: Button goes down       //
+		// RIGHT: Button goes up        //
+		//------------------------------//
 		//
-        // Decreases Power
+        // Power Settings
 		//
 		if (gamepad1.right_trigger > 0.8) {
 			percision_flag = true;
@@ -157,7 +179,7 @@ public class MecanumDriver extends OpMode{
         } else {
             motorLS.setPower(0.0);
         }
-		telemetry.addData("LinearSlideMotor ",LSRotations);
+		telemetry.addData("LinearSlideMotor", LSRotations);
 		telemetry.update();
 
 	}

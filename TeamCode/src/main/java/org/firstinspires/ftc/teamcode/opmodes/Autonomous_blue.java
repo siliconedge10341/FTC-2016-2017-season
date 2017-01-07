@@ -26,6 +26,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
     // instance variables
     // private variables
         // Motors
+
         private DcMotor fr;
         private DcMotor fl;
         private DcMotor bl;
@@ -47,7 +48,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         private Mecanum Drive_Train = new Mecanum();
         private ElapsedTime runtime = new ElapsedTime();
 
-
     // Reading for the initial color we take at the beginning of the match.
     // This helps us because when we test for the white line, we want to be
     // able to tell the difference from the color of the ground. Thus
@@ -64,28 +64,29 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
 
     public void runOpMode() throws InterruptedException {
-        // Sets every class at the beginning of the demoautonomous run class
-        //Hardware Maps
-        fr = hardwareMap.dcMotor.get("fr_motor");
-        fl = hardwareMap.dcMotor.get("fl_motor");
-        br = hardwareMap.dcMotor.get("br_motor");
-        bl = hardwareMap.dcMotor.get("bl_motor");
+        // Sets every class at the beginning of the autonomous run class
+        // Hardware Maps
+            // Motors
+            fr = hardwareMap.dcMotor.get("fr_motor");
+            fl = hardwareMap.dcMotor.get("fl_motor");
+            br = hardwareMap.dcMotor.get("br_motor");
+            bl = hardwareMap.dcMotor.get("bl_motor");
+            motorShootL = hardwareMap.dcMotor.get("shooter_left");
+            motorShootR = hardwareMap.dcMotor.get("shooter_right");
+            motorCollector = hardwareMap.dcMotor.get("ball_collector");
 
-        motorShootL = hardwareMap.dcMotor.get("shooter_left");
-        motorShootR = hardwareMap.dcMotor.get("shooter_right");
-        motorCollector = hardwareMap.dcMotor.get("ball_collector");
+            // Servos
+            releaseServo = hardwareMap.servo.get("servo_ball");
+            beaconServo = hardwareMap.servo.get("servo_beacon");
 
-        releaseServo = hardwareMap.servo.get("servo_ball");
-        beaconServo = hardwareMap.servo.get("servo_beacon");
+            // Classes
+            ods = hardwareMap.opticalDistanceSensor.get("ods_line");
+            rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
+            ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
 
-        ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-        rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
-        ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
-
-
-        // Sets Position
-        releaseServo.setPosition(0.3);
-        beaconServo.setPosition(.5);
+            // Sets Position
+            releaseServo.setPosition(0.3);
+            beaconServo.setPosition(.5);
 
         waitForVisionStart();
 
@@ -111,14 +112,12 @@ public class Autonomous_blue extends LinearVisionOpMode {
         waitForStart();
         //Start OpMode
 
-
         initialC = ods.getLightDetected();
 
-       // encoderDrive(510,"forward",1.0);
-
-
-        /////////////////////////////////////////////////////////
-        //Shoot ball:
+        // encoderDrive(510,"forward",1.0);
+        //
+        // Shoot ball:
+        //
         releaseServo.setPosition(.05);
         motorCollector.setPower(0.9);
         motorShootL.setPower(1.0);
@@ -135,21 +134,27 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
 
         //Hit the ball:
-        encoderDrive(2.0*2, "left" , .5);
-        PauseAuto(.5);
-        //Turn:
+        encoderDrive(4.0, "left", .5);
+
+        PauseAuto(0.4);
+        //
+        // Turn
+        //
         fr.setPower(-1.0);
         fl.setPower(-1.0);
         br.setPower(-1.0);
         bl.setPower(-1.0);
 
         runtime.reset();
+        runtime.startTime();
         while (runtime.seconds() < 0.86) {
             telemetry.addData("seconds", runtime.seconds());
             telemetry.update();
         }
         Drive_Train.brake(fr, fl, br, bl);
-        PauseAuto(.5);
+
+        PauseAuto(0.4);
+
         //Move to wall
         /*
         Drive_Train.setPowerD(.2);
@@ -168,75 +173,85 @@ public class Autonomous_blue extends LinearVisionOpMode {
         beaconServo.setPosition(1.0);*/
 
 
-        //Move and detect line
-
-        //Drive_Train.run_using_encoders(fr,fl,br,bl);
+        // Move and detect line
+        //
+        // Drive_Train.run_using_encoders(fr,fl,br,bl);
+        //
         Drive_Train.setPowerD(.15);
-
         Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
-
         while (opModeIsActive() && ods.getLightDetected()< initialC +.1) {
+            // Get Data
             telemetry.addData("Light ",ods.getLightDetected());
             telemetry.update();
         }
         //Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
 
-        PauseAuto(.5);
+        PauseAuto(.4);
 
         beaconServo.setPosition(0.0);
         //Go closer to wall
         Drive_Train.setPowerD(.2);
         Drive_Train.run_right(fr,fl,br,bl);
         while(ranges.getDistance(DistanceUnit.INCH) > 8){
+            // Get data
             telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.INCH));
             telemetry.update();
         }
-
-
+        //
         // Detect beacon
+        //
         telemetry.addData("Beacon " , beacon.getAnalysis());
         telemetry.update();
         if (beacon.getAnalysis().isLeftBlue() == true) {
-            //go forward if the left side of the beacon is blue
-
-            //beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
+            //
+            // go forward if the left side of the beacon is blue.
+            // beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
+            //
             encoderDrive(buttonWidth,"forward" , .3);
 
         } else {
             //beacon is 1/2 a foot
 
         }
+        //
         // beacon code
+        //
+        PauseAuto(1.0);
+        //
+        // hit the button
+        //
+        encoderDrive(1.5 * 2,"right" , .15);
 
         PauseAuto(1.0);
-
-        //hit the button
-
-        encoderDrive(1.5 * 2,"right" , .15);
-        PauseAuto(.8);
-        //go back a little bit
+        //
+        // go back a little bit
+        //
         encoderDrive(10.0 * 2, "left" , .15);
-
-        //Run to line
+        //
+        // Run to line
+        //
         Drive_Train.setPowerD(.2);
         Drive_Train.run_forward(fr, fl, br, bl);
         //Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
         while (opModeIsActive() && ods.getLightDetected() > initialC + .1) {
+            // Get data
             telemetry.addData("Light" , ods.getLightDetected());
             telemetry.update();
         }
         Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
+        //
         // Wait...
         //
-        //Stop at wall
-        PauseAuto(.5);
+        // Stop at wall
+        //
+        PauseAuto(.4);
 
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         Drive_Train.run_right(fr, fl, br, bl);
-
         while ( opModeIsActive() && ranges.getDistance(DistanceUnit.INCH) > 8) {
+            // Get data
             telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.INCH));
             telemetry.update();
         }
@@ -245,28 +260,29 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Wait...
         //
-        //Detect beacon
+        // Detect beacon
+        //
         telemetry.addData("Beacon" , beacon.getAnalysis());
         telemetry.update();
         if (beacon.getAnalysis().isLeftBlue() == true) {
-            //go forward if the left side of the beacon is blue
+            // go forward if the left side of the beacon is blue
             encoderDrive(6.0,"backward" , .5);
         } else {
             // encoderDrive(720,"backward" , .15);
         }
         PauseAuto(1.0);
-
-        //beacon code
-
+        //
+        // beacon code
         //
         // Wait...
         //
-
-        //hit the button
+        // hit the button
+        //
         encoderDrive(3.0 *2,"right",.3);
-        PauseAuto(.5);
-        beaconServo.setPosition(.5);
 
+        PauseAuto(.4);
+
+        beaconServo.setPosition(.5);
 
     }
 
