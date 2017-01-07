@@ -29,7 +29,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * @version 2015-08-01-06-01
  */
 
-@Autonomous(name = "Red_Autonomous", group = "Red")
+@Autonomous(name = "Red_Auto_Linear", group = "Red")
 public class Autonomous_red extends LinearVisionOpMode {
     // instance variables
     // private variables
