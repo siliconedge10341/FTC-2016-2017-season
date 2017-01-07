@@ -66,6 +66,7 @@ public class Krimp_Autonomous extends VisionOpMode {
         private static final Double ticks_per_inch = 510 / (3.1415 * 4);
 
     // public data
+        // None;
 
     // Constructors
     public Krimp_Autonomous() {
