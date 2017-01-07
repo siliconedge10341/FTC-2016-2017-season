@@ -134,10 +134,10 @@ public class Autonomous_red_nocase extends LinearVisionOpMode {
         encoderDrive(2.0*2, "left" , .5);
         PauseAuto(.5);
         //Turn:
-        fr.setPower(-1.0);
-        fl.setPower(-1.0);
-        br.setPower(-1.0);
-        bl.setPower(-1.0);
+        fr.setPower(1.0);
+        fl.setPower(1.0);
+        br.setPower(1.0);
+        bl.setPower(1.0);
 
         runtime.reset();
         while (runtime.seconds() < 0.86) {

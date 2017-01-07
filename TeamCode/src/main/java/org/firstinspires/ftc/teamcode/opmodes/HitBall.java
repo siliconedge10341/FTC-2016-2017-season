@@ -104,7 +104,7 @@ public class HitBall extends LinearOpMode {
         //
         // starting autonomous
         //
-        encoderDrive(48.0, "leftalign", 0.5);
+        encoderDrive(24.0, "leftalign", 0.5);
 
         PauseAuto(0.2);
         //
