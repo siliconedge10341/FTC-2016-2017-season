@@ -106,7 +106,7 @@ public class HitBall extends LinearOpMode {
         //
         // Drives to the center of the field
         //
-        encoderDrive(60.0, "left", .5);
+        encoderDrive(48.0, "left", .5);
         //
         // end of autonomous period
         //
