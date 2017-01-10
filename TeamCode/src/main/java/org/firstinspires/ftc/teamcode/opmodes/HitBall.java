@@ -147,7 +147,7 @@ public class HitBall extends LinearOpMode {
         motorShootL.setPower(0);
         motorShootR.setPower(0);
         motorCollector.setPower(0);
-        */
+
         //
         // Drives to the center of the field
         //
