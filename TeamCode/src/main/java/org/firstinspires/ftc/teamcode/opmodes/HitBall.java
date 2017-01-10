@@ -147,7 +147,7 @@ public class HitBall extends LinearOpMode {
         motorShootL.setPower(0);
         motorShootR.setPower(0);
         motorCollector.setPower(0);
-
+        */
         //
         // Drives to the center of the field
         //
@@ -164,7 +164,7 @@ public class HitBall extends LinearOpMode {
         // end of autonomous period
         //
         Drive_Train.brake(fr,fl,br,bl);
-        telemetry.addData("DONE", "Done");
+        telemetry.addData( "DONE" , "Done");
         telemetry.update();
 
     }
@@ -202,13 +202,16 @@ public class HitBall extends LinearOpMode {
         // from the encoders is achieved. When achieved, the program will proceed to the end
         // of the function.
         //
-        if(direction == "leftalign") {
-            while(Drive_Train.testDistance(fl)!= 1) {
+        if(direction == "leftalign")
+        {
+            while(Drive_Train.testDistance(fl)!= 1)
+            {
                 Drive_Train.run_left_using_alignment(fr,fl,br,bl,rangesl.getDistance(DistanceUnit.CM),rangesr.getDistance(DistanceUnit.CM));
                 telemetry.addData("Pos ", fl.getCurrentPosition());
                 telemetry.update();
             }
-        } else {
+        }
+        else {
             while (Drive_Train.testDistance(fl) != 1) {
                 telemetry.addData("Pos ", fl.getCurrentPosition());
                 telemetry.update();
@@ -229,5 +232,6 @@ public class HitBall extends LinearOpMode {
             // do nothing
             telemetry.addData("Seconds", runtime.seconds());
         }
+
     }
 }

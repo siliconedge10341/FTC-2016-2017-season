@@ -37,7 +37,7 @@ import org.firstinspires.ftc.teamcode.classes.Mecanum;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="40_points_farside", group="Pushbot")
+@Autonomous(name="10_points", group="Pushbot")
 
 public class HitballFar extends LinearOpMode {
 
@@ -87,27 +87,12 @@ public class HitballFar extends LinearOpMode {
         //
         // starting autonomous
         //
-        PauseAuto(8.0);
-        encoderDrive(12.0, "forward" , .5);
-
-        releaseServo.setPosition(.05);
-        motorShootL.setPower(1.0);
-        motorShootR.setPower(-1.0);
-        motorCollector.setPower(1.0);
-        runtime.reset();
-        runtime.startTime();
-        while (runtime.seconds() < 8){
-            telemetry.addData("Seconds" , runtime.seconds());
-            telemetry.update();
-        }
-        motorShootL.setPower(0);
-        motorShootR.setPower(0);
-        motorCollector.setPower(0);
+        PauseAuto(5.5);
+        encoderDrive(64.0, "forward" , .5);
 
         //
         // Drives to the center of the field
         //
-        encoderDrive(48.0 * 2, "left", .5);
         //
         // end of autonomous period
         //

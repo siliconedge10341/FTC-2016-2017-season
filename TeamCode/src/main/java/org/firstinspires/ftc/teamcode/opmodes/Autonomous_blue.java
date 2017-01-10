@@ -201,8 +201,10 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Detect beacon
         //
-        telemetry.addData("Beacon " , beacon.getAnalysis());
-        telemetry.update();
+        while(opModeIsActive()&& !beacon.getAnalysis().isBeaconFound()) {
+            telemetry.addData("Beacon ", beacon.getAnalysis());
+            telemetry.update();
+        }
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //
             // go forward if the left side of the beacon is blue.
@@ -247,6 +249,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Stop at wall
         //
         PauseAuto(.4);
+        //Move closer to the wall
 
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         Drive_Train.run_right(fr, fl, br, bl);
@@ -262,8 +265,10 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Detect beacon
         //
-        telemetry.addData("Beacon" , beacon.getAnalysis());
-        telemetry.update();
+        while (opModeIsActive() && !beacon.getAnalysis().isBeaconFound()) {
+            telemetry.addData("Beacon", beacon.getAnalysis());
+            telemetry.update();
+        }
         if (beacon.getAnalysis().isLeftBlue() == true) {
             // go forward if the left side of the beacon is blue
             encoderDrive(6.0,"backward" , .5);
