@@ -64,25 +64,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
 
     public void runOpMode() throws InterruptedException {
-        waitForVisionStart();
-
-        this.setCamera(Cameras.PRIMARY);
-        this.setFrameSize(new Size(900, 900));
-
-        enableExtension(LinearVisionOpMode.Extensions.BEACON);         //Beacon detection
-        enableExtension(LinearVisionOpMode.Extensions.ROTATION);       //Automatic screen rotation correction
-        enableExtension(LinearVisionOpMode.Extensions.CAMERA_CONTROL); //Manual camera control
-        beacon.setAnalysisMethod(Beacon.AnalysisMethod.FAST);
-
-        beacon.setColorToleranceRed(0);
-        beacon.setColorToleranceBlue(0);
-
-        rotation.setIsUsingSecondaryCamera(false);
-        rotation.disableAutoRotate();
-        rotation.setActivityOrientationFixed(ScreenOrientation.PORTRAIT);
-
-        cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
-        cameraControl.setAutoExposureCompensation();
         // Sets every class at the beginning of the autonomous run class
         // Hardware Maps
             // Motors
@@ -101,16 +82,32 @@ public class Autonomous_blue extends LinearVisionOpMode {
             // Classes
             ods = hardwareMap.opticalDistanceSensor.get("ods_line");
             rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
-            ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
+            ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
 
             // Sets Position
             releaseServo.setPosition(0.3);
             beaconServo.setPosition(.5);
 
-
+        waitForVisionStart();
 
         //VISION:
+        this.setCamera(Cameras.PRIMARY);
+        this.setFrameSize(new Size(900, 900));
 
+        enableExtension(LinearVisionOpMode.Extensions.BEACON);         //Beacon detection
+        enableExtension(LinearVisionOpMode.Extensions.ROTATION);       //Automatic screen rotation correction
+        enableExtension(LinearVisionOpMode.Extensions.CAMERA_CONTROL); //Manual camera control
+        beacon.setAnalysisMethod(Beacon.AnalysisMethod.FAST);
+
+        beacon.setColorToleranceRed(0);
+        beacon.setColorToleranceBlue(0);
+
+        rotation.setIsUsingSecondaryCamera(false);
+        rotation.disableAutoRotate();
+        rotation.setActivityOrientationFixed(ScreenOrientation.PORTRAIT);
+
+        cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
+        cameraControl.setAutoExposureCompensation();
 
         waitForStart();
         //Start OpMode
@@ -121,7 +118,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Shoot ball:
         //
-        /*
         releaseServo.setPosition(.05);
         motorCollector.setPower(0.9);
         motorShootL.setPower(1.0);
@@ -135,8 +131,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
         releaseServo.setPosition(.3);
         motorShootL.setPower(0.0);
         motorShootR.setPower(0.0);
-*/
-/*
+
+
         //Hit the ball:
         encoderDrive(4.0, "left", .5);
 
@@ -158,7 +154,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         Drive_Train.brake(fr, fl, br, bl);
 
         PauseAuto(0.4);
-        */
 
         //Move to wall
         /*
@@ -180,7 +175,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         // Move and detect line
         //
-         Drive_Train.run_using_encoders(fr,fl,br,bl);
+        // Drive_Train.run_using_encoders(fr,fl,br,bl);
         //
         Drive_Train.setPowerD(.15);
         Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
@@ -192,27 +187,24 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
 
-        PauseAuto(2.4);
+        PauseAuto(.4);
 
         beaconServo.setPosition(0.0);
         //Go closer to wall
         Drive_Train.setPowerD(.2);
         Drive_Train.run_right(fr,fl,br,bl);
-
         while(ranges.getDistance(DistanceUnit.INCH) > 8){
             // Get data
             telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.INCH));
             telemetry.update();
         }
-
-        Drive_Train.brake(fr,fl,br,bl);
         //
         // Detect beacon
         //
-        PauseAuto(2.0);
-        telemetry.addData("Beacon " , beacon.getAnalysis().getColorString());
-        telemetry.update();
-
+        while(opModeIsActive()&& !beacon.getAnalysis().isBeaconFound()) {
+            telemetry.addData("Beacon ", beacon.getAnalysis());
+            telemetry.update();
+        }
         if (beacon.getAnalysis().isLeftBlue() == true) {
             //
             // go forward if the left side of the beacon is blue.
@@ -224,7 +216,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
             //beacon is 1/2 a foot
 
         }
-        waitOneFullHardwareCycle();
         //
         // beacon code
         //
@@ -233,8 +224,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // hit the button
         //
         encoderDrive(1.5 * 2,"right" , .15);
-        telemetry.addData("Button Hit" , " d");
-        telemetry.update();
 
         PauseAuto(1.0);
         //
@@ -260,6 +249,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Stop at wall
         //
         PauseAuto(.4);
+        //Move closer to the wall
 
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         Drive_Train.run_right(fr, fl, br, bl);
@@ -275,8 +265,10 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Detect beacon
         //
-        telemetry.addData("Beacon" , beacon.getAnalysis());
-        telemetry.update();
+        while (opModeIsActive() && !beacon.getAnalysis().isBeaconFound()) {
+            telemetry.addData("Beacon", beacon.getAnalysis());
+            telemetry.update();
+        }
         if (beacon.getAnalysis().isLeftBlue() == true) {
             // go forward if the left side of the beacon is blue
             encoderDrive(6.0,"backward" , .5);
