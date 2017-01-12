@@ -164,31 +164,56 @@ public class Mecanum{
         return wheel_rotation;
     }
 
-    public void run_left_using_alignment(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, double distanceleft, double distanceright)
+    public void run_left_using_alignment(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, double distancefront, double distanceback)
     {
         FLpower = -BasePower;
         BLpower = BasePower; //0.95
         FRpower = -BasePower;  //0.73
         BRpower = BasePower; // 1
-        double distancedifference = distanceleft - distanceright;
+        double distancedifference = distancefront - distanceback;
         if(distancedifference > 1)
         {
-            //turn left
-            FLpower -= (double) (distancedifference/60);
-            FRpower -= (double) (distancedifference/60);
+            //turn right
+            BLpower += (double) (distancedifference/60);
+            BRpower += (double) (distancedifference/60);
         }
         else if(distancedifference < -1)
         {
             distancedifference = -1 * distancedifference;
-            //turn right
-            BLpower += (double) (distancedifference/60);
-            BRpower += (double) (distancedifference/60);
+            //turn left
+            FLpower -= (double) (distancedifference/60);
+            FRpower -= (double) (distancedifference/60);
         }
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
         motorFL.setPower(FLpower);
         motorBL.setPower(BLpower);
+    }
 
+    public void run_right_using_alignment(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL, double distancefront, double distanceback)
+    {
+        FLpower = BasePower;
+        BLpower = -BasePower; //0.95
+        FRpower = BasePower;  //0.73
+        BRpower = -BasePower; // 1
+        double distancedifference = distancefront - distanceback;
+        if(distancedifference > 1)
+        {
+            //turn right
+            FLpower += (double) (distancedifference/60);
+            FRpower += (double) (distancedifference/60);
+        }
+        else if(distancedifference < -1)
+        {
+            distancedifference = -1 * distancedifference;
+            //turn left
+            BLpower -= (double) (distancedifference/60);
+            BRpower -= (double) (distancedifference/60);
+        }
+        motorFR.setPower(FRpower);
+        motorBR.setPower(BRpower);
+        motorFL.setPower(FLpower);
+        motorBL.setPower(BLpower);
     }
 
     // methods
