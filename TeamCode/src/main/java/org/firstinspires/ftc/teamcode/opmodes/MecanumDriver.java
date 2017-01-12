@@ -9,6 +9,7 @@ import org.firstinspires.ftc.teamcode.classes.Range;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name="MecanumDrive", group ="Drive")
 public class MecanumDriver extends OpMode{
@@ -29,6 +30,9 @@ public class MecanumDriver extends OpMode{
 		private Servo beaconServo;
 
 		private boolean percision_flag;
+		private boolean collect;
+		private double collecttime = 0.090;
+
 		// percision flag is to decrease power, if power is decreased, the robot will go slower.
 
 	private double ballpos = .25;
@@ -37,8 +41,10 @@ public class MecanumDriver extends OpMode{
 	private Mecanum yo = new Mecanum();
     private double power = 0;
     //private Range dist = new Range();
+	private ElapsedTime runtime = new ElapsedTime();
+	;
 
-    public MecanumDriver() {
+	public MecanumDriver() {
 		// default constructor
 
 	}
@@ -139,10 +145,34 @@ public class MecanumDriver extends OpMode{
 		//
         // Run Collector
 		//
+		if (gamepad2.left_bumper){
+			collecttime = collecttime - 0.00001;
+			telemetry.addData("seconds",collecttime);
+		}
+
+		if (gamepad2.right_bumper){
+			collecttime = collecttime + 0.00001;
+			telemetry.addData("seconds",collecttime);
+		}
+
 		if (gamepad2.a)  {
-			motorCollector.setPower(1.0);
+			runtime.reset();
+			if (collect == true) {
+				while (runtime.seconds() < collecttime) {
+					telemetry.addData("seconds", runtime.seconds());
+					telemetry.update();
+					motorCollector.setPower(-1.0);
+				}
+			}
+
+			motorCollector.setPower(0);
+
+			collect = false;
+
+
 		} else {
 			motorCollector.setPower(0);
+			collect = true;
 		}
 		//
 		// bantu shooter
