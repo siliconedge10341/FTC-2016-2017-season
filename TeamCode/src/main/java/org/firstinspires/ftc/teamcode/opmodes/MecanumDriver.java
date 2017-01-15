@@ -16,35 +16,30 @@ public class MecanumDriver extends OpMode{
     // instance variables
     // private variables
 		// Motors
-		private DcMotor motorConveyor;
+		private DcMotor motorC;
 		private DcMotor motorFR;
 		private DcMotor motorFL;
 		private DcMotor motorBR;
 		private DcMotor motorBL;
-		private DcMotor motorShootL;
-		private DcMotor motorShootR;
+		private DcMotor motorShootB;
+		private DcMotor motorShootT;
 		private DcMotor motorLS;
 
 		// Servos
 		private Servo ballRelease;
-		//private Servo beaconServo;
 		private Servo collectServo;
 
-		private boolean percision_flag;
-		private boolean collect;
-		private double collecttime = 0.090;
-
+		private boolean percision_flag = false;
+        //
 		// percision flag is to decrease power, if power is decreased, the robot will go slower.
-
-	private double ballpos = .25;
+        //
+    // Variables
     private double LSRotations = 0;
 	private double initialR = 0;
 	private Mecanum yo = new Mecanum();
-    private double power = 0;
-    //private Range dist = new Range();
 	private ElapsedTime runtime = new ElapsedTime();
-	;
 
+    // constructors
 	public MecanumDriver() {
 		// default constructor
 
@@ -61,17 +56,19 @@ public class MecanumDriver extends OpMode{
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
 		motorBR = hardwareMap.dcMotor.get("br_motor");
         motorLS = hardwareMap.dcMotor.get("linear_slide_motor");
-		motorConveyor = hardwareMap.dcMotor.get("conveyor_motor");
-		motorShootL = hardwareMap.dcMotor.get("shooter_left");
-		motorShootR = hardwareMap.dcMotor.get("shooter_right");
+		motorC = hardwareMap.dcMotor.get("conveyor_motor");
+		motorShootB = hardwareMap.dcMotor.get("shooter_left");
+		motorShootT = hardwareMap.dcMotor.get("shooter_right");
 
 		// Servos
 		ballRelease = hardwareMap.servo.get("servo_ball");
-		ballRelease.setPosition(0.25);
+		ballRelease.setPosition(0.4);
 		//beaconServo = hardwareMap.servo.get("servo_beacon");
 		//beaconServo.setPosition(0.5);
 		collectServo = hardwareMap.servo.get("servo_collector");
 		collectServo.setPosition(.5);
+		collectServo = hardwareMap.servo.get("servo_collect");
+		collectServo.setPosition(0.0);
 
 		// Classes
 		//dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
@@ -95,7 +92,7 @@ public class MecanumDriver extends OpMode{
         // LEFT: Move Servo Left        //
         // DOWN: None;                  //
         //          -BUTTONS-           //
-        // A: Turns on Collector        //
+        // A: Runs Conveyor 	        //
         // B: Runs Shooter              //
         // X: Raise Slide               //
         // Y: Lower Slide               //
@@ -116,7 +113,7 @@ public class MecanumDriver extends OpMode{
 		// LEFT: Turn left				//
 		// DOWN: none;					//
 		//          -BUTTONS-           //
-		// A: none;        				//
+		// A: Runs the Collector		//
 		// B: none;             		//
 		// X: none;      		        //
 		// Y: none;		                //
@@ -133,15 +130,6 @@ public class MecanumDriver extends OpMode{
 			percision_flag = false;
 		}
 		//
-		// beacon servo
-		//
-		/*if (gamepad1.x) {
-			beaconServo.setPosition(beaconServo.MIN_POSITION);
-		} else if (gamepad1.y) {
-			beaconServo.setPosition(0.5);
-		}
-		*/
-		//
         // runs the robot
 		//
 		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x,percision_flag);
@@ -149,48 +137,44 @@ public class MecanumDriver extends OpMode{
 		//
         // Run Collector
 		//
-		if (gamepad2.left_bumper){
-			collectServo.setPosition(.3);
+		if (gamepad1.a){
+			collectServo.setPosition(0.5);
+		} else if (gamepad1.b){
+			collectServo.setPosition(0.0);
 		}
-
-		if (gamepad2.right_bumper){
-			collectServo.setPosition(0);
-		}
-		//conveyor
-
+		//
+		// Runs the conveyor
+		//
 		if (gamepad2.a)  {
-			motorConveyor.setPower(.7);
-
-
+			motorC.setPower(.7);
 		} else {
-			motorConveyor.setPower(0);
-
+			motorC.setPower(0);
 		}
 		//
-		// bantu shooter
+		// bantu shooter function
+        // This is a 3 second function that lets the motors accelerate and move
+        // the servo to shoot one ball.
 		//
-		if (ballpos <= .125 || gamepad2.b){
-            motorShootL.setPower(1.0);
-			motorShootR.setPower(-1.0);
-		} else {
-			motorShootL.setPower(0);
-			motorShootR.setPower(0);
-		}
-		//
-        // Moves Servo
-		//
-		if (gamepad2.dpad_right){
-            if (ballpos > .125) {
-                ballpos = -0.2;
+        if (gamepad2.b) {
+            motorShootB.setPower(0.8);
+            motorShootT.setPower(-1.0);
+            runtime.reset();
+            runtime.startTime();
+            while (runtime.seconds() < 1.5) {
+                // wait for the motors to accelerate to speed.
             }
-		}else if(gamepad2.dpad_left){
-            if (ballpos < .125) {
-                ballpos = .25;
+            ballRelease.setPosition(0.65);
+            runtime.reset();
+            runtime.startTime();
+            while (runtime.seconds() < 1.5) {
+                // lets ball shoot
             }
-		}
-        ballRelease.setPosition(ballpos);
+            ballRelease.setPosition(0.4);
+            motorShootB.setPower(0.0);
+            motorShootT.setPower(0.0);
+        }
 		//
-        // Raises CatBall
+        // Raises CapBall
         //
 		if (gamepad2.x) {
             motorLS.setPower(-0.5);
