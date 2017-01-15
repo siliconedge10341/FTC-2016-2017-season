@@ -27,7 +27,7 @@ public class MecanumDriver extends OpMode{
 
 		// Servos
 		private Servo ballRelease;
-		private Servo beaconServo;
+		//private Servo beaconServo;
 		private Servo collectServo;
 
 		private boolean percision_flag;
@@ -68,8 +68,8 @@ public class MecanumDriver extends OpMode{
 		// Servos
 		ballRelease = hardwareMap.servo.get("servo_ball");
 		ballRelease.setPosition(0.25);
-		beaconServo = hardwareMap.servo.get("servo_beacon");
-		beaconServo.setPosition(0.5);
+		//beaconServo = hardwareMap.servo.get("servo_beacon");
+		//beaconServo.setPosition(0.5);
 		collectServo = hardwareMap.servo.get("servo_collect");
 		collectServo.setPosition(.5);
 
@@ -135,11 +135,12 @@ public class MecanumDriver extends OpMode{
 		//
 		// beacon servo
 		//
-		if (gamepad1.x) {
+		/*if (gamepad1.x) {
 			beaconServo.setPosition(beaconServo.MIN_POSITION);
 		} else if (gamepad1.y) {
 			beaconServo.setPosition(0.5);
 		}
+		*/
 		//
         // runs the robot
 		//
