@@ -152,8 +152,8 @@ public class MecanumDriver extends OpMode{
         // the servo to shoot one ball.
 		//
         if (gamepad2.b) {
-            motorShootB.setPower(0.8);
-            motorShootT.setPower(-1.0);
+            motorShootB.setPower(0.6);
+            motorShootT.setPower(-0.8);
             runtime.reset();
             runtime.startTime();
             while (runtime.seconds() < 1.5) {
