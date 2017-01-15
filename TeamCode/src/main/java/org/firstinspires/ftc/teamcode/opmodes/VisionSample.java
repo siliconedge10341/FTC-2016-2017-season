@@ -80,6 +80,7 @@ public class VisionSample extends LinearVisionOpMode {
 
     ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
 
+
     //Wait for the match to begin
     waitForStart();
 
@@ -99,7 +100,7 @@ public class VisionSample extends LinearVisionOpMode {
       telemetry.addData("Frame Size", "Width: " + width + " Height: " + height);
       telemetry.addData("Frame Counter", frameCount);
 
-      telemetry.addData("Distance Sensor: " , ranges.getDistance(DistanceUnit.CM));
+      telemetry.addData("cm", "%.2f cm", ranges.getDistance(DistanceUnit.CM));
 
       //You can access the most recent frame data and modify it here using getFrameRgba() or getFrameGray()
       //Vision will run asynchronously (parallel) to any user code so your programs won't hang
