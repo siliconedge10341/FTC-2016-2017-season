@@ -33,11 +33,12 @@ public class Autonomous_blue extends LinearVisionOpMode {
         private DcMotor br;
         private DcMotor motorShootL;
         private DcMotor motorShootR;
-        private DcMotor motorCollector;
+       // private DcMotor motorCollector;
+        private DcMotor motorConveyor;
 
         // servo
-        private Servo releaseServo;
-        private Servo beaconServo;
+       // private Servo releaseServo;
+        //private Servo beaconServo;
 
         // Range Sensor
         private ModernRoboticsI2cRangeSensor rangef;
@@ -71,13 +72,15 @@ public class Autonomous_blue extends LinearVisionOpMode {
             fl = hardwareMap.dcMotor.get("fl_motor");
             br = hardwareMap.dcMotor.get("br_motor");
             bl = hardwareMap.dcMotor.get("bl_motor");
+
             motorShootL = hardwareMap.dcMotor.get("shooter_left");
             motorShootR = hardwareMap.dcMotor.get("shooter_right");
-            motorCollector = hardwareMap.dcMotor.get("ball_collector");
+            //motorCollector = hardwareMap.dcMotor.get("ball_collector");
+            motorConveyor = hardwareMap.dcMotor.get("conveyor_motor");
 
             // Servos
-            releaseServo = hardwareMap.servo.get("servo_ball");
-            beaconServo = hardwareMap.servo.get("servo_beacon");
+            //releaseServo = hardwareMap.servo.get("servo_ball");
+           // beaconServo = hardwareMap.servo.get("servo_beacon");
 
             // Classes
             ods = hardwareMap.opticalDistanceSensor.get("ods_line");
@@ -85,8 +88,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
             ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
 
             // Sets Position
-            releaseServo.setPosition(0.3);
-            beaconServo.setPosition(.5);
+            //releaseServo.setPosition(0.3);
+            //beaconServo.setPosition(.5);
 
         waitForVisionStart();
 
@@ -118,8 +121,9 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Shoot ball:
         //
-        releaseServo.setPosition(.05);
-        motorCollector.setPower(0.9);
+        //releaseServo.setPosition(.05);
+        //motorCollector.setPower(0.9);
+        motorConveyor.setPower(.7);
         motorShootL.setPower(1.0);
         motorShootR.setPower(-1.0);
         runtime.reset();
@@ -127,8 +131,9 @@ public class Autonomous_blue extends LinearVisionOpMode {
             telemetry.addData("seconds",runtime.seconds());
             telemetry.update();
         }
-        motorCollector.setPower(0);
-        releaseServo.setPosition(.3);
+        //motorCollector.setPower(0);
+        //releaseServo.setPosition(.3);
+        motorConveyor.setPower(0.0);
         motorShootL.setPower(0.0);
         motorShootR.setPower(0.0);
 
@@ -189,7 +194,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         PauseAuto(.4);
 
-        beaconServo.setPosition(0.0);
+        //beaconServo.setPosition(0.0);
         //Go closer to wall
         Drive_Train.setPowerD(.2);
         Drive_Train.run_right(fr,fl,br,bl);
@@ -287,7 +292,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         PauseAuto(.4);
 
-        beaconServo.setPosition(.5);
+        //beaconServo.setPosition(.5);
 
     }
 
