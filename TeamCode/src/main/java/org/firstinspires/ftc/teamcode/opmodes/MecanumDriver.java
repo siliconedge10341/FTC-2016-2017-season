@@ -63,11 +63,7 @@ public class MecanumDriver extends OpMode{
 		// Servos
 		ballRelease = hardwareMap.servo.get("servo_ball");
 		ballRelease.setPosition(0.4);
-		//beaconServo = hardwareMap.servo.get("servo_beacon");
-		//beaconServo.setPosition(0.5);
 		collectServo = hardwareMap.servo.get("servo_collector");
-		collectServo.setPosition(.5);
-		collectServo = hardwareMap.servo.get("servo_collect");
 		collectServo.setPosition(0.0);
 
 		// Classes

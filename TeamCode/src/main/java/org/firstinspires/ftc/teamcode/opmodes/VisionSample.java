@@ -61,7 +61,7 @@ public class VisionSample extends LinearVisionOpMode {
      * Set the beacon analysis method
      * Try them all and see what works!
      */
-    beacon.setAnalysisMethod(Beacon.AnalysisMethod.FAST);
+    beacon.setAnalysisMethod(Beacon.AnalysisMethod.COMPLEX);
 
     /**
      * Set color tolerances
@@ -89,6 +89,8 @@ public class VisionSample extends LinearVisionOpMode {
     while (opModeIsActive()) {
       //Log a few things
       telemetry.addData("Beacon Color", beacon.getAnalysis().getColorString());
+      telemetry.addData("Beacon Left", beacon.getAnalysis().getStateLeft().toString());
+      telemetry.addData("Beacon Right", beacon.getAnalysis().getStateRight().toString());
       telemetry.addData("Beacon Center", beacon.getAnalysis().getLocationString());
       telemetry.addData("Beacon Confidence", beacon.getAnalysis().getConfidenceString());
       telemetry.addData("Beacon Buttons", beacon.getAnalysis().getButtonString());
