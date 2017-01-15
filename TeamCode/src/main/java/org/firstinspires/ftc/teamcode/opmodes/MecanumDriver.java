@@ -70,7 +70,7 @@ public class MecanumDriver extends OpMode{
 		ballRelease.setPosition(0.25);
 		//beaconServo = hardwareMap.servo.get("servo_beacon");
 		//beaconServo.setPosition(0.5);
-		collectServo = hardwareMap.servo.get("servo_collect");
+		collectServo = hardwareMap.servo.get("servo_collector");
 		collectServo.setPosition(.5);
 
 		// Classes
@@ -156,6 +156,7 @@ public class MecanumDriver extends OpMode{
 		if (gamepad2.right_bumper){
 			collectServo.setPosition(0);
 		}
+		//conveyor
 
 		if (gamepad2.a)  {
 			motorConveyor.setPower(.7);

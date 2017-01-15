@@ -117,71 +117,18 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         initialC = ods.getLightDetected();
 
-        // encoderDrive(510,"forward",1.0);
-        //
-        // Shoot ball:
-        //
-        //releaseServo.setPosition(.05);
         //motorCollector.setPower(0.9);
-        motorConveyor.setPower(.7);
-        motorShootL.setPower(1.0);
-        motorShootR.setPower(-1.0);
-        runtime.reset();
-        while (runtime.seconds() < 4.0){
-            telemetry.addData("seconds",runtime.seconds());
-            telemetry.update();
-        }
-        //motorCollector.setPower(0);
-        //releaseServo.setPosition(.3);
-        motorConveyor.setPower(0.0);
-        motorShootL.setPower(0.0);
-        motorShootR.setPower(0.0);
 
 
-        //Hit the ball:
-        encoderDrive(4.0, "left", .5);
 
         PauseAuto(0.4);
         //
         // Turn
         //
-        fr.setPower(-1.0);
-        fl.setPower(-1.0);
-        br.setPower(-1.0);
-        bl.setPower(-1.0);
-
-        runtime.reset();
-        runtime.startTime();
-        while (runtime.seconds() < 0.86) {
-            telemetry.addData("seconds", runtime.seconds());
-            telemetry.update();
-        }
-        Drive_Train.brake(fr, fl, br, bl);
 
         PauseAuto(0.4);
 
-        //Move to wall
-        /*
-        Drive_Train.setPowerD(.2);
-        Drive_Train.run_right(fr, fl, br, bl);
-        while (opModeIsActive() && ranges.getDistance(DistanceUnit.CM) > distanceFromWall) {
 
-            telemetry.addData("Distance ",ranges.getDistance(DistanceUnit.CM ));
-            telemetry.update();
-        }
-        Drive_Train.brake(fr,fl,br,bl);
-        Drive_Train.reset_encoders(fr,fl,br,bl);
-        */
-        /*
-        Drive_Train.run_using_encoders(fr,fl,br,bl);
-        Drive_Train.setPowerD(.15);
-        beaconServo.setPosition(1.0);*/
-
-
-        // Move and detect line
-        //
-        // Drive_Train.run_using_encoders(fr,fl,br,bl);
-        //
         Drive_Train.setPowerD(.15);
         Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
         while (opModeIsActive() && ods.getLightDetected()< initialC +.1) {
@@ -203,6 +150,22 @@ public class Autonomous_blue extends LinearVisionOpMode {
             telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.INCH));
             telemetry.update();
         }
+        Drive_Train.brake(fr,fl,br,bl);
+        //
+        //Shoot ball
+        //
+        motorConveyor.setPower(.7);
+        motorShootL.setPower(1.0);
+        motorShootR.setPower(-1.0);
+        runtime.reset();
+        while (runtime.seconds() < 4.0){
+            telemetry.addData("seconds",runtime.seconds());
+            telemetry.update();
+        }
+        motorConveyor.setPower(0.0);
+        motorShootL.setPower(0.0);
+        motorShootR.setPower(0.0);
+
         //
         // Detect beacon
         //
@@ -218,7 +181,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
             encoderDrive(buttonWidth,"forward" , .3);
 
         } else {
-            //beacon is 1/2 a foot
+
+            encoderDrive(buttonWidth,"backward" , .3);
 
         }
         //
@@ -228,7 +192,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // hit the button
         //
-        encoderDrive(1.5 * 2,"right" , .15);
+        encoderDrive(8.0*2,"right" , .15);
 
         PauseAuto(1.0);
         //
@@ -248,8 +212,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         }
         Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
-        //
-        // Wait...
         //
         // Stop at wall
         //
@@ -275,22 +237,24 @@ public class Autonomous_blue extends LinearVisionOpMode {
             telemetry.update();
         }
         if (beacon.getAnalysis().isLeftBlue() == true) {
-            // go forward if the left side of the beacon is blue
-            encoderDrive(6.0,"backward" , .5);
+
+            encoderDrive(buttonWidth,"forward" , .3);
+
         } else {
-            // encoderDrive(720,"backward" , .15);
+
+            encoderDrive(buttonWidth,"backward" , .3);
+
         }
+
         PauseAuto(1.0);
         //
         // beacon code
         //
-        // Wait...
-        //
-        // hit the button
-        //
-        encoderDrive(3.0 *2,"right",.3);
+
+        encoderDrive(8.0 *2,"right",.3);
 
         PauseAuto(.4);
+        encoderDrive(3.0 , "left" , .3);
 
         //beaconServo.setPosition(.5);
 

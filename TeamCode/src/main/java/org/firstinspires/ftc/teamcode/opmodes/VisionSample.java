@@ -78,7 +78,7 @@ public class VisionSample extends LinearVisionOpMode {
     cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
     cameraControl.setAutoExposureCompensation();
 
-    ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
+    ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
 
     //Wait for the match to begin
     waitForStart();
