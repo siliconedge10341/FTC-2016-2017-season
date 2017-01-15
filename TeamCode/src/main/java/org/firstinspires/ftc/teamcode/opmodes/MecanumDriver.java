@@ -16,7 +16,7 @@ public class MecanumDriver extends OpMode{
     // instance variables
     // private variables
 		// Motors
-		private DcMotor motorCollector;
+		private DcMotor motorConveyor;
 		private DcMotor motorFR;
 		private DcMotor motorFL;
 		private DcMotor motorBR;
@@ -28,6 +28,7 @@ public class MecanumDriver extends OpMode{
 		// Servos
 		private Servo ballRelease;
 		private Servo beaconServo;
+		private Servo collectServo;
 
 		private boolean percision_flag;
 		private boolean collect;
@@ -60,7 +61,7 @@ public class MecanumDriver extends OpMode{
 		motorBL = hardwareMap.dcMotor.get("bl_motor");
 		motorBR = hardwareMap.dcMotor.get("br_motor");
         motorLS = hardwareMap.dcMotor.get("linear_slide_motor");
-		motorCollector = hardwareMap.dcMotor.get("ball_collector");
+		motorConveyor = hardwareMap.dcMotor.get("conveyor_motor");
 		motorShootL = hardwareMap.dcMotor.get("shooter_left");
 		motorShootR = hardwareMap.dcMotor.get("shooter_right");
 
@@ -69,6 +70,8 @@ public class MecanumDriver extends OpMode{
 		ballRelease.setPosition(0.25);
 		beaconServo = hardwareMap.servo.get("servo_beacon");
 		beaconServo.setPosition(0.5);
+		collectServo = hardwareMap.servo.get("servo_collect");
+		collectServo.setPosition(.5);
 
 		// Classes
 		//dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
@@ -146,33 +149,20 @@ public class MecanumDriver extends OpMode{
         // Run Collector
 		//
 		if (gamepad2.left_bumper){
-			collecttime = collecttime - 0.00001;
-			telemetry.addData("seconds",collecttime);
+			collectServo.setPosition(.3);
 		}
 
 		if (gamepad2.right_bumper){
-			collecttime = collecttime + 0.00001;
-			telemetry.addData("seconds",collecttime);
+			collectServo.setPosition(0);
 		}
 
 		if (gamepad2.a)  {
-			runtime.reset();
-			if (collect == true) {
-				while (runtime.seconds() < collecttime) {
-					telemetry.addData("seconds", runtime.seconds());
-					telemetry.update();
-					motorCollector.setPower(-1.0);
-				}
-			}
-
-			motorCollector.setPower(0);
-
-			collect = false;
+			motorConveyor.setPower(.7);
 
 
 		} else {
-			motorCollector.setPower(0);
-			collect = true;
+			motorConveyor.setPower(0);
+
 		}
 		//
 		// bantu shooter
