@@ -34,46 +34,60 @@ public class Mecanum{
         float ch1 = rjoystick_x;
         float ch3 = ljoystick_x;
         float ch4 = ljoystick_y;
-
+        double midfl, midbl, midfr, midbr;
         boolean FL = ch4 > ch3;
         boolean FR = ch4 > -ch3;
         if (ch1 < -0.4 || ch1 > 0.4) {
-            FLpower = ch1;
-            BLpower = ch1;
-            FRpower = ch1;
-            BRpower = ch1;
+            midfl = ch1;
+            midbl = ch1;
+            midfr = ch1;
+            midbr = ch1;
         } else if (FL && FR) {
-            FLpower = -ch4;
-            BLpower = -ch4;
-            FRpower = ch4;
-            BRpower = ch4;
+            midfl = ch4;
+            midbl = ch4;
+            midfr = -ch4;
+            midbr = -ch4;
         } else if (FL || FR) {
             if(FL) {
                 //
                 // Will be adjusted
                 //
-                FLpower = ch3; //0.7
-                BLpower = -ch3;  //0.95
-                FRpower = ch3; //0.78
-                BRpower = -ch3;  //1
+                midfl = ch3; //0.7
+                midbl = -ch3;  //0.95
+                midfr = ch3; //0.78
+                midbr = -ch3;  //1
             } else {
-                FLpower = ch3; //.78
-                BLpower = -ch3;  //1
-                FRpower = ch3; //0.7
-                BRpower = -ch3;  //0.95
+                midfl = ch3; //.78
+                midbl = -ch3;  //1
+                midfr = ch3; //0.7
+                midbr = -ch3;  //0.95
             }
         } else {
-            FLpower = -ch4;
-            BLpower = -ch4;
-            FRpower = ch4;
-            BRpower = ch4;
+            midfl = ch4;
+            midbl = ch4;
+            midfr = -ch4;
+            midbr = -ch4;
         }
         //
         // Power has to be over a certain amount. We found this to work because the amount of
         // power that is below 1 together doesn't move the robot anyways. So, in order to protect
         // the motors, we did this in case.
         //
-        if (Math.abs(FLpower) + Math.abs(BLpower) + Math.abs(FRpower) + Math.abs(BRpower) < 1)
+        if (Math.abs(midfl) + Math.abs(midbl) + Math.abs(midfr) + Math.abs(midbr) < 1)
+        {
+            midfl = 0;
+            midbl = 0;
+            midfr = 0;
+            midbr = 0;
+        }
+
+        FLpower= midfl;
+        BLpower= midbl;
+        FRpower= midfr;
+        BRpower= midbr;
+
+
+        if (Math.abs(FLpower) + Math.abs(BLpower) + Math.abs(FRpower) + Math.abs(BRpower) < 0.5)
         {
             FLpower = 0;
             BLpower = 0;
@@ -173,13 +187,13 @@ public class Mecanum{
         FRpower = -BasePower;
         BRpower = BasePower;
         double distanceDifference = distanceFrontR - distanceBackR;
-        if(distanceDifference > 1) {
+        if(distanceDifference > 2) {
             //
             // turn right
             //
             BLpower += distanceDifference/60;
             BRpower += distanceDifference/60;
-        } else if(distanceDifference < -1) {
+        } else if(distanceDifference < -2) {
             distanceDifference = -1 * distanceDifference;
             //
             // turn left
@@ -199,13 +213,13 @@ public class Mecanum{
         FRpower = BasePower;
         BRpower = -BasePower;
         double distanceDifference = distanceFrontR - distanceBackR;
-        if(distanceDifference > 1) {
+        if(distanceDifference > 2) {
             //
             // turn right
             //
             FLpower += distanceDifference/60;
             FRpower += distanceDifference/60;
-        } else if(distanceDifference < -1) {
+        } else if(distanceDifference < -2) {
             distanceDifference = -1 * distanceDifference;
             //
             // turn left

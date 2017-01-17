@@ -42,7 +42,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         // Range Sensor
         private ModernRoboticsI2cRangeSensor rangef;
-        private ModernRoboticsI2cRangeSensor ranges;
+        private ModernRoboticsI2cRangeSensor rangesf;
+        private ModernRoboticsI2cRangeSensor rangesb;
         private OpticalDistanceSensor ods;
 
         // Sensor Classes
@@ -85,7 +86,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
             // Classes
             ods = hardwareMap.opticalDistanceSensor.get("ods_line");
             rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
-            ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side");
+            rangesf = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
+            rangesb = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
 
             // Sets Position
             //releaseServo.setPosition(0.3);
@@ -144,10 +146,10 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //beaconServo.setPosition(0.0);
         //Go closer to wall
         Drive_Train.setPowerD(.2);
-        Drive_Train.run_right(fr,fl,br,bl);
-        while(ranges.getDistance(DistanceUnit.INCH) > 8){
+        Drive_Train.run_right_using_alignment(fr,fl,br,bl,rangesb.getDistance(DistanceUnit.CM),rangesf.getDistance(DistanceUnit.CM));
+        while(rangesf.getDistance(DistanceUnit.INCH) > 8){
             // Get data
-            telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.INCH));
+            telemetry.addData("Distance ", rangesf.getDistance(DistanceUnit.INCH));
             telemetry.update();
         }
         Drive_Train.brake(fr,fl,br,bl);
@@ -182,7 +184,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         } else {
 
-            encoderDrive(buttonWidth,"backward" , .3);
+            encoderDrive(buttonWidth - 2,"backward" , .3);
 
         }
         //
@@ -220,9 +222,9 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         Drive_Train.run_right(fr, fl, br, bl);
-        while ( opModeIsActive() && ranges.getDistance(DistanceUnit.INCH) > 8) {
+        while ( opModeIsActive() && rangesf.getDistance(DistanceUnit.INCH) > 8) {
             // Get data
-            telemetry.addData("Distance ", ranges.getDistance(DistanceUnit.INCH));
+            telemetry.addData("Distance ", rangesf.getDistance(DistanceUnit.INCH));
             telemetry.update();
         }
         Drive_Train.reset_encoders(fr, fl, br, bl);
@@ -242,7 +244,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         } else {
 
-            encoderDrive(buttonWidth,"backward" , .3);
+            encoderDrive(buttonWidth-2,"backward" , .3);
 
         }
 
