@@ -143,8 +143,9 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         PauseAuto(.4);
 
-        //beaconServo.setPosition(0.0);
         //Go closer to wall
+
+        /*
         Drive_Train.setPowerD(.2);
         Drive_Train.run_right_using_alignment(fr,fl,br,bl,rangesb.getDistance(DistanceUnit.CM),rangesf.getDistance(DistanceUnit.CM));
         while(rangesf.getDistance(DistanceUnit.INCH) > 8){
@@ -153,6 +154,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
             telemetry.update();
         }
         Drive_Train.brake(fr,fl,br,bl);
+        */
         //
         //Shoot ball
         //
@@ -194,7 +196,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // hit the button
         //
-        encoderDrive(8.0*2,"right" , .15);
+        encoderDrive(rangesf.getDistance(DistanceUnit.INCH)*2 +1,"right" , .15);
 
         PauseAuto(1.0);
         //
@@ -219,7 +221,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         PauseAuto(.4);
         //Move closer to the wall
-
+        /*
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         Drive_Train.run_right(fr, fl, br, bl);
         while ( opModeIsActive() && rangesf.getDistance(DistanceUnit.INCH) > 8) {
@@ -229,6 +231,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         }
         Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
+        */
         //
         // Wait...
         //
@@ -253,7 +256,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // beacon code
         //
 
-        encoderDrive(8.0 *2,"right",.3);
+        encoderDrive(rangesf.getDistance(DistanceUnit.INCH) * 2 + 1,"right",.3);
 
         PauseAuto(.4);
         encoderDrive(3.0 , "left" , .3);
