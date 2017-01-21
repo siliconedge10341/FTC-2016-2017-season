@@ -153,7 +153,7 @@ public class MecanumDriver extends OpMode{
 		//
         if (gamepad2.b) {
             motorShootB.setPower(0.6);
-            motorShootT.setPower(-0.8);
+            motorShootT.setPower(-0.8);/*
             runtime.reset();
             runtime.startTime();
             while (runtime.seconds() < 1.5) {
@@ -167,15 +167,20 @@ public class MecanumDriver extends OpMode{
             }
             ballRelease.setPosition(0.4);
             motorShootB.setPower(0.0);
-            motorShootT.setPower(0.0);
+            motorShootT.setPower(0.0);*/
         }
+		else
+		{
+			motorShootB.setPower(0.0);
+			motorShootT.setPower(0.0);
+		}
 		//
         // Raises CapBall
         //
 		if (gamepad2.x) {
             motorLS.setPower(-0.5);
             LSRotations = motorLS.getCurrentPosition();
-        } else if (gamepad2.y && LSRotations > initialR) {
+        } else if (gamepad2.y   ) {
             motorLS.setPower(0.5);
             LSRotations = motorLS.getCurrentPosition();
         } else {

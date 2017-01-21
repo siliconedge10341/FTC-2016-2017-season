@@ -26,7 +26,9 @@ import org.opencv.core.Size;
 
 public class VisionSample extends LinearVisionOpMode {
 
-  ModernRoboticsI2cRangeSensor ranges;
+  ModernRoboticsI2cRangeSensor rangef;
+  ModernRoboticsI2cRangeSensor rangesf;
+  ModernRoboticsI2cRangeSensor rangesb;
   int frameCount = 0;
 
   @Override
@@ -78,7 +80,9 @@ public class VisionSample extends LinearVisionOpMode {
     cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
     cameraControl.setAutoExposureCompensation();
 
-    ranges = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
+    rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
+    rangesf = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
+    rangesb = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
 
 
     //Wait for the match to begin
@@ -100,7 +104,9 @@ public class VisionSample extends LinearVisionOpMode {
       telemetry.addData("Frame Size", "Width: " + width + " Height: " + height);
       telemetry.addData("Frame Counter", frameCount);
 
-      telemetry.addData("cm", "%.2f cm", ranges.getDistance(DistanceUnit.CM));
+      telemetry.addData("cm", "%.2f cm", rangef.getDistance(DistanceUnit.CM));
+      telemetry.addData("cm", "%.2f cm", rangesb.getDistance(DistanceUnit.CM));
+      telemetry.addData("cm", "%.2f cm", rangesf.getDistance(DistanceUnit.CM));
 
       //You can access the most recent frame data and modify it here using getFrameRgba() or getFrameGray()
       //Vision will run asynchronously (parallel) to any user code so your programs won't hang
