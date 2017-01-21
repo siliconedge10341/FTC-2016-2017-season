@@ -131,15 +131,8 @@ public class MecanumDriver extends OpMode{
 		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x,percision_flag);
 		yo.run_motor(motorFR, motorFL, motorBR, motorBL);
 		//
-        // Run Collector
 		//
-		if (gamepad1.a){
-			collectServo.setPosition(0.5);
-		} else if (gamepad1.b){
-			collectServo.setPosition(0.0);
-		}
-		//
-		// Runs the conveyor
+		// Runs the collector
 		//
 		if (gamepad2.a)  {
 			motorC.setPower(.7);

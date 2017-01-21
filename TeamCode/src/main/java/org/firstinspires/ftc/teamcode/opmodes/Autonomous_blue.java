@@ -96,7 +96,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         waitForVisionStart();
 
         //VISION:
-        this.setCamera(Cameras.PRIMARY);
+        this.setCamera(Cameras.SECONDARY);
         this.setFrameSize(new Size(900, 900));
 
         enableExtension(LinearVisionOpMode.Extensions.BEACON);         //Beacon detection
@@ -107,7 +107,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         beacon.setColorToleranceRed(0);
         beacon.setColorToleranceBlue(0);
 
-        rotation.setIsUsingSecondaryCamera(false);
+        rotation.setIsUsingSecondaryCamera(true);
         rotation.disableAutoRotate();
         rotation.setActivityOrientationFixed(ScreenOrientation.PORTRAIT);
 
@@ -120,9 +120,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         initialC = ods.getLightDetected();
 
         //motorCollector.setPower(0.9);
-
-
-
         PauseAuto(0.4);
         //
         // Turn
@@ -142,8 +139,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         Drive_Train.brake(fr, fl, br, bl);
 
         PauseAuto(.4);
-
-        //Go closer to wall
 
         /*
         Drive_Train.setPowerD(.2);
@@ -187,7 +182,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         } else {
 
             encoderDrive(buttonWidth - 2,"backward" , .3);
-
         }
         //
         // beacon code
@@ -196,7 +190,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // hit the button
         //
-        encoderDrive(rangesf.getDistance(DistanceUnit.INCH)*2 +1,"right" , .15);
+
+        encoderDrive(avgRange() * 2,"right" , .15);
 
         PauseAuto(1.0);
         //
@@ -206,6 +201,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Run to line
         //
+        PauseAuto(.5);
         Drive_Train.setPowerD(.2);
         Drive_Train.run_forward(fr, fl, br, bl);
         //Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
@@ -232,9 +228,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
         */
-        //
-        // Wait...
-        //
+
         // Detect beacon
         //
         while (opModeIsActive() && !beacon.getAnalysis().isBeaconFound()) {
@@ -256,7 +250,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // beacon code
         //
 
-        encoderDrive(rangesf.getDistance(DistanceUnit.INCH) * 2 + 1,"right",.3);
+        encoderDrive(avgRange() * 2,"right",.3);
 
         PauseAuto(.4);
         encoderDrive(3.0 , "left" , .3);
@@ -312,6 +306,23 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         Drive_Train.brake(fr, fl, br, bl);
 
+    }
+    public double avgRange(){
+        double avg = 0;
+        int i;
+        int rcount = 0;
+        for (i =0; i <=5 ; i++){
+            if (rangef.getDistance(DistanceUnit.INCH) > 1){
+
+            }else{
+                avg = avg + rangef.getDistance(DistanceUnit.INCH);
+                rcount ++;
+            }
+        }
+
+
+
+        return (avg / rcount);
     }
 
 

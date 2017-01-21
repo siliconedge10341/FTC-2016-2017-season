@@ -3,6 +3,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import org.lasarobotics.vision.android.Cameras;
 import org.lasarobotics.vision.ftc.resq.Beacon;
 import org.lasarobotics.vision.opmode.LinearVisionOpMode;
@@ -29,6 +30,7 @@ public class VisionSample extends LinearVisionOpMode {
   ModernRoboticsI2cRangeSensor rangef;
   ModernRoboticsI2cRangeSensor rangesf;
   ModernRoboticsI2cRangeSensor rangesb;
+  private OpticalDistanceSensor ods;
   int frameCount = 0;
 
   @Override
@@ -42,7 +44,7 @@ public class VisionSample extends LinearVisionOpMode {
      * SECONDARY = Screen-facing, "selfie" camera :D
      **/
 
-    this.setCamera(Cameras.PRIMARY);
+    this.setCamera(Cameras.SECONDARY);
 
     /**
      * Set the frame size
@@ -83,6 +85,7 @@ public class VisionSample extends LinearVisionOpMode {
     rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
     rangesf = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
     rangesb = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
+    ods = hardwareMap.opticalDistanceSensor.get("ods_line");
 
 
     //Wait for the match to begin
@@ -107,6 +110,8 @@ public class VisionSample extends LinearVisionOpMode {
       telemetry.addData("cm", "%.2f cm", rangef.getDistance(DistanceUnit.CM));
       telemetry.addData("cm", "%.2f cm", rangesb.getDistance(DistanceUnit.CM));
       telemetry.addData("cm", "%.2f cm", rangesf.getDistance(DistanceUnit.CM));
+
+      telemetry.addData("Light detected" , ods.getLightDetected());
 
       //You can access the most recent frame data and modify it here using getFrameRgba() or getFrameGray()
       //Vision will run asynchronously (parallel) to any user code so your programs won't hang
