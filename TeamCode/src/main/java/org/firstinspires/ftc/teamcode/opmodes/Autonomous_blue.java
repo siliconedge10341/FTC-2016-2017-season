@@ -341,7 +341,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // from the encoders is achieved. When achieved, the program will proceed to the end
         // of the function.
         //
-        while(Drive_Train.testDistance(fl) != 1){
+        while (Drive_Train.testDistance(fl) != 1){
             telemetry.addData("Pos " , fl.getCurrentPosition());
             telemetry.update();
         }

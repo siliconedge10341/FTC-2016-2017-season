@@ -153,6 +153,10 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         telemetry.update();
         this.initialize();
         this.startRobot();
+        //
+        // Waits for start button click
+        //
+        waitForStart();
         total_time.reset();
         total_time.startTime();
         //
@@ -166,8 +170,8 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         // One ball by the releases servo and there is one ball in the collector so there
         // is a delay between the shots. This allows for smoother transitions.
         //
-        mtrShootT.setPower(0.7);
-        mtrShootB.setPower(-0.5);
+        mtrShootT.setPower(0.6);
+        mtrShootB.setPower(-0.4);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 1.0) {
@@ -193,8 +197,8 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
             // Loads another ball
             //
         }
-        mtrShootT.setPower(0.7);
-        mtrShootB.setPower(-0.5);
+        mtrShootT.setPower(0.6);
+        mtrShootB.setPower(-0.4);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 1.0) {
@@ -246,7 +250,7 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         drive_train.run_diagonal_right_up(mtrFR, mtrFL, mtrBR, mtrBL);
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 8 || colourS.getLightDetected() < initialC + .1) {
+        while (opModeIsActive() && runtime.milliseconds() < (8 * 1000) || colourS.getLightDetected() < initialC + .1) {
             telemetry.addData("Colour WaveLength", colourS.getLightDetected());
             telemetry.update();
         }
@@ -371,7 +375,7 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         drive_train.run_forward(mtrFR, mtrFL, mtrBR, mtrBL);
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 6 || colourS.getLightDetected() < initialC + .1) {
+        while (opModeIsActive() && runtime.milliseconds() < (6 * 1000) || colourS.getLightDetected() < initialC + .1) {
             telemetry.addData("Colour", colourS.getLightDetected());
             telemetry.addData("Seconds", runtime.seconds());
             telemetry.update();
@@ -554,7 +558,7 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         // for Waiting between driving periods.
         //
         runtime.reset();
-        while (runtime.milliseconds() < (time * 1000)) {
+        while (opModeIsActive() && runtime.milliseconds() < (time * 1000)) {
             // do nothing
             telemetry.addData("Seconds", runtime.seconds());
             telemetry.update();
@@ -592,7 +596,7 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         // from the encoders is achieved. When achieved, the program will proceed to the end
         // of the function.
         //
-        while(drive_train.testDistance(mtrFR) != 1){
+        while (opModeIsActive() && drive_train.testDistance(mtrFR) != 1){
             telemetry.addData("Pos " , mtrFR.getCurrentPosition());
             telemetry.update();
         }
