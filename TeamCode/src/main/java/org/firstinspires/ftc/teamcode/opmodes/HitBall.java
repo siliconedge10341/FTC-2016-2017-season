@@ -62,7 +62,7 @@ public class HitBall extends LinearOpMode {
 
     private DcMotor motorShootL;
     private DcMotor motorShootR;
-    private DcMotor motorCollector;
+    //private DcMotor motorCollector;
 
     private Servo releaseServo;
     private Servo beaconServo;
@@ -88,11 +88,11 @@ public class HitBall extends LinearOpMode {
 
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
-        motorCollector = hardwareMap.dcMotor.get("ball_collector");
+        //motorCollector = hardwareMap.dcMotor.get("motor_conveyor");
 
         releaseServo = hardwareMap.servo.get("servo_ball");
-        beaconServo = hardwareMap.servo.get("servo_beacon");
-        beaconServo.setPosition(0.25);
+       // beaconServo = hardwareMap.servo.get("servo_beacon");
+       // beaconServo.setPosition(0.25);
 
         Drive_Train.reset_encoders(fr,fl,br,bl);
 
@@ -114,6 +114,7 @@ public class HitBall extends LinearOpMode {
         //
         // Shoot
         //
+        /*
         releaseServo.setPosition(-0.2);
         PauseAuto(.5);
 
@@ -147,7 +148,7 @@ public class HitBall extends LinearOpMode {
         motorShootL.setPower(0);
         motorShootR.setPower(0);
         motorCollector.setPower(0);
-
+*/
         //
         // Drives to the center of the field
         //
