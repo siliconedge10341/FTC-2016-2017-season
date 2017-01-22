@@ -224,7 +224,6 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         v_state = 1;
         telemetry.addData("Current State: ", v_state);
         telemetry.update();
-        PauseAuto(0.2);
         //
         // Rotation
         //
@@ -232,9 +231,6 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         mtrFL.setPower(1.0);
         mtrBR.setPower(1.0);
         mtrBL.setPower(1.0);
-        drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
-
-        PauseAuto(0.2);
 
         //
         // Wait...
