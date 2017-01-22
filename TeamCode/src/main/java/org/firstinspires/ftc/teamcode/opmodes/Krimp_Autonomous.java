@@ -41,7 +41,6 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         private DcMotor mtrBL;
         private DcMotor mtrShootT;
         private DcMotor mtrShootB;
-        private DcMotor mtrCollect;
 
     // Servos
         private Servo srvRelease;
@@ -91,20 +90,18 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         mtrBL = hardwareMap.dcMotor.get("bl_motor");
         mtrShootB = hardwareMap.dcMotor.get("shooter_right"); // Bottom
         mtrShootT = hardwareMap.dcMotor.get("shooter_left");  // Top
-        mtrCollect = hardwareMap.dcMotor.get("ball_collector");
 
         mtrShootT.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
         mtrShootB.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
 
         // Servos
         srvRelease = hardwareMap.servo.get("servo_ball");
-        srvRelease = hardwareMap.servo.get("servo_beacon");
 
         // Classes
         colourS = hardwareMap.opticalDistanceSensor.get("ods_line");
         rangeF = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
-        rangeSF = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
-        rangeSB = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
+        rangeSF = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
+        rangeSB = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
 
         // Positions
         srvRelease.setPosition(srvRelease.MAX_POSITION);
@@ -188,7 +185,6 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         mtrShootT.setPower(0.0);
         mtrShootB.setPower(0.0);
         srvRelease.setPosition(srvRelease.MAX_POSITION);
-        mtrCollect.setPower(1.0);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 0.75) {
@@ -196,7 +192,6 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
             // Loads another ball
             //
         }
-        mtrCollect.setPower(0.0);
         mtrShootT.setPower(0.7);
         mtrShootB.setPower(-0.5);
         runtime.reset();
@@ -217,7 +212,6 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         srvRelease.setPosition(srvRelease.MAX_POSITION);
         mtrShootT.setPower(0);
         mtrShootB.setPower(0);
-        mtrCollect.setPower(0);
 
         //
         // Wait...
