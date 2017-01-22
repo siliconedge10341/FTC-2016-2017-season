@@ -119,17 +119,60 @@ public class Autonomous_blue extends LinearVisionOpMode {
         initialC = ods.getLightDetected();
 
         //motorCollector.setPower(0.9);
-        PauseAuto(0.4);
-        //
-        // Turn
-        //
 
-        PauseAuto(0.4);
+        motorShootL.setPower(0.7);
+        motorShootR.setPower(-0.5);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Lets the spinners speed up
+            //
+        }
+        ballServo.setPosition(0.85);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Shoots ball
+            //
+        }
+        motorShootL.setPower(0.0);
+        motorShootR.setPower(0.0);
+        ballServo.setPosition(ballServo.MAX_POSITION);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 0.75) {
+            //
+            // Loads another ball
+            //
+        }
+        motorShootL.setPower(0.7);
+        motorShootR.setPower(-0.5);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Lets the spinners speed up
+            //
+        }
+        ballServo.setPosition(0.85);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Shoots ball
+            //
+        }
+        ballServo.setPosition(ballServo.MAX_POSITION);
+        motorShootL.setPower(0);
+        motorShootR.setPower(0);
+//////          ////
 
-
-        Drive_Train.setPowerD(.15);
-        Drive_Train.run_diagonal_right_up(fr, fl, br, bl);
-        while (opModeIsActive() && ods.getLightDetected()< initialC +.1) {
+        PauseAuto(.4);
+        Drive_Train.setPowerD(.3);
+        Drive_Train.run_forward(fr, fl, br, bl);
+        while (opModeIsActive() && ods.getLightDetected()< initialC +.08) {
             // Get Data
             telemetry.addData("Light ",ods.getLightDetected());
             telemetry.update();
@@ -138,6 +181,15 @@ public class Autonomous_blue extends LinearVisionOpMode {
         Drive_Train.brake(fr, fl, br, bl);
 
         PauseAuto(.4);
+
+        Drive_Train.turn_right(fr,fl,br,bl);
+        runtime.reset();
+        while(runtime.seconds()<.40){
+
+        }
+        Drive_Train.brake(fr,fl,br,bl);
+        PauseAuto(.3);
+
 
         /*
         Drive_Train.setPowerD(.2);
@@ -152,32 +204,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         //Shoot ball
         //
-        motorConveyor.setPower(.7);
-        motorShootL.setPower(9.0);
-        motorShootR.setPower(-8.0);
 
-        runtime.reset();
-        while (runtime.seconds() < 5.0){
-            if (runtime.seconds()==1.0){
-                ballServo.setPosition(.85);
-            }
-            if (runtime.seconds() == 2.0){
-                ballServo.setPosition(Servo.MAX_POSITION);
-            }
-            if (runtime.seconds() == 3.5){
-                ballServo.setPosition(.85);
-            }
-            if (runtime.seconds() == 4.5){
-                ballServo.setPosition(Servo.MAX_POSITION);
-            }
-
-            telemetry.addData("seconds",runtime.seconds());
-            telemetry.update();
-        }
-        motorConveyor.setPower(0.0);
-        motorShootL.setPower(0.0);
-        motorShootR.setPower(0.0);
-        ballServo.setPosition(0.0);
 
         //
         // Detect beacon
