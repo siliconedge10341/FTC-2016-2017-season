@@ -170,7 +170,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 //////          ////
 
         PauseAuto(.4);
-        Drive_Train.setPowerD(.15);
+        Drive_Train.setPowerD(.3);
         Drive_Train.run_forward(fr, fl, br, bl);
         while (opModeIsActive() && ods.getLightDetected()< initialC +.08) {
             // Get Data
@@ -182,7 +182,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         PauseAuto(.4);
 
-        Drive_Train.turn_left(fr,fl,br,bl);
+        Drive_Train.turn_right(fr,fl,br,bl);
         runtime.reset();
         while(runtime.seconds()<.40){
 
