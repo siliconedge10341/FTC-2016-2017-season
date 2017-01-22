@@ -35,7 +35,7 @@ public class MecanumDriver extends OpMode{
         //
     // Variables
     private double LSRotations = 0;
-	private double initialR = 0;
+	private double MaxR = -12500;
 	private Mecanum yo = new Mecanum();
 	private ElapsedTime runtime = new ElapsedTime();
 
@@ -66,7 +66,7 @@ public class MecanumDriver extends OpMode{
 
 		// Variables
 		LSRotations = 0;
-		initialR = motorLS.getCurrentPosition();
+		motorLS.setMode(DcMotor.RunMode.RESET_ENCODERS);
 		percision_flag = false;
 
 	}
@@ -141,11 +141,12 @@ public class MecanumDriver extends OpMode{
 		//
         if (gamepad2.b) {
 			motorShootB.setPower(.9);
-			motorShootT.setPower(-.1);
+			motorShootT.setPower(-.8);
 			runtime.reset();
 			while (runtime.seconds() < 1){
 
 			}
+
 			ballRelease.setPosition(.85);
             runtime.reset();
             while (runtime.seconds()<.5){
@@ -159,14 +160,20 @@ public class MecanumDriver extends OpMode{
         // Raises CapBall
         //
 		if (gamepad2.x) {
-            motorLS.setPower(-0.5);
+			if(Math.abs(LSRotations) >= MaxR){
+				motorLS.setPower(0.0);
+			}else {
+				motorLS.setPower(-0.5);
+			}
             LSRotations = motorLS.getCurrentPosition();
-        } else if (gamepad2.y   ) {
+
+        } else if (gamepad2.y ) {
             motorLS.setPower(0.5);
             LSRotations = motorLS.getCurrentPosition();
         } else {
             motorLS.setPower(0.0);
         }
+
 		telemetry.addData("LinearSlideMotor", LSRotations);
 		telemetry.update();
 
