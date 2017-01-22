@@ -64,10 +64,6 @@ public class MecanumDriver extends OpMode{
 		ballRelease = hardwareMap.servo.get("servo_ball");
 		ballRelease.setPosition(Servo.MAX_POSITION);
 
-
-		// Classes
-		//dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
-
 		// Variables
 		LSRotations = 0;
 		initialR = motorLS.getCurrentPosition();
@@ -147,29 +143,11 @@ public class MecanumDriver extends OpMode{
 			motorShootB.setPower(.9);
 			motorShootT.setPower(-.8);
 			runtime.reset();
-			while (runtime.seconds()<1){
+			while (runtime.seconds() < 1){
 
 			}
 			ballRelease.setPosition(.85);
-            /*
-            runtime.reset();
-            runtime.startTime();
-            while (runtime.seconds() < 1.5) {
-                // wait for the motors to accelerate to speed.
-            }
-            ballRelease.setPosition(0.65);
-            runtime.reset();
-            runtime.startTime();
-            while (runtime.seconds() < 1.5) {
-                // lets ball shoot
-            }
-            ballRelease.setPosition(0.4);
-            motorShootB.setPower(0.0);
-            motorShootT.setPower(0.0);*/
-        }
-		else
-		{
-			ballRelease.setPosition(1.0);
+			ballRelease.setPosition(ballRelease.MAX_POSITION);
 			motorShootB.setPower(0.0);
 			motorShootT.setPower(0.0);
 		}

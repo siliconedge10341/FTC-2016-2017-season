@@ -31,7 +31,7 @@ import org.opencv.core.Size;
  */
 
 @Autonomous(name = "Final_Countdown_Blue", group = "Blue")
-public class Krimp_Autonomous extends VisionOpMode {
+public class Krimp_Autonomous extends LinearVisionOpMode {
     // instance variables
     // private data
     // Motors
@@ -62,6 +62,7 @@ public class Krimp_Autonomous extends VisionOpMode {
         // knowing where the sensor is.
         private double initialC = 0;
         private double initialD = 0;
+        private int v_state = 0;
 
         // states variable for the loop
         private static final Double ticks_per_inch = 510 / (3.1415 * 4);
@@ -76,7 +77,7 @@ public class Krimp_Autonomous extends VisionOpMode {
     }
 
     // Initialization
-    public void init() {
+    private void initialize() throws InterruptedException {
         //
         // Initializes every motor, servo, variable, and position.
         //
@@ -106,9 +107,10 @@ public class Krimp_Autonomous extends VisionOpMode {
         rangeSB = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
 
         // Positions
-        srvRelease.setPosition(0.3);
+        srvRelease.setPosition(srvRelease.MAX_POSITION);
 
-        super.init();
+        waitForVisionStart();
+
         this.setCamera(Cameras.PRIMARY);
         this.setFrameSize(new Size(900, 900));
 
@@ -130,28 +132,29 @@ public class Krimp_Autonomous extends VisionOpMode {
     }
 
     // Start
-    public void start() {
+    private void startRobot() {
         //
         // Starts the -LOOP-.
         //
-        super.start();
-
         // Resets encoders to begin -LOOP-.
         drive_train.reset_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
 
     }
 
     // Loop
-    public void loop() {
+    public void runOpMode() throws InterruptedException {
         //
         // Loop that controls the -AUTONOMOUS- period.
-        //
-        super.loop();
         //
         // SHOOTING STATE:
         // v_state == 0 is all about a few seconds where the robot moves the launching servo
         // to release to balls. Then, after 6 seconds. the robot will move into the next state.
         //
+        v_state = 0;
+        telemetry.addData("Current State: ", v_state);
+        telemetry.update();
+        this.initialize();
+        this.startRobot();
         total_time.reset();
         total_time.startTime();
         //
@@ -159,13 +162,14 @@ public class Krimp_Autonomous extends VisionOpMode {
         //
         initialC = colourS.getLightDetected();
         telemetry.addData("Light WaveLength", initialC);
+        telemetry.update();
         //
         // Shoots ball for 3 seconds
         // One ball by the releases servo and there is one ball in the collector so there
         // is a delay between the shots. This allows for smoother transitions.
         //
-        mtrShootT.setPower(-0.5);
-        mtrShootB.setPower(0.7);
+        mtrShootT.setPower(0.5);
+        mtrShootB.setPower(-0.7);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 1.0) {
@@ -173,7 +177,7 @@ public class Krimp_Autonomous extends VisionOpMode {
             // Lets the spinners speed up
             //
         }
-        srvRelease.setPosition(0.6);
+        srvRelease.setPosition(0.85);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 1.0) {
@@ -183,7 +187,7 @@ public class Krimp_Autonomous extends VisionOpMode {
         }
         mtrShootT.setPower(0.0);
         mtrShootB.setPower(0.0);
-        srvRelease.setPosition(0.3);
+        srvRelease.setPosition(srvRelease.MAX_POSITION);
         mtrCollect.setPower(1.0);
         runtime.reset();
         runtime.startTime();
@@ -193,8 +197,8 @@ public class Krimp_Autonomous extends VisionOpMode {
             //
         }
         mtrCollect.setPower(0.0);
-        mtrShootT.setPower(-0.5);
-        mtrShootB.setPower(0.7);
+        mtrShootT.setPower(0.5);
+        mtrShootB.setPower(-0.7);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 1.0) {
@@ -202,7 +206,7 @@ public class Krimp_Autonomous extends VisionOpMode {
             // Lets the spinners speed up
             //
         }
-        srvRelease.setPosition(0.6);
+        srvRelease.setPosition(0.85);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 1.0) {
@@ -210,11 +214,10 @@ public class Krimp_Autonomous extends VisionOpMode {
             // Shoots ball
             //
         }
-        srvRelease.setPosition(0.3);
+        srvRelease.setPosition(srvRelease.MAX_POSITION);
         mtrShootT.setPower(0);
         mtrShootB.setPower(0);
         mtrCollect.setPower(0);
-        srvRelease.setPosition(0.3);
 
         //
         // Wait...
@@ -223,6 +226,9 @@ public class Krimp_Autonomous extends VisionOpMode {
         // v_state == 1 is all about turning 90 degrees to the left to make sure that the
         // touching servo, the range sensor, and the beacon are all facing the wall.
         //
+        v_state = 1;
+        telemetry.addData("Current State: ", v_state);
+        telemetry.update();
         PauseAuto(0.2);
         //
         // Rotation
@@ -249,12 +255,16 @@ public class Krimp_Autonomous extends VisionOpMode {
         // v_state == 2 is all about moving the robot to it's specific position at the white
         // line up by the coloured box. From there we go into the next state. Repositioning.
         //
+        v_state = 2;
+        telemetry.addData("Current State: ", v_state);
+        telemetry.update();
         drive_train.setPowerD(0.6);
         drive_train.run_diagonal_right_up(mtrFR, mtrFL, mtrBR, mtrBL);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 8 || colourS.getLightDetected() < initialC + .1) {
             telemetry.addData("Colour WaveLength", colourS.getLightDetected());
+            telemetry.update();
         }
         drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
 
@@ -272,6 +282,9 @@ public class Krimp_Autonomous extends VisionOpMode {
         //
         // After repositioning, we will proceed with the next state, pushing.
         //
+        v_state = 3;
+        telemetry.addData("Current State: ", v_state);
+        telemetry.update();
         PauseAuto(0.4);
         //
         // Pause to see colour
@@ -300,6 +313,9 @@ public class Krimp_Autonomous extends VisionOpMode {
             // v_state == 4 is when the robot goes in for the points and presses the -FIRST BEACON-
             // After pressing the button, it will go into the next state, going back to original position.
             //
+            v_state = 4;
+            telemetry.addData("Current State: ", v_state);
+            telemetry.update();
 
             encoderDrive(12.0, "right", 0.6);
 
@@ -311,6 +327,9 @@ public class Krimp_Autonomous extends VisionOpMode {
             // v_state 5 is about returning to where you were before pressing the button.
             // After this, the next state will be moving to the next beacon.
             //
+            v_state = 5;
+            telemetry.addData("Current State: ", v_state);
+            telemetry.update();
 
             encoderDrive(10.0, "left" , 0.6);
 
@@ -330,6 +349,9 @@ public class Krimp_Autonomous extends VisionOpMode {
             // v_state == 4 is when the robot goes in for the points and presses the -FIRST BEACON-
             // After pressing the button, it will go into the next state, going back to original position.
             //
+            v_state = 4;
+            telemetry.addData("Current State: ", v_state);
+            telemetry.update();
 
             encoderDrive(12.0, "right", 0.6);
 
@@ -341,6 +363,9 @@ public class Krimp_Autonomous extends VisionOpMode {
             // v_state 5 is about returning to where you were before pressing the button.
             // After this, the next state will be moving to the next beacon.
             //
+            v_state = 5;
+            telemetry.addData("Current State: ", v_state);
+            telemetry.update();
 
             encoderDrive(10.0, "left" , 0.6);
         }
@@ -355,6 +380,9 @@ public class Krimp_Autonomous extends VisionOpMode {
         // button. We will use the color sensor to read the second line. Then we will
         // repeat the same steps to press the button again.
         //
+        v_state = 6;
+        telemetry.addData("Current State: ", v_state);
+        telemetry.update();
         drive_train.setPowerD(0.6);
         drive_train.run_forward(mtrFR, mtrFL, mtrBR, mtrBL);
         runtime.reset();
@@ -362,6 +390,7 @@ public class Krimp_Autonomous extends VisionOpMode {
         while (runtime.seconds() < 6 || colourS.getLightDetected() < initialC + .1) {
             telemetry.addData("Colour", colourS.getLightDetected());
             telemetry.addData("Seconds", runtime.seconds());
+            telemetry.update();
         }
         drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
 
@@ -379,6 +408,9 @@ public class Krimp_Autonomous extends VisionOpMode {
         //
         // After repositioning, we will proceed with the next state, pushing.
         //
+        v_state = 7;
+        telemetry.addData("Current State: ", v_state);
+        telemetry.update();
         PauseAuto(0.4);
         //
         // Pause to see colour
@@ -407,6 +439,9 @@ public class Krimp_Autonomous extends VisionOpMode {
             // v_state == 8 is when the robot goes in for the points and presses the -FIRST BEACON-
             // After pressing the button, it will go into the next state, going back to original position.
             //
+            v_state = 8;
+            telemetry.addData("Current State: ", v_state);
+            telemetry.update();
 
             encoderDrive(12.0, "right", 0.6);
 
@@ -418,6 +453,9 @@ public class Krimp_Autonomous extends VisionOpMode {
             // v_state 9 is about returning to where you were before pressing the button.
             // After this, the next state will be moving to the next beacon.
             //
+            v_state = 9;
+            telemetry.addData("Current State: ", v_state);
+            telemetry.update();
 
             encoderDrive(10.0, "left" , 0.6);
 
@@ -437,6 +475,9 @@ public class Krimp_Autonomous extends VisionOpMode {
             // v_state == 8 is when the robot goes in for the points and presses the -FIRST BEACON-
             // After pressing the button, it will go into the next state, going back to original position.
             //
+            v_state = 8;
+            telemetry.addData("Current State: ", v_state);
+            telemetry.update();
 
             encoderDrive(12.0, "right", 0.6);
 
@@ -448,6 +489,9 @@ public class Krimp_Autonomous extends VisionOpMode {
             // v_state 9 is about returning to where you were before pressing the button.
             // After this, the next state will be moving to the next beacon.
             //
+            v_state = 9;
+            telemetry.addData("Current State: ", v_state);
+            telemetry.update();
 
             encoderDrive(10.0, "left" , 0.6);
         }
@@ -466,6 +510,9 @@ public class Krimp_Autonomous extends VisionOpMode {
             // ramp and get extra points for the team. We have to do this if time
             // is less than 26 seconds however, all in order to get extra points.
             //
+            v_state = 10;
+            telemetry.addData("Current State: ", v_state);
+            telemetry.update();
             encoderDrive(4.0, "left", 0.5);
 
             PauseAuto(0.2);
@@ -489,6 +536,9 @@ public class Krimp_Autonomous extends VisionOpMode {
             // it stays at. The v_state will increase into nothing. Therefore, it will stop and
             // end. This is for 90 points in the Velocity vortex.
             //
+            v_state = 10;
+            telemetry.addData("Current State: ", v_state);
+            telemetry.update();
             encoderDrive(9.0, "left", 0.5);
 
             PauseAuto(0.2);
@@ -510,7 +560,7 @@ public class Krimp_Autonomous extends VisionOpMode {
         //
         // Stops the program.
         //
-        stop();
+        this.stopRobot();
 
     }
 
@@ -567,7 +617,7 @@ public class Krimp_Autonomous extends VisionOpMode {
         //
         drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
     }
-    public void stop() {
+    private void stopRobot() {
         //
         // Stops -LOOP- and ends Program.
         //
