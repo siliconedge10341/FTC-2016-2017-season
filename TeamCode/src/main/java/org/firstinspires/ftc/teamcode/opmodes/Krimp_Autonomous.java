@@ -89,8 +89,8 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         mtrFL = hardwareMap.dcMotor.get("fl_motor");
         mtrBR = hardwareMap.dcMotor.get("br_motor");
         mtrBL = hardwareMap.dcMotor.get("bl_motor");
-        mtrShootT = hardwareMap.dcMotor.get("shooter_right");
-        mtrShootB = hardwareMap.dcMotor.get("shooter_left");
+        mtrShootB = hardwareMap.dcMotor.get("shooter_right"); // Bottom
+        mtrShootT = hardwareMap.dcMotor.get("shooter_left");  // Top
         mtrCollect = hardwareMap.dcMotor.get("ball_collector");
 
         mtrShootT.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
@@ -168,8 +168,8 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         // One ball by the releases servo and there is one ball in the collector so there
         // is a delay between the shots. This allows for smoother transitions.
         //
-        mtrShootT.setPower(0.5);
-        mtrShootB.setPower(-0.7);
+        mtrShootT.setPower(0.7);
+        mtrShootB.setPower(-0.5);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 1.0) {
@@ -197,8 +197,8 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
             //
         }
         mtrCollect.setPower(0.0);
-        mtrShootT.setPower(0.5);
-        mtrShootB.setPower(-0.7);
+        mtrShootT.setPower(0.7);
+        mtrShootB.setPower(-0.5);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 1.0) {

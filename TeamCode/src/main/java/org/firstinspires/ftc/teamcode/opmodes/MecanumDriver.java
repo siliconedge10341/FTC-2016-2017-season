@@ -57,8 +57,8 @@ public class MecanumDriver extends OpMode{
 		motorBR = hardwareMap.dcMotor.get("br_motor");
         motorLS = hardwareMap.dcMotor.get("linear_slide_motor");
 		motorC = hardwareMap.dcMotor.get("conveyor_motor");
-		motorShootB = hardwareMap.dcMotor.get("shooter_left");
-		motorShootT = hardwareMap.dcMotor.get("shooter_right");
+		motorShootB = hardwareMap.dcMotor.get("shooter_right"); // Bottom
+		motorShootT = hardwareMap.dcMotor.get("shooter_left");  // Top
 
 		// Servos
 		ballRelease = hardwareMap.servo.get("servo_ball");
@@ -140,8 +140,8 @@ public class MecanumDriver extends OpMode{
         // the servo to shoot one ball.
 		//
         if (gamepad2.b) {
-			motorShootB.setPower(.9);
-			motorShootT.setPower(-.8);
+            motorShootT.setPower(.9);
+            motorShootB.setPower(-.7);
 			runtime.reset();
 			while (runtime.seconds() < 1){
 
