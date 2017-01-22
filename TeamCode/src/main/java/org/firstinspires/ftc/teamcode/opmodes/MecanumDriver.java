@@ -141,12 +141,16 @@ public class MecanumDriver extends OpMode{
 		//
         if (gamepad2.b) {
 			motorShootB.setPower(.9);
-			motorShootT.setPower(-.8);
+			motorShootT.setPower(-.1);
 			runtime.reset();
 			while (runtime.seconds() < 1){
 
 			}
 			ballRelease.setPosition(.85);
+            runtime.reset();
+            while (runtime.seconds()<.5){
+
+            }
 			ballRelease.setPosition(ballRelease.MAX_POSITION);
 			motorShootB.setPower(0.0);
 			motorShootT.setPower(0.0);
