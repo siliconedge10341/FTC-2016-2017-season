@@ -64,7 +64,8 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         private int v_state = 0;
 
         // states variable for the loop
-        private static final Double ticks_per_inch = 510 / (3.1415 * 4);
+        private static final double ticks_per_inch = 510 / (3.1415 * 4);
+        private static final double seconds_per_90_degrees = 0.86;
 
     // public data
         // None;
@@ -231,16 +232,9 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         mtrFL.setPower(1.0);
         mtrBR.setPower(1.0);
         mtrBL.setPower(1.0);
-        runtime.reset();
-        runtime.startTime();
-        while (runtime.seconds() < 0.86) {
-            // Get data
-            telemetry.addData("seconds", runtime.seconds());
-            telemetry.update();
-        }
         drive_train.brake(mtrFR, mtrFL, mtrBR, mtrBL);
 
-        PauseAuto(0.4);
+        PauseAuto(0.2);
 
         //
         // Wait...
@@ -564,17 +558,17 @@ public class Krimp_Autonomous extends LinearVisionOpMode {
         // for Waiting between driving periods.
         //
         runtime.reset();
-        while(runtime.seconds() < time)
-        {
+        while (runtime.milliseconds() < (time * 1000)) {
             // do nothing
             telemetry.addData("Seconds", runtime.seconds());
+            telemetry.update();
         }
 
     }
     public void encoderDrive(double inches /*Seconds*/, String direction /*movement type*/, double power /*Power from 1.0 to -1.0*/) {
         int encoderval;
 
-        encoderval = ticks_per_inch.intValue() * ((int) inches);
+        encoderval = ((int) ticks_per_inch) * ((int) inches);
         drive_train.run_using_encoders(mtrFR, mtrFL, mtrBR, mtrBL);
         //
         // Uses the encoders and motors to set the specific position
