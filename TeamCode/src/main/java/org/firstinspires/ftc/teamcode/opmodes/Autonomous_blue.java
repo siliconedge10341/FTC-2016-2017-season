@@ -108,7 +108,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         rotation.setIsUsingSecondaryCamera(true);
         rotation.disableAutoRotate();
-        rotation.setActivityOrientationFixed(ScreenOrientation.LANDSCAPE);
+        rotation.setActivityOrientationFixed(ScreenOrientation.LANDSCAPE_REVERSE);
 
         cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
         cameraControl.setAutoExposureCompensation();

@@ -77,7 +77,7 @@ public class VisionSample extends LinearVisionOpMode {
 
     rotation.setIsUsingSecondaryCamera(true);
     rotation.disableAutoRotate();
-    rotation.setActivityOrientationFixed(ScreenOrientation.PORTRAIT);
+    rotation.setActivityOrientationFixed(ScreenOrientation.LANDSCAPE_REVERSE);
 
     cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
     cameraControl.setAutoExposureCompensation();
@@ -101,7 +101,7 @@ public class VisionSample extends LinearVisionOpMode {
       telemetry.addData("Beacon Right", beacon.getAnalysis().getStateRight().toString());
       telemetry.addData("Beacon Center", beacon.getAnalysis().getLocationString());
       telemetry.addData("Beacon Confidence", beacon.getAnalysis().getConfidenceString());
-
+      telemetry.addData("Beacon Detected? ", beacon.getAnalysis().isBeaconFound());
       telemetry.addData("Screen Rotation", rotation.getScreenOrientationActual());
       telemetry.addData("Frame Rate", fps.getFPSString() + " FPS");
       telemetry.addData("Frame Size", "Width: " + width + " Height: " + height);
