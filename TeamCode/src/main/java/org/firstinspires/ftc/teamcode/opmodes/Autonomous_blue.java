@@ -37,7 +37,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         private DcMotor motorConveyor;
 
         // servo
-       // private Servo releaseServo;
+       private Servo ballServo;
         //private Servo beaconServo;
 
         // Range Sensor
@@ -80,7 +80,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
             motorConveyor = hardwareMap.dcMotor.get("conveyor_motor");
 
             // Servos
-            //releaseServo = hardwareMap.servo.get("servo_ball");
+            ballServo = hardwareMap.servo.get("servo_ball");
+        ballServo.setPosition(Servo.MAX_POSITION);
            // beaconServo = hardwareMap.servo.get("servo_beacon");
 
             // Classes
@@ -89,9 +90,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
             rangesf = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
             rangesb = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
 
-            // Sets Position
-            //releaseServo.setPosition(0.3);
-            //beaconServo.setPosition(.5);
+
 
         waitForVisionStart();
 
@@ -109,7 +108,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         rotation.setIsUsingSecondaryCamera(true);
         rotation.disableAutoRotate();
-        rotation.setActivityOrientationFixed(ScreenOrientation.PORTRAIT);
+        rotation.setActivityOrientationFixed(ScreenOrientation.LANDSCAPE);
 
         cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
         cameraControl.setAutoExposureCompensation();
@@ -154,20 +153,36 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //Shoot ball
         //
         motorConveyor.setPower(.7);
-        motorShootL.setPower(1.0);
-        motorShootR.setPower(-1.0);
+        motorShootL.setPower(9.0);
+        motorShootR.setPower(-8.0);
+
         runtime.reset();
-        while (runtime.seconds() < 4.0){
+        while (runtime.seconds() < 5.0){
+            if (runtime.seconds()==1.0){
+                ballServo.setPosition(.85);
+            }
+            if (runtime.seconds() == 2.0){
+                ballServo.setPosition(Servo.MAX_POSITION);
+            }
+            if (runtime.seconds() == 3.5){
+                ballServo.setPosition(.85);
+            }
+            if (runtime.seconds() == 4.5){
+                ballServo.setPosition(Servo.MAX_POSITION);
+            }
+
             telemetry.addData("seconds",runtime.seconds());
             telemetry.update();
         }
         motorConveyor.setPower(0.0);
         motorShootL.setPower(0.0);
         motorShootR.setPower(0.0);
+        ballServo.setPosition(0.0);
 
         //
         // Detect beacon
         //
+
         while(opModeIsActive()&& !beacon.getAnalysis().isBeaconFound()) {
             telemetry.addData("Beacon ", beacon.getAnalysis());
             telemetry.update();
@@ -177,11 +192,11 @@ public class Autonomous_blue extends LinearVisionOpMode {
             // go forward if the left side of the beacon is blue.
             // beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
             //
-            encoderDrive(buttonWidth,"forward" , .3);
+            encoderDrive(buttonWidth -3,"forward" , .3);
 
         } else {
 
-            encoderDrive(buttonWidth - 2,"backward" , .3);
+            encoderDrive(buttonWidth +3,"backward" , .3);
         }
         //
         // beacon code
@@ -201,6 +216,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Run to line
         //
+        encoderDrive(12.0 , "forward" , .3);
+
         PauseAuto(.5);
         Drive_Train.setPowerD(.2);
         Drive_Train.run_forward(fr, fl, br, bl);
@@ -237,11 +254,11 @@ public class Autonomous_blue extends LinearVisionOpMode {
         }
         if (beacon.getAnalysis().isLeftBlue() == true) {
 
-            encoderDrive(buttonWidth,"forward" , .3);
+            encoderDrive(buttonWidth - 3,"forward" , .3);
 
         } else {
 
-            encoderDrive(buttonWidth-2,"backward" , .3);
+            encoderDrive(buttonWidth + 3,"backward" , .3);
 
         }
 
@@ -312,16 +329,14 @@ public class Autonomous_blue extends LinearVisionOpMode {
         int i;
         int rcount = 0;
         for (i =0; i <=5 ; i++){
-            if (rangef.getDistance(DistanceUnit.INCH) > 1){
+            if (rangef.getDistance(DistanceUnit.INCH) <= 1){
 
             }else{
                 avg = avg + rangef.getDistance(DistanceUnit.INCH);
                 rcount ++;
             }
         }
-
-
-
+        telemetry.addData("Range" , (avg/rcount));
         return (avg / rcount);
     }
 

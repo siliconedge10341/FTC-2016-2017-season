@@ -65,7 +65,7 @@ public class VisionSample extends LinearVisionOpMode {
      * Set the beacon analysis method
      * Try them all and see what works!
      */
-    beacon.setAnalysisMethod(Beacon.AnalysisMethod.COMPLEX);
+    beacon.setAnalysisMethod(Beacon.AnalysisMethod.FAST);
 
     /**
      * Set color tolerances
@@ -75,7 +75,7 @@ public class VisionSample extends LinearVisionOpMode {
     beacon.setColorToleranceBlue(0);
 
 
-    rotation.setIsUsingSecondaryCamera(false);
+    rotation.setIsUsingSecondaryCamera(true);
     rotation.disableAutoRotate();
     rotation.setActivityOrientationFixed(ScreenOrientation.PORTRAIT);
 
@@ -101,7 +101,7 @@ public class VisionSample extends LinearVisionOpMode {
       telemetry.addData("Beacon Right", beacon.getAnalysis().getStateRight().toString());
       telemetry.addData("Beacon Center", beacon.getAnalysis().getLocationString());
       telemetry.addData("Beacon Confidence", beacon.getAnalysis().getConfidenceString());
-      telemetry.addData("Beacon Buttons", beacon.getAnalysis().getButtonString());
+
       telemetry.addData("Screen Rotation", rotation.getScreenOrientationActual());
       telemetry.addData("Frame Rate", fps.getFPSString() + " FPS");
       telemetry.addData("Frame Size", "Width: " + width + " Height: " + height);

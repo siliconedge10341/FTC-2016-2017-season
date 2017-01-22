@@ -27,7 +27,7 @@ public class MecanumDriver extends OpMode{
 
 		// Servos
 		private Servo ballRelease;
-		private Servo collectServo;
+
 
 		private boolean percision_flag = false;
         //
@@ -62,9 +62,8 @@ public class MecanumDriver extends OpMode{
 
 		// Servos
 		ballRelease = hardwareMap.servo.get("servo_ball");
-		ballRelease.setPosition(0.4);
-		collectServo = hardwareMap.servo.get("servo_collector");
-		collectServo.setPosition(0.0);
+		ballRelease.setPosition(Servo.MAX_POSITION);
+
 
 		// Classes
 		//dist.setRange(hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "projectile_distance"));
@@ -145,8 +144,14 @@ public class MecanumDriver extends OpMode{
         // the servo to shoot one ball.
 		//
         if (gamepad2.b) {
-            motorShootB.setPower(0.6);
-            motorShootT.setPower(-0.8);/*
+			motorShootB.setPower(.9);
+			motorShootT.setPower(-.8);
+			runtime.reset();
+			while (runtime.seconds()<1){
+
+			}
+			ballRelease.setPosition(.85);
+            /*
             runtime.reset();
             runtime.startTime();
             while (runtime.seconds() < 1.5) {
@@ -164,6 +169,7 @@ public class MecanumDriver extends OpMode{
         }
 		else
 		{
+			ballRelease.setPosition(1.0);
 			motorShootB.setPower(0.0);
 			motorShootT.setPower(0.0);
 		}
