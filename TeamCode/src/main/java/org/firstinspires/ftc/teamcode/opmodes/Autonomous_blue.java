@@ -411,8 +411,9 @@ public class Autonomous_blue extends LinearVisionOpMode {
         return (avg / rcount);
     }
 
-public void alignRobot(double a){
+public void encoderTurn(double inches){
 
-}
+
+    }
 
 }
