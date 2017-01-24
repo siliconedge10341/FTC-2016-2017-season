@@ -278,6 +278,7 @@ public class Mecanum{
         //
         // The positive and negative inputs only mean direction, not speed.
         //
+
         motorFR.setPower(-FRpower);
         motorBR.setPower(-BRpower);
         motorFL.setPower(-FLpower);
@@ -438,13 +439,23 @@ public class Mecanum{
         //
         // The positive and negative inputs only mean direction, not speed.
         //
-        motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
-        motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
-        motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
-        motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+        motorFR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //
         // This sets the motors that go into DemoAutonomous.
         //
+    }
+    public void run_without_encoders(DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL){
+        motorFR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorBR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorFL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorBL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+
+    public double getSpeed(){
+        return BasePower;
     }
 
 }

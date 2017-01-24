@@ -48,7 +48,7 @@ import java.net.PortUnreachableException;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="40_points", group="Pushbot")
+@Autonomous(name="strafetest", group="Pushbot")
 
 public class HitBall extends LinearOpMode {
 
@@ -106,8 +106,6 @@ public class HitBall extends LinearOpMode {
         //
         // starting autonomous
         //
-        encoderDrive(30.0, "left", 0.5);
-
 
         PauseAuto(0.2);
 
@@ -152,7 +150,7 @@ public class HitBall extends LinearOpMode {
         //
         // Drives to the center of the field
         //
-        encoderDrive(44.0, "left", 0.5);
+        encoderDrive(44.0, "rightalign", 0.5);
         Drive_Train.turn_left(fr,fl,br,bl);
         runtime.reset();
         while (runtime.seconds() < 1){

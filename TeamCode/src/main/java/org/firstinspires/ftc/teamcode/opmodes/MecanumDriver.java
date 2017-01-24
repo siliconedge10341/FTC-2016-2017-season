@@ -147,7 +147,7 @@ public class MecanumDriver extends OpMode{
 
 			}
 
-			ballRelease.setPosition(.85);
+			ballRelease.setPosition(.8);
             runtime.reset();
             while (runtime.seconds()<.5){
 
@@ -160,11 +160,8 @@ public class MecanumDriver extends OpMode{
         // Raises CapBall
         //
 		if (gamepad2.x) {
-			if(Math.abs(LSRotations) >= MaxR){
-				motorLS.setPower(0.0);
-			}else {
-				motorLS.setPower(-0.5);
-			}
+
+			motorLS.setPower(-0.5);
             LSRotations = motorLS.getCurrentPosition();
 
         } else if (gamepad2.y ) {

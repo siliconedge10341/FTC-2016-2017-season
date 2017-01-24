@@ -20,7 +20,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "Blue_Autonomous", group = "Blue")
+@Autonomous(name = "Blue_Autonomous_dude", group = "Blue")
 
 public class Autonomous_blue extends LinearVisionOpMode {
     // instance variables
@@ -41,7 +41,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //private Servo beaconServo;
 
         // Range Sensor
-        private ModernRoboticsI2cRangeSensor rangef;
+        //private ModernRoboticsI2cRangeSensor rangef;
         private ModernRoboticsI2cRangeSensor rangesf;
         private ModernRoboticsI2cRangeSensor rangesb;
         private OpticalDistanceSensor ods;
@@ -63,6 +63,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
     private static final double distancetoBase = 46.7;
     private static final double distanceFromWall = 19;
     private static final double buttonWidth = 6.0;
+    private double avgr = 0;
 
 
     public void runOpMode() throws InterruptedException {
@@ -86,9 +87,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
             // Classes
             ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-            rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
-            rangesf = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
-            rangesb = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
+            rangesf = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_front");
+            rangesb = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_back");
 
 
 
@@ -169,26 +169,34 @@ public class Autonomous_blue extends LinearVisionOpMode {
         motorShootR.setPower(0);
 //////          ////
 
-        PauseAuto(.4);
-        Drive_Train.setPowerD(.3);
+        Drive_Train.reset_encoders(fr,fl,br,bl);
+        PauseAuto(.3);
+        Drive_Train.run_without_encoders(fr,fl,br,bl);
+        Drive_Train.setPowerD(0.25);
+
         Drive_Train.run_forward(fr, fl, br, bl);
-        while (opModeIsActive() && ods.getLightDetected()< initialC +.08) {
+        runtime.reset();
+        while (opModeIsActive() && ods.getLightDetected()< initialC +.08 && runtime.seconds()<5) {
             // Get Data
+            telemetry.addData("base power" , Drive_Train.getSpeed());
             telemetry.addData("Light ",ods.getLightDetected());
             telemetry.update();
         }
         //Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
+        telemetry.addData("Line" ,  " Found!");
+        telemetry.update();
 
-        PauseAuto(.4);
+        PauseAuto(1.5);
 
-        Drive_Train.turn_right(fr,fl,br,bl);
+        Drive_Train.setPowerD(.3);
+        Drive_Train.turn_left(fr,fl,br,bl);
         runtime.reset();
-        while(runtime.seconds()<.40){
-
+        while(runtime.seconds() < 1.2){
+            telemetry.addData("Turning" , "");
+            telemetry.update();
         }
         Drive_Train.brake(fr,fl,br,bl);
-        PauseAuto(.3);
 
 
         /*
@@ -210,46 +218,61 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Detect beacon
         //
 
-        while(opModeIsActive()&& !beacon.getAnalysis().isBeaconFound()) {
-            telemetry.addData("Beacon ", beacon.getAnalysis());
+        PauseAuto(.5);
+        while (opModeIsActive() && !beacon.getAnalysis().isBeaconFound()) {
+            telemetry.addData("Beacon", beacon.getAnalysis());
             telemetry.update();
         }
         if (beacon.getAnalysis().isLeftBlue() == true) {
-            //
-            // go forward if the left side of the beacon is blue.
-            // beacon is 1/2 a foot, presser is on the right side so it is lined up with the line
-            //
-            encoderDrive(buttonWidth -3,"forward" , .3);
+
+            Drive_Train.reset_encoders(fr,fl,br,bl);
+            encoderDrive(3.0,"forward" , .3);
+
+
 
         } else {
+            Drive_Train.reset_encoders(fr,fl,br,bl);
+            encoderDrive(10.0,"backward" , .3);
 
-            encoderDrive(buttonWidth +3,"backward" , .3);
         }
         //
         // beacon code
         //
+        telemetry.addData("Beacon " , beacon.getAnalysis().getColorString());
+        telemetry.update();
         PauseAuto(1.0);
         //
         // hit the button
         //
 
-        encoderDrive(avgRange() * 2,"right" , .15);
+        avgr = avgRange();
+        PauseAuto(2.0);
+        encoderDrive(avgr * 2 +2,"rightalign",.3);
+
+        telemetry.addData("Hit button " , " ");
+        telemetry.update();
 
         PauseAuto(1.0);
-        //
-        // go back a little bit
-        //
-        encoderDrive(10.0 * 2, "left" , .15);
+        encoderDrive(10.0 * 2, "left" , .5);
         //
         // Run to line
         //
+        PauseAuto(1.0);
+        telemetry.addData("Next " , " Line");
+        telemetry.update();
+
+        PauseAuto(1.0);
+
+
         encoderDrive(12.0 , "forward" , .3);
 
         PauseAuto(.5);
-        Drive_Train.setPowerD(.2);
+
+        Drive_Train.setPowerD(.25);
+        Drive_Train.run_without_encoders(fr,fl,br,bl);
         Drive_Train.run_forward(fr, fl, br, bl);
         //Drive_Train.setPosition(4 * 1440,4*1440,4*1440,4*1440, fr, fl, br, bl);
-        while (opModeIsActive() && ods.getLightDetected() > initialC + .1) {
+        while (opModeIsActive() && ods.getLightDetected() < initialC + .08) {
             // Get data
             telemetry.addData("Light" , ods.getLightDetected());
             telemetry.update();
@@ -293,11 +316,11 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // beacon code
         //
-
-        encoderDrive(avgRange() * 2,"right",.3);
+        avgr = avgRange();
+        encoderDrive(avgr * 2,"rightalign",.3);
 
         PauseAuto(.4);
-        encoderDrive(3.0 , "left" , .3);
+        encoderDrive(10.0 * 2 , "left" , .3);
 
         //beaconServo.setPosition(.5);
 
@@ -315,7 +338,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         int encoderval;
         // Sets the encoders
         //
-        encoderval = ticks_per_inch.intValue() * ((int) inches);
+        encoderval = ticks_per_inch.intValue() * (int)inches;
         Drive_Train.run_using_encoders(fr, fl, br, bl);
         //
         // Uses the encoders and motors to set the specific position
@@ -341,32 +364,55 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // from the encoders is achieved. When achieved, the program will proceed to the end
         // of the function.
         //
-        while(Drive_Train.testDistance(fl) != 1){
-            telemetry.addData("Pos " , fl.getCurrentPosition());
-            telemetry.update();
+        if(direction == "leftalign")
+        {
+            while(Drive_Train.testDistance(fl)!= 1)
+            {
+                Drive_Train.run_left_using_alignment(fr,fl,br,bl,rangesb.getDistance(DistanceUnit.CM),rangesf.getDistance(DistanceUnit.CM));
+                telemetry.addData("Pos ", fl.getCurrentPosition());
+                telemetry.update();
+            }
+        }else if(direction == "rightalign"){
+            while(Drive_Train.testDistance(fl)!= 1)
+            {
+                Drive_Train.run_right_using_alignment(fr,fl,br,bl,rangesb.getDistance(DistanceUnit.CM),rangesf.getDistance(DistanceUnit.CM));
+                telemetry.addData("Pos ", fl.getCurrentPosition());
+                telemetry.update();
+            }
         }
+        else {
+            while (Drive_Train.testDistance(fl) != 1) {
+                telemetry.addData("Pos ", fl.getCurrentPosition());
+                telemetry.update();
+            }
+        }
+
         //
         // Ends the Drive period.
         //
         Drive_Train.brake(fr, fl, br, bl);
+        Drive_Train.reset_encoders(fr,fl,br,bl);
 
     }
     public double avgRange(){
         double avg = 0;
         int i;
         int rcount = 0;
-        for (i =0; i <=5 ; i++){
-            if (rangef.getDistance(DistanceUnit.INCH) <= 1){
+        for (i =0; i <=10 ; i++){
+            if (rangesb.getDistance(DistanceUnit.INCH) <= 1 || rangesf.getDistance(DistanceUnit.INCH) < 1){
 
             }else{
-                avg = avg + rangef.getDistance(DistanceUnit.INCH);
-                rcount ++;
+                avg = avg + rangesb.getDistance(DistanceUnit.INCH);
+                avg = avg + rangesf.getDistance(DistanceUnit.INCH);
+                rcount = rcount +2;
             }
         }
         telemetry.addData("Range" , (avg/rcount));
         return (avg / rcount);
     }
 
+public void alignRobot(double a){
 
+}
 
 }

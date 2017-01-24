@@ -37,7 +37,7 @@ import org.firstinspires.ftc.teamcode.classes.Mecanum;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="10_points", group="Pushbot")
+@Autonomous(name="40_points", group="Pushbot")
 
 public class HitballFar extends LinearOpMode {
 
@@ -51,12 +51,12 @@ public class HitballFar extends LinearOpMode {
 
     private DcMotor motorShootL;
     private DcMotor motorShootR;
-    private DcMotor motorCollector;
+    //private DcMotor motorCollector;
 
-    private Servo releaseServo;
-    private Servo beaconServo;
+    private Servo ballServo;
 
-    private OpticalDistanceSensor ods;
+
+
     private double initialC = 0;
     private static final Double ticks_per_inch = 510 / (3.1415 * 4);
     ElapsedTime runtime = new ElapsedTime();
@@ -69,26 +69,74 @@ public class HitballFar extends LinearOpMode {
 
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
-        motorCollector = hardwareMap.dcMotor.get("ball_collector");
+        //motorCollector = hardwareMap.dcMotor.get("ball_collector");
 
-        releaseServo = hardwareMap.servo.get("servo_ball");
-        beaconServo = hardwareMap.servo.get("servo_beacon");
-        beaconServo.setPosition(0.5);
+        ballServo = hardwareMap.servo.get("servo_ball");
+        ballServo.setPosition(Servo.MAX_POSITION);
 
         Drive_Train.reset_encoders(fr,fl,br,bl);
 
-        releaseServo.setPosition(.5);
-        motorShootL.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
-        motorShootR.setMode(DcMotor.RunMode.RUN_USING_ENCODERS);
+        motorShootL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorShootR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //ods = hardwareMap.opticalDistanceSensor.get("ods_line");
         // Wait for the game to start (driver presses PLAY)
         // Abort this loop is started or stopped.
         waitForStart();
         //
         // starting autonomous
+
+        motorShootL.setPower(0.7);
+        motorShootR.setPower(-0.5);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Lets the spinners speed up
+            //
+        }
+        ballServo.setPosition(0.85);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Shoots ball
+            //
+        }
+        motorShootL.setPower(0.0);
+        motorShootR.setPower(0.0);
+        ballServo.setPosition(ballServo.MAX_POSITION);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 0.75) {
+            //
+            // Loads another ball
+            //
+        }
+        motorShootL.setPower(0.7);
+        motorShootR.setPower(-0.5);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Lets the spinners speed up
+            //
+        }
+        ballServo.setPosition(0.85);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Shoots ball
+            //
+        }
+        ballServo.setPosition(ballServo.MAX_POSITION);
+        motorShootL.setPower(0);
+        motorShootR.setPower(0);
+
+
         //
         PauseAuto(5.5);
-        encoderDrive(64.0, "forward" , .5);
+        encoderDrive(45.0, "forward" , .5);
 
         //
         // Drives to the center of the field
