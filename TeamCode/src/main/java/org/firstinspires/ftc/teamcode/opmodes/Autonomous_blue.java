@@ -245,7 +245,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // hit the button
         //
 
-        avgr = avgRange();
+        avgr = avgRangeF();
         PauseAuto(2.0);
         encoderDrive(avgr * 2 +2,"rightalign",.3);
 
@@ -316,7 +316,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // beacon code
         //
-        avgr = avgRange();
+        avgr = avgRangeF();
         encoderDrive(avgr * 2,"rightalign",.3);
 
         PauseAuto(.4);
@@ -334,7 +334,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
             //do nothing
         }
     }
-    public void encoderDrive(double inches /*Inches*/, String direction /*Direction*/, double power /*Power between 0.0 and 1.0*/) {
+    public void encoderDrive(double inches , String direction, double power ) {
         int encoderval;
         // Sets the encoders
         //
@@ -394,25 +394,43 @@ public class Autonomous_blue extends LinearVisionOpMode {
         Drive_Train.reset_encoders(fr,fl,br,bl);
 
     }
-    public double avgRange(){
+    public double avgRangeF(){
         double avg = 0;
         int i;
         int rcount = 0;
         for (i =0; i <=10 ; i++){
-            if (rangesb.getDistance(DistanceUnit.INCH) <= 1 || rangesf.getDistance(DistanceUnit.INCH) < 1){
+            if (rangesf.getDistance(DistanceUnit.INCH) < 1){
+
+            }else{
+                avg = avg + rangesf.getDistance(DistanceUnit.INCH);
+                rcount ++;
+            }
+        }
+        telemetry.addData("Range" , (avg/rcount));
+        return (avg / rcount);
+    }
+    public double avgRangeB(){
+        double avg = 0;
+        int i;
+        int rcount = 0;
+        for (i =0; i <=10 ; i++){
+            if (rangesb.getDistance(DistanceUnit.INCH) <= 1){
 
             }else{
                 avg = avg + rangesb.getDistance(DistanceUnit.INCH);
-                avg = avg + rangesf.getDistance(DistanceUnit.INCH);
-                rcount = rcount +2;
+                rcount ++;
             }
         }
         telemetry.addData("Range" , (avg/rcount));
         return (avg / rcount);
     }
 
-public void encoderTurn(double inches){
-
+public void alignWall(){
+        if(avgRangeF() < avgRangeB()){
+            while(avgRangeF() < avgRangeB()){
+                Drive_Train.turn_right(fr,fl,br,bl);
+            }
+        }
 
     }
 
