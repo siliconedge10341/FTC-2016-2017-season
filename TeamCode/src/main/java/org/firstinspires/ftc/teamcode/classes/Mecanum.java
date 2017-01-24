@@ -29,6 +29,48 @@ public class Mecanum{
         BasePower = .5;
     }
 
+
+    public void set_Power_using_encoders(double x, double y, DcMotor motorFR, DcMotor motorFL, DcMotor motorBR, DcMotor motorBL)
+    {
+        int frdist, fldist, brdist, bldist;
+        if(y > x && y > -x)
+        {
+            frdist = motorFR.getCurrentPosition() + 1000;
+            fldist = motorFL.getCurrentPosition() - 1000;
+            brdist = motorBR.getCurrentPosition() + 1000;
+            bldist = motorBL.getCurrentPosition() - 1000;
+        }
+        else if(y < x && y > -x)
+        {
+            frdist = motorFR.getCurrentPosition() + 1000;
+            fldist = motorFL.getCurrentPosition() + 1000;
+            brdist = motorBR.getCurrentPosition() - 1000;
+            bldist = motorBL.getCurrentPosition() - 1000;
+        }
+        else if(y > x && y < -x)
+        {
+            frdist = motorFR.getCurrentPosition() - 1000;
+            fldist = motorFL.getCurrentPosition() - 1000;
+            brdist = motorBR.getCurrentPosition() + 1000;
+            bldist = motorBL.getCurrentPosition() + 1000;
+        }
+        else
+        {
+            frdist = motorFR.getCurrentPosition() - 1000;
+            fldist = motorFL.getCurrentPosition() + 1000;
+            brdist = motorBR.getCurrentPosition() - 1000;
+            bldist = motorBL.getCurrentPosition() + 1000;
+
+        }
+        if(x*x+y*y < 0.5)
+        {
+            frdist=0;
+            fldist=0;
+            brdist=0;
+            bldist=0;
+        }
+        setPosition(frdist,fldist,brdist,bldist,motorFR,motorFL,motorBR,motorBL);
+    }
     // sets
     public void set_Power(float rjoystick_x,float ljoystick_y,float ljoystick_x, boolean percision_flag){
         float ch1 = rjoystick_x;
