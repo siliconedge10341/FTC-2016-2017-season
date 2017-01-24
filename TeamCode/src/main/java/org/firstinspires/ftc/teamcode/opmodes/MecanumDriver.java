@@ -123,9 +123,13 @@ public class MecanumDriver extends OpMode{
 		//
         // runs the robot
 		//
-		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x,percision_flag);
-		yo.run_motor(motorFR, motorFL, motorBR, motorBL);
+		//yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x,percision_flag);
+		//yo.run_motor(motorFR, motorFL, motorBR, motorBL);
 		//
+
+		// power based on setting encoders
+		yo.set_Power_using_encoders(gamepad1.left_stick_x,gamepad1.left_stick_y,motorFR,motorFL,motorBR,motorBL);
+		yo.run_using_encoders(motorFR,motorFL,motorBR,motorBL);
 		//
 		// Runs the collector
 		//
