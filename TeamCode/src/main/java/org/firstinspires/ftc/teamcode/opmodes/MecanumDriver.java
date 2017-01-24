@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="MecanumDrive", group ="Drive")
+@TeleOp(name = "MecanumDrive", group = "Drive")
 public class MecanumDriver extends OpMode{
     // instance variables
     // private variables
@@ -27,7 +27,6 @@ public class MecanumDriver extends OpMode{
 
 		// Servos
 		private Servo ballRelease;
-
 
 		private boolean percision_flag = false;
         //
@@ -50,24 +49,24 @@ public class MecanumDriver extends OpMode{
 		//
         // Initialize everything
         //
-		// Motors
-		motorFL = hardwareMap.dcMotor.get("fl_motor");
-		motorFR = hardwareMap.dcMotor.get("fr_motor");
-		motorBL = hardwareMap.dcMotor.get("bl_motor");
-		motorBR = hardwareMap.dcMotor.get("br_motor");
-        motorLS = hardwareMap.dcMotor.get("linear_slide_motor");
-		motorC = hardwareMap.dcMotor.get("conveyor_motor");
-		motorShootB = hardwareMap.dcMotor.get("shooter_right"); // Bottom
-		motorShootT = hardwareMap.dcMotor.get("shooter_left");  // Top
+			// Motors
+			motorFL = hardwareMap.dcMotor.get("fl_motor");
+			motorFR = hardwareMap.dcMotor.get("fr_motor");
+			motorBL = hardwareMap.dcMotor.get("bl_motor");
+			motorBR = hardwareMap.dcMotor.get("br_motor");
+			motorLS = hardwareMap.dcMotor.get("linear_slide_motor");
+			motorC = hardwareMap.dcMotor.get("conveyor_motor");
+			motorShootB = hardwareMap.dcMotor.get("shooter_right"); // Bottom
+			motorShootT = hardwareMap.dcMotor.get("shooter_left");  // Top
 
-		// Servos
-		ballRelease = hardwareMap.servo.get("servo_ball");
-		ballRelease.setPosition(Servo.MAX_POSITION);
+			// Servos
+			ballRelease = hardwareMap.servo.get("servo_ball");
+			ballRelease.setPosition(Servo.MAX_POSITION);
 
-		// Variables
-		LSRotations = 0;
-		motorLS.setMode(DcMotor.RunMode.RESET_ENCODERS);
-		percision_flag = false;
+			// Variables
+			LSRotations = 0;
+			motorLS.setMode(DcMotor.RunMode.RESET_ENCODERS);
+			percision_flag = false;
 
 	}
 
@@ -123,13 +122,13 @@ public class MecanumDriver extends OpMode{
 		//
         // runs the robot
 		//
-		//yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x,percision_flag);
-		//yo.run_motor(motorFR, motorFL, motorBR, motorBL);
+		yo.set_Power(gamepad1.right_stick_x, gamepad1.left_stick_y, gamepad1.left_stick_x,percision_flag);
+		yo.run_motor(motorFR, motorFL, motorBR, motorBL);
 		//
 
 		// power based on setting encoders
-		yo.set_Power_using_encoders(gamepad1.left_stick_x,gamepad1.left_stick_y,motorFR,motorFL,motorBR,motorBL);
-		yo.run_using_encoders(motorFR,motorFL,motorBR,motorBL);
+		//yo.set_Power_using_encoders(gamepad1.left_stick_x,gamepad1.left_stick_y,motorFR,motorFL,motorBR,motorBL);
+		//yo.run_using_encoders(motorFR,motorFL,motorBR,motorBL);
 		//
 		// Runs the collector
 		//
@@ -144,16 +143,15 @@ public class MecanumDriver extends OpMode{
         // the servo to shoot one ball.
 		//
         if (gamepad2.b) {
-            motorShootT.setPower(.9);
-            motorShootB.setPower(-.7);
+            motorShootT.setPower(.85);
+            motorShootB.setPower(-.75);
 			runtime.reset();
 			while (runtime.seconds() < 1){
 
 			}
-
-			ballRelease.setPosition(.8);
+			ballRelease.setPosition(.75);
             runtime.reset();
-            while (runtime.seconds()<.5){
+            while (runtime.seconds() < 0.5){
 
             }
 			ballRelease.setPosition(ballRelease.MAX_POSITION);
@@ -163,13 +161,17 @@ public class MecanumDriver extends OpMode{
 		//
         // Raises CapBall
         //
-		if (gamepad2.x) {
-
+		if (gamepad2.x){
+			//
+			// Raise
+			//
 			motorLS.setPower(-0.5);
             LSRotations = motorLS.getCurrentPosition();
-
-        } else if (gamepad2.y ) {
-            motorLS.setPower(0.5);
+        } else if (gamepad2.y) {
+			//
+			// Lower
+			//
+			motorLS.setPower(0.5);
             LSRotations = motorLS.getCurrentPosition();
         } else {
             motorLS.setPower(0.0);
