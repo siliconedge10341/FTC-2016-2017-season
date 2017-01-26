@@ -120,55 +120,9 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         //motorCollector.setPower(0.9);
 
-        motorShootL.setPower(0.7);
-        motorShootR.setPower(-0.5);
-        runtime.reset();
-        runtime.startTime();
-        while (runtime.seconds() < 1.0) {
-            //
-            // Lets the spinners speed up
-            //
-        }
-        ballServo.setPosition(0.85);
-        runtime.reset();
-        runtime.startTime();
-        while (runtime.seconds() < 1.0) {
-            //
-            // Shoots ball
-            //
-        }
-        motorShootL.setPower(0.0);
-        motorShootR.setPower(0.0);
-        ballServo.setPosition(ballServo.MAX_POSITION);
-        runtime.reset();
-        runtime.startTime();
-        while (runtime.seconds() < 0.75) {
-            //
-            // Loads another ball
-            //
-        }
-        motorShootL.setPower(0.7);
-        motorShootR.setPower(-0.5);
-        runtime.reset();
-        runtime.startTime();
-        while (runtime.seconds() < 1.0) {
-            //
-            // Lets the spinners speed up
-            //
-        }
-        ballServo.setPosition(0.85);
-        runtime.reset();
-        runtime.startTime();
-        while (runtime.seconds() < 1.0) {
-            //
-            // Shoots ball
-            //
-        }
-        ballServo.setPosition(ballServo.MAX_POSITION);
-        motorShootL.setPower(0);
-        motorShootR.setPower(0);
 
 
+        shootBall();
         //
         //Run to line
         //
@@ -194,17 +148,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         //Turn to wall
         alignWall();
-        /*
-        Drive_Train.setPowerD(.3);
-        Drive_Train.turn_left(fr,fl,br,bl);
-        runtime.reset();
-        while(runtime.seconds() < 1.2){
-            telemetry.addData("Turning" , "");
-            telemetry.update();
-        }
-        Drive_Train.brake(fr,fl,br,bl);*/
-
-
 
         //
         // Detect beacon
@@ -415,11 +358,64 @@ public void alignWall(){
                 Drive_Train.turn_left(fr,fl,br,bl);
             }
         }else if(avgRangeB() < avgRangeF()){
-            Drive_Train.run_without_encoders(fr,fl,br,bl);
-            Drive_Train.setPowerD(.3);
-            Drive_Train.turn_right(fr,fl,br,bl);
+            while(avgRangeB() < avgRangeF()) {
+                Drive_Train.run_without_encoders(fr, fl, br, bl);
+                Drive_Train.setPowerD(.3);
+                Drive_Train.turn_right(fr, fl, br, bl);
+            }
         }
         Drive_Train.brake(fr,fl,br,bl);
+    }
+
+    public void shootBall(){
+
+        motorShootL.setPower(0.7);
+        motorShootR.setPower(-0.5);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Lets the spinners speed up
+            //
+        }
+        ballServo.setPosition(0.85);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Shoots ball
+            //
+        }
+        motorShootL.setPower(0.0);
+        motorShootR.setPower(0.0);
+        ballServo.setPosition(ballServo.MAX_POSITION);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 0.75) {
+            //
+            // Loads another ball
+            //
+        }
+        motorShootL.setPower(0.7);
+        motorShootR.setPower(-0.5);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Lets the spinners speed up
+            //
+        }
+        ballServo.setPosition(0.85);
+        runtime.reset();
+        runtime.startTime();
+        while (runtime.seconds() < 1.0) {
+            //
+            // Shoots ball
+            //
+        }
+        ballServo.setPosition(ballServo.MAX_POSITION);
+        motorShootL.setPower(0);
+        motorShootR.setPower(0);
     }
 
 }
