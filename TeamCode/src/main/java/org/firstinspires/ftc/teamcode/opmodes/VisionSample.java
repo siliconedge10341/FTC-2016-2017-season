@@ -12,6 +12,11 @@ import org.lasarobotics.vision.util.ScreenOrientation;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
 
+import com.qualcomm.robotcore.hardware.I2cAddr;
+import com.qualcomm.robotcore.hardware.I2cDevice;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
+
 /**
  * Linear Vision Sample
  * <p/>
@@ -27,9 +32,17 @@ import org.opencv.core.Size;
 
 public class VisionSample extends LinearVisionOpMode {
 
-  ModernRoboticsI2cRangeSensor rangef;
-  ModernRoboticsI2cRangeSensor rangesf;
-  ModernRoboticsI2cRangeSensor rangesb;
+  I2cDevice rangesf;
+  I2cDevice rangesb;
+  I2cDeviceSynch rangesfReader;
+  I2cDeviceSynch rangesbReader;
+
+  byte frontCache[];
+  byte backCache[];
+
+  int frontCM;
+  int backCM;
+
   private OpticalDistanceSensor ods;
   int frameCount = 0;
 
@@ -83,10 +96,17 @@ public class VisionSample extends LinearVisionOpMode {
     cameraControl.setAutoExposureCompensation();
 
     //rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
-    rangesf = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_front");
-    rangesb = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_back");
+
     ods = hardwareMap.opticalDistanceSensor.get("ods_line");
 
+    rangesf = hardwareMap.i2cDevice.get("sensor_range_side_front");
+    rangesb = hardwareMap.i2cDevice.get("sensor_range_side_back");
+
+    rangesfReader = new I2cDeviceSynchImpl(rangesf , I2cAddr.create8bit(0x28) , false);
+    rangesbReader = new I2cDeviceSynchImpl(rangesb , I2cAddr.create8bit(0x20) , false);
+
+    rangesfReader.engage();
+    rangesbReader.engage();
 
     //Wait for the match to begin
     waitForStart();
@@ -96,20 +116,23 @@ public class VisionSample extends LinearVisionOpMode {
     //This loop will exit once the opmode is closed
     while (opModeIsActive()) {
       //Log a few things
+      backCache = rangesbReader.read(0x04 , 2);
+      frontCache = rangesfReader.read(0x04 , 2);
+      backCM = backCache[0] & 0xFF;
+      frontCM = frontCache[0] & 0xFF;
+
       telemetry.addData("Beacon Color", beacon.getAnalysis().getColorString());
       telemetry.addData("Beacon Left", beacon.getAnalysis().getStateLeft().toString());
       telemetry.addData("Beacon Right", beacon.getAnalysis().getStateRight().toString());
-      telemetry.addData("Beacon Center", beacon.getAnalysis().getLocationString());
       telemetry.addData("Beacon Confidence", beacon.getAnalysis().getConfidenceString());
       telemetry.addData("Beacon Detected? ", beacon.getAnalysis().isBeaconFound());
       telemetry.addData("Screen Rotation", rotation.getScreenOrientationActual());
-      telemetry.addData("Frame Rate", fps.getFPSString() + " FPS");
       telemetry.addData("Frame Size", "Width: " + width + " Height: " + height);
-      telemetry.addData("Frame Counter", frameCount);
+      telemetry.addData("back " , backCM);
+      telemetry.addData("front" , frontCM);
 
       //telemetry.addData("cm", "%.2f cm", rangef.getDistance(DistanceUnit.CM));
-      telemetry.addData("cm", "%.2f cm", rangesb.getDistance(DistanceUnit.CM));
-      telemetry.addData("cm", "%.2f cm", rangesf.getDistance(DistanceUnit.CM));
+
 
       telemetry.addData("Light detected" , ods.getLightDetected());
 

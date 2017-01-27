@@ -144,14 +144,10 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         //motorCollector.setPower(0.9);
 
-
-
         shootBall();
         //
         //Run to line
         //
-
-
         PauseAuto(1.5);
 
         //Turn to wall
@@ -163,7 +159,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Detect beacon
         //
-
         PauseAuto(1.0);
 
         while (opModeIsActive() && !beacon.getAnalysis().isBeaconFound()) {
@@ -173,8 +168,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         if (beacon.getAnalysis().isLeftBlue() == true) {
 
             encoderDrive(3.0,"forward" , .3);
-
-
 
         } else {
             encoderDrive(3.0,"backward" , .3);
@@ -191,11 +184,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
 
         avgr = avgRangeF();
-        PauseAuto(1.0);
         encoderDrive(avgr * 2 +3,"rightalign",.8);
 
-        telemetry.addData("Hit button " , " ");
-        telemetry.update();
 
         PauseAuto(1.0);
         encoderDrive(10.0 * 2, "left" , .7);
@@ -301,8 +291,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
             {
                 backCache = rangesbReader.read(0x04 , 2);
                 frontCache = rangesfReader.read(0x04 , 2);
-                backCM = backCache[0];
-                frontCM = frontCache[0];
+                backCM = backCache[0] & 0xFF;
+                frontCM = frontCache[0] & 0xFF;
 
                 Drive_Train.run_left_using_alignment(fr,fl,br,bl,backCM,frontCM);
                 telemetry.addData("Pos ", fl.getCurrentPosition());
@@ -313,8 +303,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
             {
                 backCache = rangesbReader.read(0x04 , 2);
                 frontCache = rangesfReader.read(0x04 , 2);
-                backCM = backCache[0];
-                frontCM = frontCache[0];
+                backCM = backCache[0] & 0xFF;
+                frontCM = frontCache[0] & 0xFF;
 
                 Drive_Train.run_right_using_alignment(fr,fl,br,bl,backCM,frontCM);
                 telemetry.addData("Pos ", fl.getCurrentPosition());
@@ -341,7 +331,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         int rcount = 0;
 
         frontCache = rangesfReader.read(0x04 , 2);
-        int frontCM = frontCache[0];
+        int frontCM = frontCache[0] & 0xFF;
 
         for (i =0; i<=5 ;i++){
             if (frontCM < 1 || frontCM == 255){
@@ -362,7 +352,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         int rcount = 0;
 
         backCache = rangesbReader.read(0x04 , 2);
-        int backCM = backCache[0];
+        int backCM = backCache[0] & 0xFF;
 
         for (i =0; i<=5 ;i++){
             if (backCM < 1 || backCM == 255){
@@ -382,7 +372,7 @@ public void alignWall() throws InterruptedException{
     backCache = rangesbReader.read(0x04 , 2);
     frontCache =  rangesfReader.read(0x04 , 2);
 
-    while (Math.abs(backCache[0] - frontCache[0]) > 1 && opModeIsActive()) {
+    while (Math.abs((backCache[0]& 0xFF) - (frontCache[0]& 0xFF)) > 1 && opModeIsActive()) {
         backCache = rangesbReader.read(0x04 , 2);
         frontCache =  rangesfReader.read(0x04 , 2);
 
