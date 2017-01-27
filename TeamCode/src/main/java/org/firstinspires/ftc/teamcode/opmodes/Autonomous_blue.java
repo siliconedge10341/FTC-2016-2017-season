@@ -5,6 +5,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.lasarobotics.vision.android.Cameras;
 
 import com.qualcomm.robotcore.hardware.I2cAddr;
+import com.qualcomm.robotcore.hardware.I2cDevice;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
+import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
+
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import org.lasarobotics.vision.ftc.resq.Beacon;
 import org.lasarobotics.vision.opmode.LinearVisionOpMode;
@@ -37,17 +41,26 @@ public class Autonomous_blue extends LinearVisionOpMode {
         private DcMotor br;
         private DcMotor motorShootL;
         private DcMotor motorShootR;
-       // private DcMotor motorCollector;
-        private DcMotor motorConveyor;
+
+
 
         // servo
        private Servo ballServo;
-        //private Servo beaconServo;
+
 
         // Range Sensor
-        //private ModernRoboticsI2cRangeSensor rangef;
-        private ModernRoboticsI2cRangeSensor rangesf;
-        private ModernRoboticsI2cRangeSensor rangesb;
+
+       // private ModernRoboticsI2cRangeSensor rangesf;
+        //private ModernRoboticsI2cRangeSensor rangesb;
+
+        byte frontCache[];
+        byte backCache[];
+
+        I2cDevice rangesf;
+        I2cDevice rangesb;
+        I2cDeviceSynch rangesfReader;
+        I2cDeviceSynch rangesbReader;
+
         private OpticalDistanceSensor ods;
 
         // Sensor Classes
@@ -73,34 +86,37 @@ public class Autonomous_blue extends LinearVisionOpMode {
     public void runOpMode() throws InterruptedException {
         // Sets every class at the beginning of the autonomous run class
         // Hardware Maps
-            // Motors
-            fr = hardwareMap.dcMotor.get("fr_motor");
-            fl = hardwareMap.dcMotor.get("fl_motor");
-            br = hardwareMap.dcMotor.get("br_motor");
-            bl = hardwareMap.dcMotor.get("bl_motor");
+         //INIT:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        fr = hardwareMap.dcMotor.get("fr_motor");
+        fl = hardwareMap.dcMotor.get("fl_motor");
+        br = hardwareMap.dcMotor.get("br_motor");
+        bl = hardwareMap.dcMotor.get("bl_motor");
 
-            motorShootL = hardwareMap.dcMotor.get("shooter_left");
-            motorShootR = hardwareMap.dcMotor.get("shooter_right");
-            //motorCollector = hardwareMap.dcMotor.get("ball_collector");
-            motorConveyor = hardwareMap.dcMotor.get("conveyor_motor");
+        motorShootL = hardwareMap.dcMotor.get("shooter_left");
+        motorShootR = hardwareMap.dcMotor.get("shooter_right");
+
 
             // Servos
-            ballServo = hardwareMap.servo.get("servo_ball");
+        ballServo = hardwareMap.servo.get("servo_ball");
         ballServo.setPosition(Servo.MAX_POSITION);
-           // beaconServo = hardwareMap.servo.get("servo_beacon");
 
             // Classes
-            ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-            rangesf = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_front");
-            rangesf.setI2cAddress(I2cAddr.create8bit(0x20));
-            rangesb = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_back");
-        rangesb.setI2cAddress(I2cAddr.create8bit(0x28));
+        ods = hardwareMap.opticalDistanceSensor.get("ods_line");
+
+        rangesf = hardwareMap.i2cDevice.get("sensor_range_side_front");
+        rangesb = hardwareMap.i2cDevice.get("sensor_range_side_back");
+
+        rangesfReader = new I2cDeviceSynchImpl(rangesf , I2cAddr.create8bit(0x28) , false);
+        rangesbReader = new I2cDeviceSynchImpl(rangesb , I2cAddr.create8bit(0x20) , false);
+
+        rangesfReader.engage();
+        rangesbReader.engage();
 
 
 
         waitForVisionStart();
 
-        //VISION:
+        //VISION::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         this.setCamera(Cameras.SECONDARY);
         this.setFrameSize(new Size(900, 900));
 
@@ -119,6 +135,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
         cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
         cameraControl.setAutoExposureCompensation();
 
+
+        //START::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         waitForStart();
         //Start OpMode
 
@@ -245,6 +263,9 @@ public class Autonomous_blue extends LinearVisionOpMode {
     }
     public void encoderDrive(double inches , String direction, double power ) {
         int encoderval;
+        int backCM;
+        int frontCM;
+
         // Sets the encoders
         //
         Drive_Train.reset_encoders(fr,fl,br,bl);
@@ -278,14 +299,24 @@ public class Autonomous_blue extends LinearVisionOpMode {
         {
             while(Drive_Train.testDistance(fl)!= 1)
             {
-                Drive_Train.run_left_using_alignment(fr,fl,br,bl,rangesb.getDistance(DistanceUnit.CM),rangesf.getDistance(DistanceUnit.CM));
+                backCache = rangesbReader.read(0x04 , 2);
+                frontCache = rangesfReader.read(0x04 , 2);
+                backCM = backCache[0];
+                frontCM = frontCache[0];
+
+                Drive_Train.run_left_using_alignment(fr,fl,br,bl,backCM,frontCM);
                 telemetry.addData("Pos ", fl.getCurrentPosition());
                 telemetry.update();
             }
         }else if(direction == "rightalign"){
             while(Drive_Train.testDistance(fl)!= 1)
             {
-                Drive_Train.run_right_using_alignment(fr,fl,br,bl,rangesb.getDistance(DistanceUnit.CM),rangesf.getDistance(DistanceUnit.CM));
+                backCache = rangesbReader.read(0x04 , 2);
+                frontCache = rangesfReader.read(0x04 , 2);
+                backCM = backCache[0];
+                frontCM = frontCache[0];
+
+                Drive_Train.run_right_using_alignment(fr,fl,br,bl,backCM,frontCM);
                 telemetry.addData("Pos ", fl.getCurrentPosition());
                 telemetry.update();
             }
@@ -308,42 +339,55 @@ public class Autonomous_blue extends LinearVisionOpMode {
         double avg = 0;
         int i = 0;
         int rcount = 0;
+
+        frontCache = rangesfReader.read(0x04 , 2);
+        int frontCM = frontCache[0];
+
         for (i =0; i<=5 ;i++){
-            if (rangesf.getDistance(DistanceUnit.INCH) < 1 || rangesf.getDistance(DistanceUnit.INCH) == 255){
+            if (frontCM < 1 || frontCM == 255){
 
             }else{
-                avg = avg + rangesf.getDistance(DistanceUnit.INCH);
+                avg = avg + frontCM;
                 rcount ++;
             }
 
 
         }
 
-        return (avg / rcount);
+        return (DistanceUnit.CM.toInches(avg/rcount));
     }
     public double avgRangeB(){
         double avg = 0;
         int i = 0;
         int rcount = 0;
-        while (i<10 && opModeIsActive()){
-            if (rangesb.getDistance(DistanceUnit.INCH) <= 1 || rangesb.getDistance(DistanceUnit.INCH) == 255){
+
+        backCache = rangesbReader.read(0x04 , 2);
+        int backCM = backCache[0];
+
+        for (i =0; i<=5 ;i++){
+            if (backCM < 1 || backCM == 255){
 
             }else{
-                avg = avg + rangesb.getDistance(DistanceUnit.INCH);
+                avg = avg + backCM;
                 rcount ++;
             }
-            i++;
+
         }
 
-        return (avg / rcount);
+        return (DistanceUnit.CM.toInches(avg/rcount));
     }
 
 public void alignWall() throws InterruptedException{
     Drive_Train.run_without_encoders(fr,fl,br,bl);
+    backCache = rangesbReader.read(0x04 , 2);
+    frontCache =  rangesfReader.read(0x04 , 2);
 
-    while (Math.abs(rangesb.getDistance(DistanceUnit.CM) - rangesf.getDistance(DistanceUnit.CM)) > 1 && opModeIsActive()) {
-        double cmback = rangesb.getDistance(DistanceUnit.CM);
-        double cmfront = rangesf.getDistance(DistanceUnit.CM);
+    while (Math.abs(backCache[0] - frontCache[0]) > 1 && opModeIsActive()) {
+        backCache = rangesbReader.read(0x04 , 2);
+        frontCache =  rangesfReader.read(0x04 , 2);
+
+        double cmback = backCache[0] & 0xFF;
+        double cmfront = frontCache[0] & 0xFF;
         if (cmback == 255 || cmfront == 255 || cmfront == 0 || cmback == 0){
             Drive_Train.brake(fr,fl,br,bl);
 
@@ -360,11 +404,12 @@ public void alignWall() throws InterruptedException{
             bl.setPower(0.7);
             br.setPower(0.7);
         }
+        telemetry.addData("back range" , cmback);
+        telemetry.addData("front range" , cmfront);
+        telemetry.update();
 
     }
-        telemetry.addData("back" , rangesb.getDistance(DistanceUnit.CM));
-        telemetry.addData("front" , rangesf.getDistance(DistanceUnit.CM));
-        telemetry.update();
+
         Drive_Train.brake(fr,fl,br,bl);
 }
 
