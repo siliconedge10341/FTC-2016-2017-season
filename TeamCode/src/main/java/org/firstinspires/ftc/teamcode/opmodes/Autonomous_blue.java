@@ -143,11 +143,12 @@ public class Autonomous_blue extends LinearVisionOpMode {
 
         //motorCollector.setPower(0.9);
 
-       // shootBall();
+        shootBall();
         //
         //Run to line
         //
         //PauseAuto(1.5);
+
 
         //Turn to wall
         encoderDrive(44.0,"forward" , .3);
@@ -425,7 +426,7 @@ public void alignWall() throws InterruptedException{
         ballServo.setPosition(0.85);
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 1.0) {
+        while (runtime.seconds() < .5) {
             //
             // Shoots ball
             //
@@ -452,7 +453,7 @@ public void alignWall() throws InterruptedException{
         ballServo.setPosition(0.85);
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 1.0) {
+        while (runtime.seconds() < .5) {
             //
             // Shoots ball
             //
