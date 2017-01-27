@@ -87,32 +87,6 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Sets every class at the beginning of the autonomous run class
         // Hardware Maps
          //INIT:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        fr = hardwareMap.dcMotor.get("fr_motor");
-        fl = hardwareMap.dcMotor.get("fl_motor");
-        br = hardwareMap.dcMotor.get("br_motor");
-        bl = hardwareMap.dcMotor.get("bl_motor");
-
-        motorShootL = hardwareMap.dcMotor.get("shooter_left");
-        motorShootR = hardwareMap.dcMotor.get("shooter_right");
-
-
-            // Servos
-        ballServo = hardwareMap.servo.get("servo_ball");
-        ballServo.setPosition(Servo.MAX_POSITION);
-
-            // Classes
-        ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-
-        rangesf = hardwareMap.i2cDevice.get("sensor_range_side_front");
-        rangesb = hardwareMap.i2cDevice.get("sensor_range_side_back");
-
-        rangesfReader = new I2cDeviceSynchImpl(rangesf , I2cAddr.create8bit(0x28) , false);
-        rangesbReader = new I2cDeviceSynchImpl(rangesb , I2cAddr.create8bit(0x20) , false);
-
-        rangesfReader.engage();
-        rangesbReader.engage();
-
-
 
         waitForVisionStart();
 
@@ -135,22 +109,51 @@ public class Autonomous_blue extends LinearVisionOpMode {
         cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
         cameraControl.setAutoExposureCompensation();
 
+        //INIT:::::::::::::::::::::::::::::
+        fr = hardwareMap.dcMotor.get("fr_motor");
+        fl = hardwareMap.dcMotor.get("fl_motor");
+        br = hardwareMap.dcMotor.get("br_motor");
+        bl = hardwareMap.dcMotor.get("bl_motor");
+
+        motorShootL = hardwareMap.dcMotor.get("shooter_left");
+        motorShootR = hardwareMap.dcMotor.get("shooter_right");
+
+
+        // Servos
+        ballServo = hardwareMap.servo.get("servo_ball");
+        ballServo.setPosition(Servo.MAX_POSITION);
+
+        // Classes
+        ods = hardwareMap.opticalDistanceSensor.get("ods_line");
+
+        rangesf = hardwareMap.i2cDevice.get("sensor_range_side_front");
+        rangesb = hardwareMap.i2cDevice.get("sensor_range_side_back");
+
+        rangesfReader = new I2cDeviceSynchImpl(rangesf , I2cAddr.create8bit(0x28) , false);
+        rangesbReader = new I2cDeviceSynchImpl(rangesb , I2cAddr.create8bit(0x20) , false);
+
+        rangesfReader.engage();
+        rangesbReader.engage();
 
         //START::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         waitForStart();
         //Start OpMode
 
-        initialC = ods.getLightDetected();
+
 
         //motorCollector.setPower(0.9);
 
-        shootBall();
+       // shootBall();
         //
         //Run to line
         //
-        PauseAuto(1.5);
+        //PauseAuto(1.5);
 
         //Turn to wall
+        encoderDrive(44.0,"forward" , .3);
+
+        initialC = ods.getLightDetected();
+        PauseAuto(.5);
         runtToLine();
 
         PauseAuto(0.5);
@@ -184,11 +187,15 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
 
         avgr = avgRangeF();
-        encoderDrive(avgr * 2 +3,"rightalign",.8);
+        encoderDrive(avgr * 2 +3,"right",.3);
 
 
         PauseAuto(1.0);
-        encoderDrive(10.0 * 2, "left" , .7);
+        encoderDrive(10.0 * 2, "left" , .3);
+
+        PauseAuto(.5);
+
+        alignWall();
         //
         // Run to line
         //
@@ -196,10 +203,10 @@ public class Autonomous_blue extends LinearVisionOpMode {
         telemetry.addData("Next " , " Line");
         telemetry.update();
 
-        PauseAuto(1.0);
+        PauseAuto(.2);
 
 
-        encoderDrive(24.0 , "forward" , .3);
+        encoderDrive(44.0 , "forward" , .3);
 
         PauseAuto(.5);
         //alignWall();
@@ -212,7 +219,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Stop at wall
         //
         PauseAuto(.4);
-
+        alignWall();
+        PauseAuto(.4);
         //
         // Detect beacon
         //
@@ -222,7 +230,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         }
         if (beacon.getAnalysis().isLeftBlue() == true) {
 
-            encoderDrive(buttonWidth - 3,"forward" , .3);
+            encoderDrive(buttonWidth,"forward" , .3);
 
         } else {
 
@@ -235,7 +243,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // beacon code
         //
         avgr = avgRangeF();
-        encoderDrive(avgr * 2,"rightalign",.3);
+        encoderDrive(avgr * 2 + 2,"rightalign",.3);
 
         PauseAuto(.4);
         encoderDrive(10.0 * 2 , "left" , .3);
@@ -383,16 +391,16 @@ public void alignWall() throws InterruptedException{
 
         }
         else if (cmfront < cmback) {
-            fl.setPower(-0.7);
-            fr.setPower(-0.7);
-            bl.setPower(-0.7);
-            br.setPower(-0.7);
+            fl.setPower(-0.3);
+            fr.setPower(-0.3);
+            bl.setPower(-0.3);
+            br.setPower(-0.3);
 
         } else if (cmback < cmfront) {
-            fl.setPower(0.7);
-            fr.setPower(0.7);
-            bl.setPower(0.7);
-            br.setPower(0.7);
+            fl.setPower(0.3);
+            fr.setPower(.3);
+            bl.setPower(0.3);
+            br.setPower(0.3);
         }
         telemetry.addData("back range" , cmback);
         telemetry.addData("front range" , cmfront);
@@ -455,7 +463,7 @@ public void alignWall() throws InterruptedException{
     }
     public void runtToLine(){
         Drive_Train.run_without_encoders(fr,fl,br,bl);
-        Drive_Train.setPowerD(0.35);
+        Drive_Train.setPowerD(0.25);
 
         Drive_Train.run_forward(fr, fl, br, bl);
         runtime.reset();
