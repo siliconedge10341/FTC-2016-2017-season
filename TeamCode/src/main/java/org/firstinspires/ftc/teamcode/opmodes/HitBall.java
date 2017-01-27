@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.classes.Mecanum;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -68,8 +69,8 @@ public class HitBall extends LinearOpMode {
     private Servo beaconServo;
 
     private ModernRoboticsI2cRangeSensor rangef;
-    private ModernRoboticsI2cRangeSensor rangesl;
-    private ModernRoboticsI2cRangeSensor rangesr;
+    private ModernRoboticsI2cRangeSensor rangesf;
+    private ModernRoboticsI2cRangeSensor rangesb;
 
     private OpticalDistanceSensor ods;
     private double initialC = 0;
@@ -82,9 +83,10 @@ public class HitBall extends LinearOpMode {
         br = hardwareMap.dcMotor.get("br_motor");
         bl = hardwareMap.dcMotor.get("bl_motor");
 
-        rangef = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_front");
-        rangesr = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_right");
-        rangesl = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_left");
+        rangesf = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_front");
+        rangesf.setI2cAddress(I2cAddr.create8bit(0x20));
+        rangesb = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "sensor_range_side_back");
+        rangesb.setI2cAddress(I2cAddr.create8bit(0x28));
 
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
@@ -205,7 +207,7 @@ public class HitBall extends LinearOpMode {
         {
             while(Drive_Train.testDistance(fl)!= 1)
             {
-                Drive_Train.run_left_using_alignment(fr,fl,br,bl,rangesl.getDistance(DistanceUnit.CM),rangesr.getDistance(DistanceUnit.CM));
+                Drive_Train.run_left_using_alignment(fr,fl,br,bl,rangesf.getDistance(DistanceUnit.CM),rangesb.getDistance(DistanceUnit.CM));
                 telemetry.addData("Pos ", fl.getCurrentPosition());
                 telemetry.update();
             }
@@ -232,5 +234,68 @@ public class HitBall extends LinearOpMode {
             telemetry.addData("Seconds", runtime.seconds());
         }
 
+    }
+    public double avgRangeF(){
+        double avg = 0;
+        int i = 0;
+        int rcount = 0;
+        for (i =0; i<=5 ;i++){
+            if (rangesf.getDistance(DistanceUnit.INCH) < 1 || rangesf.getDistance(DistanceUnit.INCH) == 255){
+
+            }else{
+                avg = avg + rangesf.getDistance(DistanceUnit.INCH);
+                rcount ++;
+            }
+
+
+        }
+
+        return (avg / rcount);
+    }
+    public double avgRangeB(){
+        double avg = 0;
+        int i = 0;
+        int rcount = 0;
+        while (i<10 && opModeIsActive()){
+            if (rangesb.getDistance(DistanceUnit.INCH) <= 1 || rangesb.getDistance(DistanceUnit.INCH) == 255){
+
+            }else{
+                avg = avg + rangesb.getDistance(DistanceUnit.INCH);
+                rcount ++;
+            }
+            i++;
+        }
+
+        return (avg / rcount);
+    }
+
+    public void alignWall() throws InterruptedException{
+        Drive_Train.run_without_encoders(fr,fl,br,bl);
+
+        while (Math.abs(rangesb.getDistance(DistanceUnit.CM) - rangesf.getDistance(DistanceUnit.CM)) > 1 && opModeIsActive()) {
+            double cmback = rangesb.getDistance(DistanceUnit.CM);
+            double cmfront = rangesf.getDistance(DistanceUnit.CM);
+            if (cmback == 255 || cmfront == 255 || cmfront == 0 || cmback == 0){
+                Drive_Train.brake(fr,fl,br,bl);
+
+            }
+            else if (cmfront < cmback) {
+                fl.setPower(-0.7);
+                fr.setPower(-0.7);
+                bl.setPower(-0.7);
+                br.setPower(-0.7);
+
+            } else if (cmback < cmfront) {
+                fl.setPower(0.7);
+                fr.setPower(0.7);
+                bl.setPower(0.7);
+                br.setPower(0.7);
+            }
+
+        }
+        telemetry.addData("back" , rangesb.getDistance(DistanceUnit.CM));
+        telemetry.addData("front" , rangesf.getDistance(DistanceUnit.CM));
+        telemetry.update();
+        Drive_Train.brake(fr,fl,br,bl);
     }
 }
