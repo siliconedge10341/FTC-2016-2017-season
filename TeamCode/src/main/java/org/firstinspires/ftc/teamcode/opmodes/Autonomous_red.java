@@ -151,6 +151,8 @@ public class Autonomous_red extends LinearVisionOpMode {
         encoderDrive(44.0,"forward" , .3);
 
         initialC = ods.getLightDetected();
+        telemetry.addData("initialc " , initialC);
+        telemetry.update();
         PauseAuto(.5);
         runToLine();
 
@@ -408,10 +410,9 @@ public class Autonomous_red extends LinearVisionOpMode {
     }
 
     public void shootBall(){
-        motorShootL.setPower(0.30);
-        motorShootR.setPower(-0.40);
+        motorShootL.setPower(0.20);
+        motorShootR.setPower(-0.30);
         runtime.reset();
-        runtime.startTime();
         while (runtime.seconds() < 1.0) {
             //
             // Lets the spinners speed up
@@ -428,17 +429,17 @@ public class Autonomous_red extends LinearVisionOpMode {
         motorShootL.setPower(0.0);
         motorShootR.setPower(0.0);
         ballServo.setPosition(ballServo.MAX_POSITION);
+
         runtime.reset();
-        runtime.startTime();
-        while (runtime.seconds() < 0.75) {
+        while (runtime.seconds() < 1.0) {
             //
             // Loads another ball
             //
         }
         motorShootL.setPower(0.30);
         motorShootR.setPower(-0.40);
+
         runtime.reset();
-        runtime.startTime();
         while (runtime.seconds() < 1.0) {
             //
             // Lets the spinners speed up
@@ -446,7 +447,6 @@ public class Autonomous_red extends LinearVisionOpMode {
         }
         ballServo.setPosition(0.85);
         runtime.reset();
-        runtime.startTime();
         while (runtime.seconds() < 1.0) {
             //
             // Shoots ball
@@ -465,7 +465,7 @@ public class Autonomous_red extends LinearVisionOpMode {
         //
         Drive_Train.run_forward(fr, fl, br, bl);
         runtime.reset();
-        while (opModeIsActive() && (ods.getLightDetected()< initialC +.1 || runtime.seconds()<5)) {
+        while (opModeIsActive() && ods.getLightDetected() < (initialC + .08)) {
             //
             // Get Data
             //
