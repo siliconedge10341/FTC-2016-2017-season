@@ -408,8 +408,8 @@ public class Autonomous_red extends LinearVisionOpMode {
     }
 
     public void shootBall(){
-        motorShootL.setPower(0.45);
-        motorShootR.setPower(-0.55);
+        motorShootL.setPower(0.30);
+        motorShootR.setPower(-0.40);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 1.0) {
@@ -435,8 +435,8 @@ public class Autonomous_red extends LinearVisionOpMode {
             // Loads another ball
             //
         }
-        motorShootL.setPower(0.45);
-        motorShootR.setPower(-0.55);
+        motorShootL.setPower(0.30);
+        motorShootR.setPower(-0.40);
         runtime.reset();
         runtime.startTime();
         while (runtime.seconds() < 1.0) {
@@ -459,13 +459,13 @@ public class Autonomous_red extends LinearVisionOpMode {
     }
     public void runToLine(){
         Drive_Train.run_without_encoders(fr,fl,br,bl);
-        Drive_Train.setPowerD(0.23);
+        Drive_Train.setPowerD(0.20);
         //
         // Sets the encoders
         //
         Drive_Train.run_forward(fr, fl, br, bl);
         runtime.reset();
-        while (opModeIsActive() && ods.getLightDetected()< initialC +.08 && runtime.seconds()<5) {
+        while (opModeIsActive() && (ods.getLightDetected()< initialC +.1 || runtime.seconds()<5)) {
             //
             // Get Data
             //
