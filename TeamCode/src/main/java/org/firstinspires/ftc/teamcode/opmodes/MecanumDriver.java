@@ -142,8 +142,8 @@ public class MecanumDriver extends OpMode{
 			//
 			// Max distance
 			//
-            motorShootT.setPower(.65);
-            motorShootB.setPower(-.55);
+            motorShootT.setPower(.55);
+            motorShootB.setPower(-.65);
 			runtime.reset();
 			while (runtime.seconds() < 1){
 

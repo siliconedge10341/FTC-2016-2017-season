@@ -130,7 +130,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Turn
         //
         encoderDrive(4.0, "forward", 0.3);
-        encoderTurn(arc_90 * 0.4);
+        encoderTurn(arc_90 * 0.4 , "right");
 
         PauseAuto(1.0);
         //
@@ -215,6 +215,8 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Run to line
         //
+        encoderDrive(24.0 , "forward" , .4);
+        PauseAuto(.4);
         runToLine();
         //
         // Line found
@@ -277,7 +279,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         // Turn 45 degrees
         //
-        encoderTurn(arc_90 * 0.5);
+        encoderTurn(arc_90 * 0.5 , "right");
         //
         // Wait...
         //
@@ -507,7 +509,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         telemetry.update();
 
     }
-    public  void encoderTurn(double inches){
+    public  void encoderTurn(double inches, String direction){
         Drive_Train.run_using_encoders(fr,fl,br,bl);
         int encoderval;
         //
@@ -521,7 +523,11 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         Drive_Train.setPosition(encoderval,encoderval,encoderval,encoderval,fr,fl,br,bl);
         Drive_Train.setPowerD(0.3);
-        Drive_Train.turn_right(fr,fl,br,bl);
+        if(direction == "right") {
+            Drive_Train.turn_right(fr, fl, br, bl);
+        }else if (direction == "left"){
+            Drive_Train.turn_left(fr, fl, br, bl);
+        }
 
         while (Drive_Train.testDistance(fl) != 1 && opModeIsActive()) {
             telemetry.addData("Pos ", fl.getCurrentPosition());
