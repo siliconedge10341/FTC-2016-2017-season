@@ -233,15 +233,15 @@ public class Mecanum{
             //
             // turn right
             //
-            BLpower += distanceDifference/60;
-            BRpower += distanceDifference/60;
+            BLpower += distanceDifference/30;
+            BRpower += distanceDifference/30;
         } else if(distanceDifference < -2) {
             distanceDifference = -1 * distanceDifference;
             //
             // turn left
             //
-            FLpower -= distanceDifference/60;
-            FRpower -= distanceDifference/60;
+            FLpower -= distanceDifference/30;
+            FRpower -= distanceDifference/30;
         }
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);
@@ -259,20 +259,17 @@ public class Mecanum{
             //
             // turn right
             //
-            FLpower += distanceDifference/60;
-            FRpower += distanceDifference/60;
-            BLpower -= distanceDifference/60;
-            BRpower -= distanceDifference/60;
+            BLpower += distanceDifference/30;
+            BRpower += distanceDifference/30;
 
         } else if(distanceDifference < -2) {
             distanceDifference = -1 * distanceDifference;
             //
             // turn left
             //
-            FLpower -= distanceDifference/60;
-            FRpower -= distanceDifference/60;
-            BLpower += distanceDifference/60;
-            BRpower += distanceDifference/60;
+            FLpower -= distanceDifference/30;
+            FRpower -= distanceDifference/30;
+
         }
         motorFR.setPower(FRpower);
         motorBR.setPower(BRpower);

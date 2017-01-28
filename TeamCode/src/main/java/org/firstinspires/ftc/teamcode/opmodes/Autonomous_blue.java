@@ -1,40 +1,31 @@
 package org.firstinspires.ftc.teamcode.opmodes;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.lasarobotics.vision.android.Cameras;
-
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.I2cDevice;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynch;
 import com.qualcomm.robotcore.hardware.I2cDeviceSynchImpl;
-
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import org.lasarobotics.vision.ftc.resq.Beacon;
 import org.lasarobotics.vision.opmode.LinearVisionOpMode;
 import org.lasarobotics.vision.opmode.extensions.CameraControlExtension;
 import org.lasarobotics.vision.util.ScreenOrientation;
 import org.opencv.core.Size;
-
-
 import org.firstinspires.ftc.teamcode.classes.Mecanum;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 
 
-@Autonomous(name = "Blue_Autonomous_dude", group = "Blue")
+@Autonomous(name = "Blue_Autonomous", group = "Blue")
 
 public class Autonomous_blue extends LinearVisionOpMode {
     // instance variables
     // private variables
         // Motors
-
-
         private DcMotor fr;
         private DcMotor fl;
         private DcMotor bl;
@@ -42,28 +33,20 @@ public class Autonomous_blue extends LinearVisionOpMode {
         private DcMotor motorShootL;
         private DcMotor motorShootR;
 
-
-
         // servo
-       private Servo ballServo;
+        private Servo ballServo;
 
-
-        // Range Sensor
-
-       // private ModernRoboticsI2cRangeSensor rangesf;
-        //private ModernRoboticsI2cRangeSensor rangesb;
-
+        // range Sensor
         byte frontCache[];
         byte backCache[];
-
-        I2cDevice rangesf;
-        I2cDevice rangesb;
-        I2cDeviceSynch rangesfReader;
-        I2cDeviceSynch rangesbReader;
+        private I2cDevice rangesf;
+        private I2cDevice rangesb;
+        private I2cDeviceSynch rangesfReader;
+        private I2cDeviceSynch rangesbReader;
 
         private OpticalDistanceSensor ods;
 
-        // Sensor Classes
+        // Classes
         private Mecanum Drive_Train = new Mecanum();
         private ElapsedTime runtime = new ElapsedTime();
 
@@ -71,26 +54,26 @@ public class Autonomous_blue extends LinearVisionOpMode {
     // This helps us because when we test for the white line, we want to be
     // able to tell the difference from the color of the ground. Thus
     // knowing where the sensor is.
-    private double initialC = 0;
+    private double initialC = 0.0;
+    private double initialAvgD = 0.0;
 
     // states variable for the loop
     private int v_state = 0;
-    private static final Double ticks_per_inch = 510 / (3.1415 * 4);
-
-    private static final double distancetoBase = 46.7;
-    private static final double distanceFromWall = 19;
-    private static final double buttonWidth = 6.0;
-    private double avgr = 0;
+    private static final Double ticks_per_inch = 510 / (3.1415 * 4); // ticks constant
+    private static final double arc_90 = ((3.1415 * 17) / 4) * 2;    // arc length of 90
+    private static final double distanceToBase = 46.7 * 2;               // base measurement
+    private static final double distanceFromWall = 19 * 2;               // wall measurement
+    private static final double buttonWidth = 6.0;                   // button measurement
 
 
     public void runOpMode() throws InterruptedException {
         // Sets every class at the beginning of the autonomous run class
         // Hardware Maps
-         //INIT:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // -INITIALIZATION-
 
         waitForVisionStart();
 
-        //VISION::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // VISION:
         this.setCamera(Cameras.SECONDARY);
         this.setFrameSize(new Size(900, 900));
 
@@ -109,71 +92,91 @@ public class Autonomous_blue extends LinearVisionOpMode {
         cameraControl.setColorTemperature(CameraControlExtension.ColorTemperature.AUTO);
         cameraControl.setAutoExposureCompensation();
 
-        //INIT:::::::::::::::::::::::::::::
-        fr = hardwareMap.dcMotor.get("fr_motor");
-        fl = hardwareMap.dcMotor.get("fl_motor");
-        br = hardwareMap.dcMotor.get("br_motor");
-        bl = hardwareMap.dcMotor.get("bl_motor");
+        // INIT:
+            // motors
+            fr = hardwareMap.dcMotor.get("fr_motor");
+            fl = hardwareMap.dcMotor.get("fl_motor");
+            br = hardwareMap.dcMotor.get("br_motor");
+            bl = hardwareMap.dcMotor.get("bl_motor");
+            motorShootL = hardwareMap.dcMotor.get("shooter_left");
+            motorShootR = hardwareMap.dcMotor.get("shooter_right");
 
-        motorShootL = hardwareMap.dcMotor.get("shooter_left");
-        motorShootR = hardwareMap.dcMotor.get("shooter_right");
+            // servos
+            ballServo = hardwareMap.servo.get("servo_ball");
+            ballServo.setPosition(Servo.MAX_POSITION);
 
+            // sensors
+            ods = hardwareMap.opticalDistanceSensor.get("ods_line");
+            rangesf = hardwareMap.i2cDevice.get("sensor_range_side_front");
+            rangesb = hardwareMap.i2cDevice.get("sensor_range_side_back");
+            rangesfReader = new I2cDeviceSynchImpl(rangesf , I2cAddr.create8bit(0x28) , false);
+            rangesbReader = new I2cDeviceSynchImpl(rangesb , I2cAddr.create8bit(0x20) , false);
+            rangesfReader.engage();
+            rangesbReader.engage();
 
-        // Servos
-        ballServo = hardwareMap.servo.get("servo_ball");
-        ballServo.setPosition(Servo.MAX_POSITION);
-
-        // Classes
-        ods = hardwareMap.opticalDistanceSensor.get("ods_line");
-
-        rangesf = hardwareMap.i2cDevice.get("sensor_range_side_front");
-        rangesb = hardwareMap.i2cDevice.get("sensor_range_side_back");
-
-        rangesfReader = new I2cDeviceSynchImpl(rangesf , I2cAddr.create8bit(0x28) , false);
-        rangesbReader = new I2cDeviceSynchImpl(rangesb , I2cAddr.create8bit(0x20) , false);
-
-        rangesfReader.engage();
-        rangesbReader.engage();
-
-        //START::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        // START:
         waitForStart();
-        //Start OpMode
-
-
-
-        //motorCollector.setPower(0.9);
-
-       // shootBall();
         //
-        //Run to line
+        // Start OpMode
         //
-        //PauseAuto(1.5);
+        // Shoot 2 balls
+        //
+        shootBall();
+        //
+        // Wait...
+        //
+        PauseAuto(0.4);
+        //
+        // Turn
+        //
+        encoderDrive(4.0, "forward", 0.3);
+        encoderTurn(arc_90 * 0.4);
 
-        //Turn to wall
-        encoderDrive(44.0,"forward" , .3);
-
+        PauseAuto(1.0);
+        //
+        // Drive
+        //
+        encoderDrive(44.0 , "forward" , .3);
         initialC = ods.getLightDetected();
-        PauseAuto(.5);
-        runtToLine();
-
-        PauseAuto(0.5);
-
+        //
+        // Wait...
+        //
+        PauseAuto(0.2);
+        //
+        // Run to line
+        //
+        runToLine();
+        //
+        // Gets the Line
+        // Wait...
+        //
+        PauseAuto(0.4);
+        //
+        // Turn to align to the wall
+        //
         alignWall();
+        //
+        // Wait...
+        //
+        PauseAuto(0.4);
         //
         // Detect beacon
         //
-        PauseAuto(1.0);
-
         while (opModeIsActive() && !beacon.getAnalysis().isBeaconFound()) {
             telemetry.addData("Beacon", beacon.getAnalysis());
             telemetry.update();
         }
         if (beacon.getAnalysis().isLeftBlue() == true) {
-
-            encoderDrive(3.0,"forward" , .3);
+            //
+            // Left Blue
+            //
+            encoderDrive(buttonWidth - 2, "forward", 0.3);
 
         } else {
-            encoderDrive(3.0,"backward" , .3);
+            //
+            // Right Blue
+            //
+            encoderDrive(buttonWidth, "backward", .3);
 
         }
         //
@@ -181,46 +184,54 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         telemetry.addData("Beacon " , beacon.getAnalysis().getColorString());
         telemetry.update();
-        PauseAuto(1.0);
+        PauseAuto(0.4);
         //
         // hit the button
         //
-
-        avgr = avgRangeF();
-        encoderDrive(avgr * 2 +3,"right",.3);
-
-
-        PauseAuto(1.0);
-        encoderDrive(10.0 * 2, "left" , .3);
-
-        PauseAuto(.5);
-
+        initialAvgD = avgRangeF();
+        encoderDrive(initialAvgD * 2 + 3, "rightalign", 0.3);
+        //
+        // Let config...
+        //
+        PauseAuto(0.4);
+        encoderDrive(10.0 * 2, "left" , 0.3);
+        //
+        // Wait...
+        //
+        PauseAuto(0.4);
+        //
+        // Realign
         alignWall();
         //
         // Run to line
         //
-        PauseAuto(.5);
+        PauseAuto(0.4);
         telemetry.addData("Next " , " Line");
         telemetry.update();
-
-        PauseAuto(.2);
-
-
-        encoderDrive(44.0 , "forward" , .3);
-
-        PauseAuto(.5);
-        //alignWall();
-        PauseAuto(.5);
         //
-        //Run to line
+        // Let config...
         //
-        runtToLine();
+        PauseAuto(0.2);
+        //
+        // Run to line
+        //
+        runToLine();
+        //
+        // Line found
+        //
+        PauseAuto(0.4);
         //
         // Stop at wall
         //
-        PauseAuto(.4);
+        PauseAuto(0.4);
+        //
+        // align to wall
+        //
         alignWall();
-        PauseAuto(.4);
+        //
+        // Wait...
+        //
+        PauseAuto(0.4);
         //
         // Detect beacon
         //
@@ -229,32 +240,62 @@ public class Autonomous_blue extends LinearVisionOpMode {
             telemetry.update();
         }
         if (beacon.getAnalysis().isLeftBlue() == true) {
-
+            //
+            // Left Blue
+            //
             encoderDrive(buttonWidth,"forward" , .3);
 
         } else {
-
+            //
+            // Right Blue
+            //
             encoderDrive(buttonWidth + 3,"backward" , .3);
 
         }
-
-        PauseAuto(1.0);
+        //
+        //
+        //
+        PauseAuto(0.4);
         //
         // beacon code
         //
-        avgr = avgRangeF();
-        encoderDrive(avgr * 2 + 2,"rightalign",.3);
-
-        PauseAuto(.4);
+        initialAvgD = avgRangeF();
+        encoderDrive(initialAvgD * 2 + 2,"rightalign",.3);
+        //
+        // Press beacon
+        // Wait...
+        //
+        PauseAuto(0.4);
+        //
+        // Go back
+        //
         encoderDrive(10.0 * 2 , "left" , .3);
-
+        //
+        // Wait...
+        //
+        PauseAuto(0.4);
+        //
+        // Turn 45 degrees
+        //
+        encoderTurn(arc_90 * 0.5);
+        //
+        // Wait...
+        //
+        PauseAuto(0.4);
+        //
+        // Hit cap ball
+        //
+        encoderDrive(distanceToBase, "backward", 0.3);
+        //
+        //
+        //
 
     }
 
     public void PauseAuto(double time)
     {
         runtime.reset();
-        while(runtime.seconds() < time)
+        while(runtime.seconds() < time && opModeIsActive())
         {
             //do nothing
         }
@@ -277,15 +318,15 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Sets the power and direction
         //
         Drive_Train.setPowerD(power);
-        if (direction == "forward"){
+        if (direction == "forward") {
             Drive_Train.run_forward(fr,fl,br,bl);
-        }else if(direction == "backward"){
+        } else if(direction == "backward") {
             Drive_Train.run_backward(fr,fl,br,bl);
-        }else if (direction == "left"){
+        } else if (direction == "left") {
             Drive_Train.run_left(fr,fl,br,bl);
-        }else if (direction == "right"){
+        } else if (direction == "right") {
             Drive_Train.run_right(fr,fl,br,bl);
-        }else if (direction == "diagonal_left_up"){
+        } else if (direction == "diagonal_left_up") {
             Drive_Train.run_diagonal_left_up(fr,fl,br,bl);
         }
         //
@@ -295,7 +336,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         //
         if(direction == "leftalign")
         {
-            while(Drive_Train.testDistance(fl)!= 1)
+            while(Drive_Train.testDistance(fl)!= 1 && opModeIsActive())
             {
                 backCache = rangesbReader.read(0x04 , 2);
                 frontCache = rangesfReader.read(0x04 , 2);
@@ -307,7 +348,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
                 telemetry.update();
             }
         }else if(direction == "rightalign"){
-            while(Drive_Train.testDistance(fl)!= 1)
+            while(Drive_Train.testDistance(fl)!= 1 && opModeIsActive())
             {
                 backCache = rangesbReader.read(0x04 , 2);
                 frontCache = rangesfReader.read(0x04 , 2);
@@ -320,7 +361,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
             }
         }
         else {
-            while (Drive_Train.testDistance(fl) != 1) {
+            while (Drive_Train.testDistance(fl) != 1 && opModeIsActive()) {
                 telemetry.addData("Pos ", fl.getCurrentPosition());
                 telemetry.update();
             }
@@ -349,10 +390,9 @@ public class Autonomous_blue extends LinearVisionOpMode {
                 rcount ++;
             }
 
-
         }
-
         return (DistanceUnit.CM.toInches(avg/rcount));
+
     }
     public double avgRangeB(){
         double avg = 0;
@@ -363,96 +403,82 @@ public class Autonomous_blue extends LinearVisionOpMode {
         int backCM = backCache[0] & 0xFF;
 
         for (i =0; i<=5 ;i++){
-            if (backCM < 1 || backCM == 255){
+            if (backCM < 1 || backCM == 255) {
 
-            }else{
+            } else {
                 avg = avg + backCM;
                 rcount ++;
             }
 
         }
-
         return (DistanceUnit.CM.toInches(avg/rcount));
+
     }
-
-public void alignWall() throws InterruptedException{
-    Drive_Train.run_without_encoders(fr,fl,br,bl);
-    backCache = rangesbReader.read(0x04 , 2);
-    frontCache =  rangesfReader.read(0x04 , 2);
-
-    while (Math.abs((backCache[0]& 0xFF) - (frontCache[0]& 0xFF)) > 1 && opModeIsActive()) {
+    public void alignWall() throws InterruptedException{
+        Drive_Train.run_without_encoders(fr,fl,br,bl);
         backCache = rangesbReader.read(0x04 , 2);
         frontCache =  rangesfReader.read(0x04 , 2);
 
-        double cmback = backCache[0] & 0xFF;
-        double cmfront = frontCache[0] & 0xFF;
-        if (cmback == 255 || cmfront == 255 || cmfront == 0 || cmback == 0){
-            Drive_Train.brake(fr,fl,br,bl);
+        while (Math.abs((backCache[0]& 0xFF) - (frontCache[0]& 0xFF)) > 1 && opModeIsActive()) {
+            backCache = rangesbReader.read(0x04 , 2);
+            frontCache =  rangesfReader.read(0x04 , 2);
+
+            double cmback = backCache[0] & 0xFF;
+            double cmfront = frontCache[0] & 0xFF;
+            if (cmback == 255 || cmfront == 255 || cmfront == 0 || cmback == 0) {
+                Drive_Train.brake(fr,fl,br,bl);
+
+            } else if (cmfront < cmback) {
+                fl.setPower(-0.3);
+                fr.setPower(-0.3);
+                bl.setPower(-0.3);
+                br.setPower(-0.3);
+
+            } else if (cmback < cmfront) {
+                fl.setPower(0.3);
+                fr.setPower(.3);
+                bl.setPower(0.3);
+                br.setPower(0.3);
+            }
+            telemetry.addData("back range" , cmback);
+            telemetry.addData("front range" , cmfront);
+            telemetry.update();
 
         }
-        else if (cmfront < cmback) {
-            fl.setPower(-0.3);
-            fr.setPower(-0.3);
-            bl.setPower(-0.3);
-            br.setPower(-0.3);
-
-        } else if (cmback < cmfront) {
-            fl.setPower(0.3);
-            fr.setPower(.3);
-            bl.setPower(0.3);
-            br.setPower(0.3);
-        }
-        telemetry.addData("back range" , cmback);
-        telemetry.addData("front range" , cmfront);
-        telemetry.update();
+        Drive_Train.brake(fr,fl,br,bl);
 
     }
-
-        Drive_Train.brake(fr,fl,br,bl);
-}
-
     public void shootBall(){
 
         motorShootL.setPower(0.7);
         motorShootR.setPower(-0.5);
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 1.0) {
+        while (runtime.seconds() < 1.0 && opModeIsActive()) {
             //
             // Lets the spinners speed up
             //
         }
-        ballServo.setPosition(0.85);
+        ballServo.setPosition(0.80);
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 1.0) {
+        while (runtime.seconds() < .5 && opModeIsActive()) {
             //
             // Shoots ball
             //
         }
-        motorShootL.setPower(0.0);
-        motorShootR.setPower(0.0);
         ballServo.setPosition(ballServo.MAX_POSITION);
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 0.75) {
+        while (runtime.seconds() < 0.75 && opModeIsActive()) {
             //
             // Loads another ball
-            //
-        }
-        motorShootL.setPower(0.7);
-        motorShootR.setPower(-0.5);
-        runtime.reset();
-        runtime.startTime();
-        while (runtime.seconds() < 1.0) {
-            //
-            // Lets the spinners speed up
             //
         }
         ballServo.setPosition(0.85);
         runtime.reset();
         runtime.startTime();
-        while (runtime.seconds() < 1.0) {
+        while (runtime.seconds() < .5 && opModeIsActive()) {
             //
             // Shoots ball
             //
@@ -461,27 +487,30 @@ public void alignWall() throws InterruptedException{
         motorShootL.setPower(0);
         motorShootR.setPower(0);
     }
-    public void runtToLine(){
+    public void runToLine(){
         Drive_Train.run_without_encoders(fr,fl,br,bl);
-        Drive_Train.setPowerD(0.25);
-
+        Drive_Train.setPowerD(0.3);
+        //
+        // Set direction
+        //
         Drive_Train.run_forward(fr, fl, br, bl);
         runtime.reset();
-        while (opModeIsActive() && ods.getLightDetected()< initialC +.1 && runtime.seconds()<5) {
+        while (opModeIsActive() && (ods.getLightDetected()< initialC +.1 || runtime.seconds() < 8)) {
             // Get Data
-            telemetry.addData("base power" , Drive_Train.getSpeed());
-            telemetry.addData("Light ",ods.getLightDetected());
+            telemetry.addData("base power ", Drive_Train.getSpeed());
+            telemetry.addData("Light ", ods.getLightDetected());
             telemetry.update();
 
         }
-        //Drive_Train.reset_encoders(fr, fl, br, bl);
         Drive_Train.brake(fr, fl, br, bl);
         telemetry.addData("Line" ,  " Found!");
         telemetry.update();
+
     }
-    public  void encoderTurn(double inches ){
+    public  void encoderTurn(double inches){
         Drive_Train.run_using_encoders(fr,fl,br,bl);
         int encoderval;
+        //
         // Sets the encoders
         //
         Drive_Train.reset_encoders(fr,fl,br,bl);
@@ -491,10 +520,10 @@ public void alignWall() throws InterruptedException{
         // Uses the encoders and motors to set the specific position
         //
         Drive_Train.setPosition(encoderval,encoderval,encoderval,encoderval,fr,fl,br,bl);
-        Drive_Train.setPowerD(.5);
-        Drive_Train.turn_left(fr,fl,br,bl);
+        Drive_Train.setPowerD(0.3);
+        Drive_Train.turn_right(fr,fl,br,bl);
 
-        while (Drive_Train.testDistance(fl) != 1) {
+        while (Drive_Train.testDistance(fl) != 1 && opModeIsActive()) {
             telemetry.addData("Pos ", fl.getCurrentPosition());
             telemetry.update();
         }
