@@ -62,6 +62,7 @@ public class PIDTester extends OpMode {
     private long fVelocityTime = 0;
     private long fLastVelocityTime = 0;
 
+
     private double place = 0.1;
 
     private boolean firstCross;
@@ -140,7 +141,7 @@ public class PIDTester extends OpMode {
     public void calculateRightPID(){
         fVelocityTimeRight = System.nanoTime();
         fEncoderRight = motorShootT.getCurrentPosition();
-        fVelocityRight = (double)(fEncoder - fLastEncoder) / (fVelocityTime - fLastVelocityTime);
+        fVelocityRight = (double)(fEncoderRight - fLastEncoderRight) / (fVelocityTimeRight - fLastVelocityTime);
         fErrorRight = fTargetRight - fVelocityRight;
 
         integralRight += fErrorRight;
@@ -154,15 +155,15 @@ public class PIDTester extends OpMode {
             integralRight = 0;
         }
 
-        derivative = fError - fLastError;
+        derivativeRight = fErrorRight - fLastErrorRight;
 
-        fLastError = fError;
-        fLastEncoder = fEncoder;
-        fLastVelocityTime = fVelocityTime;
+        fLastErrorRight = fErrorRight;
+        fLastEncoderRight = fEncoderRight;
+        fLastVelocityTimeRight = fVelocityTimeRight;
 
-        motorOut = (kP * fError) + (kI * integral) + (kD * derivative);
+        motorOutRight = (kPRight * fErrorRight) + (kIRight * integralRight) + (kDRight * derivativeRight);
 
-        motorOut = Range.clip(motorOut, 0.0, 1.0);
+        motorOutRight = Range.clip(motorOutRight, 0.0, 1.0);
 
         telemetry.addData("1", "RIGHTkP " + (kP * fError));
         telemetry.addData("2", "RIGHTError " + fError);
