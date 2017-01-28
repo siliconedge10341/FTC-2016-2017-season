@@ -150,9 +150,12 @@ public class Autonomous_red extends LinearVisionOpMode {
         //Turn to wall
         encoderDrive(44.0,"forward" , .3);
 
+        PauseAuto(.1);
+
         initialC = ods.getLightDetected();
         telemetry.addData("initialc " , initialC);
         telemetry.update();
+
         PauseAuto(.5);
         runToLine();
 
@@ -410,6 +413,8 @@ public class Autonomous_red extends LinearVisionOpMode {
     }
 
     public void shootBall(){
+        motorShootL.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        motorShootR.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         motorShootL.setPower(0.20);
         motorShootR.setPower(-0.30);
         runtime.reset();
@@ -469,6 +474,7 @@ public class Autonomous_red extends LinearVisionOpMode {
             //
             // Get Data
             //
+            telemetry.addData("initial" , initialC);
             telemetry.addData("base power" , Drive_Train.getSpeed());
             telemetry.addData("Light ",ods.getLightDetected());
             telemetry.update();
