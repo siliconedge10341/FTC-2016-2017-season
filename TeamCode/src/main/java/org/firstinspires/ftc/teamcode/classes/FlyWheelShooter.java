@@ -133,15 +133,15 @@ public class FlyWheelShooter extends LinearOpMode{
 
         motorOut = Range.clip(motorOut, 0.0, 1.0);
 
-        telemetry.addData("1", "LEFTkP " + (kP * fError));
-        telemetry.addData("2", "LEFTError " + fError);
-        telemetry.addData("3", "LEFTTime " + fVelocityTime);
-        telemetry.addData("4", "LEFTEncoder " + fEncoder);
-        telemetry.addData("5", "LEFTLast Encoder " + fLastEncoder);
-        telemetry.addData("6", "LEFTEncoder Change " + (fEncoder - fLastEncoder));
-        telemetry.addData("7", "LEFTTime Change " + (fVelocityTime - fLastVelocityTime));
-        telemetry.addData("8", "LEFTVelocity " + fVelocity);
-        telemetry.addData("9", "LEFTResult " + motorOut);
+        telemetry.addData("1", "RIGHTkP " + (kP * fError));
+        telemetry.addData("2", "RIGHTError " + fError);
+        telemetry.addData("3", "RIGHTTime " + fVelocityTime);
+        telemetry.addData("4", "RIGHTEncoder " + fEncoder);
+        telemetry.addData("5", "RIGHTLast Encoder " + fLastEncoder);
+        telemetry.addData("6", "RIGHTEncoder Change " + (fEncoder - fLastEncoder));
+        telemetry.addData("7", "RIGHTTime Change " + (fVelocityTime - fLastVelocityTime));
+        telemetry.addData("8", "RIGHTVelocity " + fVelocity);
+        telemetry.addData("9", "RIGHTResult " + motorOut);
         telemetry.update();
         motorShootL.setPower(motorOut);
     }
@@ -149,6 +149,7 @@ public class FlyWheelShooter extends LinearOpMode{
     public void runOpMode() throws InterruptedException{
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
+
     }
 
     public double getBatteryVoltage(){
