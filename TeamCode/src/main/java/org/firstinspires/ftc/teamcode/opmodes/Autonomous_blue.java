@@ -130,6 +130,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Turn
         //
         encoderDrive(4.0, "forward", 0.3);
+        PauseAuto(.4);
         encoderTurn(arc_90 * 0.4 , "right");
 
         PauseAuto(1.0);
@@ -150,7 +151,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // Gets the Line
         // Wait...
         //
-        PauseAuto(0.4);
+        PauseAuto(0.5);
         //
         // Turn to align to the wall
         //
@@ -189,7 +190,7 @@ public class Autonomous_blue extends LinearVisionOpMode {
         // hit the button
         //
         initialAvgD = avgRangeF();
-        encoderDrive(initialAvgD * 2 + 3, "rightalign", 0.3);
+        encoderDrive(initialAvgD * 2 + 3, "right", 0.6);
         //
         // Let config...
         //
