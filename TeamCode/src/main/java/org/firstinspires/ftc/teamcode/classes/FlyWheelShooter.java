@@ -149,6 +149,7 @@ public class FlyWheelShooter extends LinearOpMode{
     public void runOpMode() throws InterruptedException{
         motorShootL = hardwareMap.dcMotor.get("shooter_left");
         motorShootR = hardwareMap.dcMotor.get("shooter_right");
+
     }
 
     public double getBatteryVoltage(){
